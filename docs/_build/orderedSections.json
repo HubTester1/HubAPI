@@ -1,0 +1,645 @@
+[
+	{
+		"title": "Agenda",
+		"preamble": "Not a system component. Just a todo list culled from @todos in the code.",
+		"todos": [
+			{
+				"parent": "Agenda",
+				"category": "Agenda",
+				"description": "When link has no 'p', screen changes but partial does not",
+				"path": "/meta/agenda.js"
+			},
+			{
+				"parent": "Agenda",
+				"category": "Agenda",
+				"description": "New Link component that updates browser history w/ new params",
+				"path": "/meta/agenda.js"
+			},
+			{
+				"parent": "Agenda",
+				"category": "Agenda",
+				"description": "Serverless research / planning",
+				"path": "/meta/agenda.js"
+			},
+			{
+				"parent": "Agenda",
+				"category": "Agenda",
+				"description": "Lazy load modules",
+				"path": "/meta/agenda.js"
+			},
+			{
+				"parent": "Agenda",
+				"category": "Agenda",
+				"description": "Lazy load components",
+				"path": "/meta/agenda.js"
+			},
+			{
+				"parent": "Agenda",
+				"category": "Agenda",
+				"description": "AMP",
+				"path": "/meta/agenda.js"
+			},
+			{
+				"parent": "Agenda",
+				"category": "Agenda",
+				"description": "Serverless implementation",
+				"path": "/meta/agenda.js"
+			},
+			{
+				"parent": "Agenda",
+				"category": "Agenda",
+				"description": "Move to cloud",
+				"path": "/meta/agenda.js"
+			},
+			{
+				"parent": "Agenda",
+				"category": "Agenda",
+				"description": "Maintenance mode setting and screen",
+				"path": "/meta/agenda.js"
+			},
+			{
+				"parent": "Agenda",
+				"category": "Agenda",
+				"description": "API unavailable message",
+				"path": "/meta/agenda.js"
+			},
+			{
+				"parent": "App Loader",
+				"category": "Agenda",
+				"description": "Get showe and shudson ribbon permission from database - in user service",
+				"path": "/src/public/app-loader.js"
+			},
+			{
+				"parent": "App Loader",
+				"category": "Agenda",
+				"description": "Get jbaker ribbon permission from database - in user service",
+				"path": "/src/public/app-loader.js"
+			},
+			{
+				"parent": "Button",
+				"category": "Agenda",
+				"description": "params, types, required or optional",
+				"path": "/src/components/Ingredients/Button/Button.js"
+			},
+			{
+				"parent": "Container",
+				"category": "Agenda",
+				"description": "Remove disused sticky header styles",
+				"path": "/src/components/Layout/Container.js"
+			},
+			{
+				"parent": "Grid",
+				"category": "Agenda",
+				"description": "params, types, required or optional",
+				"path": "/src/components/Layout/Grid.js"
+			},
+			{
+				"parent": "Link Button",
+				"category": "Agenda",
+				"description": "params, types, required or optional",
+				"path": "/src/components/Ingredients/LinkButton/LinkButton.js"
+			},
+			{
+				"parent": "Partial Screen - Announcements",
+				"category": "Agenda",
+				"description": "document upon completion",
+				"path": "/src/components/Screens/Partials/Messages/Announcements.js"
+			},
+			{
+				"parent": "Partial Screen - Classifieds",
+				"category": "Agenda",
+				"description": "document upon completion",
+				"path": "/src/components/Screens/Partials/Messages/Classifieds.js"
+			},
+			{
+				"parent": "Partial Screen - Pinned",
+				"category": "Agenda",
+				"description": "params, types, required or optional",
+				"path": "/src/components/Screens/Partials/Home/Pinned.js"
+			},
+			{
+				"parent": "Partial Screen - Pinned",
+				"category": "Agenda",
+				"description": "document upon completion",
+				"path": "/src/components/Screens/Partials/Home/Pinned.js"
+			},
+			{
+				"parent": "Partial Screen - Today and Recent",
+				"category": "Agenda",
+				"description": "document upon completion",
+				"path": "/src/components/Screens/Partials/Home/TodayAndRecent.js"
+			},
+			{
+				"parent": "Partial Screen Header",
+				"category": "Agenda",
+				"description": "params, types, required or optional",
+				"path": "/src/components/Screens/Partials/Common/PartialScreenHeader.js"
+			},
+			{
+				"parent": "Partial Screen Header",
+				"category": "Agenda",
+				"description": "document upon completion",
+				"path": "/src/components/Screens/Partials/Common/PartialScreenHeader.js"
+			},
+			{
+				"parent": "Partial Screen Registry",
+				"category": "Agenda",
+				"description": "Make into a service?",
+				"path": "/src/components/Screens/Partials/Registry.js"
+			},
+			{
+				"parent": "Plane",
+				"category": "Agenda",
+				"description": "params, types, required or optional",
+				"path": "/src/components/Ingredients/Plane/Plane.js"
+			},
+			{
+				"parent": "Screen",
+				"category": "Agenda",
+				"description": "params, types, required or optional",
+				"path": "/src/components/Screens/Screen.js"
+			},
+			{
+				"parent": "Screen",
+				"category": "Agenda",
+				"description": "Document functions",
+				"path": "/src/services/Screen.js"
+			},
+			{
+				"parent": "State Store - Reducer",
+				"category": "Agenda",
+				"description": "Document functions",
+				"path": "/src/services/State/Reducer.js"
+			},
+			{
+				"parent": "State Store - Selectors",
+				"category": "Agenda",
+				"description": "Document functions",
+				"path": "/src/services/State/Selectors.js"
+			},
+			{
+				"parent": "Style",
+				"category": "Agenda",
+				"description": "Document functions",
+				"path": "/src/services/Style.js"
+			},
+			{
+				"parent": "User",
+				"category": "Agenda",
+				"description": "Refactor into module instead of class",
+				"path": "/src/services/User.js"
+			},
+			{
+				"parent": "User",
+				"category": "Agenda",
+				"description": "Fetch live data",
+				"path": "/src/services/User.js"
+			},
+			{
+				"parent": "User",
+				"category": "Agenda",
+				"description": "Assign roles in cloud",
+				"path": "/src/services/User.js"
+			},
+			{
+				"parent": "User",
+				"category": "Agenda",
+				"description": "Set mosManager as a role in cloud",
+				"path": "/src/services/User.js"
+			},
+			{
+				"parent": "User",
+				"category": "Agenda",
+				"description": "Get showe and shudson ribbon permission from database - in user service",
+				"path": "/src/services/User.js"
+			},
+			{
+				"parent": "User",
+				"category": "Agenda",
+				"description": "Get jbaker ribbon permission from database - in user service",
+				"path": "/src/services/User.js"
+			},
+			{
+				"parent": "User",
+				"category": "Agenda",
+				"description": "Document functions",
+				"path": "/src/services/User.js"
+			},
+			{
+				"parent": "Utilities",
+				"category": "Agenda",
+				"description": "Document functions",
+				"path": "/src/services/Utilities.js"
+			}
+		]
+	},
+	{
+		"title": "Next.js",
+		"preamble": "This is the Next.js preamble.",
+		"components": [
+			{
+				"name": "App",
+				"category": "Next.js",
+				"description": "Connect Next.js to Redux. Create state store. Get data from index page component and send to state store via reducers.\n\nUsed by Next.js in transpilation; overrides default Next.js _app.",
+				"smart": false,
+				"path": "/src/pages/_app.js"
+			},
+			{
+				"name": "Document",
+				"category": "Next.js",
+				"description": "Collect and handle styles from styled-components. Render &lt;html>.\n\nUsed by Next.js in transpilation; overrides default Next.js _document.",
+				"smart": false,
+				"path": "/src/pages/_document.js"
+			},
+			{
+				"name": "Index",
+				"category": "Next.js",
+				"description": "Fetch data and send it to _app. Render Container component.\n\nUsed by Next.js whenever /index is requested.",
+				"smart": true,
+				"path": "/src/pages/index.js",
+				"params": [
+					{
+						"name": "s",
+						"description": "URL param indicating which screen is requested.",
+						"parent": "Index",
+						"type": "string"
+					},
+					{
+						"name": "p",
+						"description": "URL param indicating which partial screen is requested.",
+						"parent": "Index",
+						"type": "string"
+					},
+					{
+						"name": "u",
+						"description": "URL param indicating current user's account name. \nE.g., \"sp1\". SPO sets correct current user, even if the wrong user was entered.",
+						"parent": "Index",
+						"type": "string"
+					},
+					{
+						"name": "o",
+						"description": "URL param indicating an account name that should be used \ninstead of the current user's account name. If the current user does not have \npermission to emulate another user, this param will be ignored.",
+						"parent": "Index",
+						"type": "string"
+					}
+				]
+			}
+		]
+	},
+	{
+		"title": "Services",
+		"preamble": "This is the Services preamble.",
+		"services": [
+			{
+				"name": "App Loader",
+				"category": "Services",
+				"description": "File is loaded by JS script in SharePoint Online (SPO) master page (mos.2.1.master).\nJS code executes automatically. This is the connection between SPO and this app.\n\nCode either loads the app or arranges things for other SPO areas that use \nthe same master page.\n\nThis is vanilla ES6; it is not compiled or otherwise manipulated. \nThus, it is both source and distribution, and lives in /public.",
+				"path": "/src/public/app-loader.js"
+			},
+			{
+				"name": "Screen",
+				"category": "Services",
+				"description": "Returns data about screen breakpoints and contents. Users cannot navigate\nto screens or partial screens not listed in ReturnSData > screens.",
+				"path": "/src/services/Screen.js"
+			},
+			{
+				"name": "State Store - Make Store",
+				"category": "Services",
+				"description": "Create Redux state store and connect reducers and middleware (redux-thunk).",
+				"path": "/src/services/State/MakeStore.js"
+			},
+			{
+				"name": "State Store - Reducer",
+				"category": "Services",
+				"description": "Define Redux state store reducer. Due to Next.js limitations, this\nis the only reducer.",
+				"path": "/src/services/State/Reducer.js"
+			},
+			{
+				"name": "State Store - Selectors",
+				"category": "Services",
+				"description": "Define state selectors for Reselect package, for performance enhancement.",
+				"path": "/src/services/State/Selectors.js"
+			},
+			{
+				"name": "Style",
+				"category": "Services",
+				"description": "Centralized style computations, variables, specs, and patterns.",
+				"path": "/src/services/Style.js"
+			},
+			{
+				"name": "User",
+				"category": "Services",
+				"description": "Fetch and return data about user.",
+				"path": "/src/services/User.js"
+			},
+			{
+				"name": "Utilities",
+				"category": "Services",
+				"description": "Miscellaneous utility functions.",
+				"path": "/src/services/Utilities.js"
+			}
+		]
+	},
+	{
+		"title": "Layout",
+		"components": [
+			{
+				"name": "Container",
+				"category": "Layout",
+				"description": "App root.\n\nCompute and inject global styles. Determine screen size and \ndispatch to state store. Listen for screen resize events and \nre-dispatch screen size to state store. Render App Grid.",
+				"smart": true,
+				"path": "/src/components/Layout/Container.js"
+			},
+			{
+				"name": "Grid",
+				"category": "Layout",
+				"description": "Scaffolding for headers and screen contents.",
+				"smart": false,
+				"path": "/src/components/Layout/Grid.js"
+			}
+		]
+	},
+	{
+		"title": "Screens",
+		"components": [
+			{
+				"name": "Partial Screen Header",
+				"category": "Screens",
+				"description": "Must document upon completion.",
+				"smart": false,
+				"path": "/src/components/Screens/Partials/Common/PartialScreenHeader.js"
+			},
+			{
+				"name": "Screen",
+				"category": "Screens",
+				"description": "Main content within app. Corresponds to \"s\" url param.",
+				"smart": true,
+				"path": "/src/components/Screens/Screen.js"
+			}
+		]
+	},
+	{
+		"title": "Partial Screens",
+		"components": [
+			{
+				"name": "Partial Screen - Announcements",
+				"category": "Partial Screens",
+				"description": "Must document upon completion.",
+				"smart": true,
+				"path": "/src/components/Screens/Partials/Messages/Announcements.js"
+			},
+			{
+				"name": "Partial Screen - Classifieds",
+				"category": "Partial Screens",
+				"description": "Must document upon completion.",
+				"smart": true,
+				"path": "/src/components/Screens/Partials/Messages/Classifieds.js"
+			},
+			{
+				"name": "Partial Screen - Pinned",
+				"category": "Partial Screens",
+				"description": "Must document upon completion.",
+				"smart": true,
+				"path": "/src/components/Screens/Partials/Home/Pinned.js"
+			},
+			{
+				"name": "Partial Screen - Today and Recent",
+				"category": "Partial Screens",
+				"description": "Must document upon completion.",
+				"smart": true,
+				"path": "/src/components/Screens/Partials/Home/TodayAndRecent.js"
+			},
+			{
+				"name": "Partial Screen Registry",
+				"category": "Partial Screens",
+				"description": "Registry (exports) of all partial screen components.\nScreen component gets its partial screen content from this registry.",
+				"smart": false,
+				"path": "/src/components/Screens/Partials/Registry.js"
+			}
+		]
+	},
+	{
+		"title": "Assets",
+		"components": [
+			{
+				"name": "Brand - Hub - Logo + Wordmark - Horizontal",
+				"category": "Assets",
+				"description": "SVG. Letterforms in Akzidenz Grotesk.",
+				"smart": false,
+				"path": "/src/components/Assets/Brands/BrandHorizontal.js"
+			},
+			{
+				"name": "Brand - Hub - Logo Only",
+				"category": "Assets",
+				"description": "SVG.",
+				"smart": false,
+				"path": "/src/components/Assets/Brands/BrandLogoOnly.js"
+			},
+			{
+				"name": "Icon - Home",
+				"category": "Assets",
+				"description": "SVG from Microsoft Fabric UI",
+				"smart": false,
+				"path": "/src/components/Assets/Icons/IconHome.js"
+			},
+			{
+				"name": "Icon - Messages",
+				"category": "Assets",
+				"description": "SVG from Microsoft Fabric UI",
+				"smart": false,
+				"path": "/src/components/Assets/Icons/IconMessages.js"
+			},
+			{
+				"name": "Icon - On The Hub",
+				"category": "Assets",
+				"description": "SVG from Microsoft Fabric UI",
+				"smart": false,
+				"path": "/src/components/Assets/Icons/IconOnTheHub.js"
+			},
+			{
+				"name": "Icon - People",
+				"category": "Assets",
+				"description": "SVG from Microsoft Fabric UI",
+				"smart": false,
+				"path": "/src/components/Assets/Icons/IconPeople.js"
+			},
+			{
+				"name": "Icon - Search - Pointed Left",
+				"category": "Assets",
+				"description": "SVG from Microsoft Fabric UI",
+				"smart": false,
+				"path": "/src/components/Assets/Icons/IconSearchToLeft.js"
+			},
+			{
+				"name": "Icon - Search - Pointed Right",
+				"category": "Assets",
+				"description": "SVG from Microsoft Fabric UI",
+				"smart": false,
+				"path": "/src/components/Assets/Icons/IconSearchToRight.js"
+			}
+		]
+	},
+	{
+		"title": "Headers",
+		"components": [
+			{
+				"name": "Primary Nav",
+				"category": "Headers",
+				"description": "Primary navigation within app.",
+				"smart": true,
+				"path": "/src/components/Headers/PrimaryNav/PrimaryNav.js"
+			},
+			{
+				"name": "Search - Title - Secondary Nav",
+				"category": "Headers",
+				"description": "Search box, screen title, partial screen tabs (secondary navigation).",
+				"smart": true,
+				"path": "/src/components/Headers/SearchTitleSecondaryNav/SearchTitleSecondaryNav.js"
+			}
+		]
+	},
+	{
+		"title": "Ingredients",
+		"preamble": "Items such as controls that appear across other parts of the app.",
+		"components": [
+			{
+				"name": "Button",
+				"category": "Ingredients",
+				"description": "Button.",
+				"smart": true,
+				"path": "/src/components/Ingredients/Button/Button.js",
+				"params": [
+					{
+						"name": "backgroundColor",
+						"description": "Color of background. Style service param. \nReminder: may be transparent. E.g., \"bold-pink\".",
+						"type": "string",
+						"parent": "Button"
+					},
+					{
+						"name": "clickHandler",
+						"description": "Function executed when button is clicked. E.g., () => handleClick(...params).",
+						"type": "string",
+						"parent": "Button"
+					},
+					{
+						"name": "contentColor",
+						"description": "Color of text and/or icon. Style service param. E.g., \"primary-green\".",
+						"type": "string",
+						"parent": "Button"
+					},
+					{
+						"name": "contentHeightInRem",
+						"description": "Height of button's text and/or icon, measured in rem. E.g., \"3\".",
+						"type": "string",
+						"parent": "Button",
+						"default": "Style.FontSize('m', screenSize).slice(0, -3)"
+					},
+					{
+						"name": "elevationLevel",
+						"description": "Elevation level. Style service param. E.g., \"4\".",
+						"type": "string",
+						"parent": "Button"
+					},
+					{
+						"name": "heightInRem",
+						"description": "Height of button, measured in rem. E.g., \"5\".",
+						"type": "string",
+						"parent": "Button",
+						"required": true
+					},
+					{
+						"name": "marginInRem",
+						"description": "Margin size, measured in rem, to be applied to all sides of button. E.g., \"2\".",
+						"type": "string",
+						"parent": "Button"
+					},
+					{
+						"name": "screenSize",
+						"description": "Current screen size token. E.g., \"small\".",
+						"type": "string",
+						"parent": "Button",
+						"smart": true
+					},
+					{
+						"name": "text",
+						"description": "Text content of button. E.g., \"Button Text\".",
+						"type": "string",
+						"parent": "Button",
+						"required": true
+					},
+					{
+						"name": "textInvisible",
+						"description": "Indicates that text should be hidden from sight \n(but will remain available to assistive technologies). E.g., true.",
+						"type": "bool",
+						"parent": "Button"
+					},
+					{
+						"name": "widthInRem",
+						"description": "Width of button, measured in rem. E.g., \"15\".",
+						"type": "string",
+						"parent": "Button",
+						"required": true
+					}
+				]
+			},
+			{
+				"name": "Icon",
+				"category": "Ingredients",
+				"description": "Icon component. Gets icon content from Icon Registry.",
+				"smart": true,
+				"path": "/src/components/Ingredients/Icon/Icon.js",
+				"params": [
+					{
+						"name": "contentColor",
+						"description": "Fill color for SVG. Style service param. E.g., \"ux-pink\".",
+						"type": "string",
+						"parent": "Icon",
+						"default": "ux-base-text"
+					},
+					{
+						"name": "contentHeightInRem",
+						"description": "Height of icon, measured in rem. E.g., \"4\".",
+						"type": "string",
+						"parent": "Icon",
+						"required": true
+					},
+					{
+						"name": "darkMode",
+						"description": "Whether user prefers dark mode. E.g., true.",
+						"type": "bool",
+						"parent": "Icon",
+						"smart": true
+					},
+					{
+						"name": "iconContent",
+						"description": "Which SVG should be used. E.g., \"Home\".",
+						"type": "string",
+						"parent": "Icon",
+						"required": true
+					}
+				]
+			},
+			{
+				"name": "Icon Registry",
+				"category": "Ingredients",
+				"description": "Registry (exports) of all icon assets. \nIcon component gets its icon content from this registry.",
+				"smart": false,
+				"path": "/src/components/Ingredients/Icon/Registry.js"
+			},
+			{
+				"name": "Link Button",
+				"category": "Ingredients",
+				"description": "Facilitates navigation between screens.",
+				"smart": true,
+				"path": "/src/components/Ingredients/LinkButton/LinkButton.js"
+			},
+			{
+				"name": "Plane",
+				"category": "Ingredients",
+				"description": "Every two-dimensional space within app.",
+				"smart": true,
+				"path": "/src/components/Ingredients/Plane/Plane.js"
+			}
+		]
+	}
+]
