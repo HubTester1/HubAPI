@@ -1,0 +1,29 @@
+service: test
+
+custom:
+  settings:
+    MONGODB_ATLAS_CLUSTER_URI: ${ssm:dev-atlas-cxn-str}
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: mos-api-sls-admin
+  region: us-east-1
+  memorySize: 128
+  timeout: 3
+  stage: dev
+  environment: ${self:custom.settings}
+  # iamRoleStatements:
+  #   - Effect: "Allow"
+  #     Action:
+  #       - "lambda:*"
+  #     Resource:
+  #       - "*"
+
+functions:
+  hello:
+    handler: handler.insert
+    events:
+      - http:
+          path: test/insert
+          method: post
+          cors: true

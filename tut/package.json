@@ -1,0 +1,14 @@
+{
+	"name": "tut",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"test": "lambda-local -l handler.js -e event.json"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"mongodb": "^3.4.1"
+	}
+}

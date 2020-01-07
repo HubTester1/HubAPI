@@ -5,4 +5,45 @@ This documentation pertains to software in development as of 1/1/2020. This will
 Client, data, and their documentation are separate.
 
 ##Technical Brief
-Prerequisite skills for understanding code: ES6 and AWS Lambda
+Prerequisite skills for understanding code: ES6, AWS (especially Lambda / serverless), and MongoDB Atlas
+
+
+You'll need installed globally to perform local testing: lambda-local
+
+You'll need AWS credentials stored locally to push local changes to AWS: https://docs.aws.amazon.com/cli/latest/userguide//cli-configure-files.html
+
+
+##Done so far
+Relevant docs: 
+* https://www.mongodb.com/blog/post/introducing-vpc-peering-for-mongodb-atlas?jmp=adref
+* https://docs.atlas.mongodb.com/security-vpc-peering/
+* https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html
+
+Actions:
+* In MongoDB Atlas
+	- Signed up for account as sp1@mos.org. Allie added payment info.
+	- Named Org "Museum of Science, Boston".
+	- Named Project "MOS API".
+	- Created Cluster named "dev-api".
+	- In Database Access settings, created user with admin privileges named "rootAnything". To Do - James has password, but it must be added to password database.
+	- In Database Access settings, created user with readWriteAnyDatabase privelegs named "aws-user". To Do - James has password, but it must be added to password database.
+	- In Network Access settings, in IP Whitelist,
+		* Whitelisted IP for Rousseau, a jbaker local development machine (using Ubuntu 17.10).
+		* Whitelisted IP for everything (0.0.0.0/0). To DO - remove this once Peering is verified.
+	- In Network Access settings, in Peering, created a new Peering Connection request with the following inputs:
+		* Cloud Provider: AWS
+		* Account ID: 344440222217
+		* VPC ID: vpc-39381943
+		* VPC CIDR: 172.31.0.0/16
+		* Application VPC Region: us-east-1
+		* Atlas VPC Region: us-east-1.
+* In AWS
+	- In VPCs, Your VPCs, found only existing VPC (ID: vpc-39381943) and used its info to request a new Peering Connection in MongoDB Atlas.
+	- In VPCs, Peering Connections, accepted Peering Connection request
+	- In VPCs, Route Tables, for the only existing Route Table (ID: rtb-59bc1027), gave it the name "Main Route Table" and added Route with following inputs:
+		* Destination: 192.168.248.0/21 <<< This is the Atlas CIDR Block
+		* Target: pcx-0e7896137c16ffcba <<< This is the Peering Connection's ID inside AWS
+	- In IAM, created user to be used for programmatic access with name "mos-api-sls-admin". To Do - James has key and secret, but they must be added to password database.
+	- In AWS System Manager, Parameter Store, stored the following parameters:
+		* dev-atlas-cxn-str - MongoDB Atlas connection string for "dev-api" cluster
+		* prod-atlas-cxn-str - MongoDB Atlas connection string for "prod-api" cluster
