@@ -10,6 +10,7 @@
  * 
  * @todo Refactor test into db services plus fake lambda
  * @todo Refactor db service to use Mongoose
+ * @todo back out some YAML props to a common file
  * @todo document
  * @todo review 12 factors
  * @todo Gulp

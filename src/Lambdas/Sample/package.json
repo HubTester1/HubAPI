@@ -1,0 +1,10 @@
+{
+	"name": "Sample API",
+	"description": "Sample function",
+	"scripts": {},
+	"author": "Museum of Science, Boston",
+	"license": "ISC",
+	"dependencies": {
+		"mongodb": "^3.4.1"
+	}
+}

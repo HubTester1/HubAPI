@@ -1,3 +1,10 @@
+/**
+ * @name InsertRestaurant
+ * @model
+ * @category Sample
+ * @description This is the restaurant insertion function in the Sample API.
+ */
+
 const mongoose = require('mongoose');
 const validator = require('validator');
 

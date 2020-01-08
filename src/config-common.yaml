@@ -1,0 +1,8 @@
+graphClientID: ${ssm:graph-client-id}
+graphClientSecret: ${ssm:graph-client-secret}
+graphTenantID: ${ssm:graph-tenant-id}
+mongoDbUriDev: ${ssm:mongo-db-cxn-str-dev}
+mongoDbUriProd: ${ssm:mongo-db-cxn-str-prod}
+upApiKey: ${ssm:up-api-key}
+upEmployeeChangesPass: ${ssm:up-emp-changes-pw}
+upEmployeeChangesUser: ${ssm:up-emp-changes-user}

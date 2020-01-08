@@ -1,0 +1,30 @@
+service: sample
+
+custom: ${file(../../config-common.yaml)}
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  profile: mos-api-sls-admin
+  memorySize: 128
+  timeout: 6
+  environment:
+    graphClientID: ${self:custom.graphClientID}
+    graphClientSecret: ${self:custom.graphClientSecret}
+    graphTenantID: ${self:custom.graphTenantID}
+    mongoDbUriDev: ${self:custom.mongoDbUriDev}
+    mongoDbUriProd: ${self:custom.mongoDbUriProd}
+    upApiKey: ${self:custom.upApiKey}
+    upEmployeeChangesPass: ${self:custom.upEmployeeChangesPass}
+    upEmployeeChangesUser: ${self:custom.upEmployeeChangesUser}
+
+functions:
+  insertRestaurant:
+    handler: Functions/InsertRestaurant.InsertRestaurant
+    events:
+      - http:
+          path: sample
+          method: post
+          cors: true

@@ -50,10 +50,9 @@
 		"jsdoc/check-syntax": 1,
 		"jsdoc/check-tag-names": [1, {
 			"definedTags": [
-				"component",
+				"model",
 				"service",
-				"category",
-				"smart"
+				"api"
 			]
 		}],// Recommended
 		"jsdoc/check-types": 1, // Recommended
