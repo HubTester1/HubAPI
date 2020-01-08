@@ -12,7 +12,7 @@
 
 * [Overview](architecture/overview.md)
 * [Development Environment](architecture/dev-environment.md)
-* [Master Page](architecture/master-page.md)
+* [MS Graph Permissions](architecture/graph-permissions.md)
 
 ##How To...
 

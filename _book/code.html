@@ -1,0 +1,1021 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Code Reference · Hub API</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-collapse/collapse.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="style.md" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Contents</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">---</li>
+        
+        
+    
+
+    
+        
+        <li class="header">Architecture</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="architecture/overview.html">
+            
+                <a href="architecture/overview.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="architecture/dev-environment.html">
+            
+                <a href="architecture/dev-environment.html">
+            
+                    
+                    Development Environment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="architecture/graph-permissions.html">
+            
+                <a href="architecture/graph-permissions.html">
+            
+                    
+                    MS Graph Permissions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">How To...</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="how-to/refresh-user-data.html">
+            
+                <a href="how-to/refresh-user-data.html">
+            
+                    
+                    Refresh User Data
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">More</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="style.md">
+            
+                <span>
+            
+                    
+                    Style Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="5.2" data-path="code.html">
+            
+                <a href="code.html">
+            
+                    
+                    Code Reference
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Code Reference</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="code-reference">Code Reference</h1>
+<h2 id="index">Index</h2>
+<ul>
+<li><a href="https://github.com/HubTester1/HubClient2.1" target="_blank">Repo</a></li>
+<li><a href="#agenda">Agenda</a></li>
+<li><a href="#nextjs">Next.js</a>
+<details><summary>- Components</summary><ul>
+<li><a href="#app">App</a></li>
+<li><a href="#document">Document</a></li>
+<li><a href="#index">Index</a></li>
+</ul>
+</details></li>
+<li><a href="#services">Services</a>
+<details><summary>- Services</summary><ul>
+<li><a href="#app-loader">App Loader</a></li>
+<li><a href="#screen">Screen</a></li>
+<li><a href="#state-store%20-%20make%20store">State Store - Make Store</a></li>
+<li><a href="#state-store%20-%20reducer">State Store - Reducer</a></li>
+<li><a href="#state-store%20-%20selectors">State Store - Selectors</a></li>
+<li><a href="#style">Style</a></li>
+<li><a href="#user">User</a></li>
+<li><a href="#utilities">Utilities</a></li>
+</ul>
+</details></li>
+<li><a href="#layout">Layout</a>
+<details><summary>- Components</summary><ul>
+<li><a href="#container">Container</a></li>
+<li><a href="#grid">Grid</a></li>
+</ul>
+</details></li>
+<li><a href="#screens">Screens</a>
+<details><summary>- Components</summary><ul>
+<li><a href="#partial-screen%20header">Partial Screen Header</a></li>
+<li><a href="#screen">Screen</a></li>
+</ul>
+</details></li>
+<li><a href="#partial%20screens">Partial Screens</a>
+<details><summary>- Components</summary><ul>
+<li><a href="#partial-screen%20-%20announcements">Partial Screen - Announcements</a></li>
+<li><a href="#partial-screen%20-%20classifieds">Partial Screen - Classifieds</a></li>
+<li><a href="#partial-screen%20-%20pinned">Partial Screen - Pinned</a></li>
+<li><a href="#partial-screen%20-%20today%20and%20recent">Partial Screen - Today and Recent</a></li>
+<li><a href="#partial-screen%20registry">Partial Screen Registry</a></li>
+</ul>
+</details></li>
+<li><a href="#assets">Assets</a>
+<details><summary>- Components</summary><ul>
+<li><a href="#brand--%20hub%20-%20logo%20+%20wordmark%20-%20horizontal">Brand - Hub - Logo + Wordmark - Horizontal</a></li>
+<li><a href="#brand--%20hub%20-%20logo%20only">Brand - Hub - Logo Only</a></li>
+<li><a href="#icon--%20home">Icon - Home</a></li>
+<li><a href="#icon--%20messages">Icon - Messages</a></li>
+<li><a href="#icon--%20on%20the%20hub">Icon - On The Hub</a></li>
+<li><a href="#icon--%20people">Icon - People</a></li>
+<li><a href="#icon--%20search%20-%20pointed%20left">Icon - Search - Pointed Left</a></li>
+<li><a href="#icon--%20search%20-%20pointed%20right">Icon - Search - Pointed Right</a></li>
+</ul>
+</details></li>
+<li><a href="#headers">Headers</a>
+<details><summary>- Components</summary><ul>
+<li><a href="#primary-nav">Primary Nav</a></li>
+<li><a href="#search--%20title%20-%20secondary%20nav">Search - Title - Secondary Nav</a></li>
+</ul>
+</details></li>
+<li><a href="#ingredients">Ingredients</a>
+<details><summary>- Components</summary><ul>
+<li><a href="#button">Button</a></li>
+<li><a href="#icon">Icon</a></li>
+<li><a href="#icon-registry">Icon Registry</a></li>
+<li><a href="#link-button">Link Button</a></li>
+<li><a href="#plane">Plane</a></li>
+</ul>
+</details></li>
+</ul>
+<h2 id="agenda">Agenda</h2>
+<p>Not a system component. Just a todo list culled from @todos in the code.</p>
+<table>
+<thead>
+<tr>
+<th><em>@todo</em></th>
+<th>path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>When link has no &apos;p&apos;, screen changes but partial does not</td>
+<td>/meta/agenda.js</td>
+</tr>
+<tr>
+<td>New Link component that updates browser history w/ new params</td>
+<td>/meta/agenda.js</td>
+</tr>
+<tr>
+<td>Serverless research / planning</td>
+<td>/meta/agenda.js</td>
+</tr>
+<tr>
+<td>Lazy load modules</td>
+<td>/meta/agenda.js</td>
+</tr>
+<tr>
+<td>Lazy load components</td>
+<td>/meta/agenda.js</td>
+</tr>
+<tr>
+<td>AMP</td>
+<td>/meta/agenda.js</td>
+</tr>
+<tr>
+<td>Serverless implementation</td>
+<td>/meta/agenda.js</td>
+</tr>
+<tr>
+<td>Move to cloud</td>
+<td>/meta/agenda.js</td>
+</tr>
+<tr>
+<td>Maintenance mode setting and screen</td>
+<td>/meta/agenda.js</td>
+</tr>
+<tr>
+<td>API unavailable message</td>
+<td>/meta/agenda.js</td>
+</tr>
+<tr>
+<td>Get showe and shudson ribbon permission from database - in user service</td>
+<td>/src/public/app-loader.js</td>
+</tr>
+<tr>
+<td>Get jbaker ribbon permission from database - in user service</td>
+<td>/src/public/app-loader.js</td>
+</tr>
+<tr>
+<td>params, types, required or optional</td>
+<td>/src/components/Ingredients/Button/Button.js</td>
+</tr>
+<tr>
+<td>Remove disused sticky header styles</td>
+<td>/src/components/Layout/Container.js</td>
+</tr>
+<tr>
+<td>params, types, required or optional</td>
+<td>/src/components/Layout/Grid.js</td>
+</tr>
+<tr>
+<td>params, types, required or optional</td>
+<td>/src/components/Ingredients/LinkButton/LinkButton.js</td>
+</tr>
+<tr>
+<td>document upon completion</td>
+<td>/src/components/Screens/Partials/Messages/Announcements.js</td>
+</tr>
+<tr>
+<td>document upon completion</td>
+<td>/src/components/Screens/Partials/Messages/Classifieds.js</td>
+</tr>
+<tr>
+<td>params, types, required or optional</td>
+<td>/src/components/Screens/Partials/Home/Pinned.js</td>
+</tr>
+<tr>
+<td>document upon completion</td>
+<td>/src/components/Screens/Partials/Home/Pinned.js</td>
+</tr>
+<tr>
+<td>document upon completion</td>
+<td>/src/components/Screens/Partials/Home/TodayAndRecent.js</td>
+</tr>
+<tr>
+<td>params, types, required or optional</td>
+<td>/src/components/Screens/Partials/Common/PartialScreenHeader.js</td>
+</tr>
+<tr>
+<td>document upon completion</td>
+<td>/src/components/Screens/Partials/Common/PartialScreenHeader.js</td>
+</tr>
+<tr>
+<td>Make into a service?</td>
+<td>/src/components/Screens/Partials/Registry.js</td>
+</tr>
+<tr>
+<td>params, types, required or optional</td>
+<td>/src/components/Ingredients/Plane/Plane.js</td>
+</tr>
+<tr>
+<td>params, types, required or optional</td>
+<td>/src/components/Screens/Screen.js</td>
+</tr>
+<tr>
+<td>Document functions</td>
+<td>/src/services/Screen.js</td>
+</tr>
+<tr>
+<td>Document functions</td>
+<td>/src/services/State/Reducer.js</td>
+</tr>
+<tr>
+<td>Document functions</td>
+<td>/src/services/State/Selectors.js</td>
+</tr>
+<tr>
+<td>Document functions</td>
+<td>/src/services/Style.js</td>
+</tr>
+<tr>
+<td>Refactor into module instead of class</td>
+<td>/src/services/User.js</td>
+</tr>
+<tr>
+<td>Fetch live data</td>
+<td>/src/services/User.js</td>
+</tr>
+<tr>
+<td>Assign roles in cloud</td>
+<td>/src/services/User.js</td>
+</tr>
+<tr>
+<td>Set mosManager as a role in cloud</td>
+<td>/src/services/User.js</td>
+</tr>
+<tr>
+<td>Get showe and shudson ribbon permission from database - in user service</td>
+<td>/src/services/User.js</td>
+</tr>
+<tr>
+<td>Get jbaker ribbon permission from database - in user service</td>
+<td>/src/services/User.js</td>
+</tr>
+<tr>
+<td>Document functions</td>
+<td>/src/services/User.js</td>
+</tr>
+<tr>
+<td>Document functions</td>
+<td>/src/services/Utilities.js</td>
+</tr>
+</tbody>
+</table>
+<p>&#xA0;</p>
+<p><a href="#index">Return to Index</a>
+&#xA0;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<hr>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<h2 id="nextjs">Next.js</h2>
+<p>This is the Next.js preamble.</p>
+<h3 id="app">App</h3>
+<p>Connect Next.js to Redux. Create state store. Get data from index page component and send to state store via reducers.</p>
+<p>Used by Next.js in transpilation; overrides default Next.js _app.</p>
+<blockquote>
+<p>/src/pages/_app.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="document">Document</h3>
+<p>Collect and handle styles from styled-components. Render &lt;html&gt;.</p>
+<p>Used by Next.js in transpilation; overrides default Next.js _document.</p>
+<blockquote>
+<p>/src/pages/_document.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="index">Index</h3>
+<p><em><code>@smart</code></em></p>
+<p>Fetch data and send it to _app. Render Container component.</p>
+<p>Used by Next.js whenever /index is requested.</p>
+<blockquote>
+<p>/src/pages/index.js</p>
+</blockquote>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>smart</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s</td>
+<td>string</td>
+<td></td>
+<td></td>
+<td>URL param indicating which screen is requested.</td>
+</tr>
+<tr>
+<td>p</td>
+<td>string</td>
+<td></td>
+<td></td>
+<td>URL param indicating which partial screen is requested.</td>
+</tr>
+<tr>
+<td>u</td>
+<td>string</td>
+<td></td>
+<td></td>
+<td>URL param indicating current user&apos;s account name.  E.g., &quot;sp1&quot;. SPO sets correct current user, even if the wrong user was entered.</td>
+</tr>
+<tr>
+<td>o</td>
+<td>string</td>
+<td></td>
+<td></td>
+<td>URL param indicating an account name that should be used  instead of the current user&apos;s account name. If the current user does not have  permission to emulate another user, this param will be ignored.</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<p><a href="#index">Return to Index</a>
+&#xA0;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<hr>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<h2 id="services">Services</h2>
+<p>This is the Services preamble.</p>
+<p>&#xA0;</p>
+<p><a href="#index">Return to Index</a>
+&#xA0;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<hr>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<h2 id="layout">Layout</h2>
+<h3 id="container">Container</h3>
+<p><em><code>@smart</code></em></p>
+<p>App root.</p>
+<p>Compute and inject global styles. Determine screen size and 
+dispatch to state store. Listen for screen resize events and 
+re-dispatch screen size to state store. Render App Grid.</p>
+<blockquote>
+<p>/src/components/Layout/Container.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="grid">Grid</h3>
+<p>Scaffolding for headers and screen contents.</p>
+<blockquote>
+<p>/src/components/Layout/Grid.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<p><a href="#index">Return to Index</a>
+&#xA0;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<hr>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<h2 id="screens">Screens</h2>
+<h3 id="partial-screen-header">Partial Screen Header</h3>
+<p>Must document upon completion.</p>
+<blockquote>
+<p>/src/components/Screens/Partials/Common/PartialScreenHeader.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="screen">Screen</h3>
+<p><em><code>@smart</code></em></p>
+<p>Main content within app. Corresponds to &quot;s&quot; url param.</p>
+<blockquote>
+<p>/src/components/Screens/Screen.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<p><a href="#index">Return to Index</a>
+&#xA0;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<hr>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<h2 id="partial-screens">Partial Screens</h2>
+<h3 id="partial-screen---announcements">Partial Screen - Announcements</h3>
+<p><em><code>@smart</code></em></p>
+<p>Must document upon completion.</p>
+<blockquote>
+<p>/src/components/Screens/Partials/Messages/Announcements.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="partial-screen---classifieds">Partial Screen - Classifieds</h3>
+<p><em><code>@smart</code></em></p>
+<p>Must document upon completion.</p>
+<blockquote>
+<p>/src/components/Screens/Partials/Messages/Classifieds.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="partial-screen---pinned">Partial Screen - Pinned</h3>
+<p><em><code>@smart</code></em></p>
+<p>Must document upon completion.</p>
+<blockquote>
+<p>/src/components/Screens/Partials/Home/Pinned.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="partial-screen---today-and-recent">Partial Screen - Today and Recent</h3>
+<p><em><code>@smart</code></em></p>
+<p>Must document upon completion.</p>
+<blockquote>
+<p>/src/components/Screens/Partials/Home/TodayAndRecent.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="partial-screen-registry">Partial Screen Registry</h3>
+<p>Registry (exports) of all partial screen components.
+Screen component gets its partial screen content from this registry.</p>
+<blockquote>
+<p>/src/components/Screens/Partials/Registry.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<p><a href="#index">Return to Index</a>
+&#xA0;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<hr>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<h2 id="assets">Assets</h2>
+<h3 id="brand---hub---logo--wordmark---horizontal">Brand - Hub - Logo + Wordmark - Horizontal</h3>
+<p>SVG. Letterforms in Akzidenz Grotesk.</p>
+<blockquote>
+<p>/src/components/Assets/Brands/BrandHorizontal.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="brand---hub---logo-only">Brand - Hub - Logo Only</h3>
+<p>SVG.</p>
+<blockquote>
+<p>/src/components/Assets/Brands/BrandLogoOnly.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="icon---home">Icon - Home</h3>
+<p>SVG from Microsoft Fabric UI</p>
+<blockquote>
+<p>/src/components/Assets/Icons/IconHome.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="icon---messages">Icon - Messages</h3>
+<p>SVG from Microsoft Fabric UI</p>
+<blockquote>
+<p>/src/components/Assets/Icons/IconMessages.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="icon---on-the-hub">Icon - On The Hub</h3>
+<p>SVG from Microsoft Fabric UI</p>
+<blockquote>
+<p>/src/components/Assets/Icons/IconOnTheHub.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="icon---people">Icon - People</h3>
+<p>SVG from Microsoft Fabric UI</p>
+<blockquote>
+<p>/src/components/Assets/Icons/IconPeople.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="icon---search---pointed-left">Icon - Search - Pointed Left</h3>
+<p>SVG from Microsoft Fabric UI</p>
+<blockquote>
+<p>/src/components/Assets/Icons/IconSearchToLeft.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="icon---search---pointed-right">Icon - Search - Pointed Right</h3>
+<p>SVG from Microsoft Fabric UI</p>
+<blockquote>
+<p>/src/components/Assets/Icons/IconSearchToRight.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<p><a href="#index">Return to Index</a>
+&#xA0;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<hr>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<h2 id="headers">Headers</h2>
+<h3 id="primary-nav">Primary Nav</h3>
+<p><em><code>@smart</code></em></p>
+<p>Primary navigation within app.</p>
+<blockquote>
+<p>/src/components/Headers/PrimaryNav/PrimaryNav.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="search---title---secondary-nav">Search - Title - Secondary Nav</h3>
+<p><em><code>@smart</code></em></p>
+<p>Search box, screen title, partial screen tabs (secondary navigation).</p>
+<blockquote>
+<p>/src/components/Headers/SearchTitleSecondaryNav/SearchTitleSecondaryNav.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<p><a href="#index">Return to Index</a>
+&#xA0;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<hr>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<h2 id="ingredients">Ingredients</h2>
+<p>Items such as controls that appear across other parts of the app.</p>
+<h3 id="button">Button</h3>
+<p><em><code>@smart</code></em></p>
+<p>Button.</p>
+<blockquote>
+<p>/src/components/Ingredients/Button/Button.js</p>
+</blockquote>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>smart</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backgroundColor</td>
+<td>string</td>
+<td></td>
+<td></td>
+<td>Color of background. Style service param.  Reminder: may be transparent. E.g., &quot;bold-pink&quot;.</td>
+</tr>
+<tr>
+<td>clickHandler</td>
+<td>string</td>
+<td></td>
+<td></td>
+<td>Function executed when button is clicked. E.g., () =&gt; handleClick(...params).</td>
+</tr>
+<tr>
+<td>contentColor</td>
+<td>string</td>
+<td></td>
+<td></td>
+<td>Color of text and/or icon. Style service param. E.g., &quot;primary-green&quot;.</td>
+</tr>
+<tr>
+<td>contentHeightInRem</td>
+<td>string</td>
+<td></td>
+<td></td>
+<td>Height of button&apos;s text and/or icon, measured in rem. E.g., &quot;3&quot;.</td>
+</tr>
+<tr>
+<td>elevationLevel</td>
+<td>string</td>
+<td></td>
+<td></td>
+<td>Elevation level. Style service param. E.g., &quot;4&quot;.</td>
+</tr>
+<tr>
+<td>heightInRem</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>Height of button, measured in rem. E.g., &quot;5&quot;.</td>
+</tr>
+<tr>
+<td>marginInRem</td>
+<td>string</td>
+<td></td>
+<td></td>
+<td>Margin size, measured in rem, to be applied to all sides of button. E.g., &quot;2&quot;.</td>
+</tr>
+<tr>
+<td>screenSize</td>
+<td>string</td>
+<td></td>
+<td>true</td>
+<td>Current screen size token. E.g., &quot;small&quot;.</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>Text content of button. E.g., &quot;Button Text&quot;.</td>
+</tr>
+<tr>
+<td>textInvisible</td>
+<td>boolean</td>
+<td></td>
+<td></td>
+<td>Indicates that text should be hidden from sight  (but will remain available to assistive technologies). E.g., true.</td>
+</tr>
+<tr>
+<td>widthInRem</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>Width of button, measured in rem. E.g., &quot;15&quot;.</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<p>&#xA0;</p>
+<h3 id="icon">Icon</h3>
+<p><em><code>@smart</code></em></p>
+<p>Icon component. Gets icon content from Icon Registry.</p>
+<blockquote>
+<p>/src/components/Ingredients/Icon/Icon.js</p>
+</blockquote>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>smart</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>contentColor</td>
+<td>string</td>
+<td></td>
+<td></td>
+<td>Fill color for SVG. Style service param. E.g., &quot;ux-pink&quot;.</td>
+</tr>
+<tr>
+<td>contentHeightInRem</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>Height of icon, measured in rem. E.g., &quot;4&quot;.</td>
+</tr>
+<tr>
+<td>darkMode</td>
+<td>boolean</td>
+<td></td>
+<td>true</td>
+<td>Whether user prefers dark mode. E.g., true.</td>
+</tr>
+<tr>
+<td>iconContent</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>Which SVG should be used. E.g., &quot;Home&quot;.</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<p>&#xA0;</p>
+<h3 id="icon-registry">Icon Registry</h3>
+<p>Registry (exports) of all icon assets. 
+Icon component gets its icon content from this registry.</p>
+<blockquote>
+<p>/src/components/Ingredients/Icon/Registry.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="link-button">Link Button</h3>
+<p><em><code>@smart</code></em></p>
+<p>Facilitates navigation between screens.</p>
+<blockquote>
+<p>/src/components/Ingredients/LinkButton/LinkButton.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<h3 id="plane">Plane</h3>
+<p><em><code>@smart</code></em></p>
+<p>Every two-dimensional space within app.</p>
+<blockquote>
+<p>/src/components/Ingredients/Plane/Plane.js</p>
+</blockquote>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<p><a href="#index">Return to Index</a>
+&#xA0;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<hr>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="style.md" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Style Guide">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Code Reference","level":"5.2","depth":1,"previous":{"title":"Style Guide","level":"5.1","depth":1,"path":"style.md","ref":"style.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapse","livereload"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapse":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"toc.md"},"variables":{},"title":"Hub API","gitbook":"*"},"file":{"path":"code.md","mtime":"2020-01-03T20:02:15.537Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-08T15:00:36.870Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-collapse/collapse.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

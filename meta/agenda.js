@@ -4,15 +4,15 @@
  * @category Agenda
  * @description Literally, a todo list
  * 
- * @todo Add UP and Graph params to AWS
- * @todo IamRoleStatements - least needed privilege
- * @todo detect dev vs prod
- * @todo detect local vs cloud
- * @todo get params when local
- * @todo Refactor test to use Mongoose
+ * @todo detect dev vs prod 
+ * @todo detect local vs cloud - run locally with command line arg specifying isLocal
+ * @todo get params when local - if local, get params from .env
+ * 
  * @todo Refactor test into db services plus fake lambda
+ * @todo Refactor db service to use Mongoose
+ * @todo document
  * @todo review 12 factors
  * @todo Gulp
- * @todo Set up basic structure with services
+ * @todo Develop the basic services
  * 
  */
