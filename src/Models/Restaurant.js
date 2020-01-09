@@ -5,10 +5,17 @@
  * @description This is the restaurant insertion function in the Sample API.
  */
 
-const mongoose = require('mongoose');
-const validator = require('validator');
+const { Schema, model } = require('mongoose');
+// const validator = require('validator');
 
-const model = mongoose.model('User', {
+const RestaurantSchema = new Schema({
+	borough: String,
+	cuisine: String,
+});
+
+module.exports = model('Restaurant', RestaurantSchema);
+
+/* const model = mongoose.model('User', {
 	name: {
 		type: String,
 		required: true,
@@ -51,4 +58,4 @@ const model = mongoose.model('User', {
 	},
 });
 
-module.exports = model;
+module.exports = model; */

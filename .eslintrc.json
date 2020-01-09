@@ -29,6 +29,7 @@
 			"tab"
 		],
 		"no-tabs": "off",
+		"implicit-arrow-linebreak": "off",
 		"prefer-promise-reject-errors": "off",
 		"linebreak-style": "off",
 		"operator-linebreak": "off",
