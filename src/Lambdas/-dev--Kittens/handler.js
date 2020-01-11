@@ -6,14 +6,14 @@
  * Of course, this is just a sample / testing API.
  */
 
-const DataQueries = require('../../../Services/DataQueries');
+const DataQueries = require('../../Services/DataQueries');
 
 exports.InsertKitten = (event, context, callback) => {
 	const kitten = {
 		name: 'Olaf',
 	};
 	// get a promise to retrieve all documents from the emailQueue document collection
-	DataQueries.InsertDocIntoCollection(kitten, 'kittens')
+	DataQueries.InsertDocIntoCollection(kitten, '_Kittens')
 	// if the promise is resolved with the result, then resolve this promise with the result
 		.then((result) => {
 			callback(null, result);

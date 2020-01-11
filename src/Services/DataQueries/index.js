@@ -1,11 +1,7 @@
 
-// ----- PULL IN MODULES
-
 const { ObjectID } = require('mongodb');
-const DataConnection = require('./DataConnection');
+const DataConnection = require('data-connection');
 // const nesoErrors = require('./nesoErrors');
-
-// ----- DB QUERY WRAPPER FUNCTIONS
 
 module.exports = {
 

@@ -1,0 +1,7 @@
+{
+	"name": "layer-dev-npm",
+	"description": "AWS Lambda Layer containing third-party Node.js modules.",
+	"dependencies": {
+		"monk": "^7.1.2"
+	}
+}

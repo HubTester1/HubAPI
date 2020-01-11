@@ -1,4 +1,4 @@
-service: sample
+service: Kittens
 
 custom: ${file(../../config-common.yaml)}
 
@@ -10,21 +10,29 @@ provider:
   profile: mos-api-sls-admin
   memorySize: 128
   timeout: 6
+  deploymentBucket:
+    name: mos-api-dev-lambdas
   environment:
     graphClientID: ${self:custom.graphClientID}
     graphClientSecret: ${self:custom.graphClientSecret}
     graphTenantID: ${self:custom.graphTenantID}
-    mongoDbUriDev: ${self:custom.mongoDbUriDev}
-    mongoDbUriProd: ${self:custom.mongoDbUriProd}
+    mongoDbHostUnique: ${self:custom.mongoDbHostUnique}
+    mongoDbPass: ${self:custom.mongoDbPass}
+    mongoDbUser: ${self:custom.mongoDbUser}
+    stage: ${self:provider.stage}
     upApiKey: ${self:custom.upApiKey}
     upEmployeeChangesPass: ${self:custom.upEmployeeChangesPass}
     upEmployeeChangesUser: ${self:custom.upEmployeeChangesUser}
 
 functions:
   insertRestaurant:
-    handler: Functions/InsertRestaurant.InsertRestaurant
+    handler: handler.InsertRestaurant
     events:
       - http:
           path: sample
           method: post
           cors: true
+    environment:
+      NODE_PATH: "./:/opt/node_modules"
+    layers:
+      - arn:aws:lambda:us-east-1:344440222217:layer:MomentLayer:3

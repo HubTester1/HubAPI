@@ -1,0 +1,8 @@
+{
+	"name": "layer-dev-services",
+	"description": "AWS Lambda Layer containing services in ../Services",
+	"dependencies": {
+		"data-connection": "file:../../../Services/DataConnection",
+		"data-queries": "file:../../../Services/DataQueries"
+	}
+}

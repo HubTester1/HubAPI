@@ -1,0 +1,7 @@
+{
+	"name": "layer-dev-moment",
+	"description": "AWS Lambda Layer containing one third-party Node.js module.",
+	"dependencies": {
+		"moment": "^2.24.0"
+	}
+}
