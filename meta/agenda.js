@@ -4,14 +4,13 @@
  * @category Agenda
  * @description Literally, a todo list
  * 
- * @todo Unwhitelist 0.0.0.0/0
- * @todo back out some YAML props to a common file
- * @todo Gulp
  * 
- * @todo document everytyhing
+ * @todo Gulp
+ * @todo Documentation build
+ * 
+ * @todo Unwhitelist 0.0.0.0/0
  * @todo review 12 factors
  * @todo Develop the basic services
- * @todo 
  * 
  * 
  * @todo BIG PIC - People Data

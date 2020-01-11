@@ -1,28 +1,11 @@
-service: XXX
-
-custom: ${file(../../config-common.yaml)}
-
-provider:
-  name: aws
-  runtime: nodejs12.x
-  stage: XXX
-  region: us-east-1
-  profile: mos-api-sls-admin
-  memorySize: 128
-  timeout: 6
-  deploymentBucket:
-    name: mos-api-dev-lambdas
-  environment:
-    graphClientID: ${self:custom.graphClientID}
-    graphClientSecret: ${self:custom.graphClientSecret}
-    graphTenantID: ${self:custom.graphTenantID}
-    mongoDbHostUnique: ${self:custom.mongoDbHostUnique}
-    mongoDbPass: ${self:custom.mongoDbPass}
-    mongoDbUser: ${self:custom.mongoDbUser}
-    stage: ${self:provider.stage}
-    upApiKey: ${self:custom.upApiKey}
-    upEmployeeChangesPass: ${self:custom.upEmployeeChangesPass}
-    upEmployeeChangesUser: ${self:custom.upEmployeeChangesUser}
+custom:
+  file: ${file(../../config-common.yaml)}
+# -------------------------------------------------------
+  config:
+    service: XXX
+    stage: XXX
+    memorySize: 256
+    timeout: 5
 
 functions:
   XXX:
@@ -32,8 +15,33 @@ functions:
           path: XXX/XXX
           method: XXX
           cors: true
-    environment:
-      NODE_PATH: "./:/opt/node_modules"
-    layers:
-      - arn:aws:lambda:us-east-1:344440222217:layer:LayerDevNPM:1
-      - arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:1
+
+# -------------------------------------------------------
+
+service: ${self:custom.config.service}
+
+provider:
+  name: aws
+  runtime: ${self:custom.file.provider.runtime}
+  stage: ${self:custom.config.stage}
+  region: us-east-1
+  profile: ${self:custom.file.provider.profile}
+  memorySize: ${self:custom.config.memorySize}
+  timeout: ${self:custom.config.timeout}
+  deploymentBucket:
+    name: mos-api-${self:provider.stage}-lambdas
+  environment:
+    NODE_PATH: "./:/opt/node_modules"
+    graphClientID: ${self:custom.file.graphClientID}
+    graphClientSecret: ${self:custom.file.graphClientSecret}
+    graphTenantID: ${self:custom.file.graphTenantID}
+    mongoDbHostUnique: ${self:custom.file.mongoDbHostUnique}
+    mongoDbPass: ${self:custom.file.mongoDbPass}
+    mongoDbUser: ${self:custom.file.mongoDbUser}
+    stage: ${self:provider.stage}
+    upApiKey: ${self:custom.file.upApiKey}
+    upEmployeeChangesPass: ${self:custom.file.upEmployeeChangesPass}
+    upEmployeeChangesUser: ${self:custom.file.upEmployeeChangesUser}
+  layers:
+    - ${self:custom.file.${self:custom.config.stage}LayerARNNPM}
+    - ${self:custom.file.${self:custom.config.stage}LayerARNServices}
