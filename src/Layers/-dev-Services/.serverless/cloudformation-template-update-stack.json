@@ -1,0 +1,28 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "The AWS CloudFormation template for this Serverless application",
+  "Resources": {
+    "LayerDevServicesLambdaLayer": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "Content": {
+          "S3Bucket": "mos-api-dev-layers",
+          "S3Key": "serverless/layer-dev-services/dev/1578773207491-2020-01-11T20:06:47.491Z/LayerDevServices.zip"
+        },
+        "LayerName": "LayerDevServices",
+        "Description": "services dependencies"
+      }
+    }
+  },
+  "Outputs": {
+    "ServerlessDeploymentBucketName": {
+      "Value": "mos-api-dev-layers"
+    },
+    "LayerDevServicesLambdaLayerQualifiedArn": {
+      "Description": "Current Lambda layer version",
+      "Value": {
+        "Ref": "LayerDevServicesLambdaLayer"
+      }
+    }
+  }
+}

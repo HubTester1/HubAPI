@@ -1,11 +1,11 @@
-service: Moment
+service: XXX
 
 custom: ${file(../../config-common.yaml)}
 
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: dev
+  stage: XXX
   region: us-east-1
   profile: mos-api-sls-admin
   memorySize: 128
@@ -25,14 +25,15 @@ provider:
     upEmployeeChangesUser: ${self:custom.upEmployeeChangesUser}
 
 functions:
-  returnCurrentTime:
-    handler: handler.returnCurrentTime
+  XXX:
+    handler: index.XXX
     events:
       - http:
-          path: moment
-          method: get
+          path: XXX/XXX
+          method: XXX
           cors: true
     environment:
       NODE_PATH: "./:/opt/node_modules"
     layers:
-      - arn:aws:lambda:us-east-1:344440222217:layer:MomentLayer:3
+      - arn:aws:lambda:us-east-1:344440222217:layer:LayerDevNPM:1
+      - arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:1

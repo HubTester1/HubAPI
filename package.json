@@ -13,15 +13,12 @@
 		"docs:clean": "rimraf _book",
 		"docs:generate": "node docs/_build/build.js",
 		"docs:install": "gitbook install",
-		"rct": "lambda-local -l src/Lambdas/-dev--Moment/handler.js -h returnCurrentTime -e src/Lambdas/sample-event.js -E '{\"mongoDbHostUnique\":\"-qmmhr.mongodb.net\",\"mongoDbUser\":\"aws-user\",\"mongoDbPass\":\"hFbB7CZNTEhhBv2cK6YcaVedmny3LXVLFriY3\",\"stage\":\"dev\",\"isLocal\":true}'",
-		"ik": "lambda-local -l src/Lambdas/-dev--Kittens/handler.js -h InsertKitten -e src/Lambdas/sample-event.js -E '{\"mongoDbHostUnique\":\"-qmmhr.mongodb.net\",\"mongoDbUser\":\"aws-user\",\"mongoDbPass\":\"hFbB7CZNTEhhBv2cK6YcaVedmny3LXVLFriY3\",\"stage\":\"dev\",\"isLocal\":true}'"
-
-
+		"ik": "lambda-local -l src/Lambdas/-dev-Kittens/index.js -h handler -e src/Lambdas/sample-event.js -E '{\"mongoDbHostUnique\":\"-qmmhr.mongodb.net\",\"mongoDbUser\":\"aws-user\",\"mongoDbPass\":\"hFbB7CZNTEhhBv2cK6YcaVedmny3LXVLFriY3\",\"stage\":\"dev\",\"isLocal\":true}'"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"moment": "^2.24.0",
+		"data-queries": "file:src/Services/-dev-DataQueries",
 		"mongodb": "^3.4.1",
 		"mongoose": "^5.8.6",
 		"monk": "^7.1.2"
@@ -41,6 +38,7 @@
 		"install": "^0.13.0",
 		"jsdoc-x": "^4.0.3",
 		"json-format": "^1.0.1",
-		"npm": "^6.13.4"
+		"npm": "^6.13.4",
+		"serverless-latest-layer-version": "^2.1.0"
 	}
 }

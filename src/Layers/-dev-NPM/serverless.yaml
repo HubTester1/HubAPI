@@ -1,4 +1,4 @@
-service: layer-dev-services
+service: layer-dev-npm
 
 provider:
   name: aws
@@ -9,6 +9,6 @@ provider:
     name: mos-api-dev-layers
 
 layers:
-  MomentLayer:
+  LayerDevNPM:
     path: nodejs
-    description: "moment dependencies"
+    description: "npm dependencies"

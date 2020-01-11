@@ -1,8 +1,8 @@
 {
   "service": {
-    "service": "layer-moment",
+    "service": "layer-dev-npm",
     "serviceObject": {
-      "name": "layer-moment"
+      "name": "layer-dev-npm"
     },
     "provider": {
       "stage": "dev",
@@ -21,15 +21,15 @@
         "AWSTemplateFormatVersion": "2010-09-09",
         "Description": "The AWS CloudFormation template for this Serverless application",
         "Resources": {
-          "MomentLayerLambdaLayer": {
+          "LayerDevNPMLambdaLayer": {
             "Type": "AWS::Lambda::LayerVersion",
             "Properties": {
               "Content": {
                 "S3Bucket": "mos-api-dev-layers",
-                "S3Key": "serverless/layer-moment/dev/1578764646953-2020-01-11T17:44:06.953Z/MomentLayer.zip"
+                "S3Key": "serverless/layer-dev-npm/dev/1578773126080-2020-01-11T20:05:26.080Z/LayerDevNPM.zip"
               },
-              "LayerName": "MomentLayer",
-              "Description": "moment dependencies"
+              "LayerName": "LayerDevNPM",
+              "Description": "npm dependencies"
             }
           }
         },
@@ -37,10 +37,10 @@
           "ServerlessDeploymentBucketName": {
             "Value": "mos-api-dev-layers"
           },
-          "MomentLayerLambdaLayerQualifiedArn": {
+          "LayerDevNPMLambdaLayerQualifiedArn": {
             "Description": "Current Lambda layer version",
             "Value": {
-              "Ref": "MomentLayerLambdaLayer"
+              "Ref": "LayerDevNPMLambdaLayer"
             }
           }
         }
@@ -50,17 +50,17 @@
     "functions": {},
     "serviceFilename": "serverless.yaml",
     "layers": {
-      "MomentLayer": {
+      "LayerDevNPM": {
         "path": "nodejs",
-        "description": "moment dependencies",
+        "description": "npm dependencies",
         "package": {
-          "artifact": "/home/skip/Software/HubAPI/src/Layers/Moment/.serverless/MomentLayer.zip"
+          "artifact": "/home/skip/Software/HubAPI/src/Layers/-dev-NPM/.serverless/LayerDevNPM.zip"
         }
       }
     }
   },
   "package": {
-    "artifactDirectoryName": "serverless/layer-moment/dev/1578764646953-2020-01-11T17:44:06.953Z",
+    "artifactDirectoryName": "serverless/layer-dev-npm/dev/1578773126080-2020-01-11T20:05:26.080Z",
     "artifact": ""
   }
 }

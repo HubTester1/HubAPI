@@ -7,4 +7,3 @@ mongoDbUser: ${ssm:mongodb-user}
 upApiKey: ${ssm:up-api-key}
 upEmployeeChangesPass: ${ssm:up-emp-changes-pw}
 upEmployeeChangesUser: ${ssm:up-emp-changes-user}
-servicesLayerDevARN: 
