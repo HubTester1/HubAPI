@@ -1,6 +1,179 @@
 [
 	{
-		"comment": "/**\n * @name Agenda\n * @module\n * @category Agenda\n * @description Literally, a todo list\n * \n * @todo Add UP and Graph params to AWS\n * @todo IamRoleStatements - least needed privilege\n * @todo detect dev vs prod\n * @todo detect local vs cloud\n * @todo get params when local\n * @todo Refactor test to use Mongoose\n * @todo Refactor test into db services plus fake lambda\n * @todo review 12 factors\n * @todo Gulp\n * @todo Set up basic structure with services\n * \n */",
+		"comment": "",
+		"meta": {
+			"range": [190,212],
+			"filename": "DataConnection.js",
+			"lineno": 9,
+			"columnno": 6,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000013",
+				"name": "CachedConnections",
+				"type": "ObjectExpression",
+				"value": "{}"
+			}
+		},
+		"undocumented": true,
+		"name": "CachedConnections",
+		"longname": "CachedConnections",
+		"kind": "constant",
+		"scope": "global",
+		"params": [],
+		"$longname": "CachedConnections",
+		"$kind": "constant"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [336,351],
+			"filename": "_barely_DataQueries.js",
+			"lineno": 13,
+			"columnno": 6,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000224",
+				"name": "cachedDb",
+				"type": "Literal",
+				"value": null
+			}
+		},
+		"undocumented": true,
+		"name": "cachedDb",
+		"longname": "cachedDb",
+		"kind": "constant",
+		"scope": "global",
+		"params": [],
+		"$longname": "cachedDb",
+		"$kind": "constant"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [1005,1027],
+			"filename": "_barely_DataQueries.js",
+			"lineno": 37,
+			"columnno": 11,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000302",
+				"name": "db",
+				"type": "CallExpression",
+				"value": ""
+			}
+		},
+		"undocumented": true,
+		"name": "db",
+		"longname": "<anonymous>~db",
+		"kind": "constant",
+		"memberof": "<anonymous>",
+		"scope": "inner",
+		"params": [],
+		"$longname": "db",
+		"$kind": "constant"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [799,816],
+			"filename": "_barely_DataQueries.js",
+			"lineno": 30,
+			"columnno": 9,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000278",
+				"name": "dbName",
+				"type": "Literal",
+				"value": "Travel"
+			}
+		},
+		"undocumented": true,
+		"name": "dbName",
+		"longname": "<anonymous>~dbName",
+		"kind": "constant",
+		"memberof": "<anonymous>",
+		"scope": "inner",
+		"params": [],
+		"$longname": "dbName",
+		"$kind": "constant"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [834,879],
+			"filename": "DataQueries.js",
+			"lineno": 33,
+			"columnno": 8,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000156",
+				"name": "fluffy",
+				"type": "NewExpression",
+				"value": ""
+			}
+		},
+		"undocumented": true,
+		"name": "fluffy",
+		"longname": "<anonymous>~fluffy",
+		"kind": "constant",
+		"memberof": "<anonymous>",
+		"scope": "inner",
+		"params": [],
+		"$longname": "fluffy",
+		"$kind": "constant"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [787,824],
+			"filename": "DataQueries.js",
+			"lineno": 32,
+			"columnno": 8,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000149",
+				"name": "Kitten",
+				"type": "CallExpression",
+				"value": ""
+			}
+		},
+		"undocumented": true,
+		"name": "Kitten",
+		"longname": "<anonymous>~Kitten",
+		"kind": "constant",
+		"memberof": "<anonymous>",
+		"scope": "inner",
+		"params": [],
+		"$longname": "Kitten",
+		"$kind": "constant"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [729,777],
+			"filename": "DataQueries.js",
+			"lineno": 29,
+			"columnno": 8,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000141",
+				"name": "kittySchema",
+				"type": "NewExpression",
+				"value": ""
+			}
+		},
+		"undocumented": true,
+		"name": "kittySchema",
+		"longname": "<anonymous>~kittySchema",
+		"kind": "constant",
+		"memberof": "<anonymous>",
+		"scope": "inner",
+		"params": [],
+		"$longname": "kittySchema",
+		"$kind": "constant"
+	},
+	{
+		"comment": "/**\n * @name Agenda\n * @module\n * @category Agenda\n * @description Literally, a todo list\n * \n * \n * @todo Gulp\n * @todo Documentation build\n * \n * @todo Unwhitelist 0.0.0.0/0\n * @todo review 12 factors\n * @todo Develop the basic services\n * \n * \n * @todo BIG PIC - People Data\n * @todo BIG PIC - Send email through Graph\n * @todo BIG PIC - Pull data from SPO\n * @todo BIG PIC - Serve client from AWS through SPO\n */",
 		"meta": {
 			"filename": "agenda.js",
 			"lineno": 1,
@@ -22,19 +195,955 @@
 		],
 		"description": "Literally, a todo list",
 		"todo": [
-			"Add UP and Graph params to AWS",
-			"IamRoleStatements - least needed privilege",
-			"detect dev vs prod",
-			"detect local vs cloud",
-			"get params when local",
-			"Refactor test to use Mongoose",
-			"Refactor test into db services plus fake lambda",
-			"review 12 factors",
 			"Gulp",
-			"Set up basic structure with services"
+			"Documentation build",
+			"Unwhitelist 0.0.0.0/0",
+			"review 12 factors",
+			"Develop the basic services",
+			"BIG PIC - People Data",
+			"BIG PIC - Send email through Graph",
+			"BIG PIC - Pull data from SPO",
+			"BIG PIC - Serve client from AWS through SPO"
 		],
 		"longname": "module:Agenda",
 		"$longname": "Agenda",
 		"$kind": "module"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [216,525],
+			"filename": "DataConnection.js",
+			"lineno": 12,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000017",
+				"name": "module.exports.DataConnection",
+				"type": "ArrowFunctionExpression",
+				"paramnames": [
+					"dbName"
+				]
+			},
+			"vars": {
+				"CachedConnections[undefined]": null
+			}
+		},
+		"undocumented": true,
+		"name": "DataConnection",
+		"longname": "DataConnection",
+		"kind": "function",
+		"scope": "global",
+		"$longname": "DataConnection",
+		"$kind": "method"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [385,1198],
+			"filename": "DataQueries.js",
+			"lineno": 13,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000082",
+				"name": "module.exports.InsertDoc",
+				"type": "ArrowFunctionExpression",
+				"paramnames": [
+					"dbName",
+					"doc",
+					"collection",
+					"callback"
+				]
+			},
+			"vars": {
+				"cxnResult": "InsertDoc~cxnResult",
+				"": null
+			}
+		},
+		"undocumented": true,
+		"name": "InsertDoc",
+		"longname": "InsertDoc",
+		"kind": "function",
+		"scope": "global",
+		"$longname": "InsertDoc",
+		"$kind": "method"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [354,2908],
+			"filename": "_barely_DataQueries.js",
+			"lineno": 15,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000228",
+				"name": "module.exports.InsertDocIntoCollection",
+				"type": "ArrowFunctionExpression",
+				"paramnames": [
+					"database",
+					"doc",
+					"collection",
+					"context"
+				]
+			},
+			"vars": {
+				"": null
+			}
+		},
+		"undocumented": true,
+		"name": "InsertDocIntoCollection",
+		"longname": "InsertDocIntoCollection",
+		"kind": "function",
+		"scope": "global",
+		"$longname": "InsertDocIntoCollection",
+		"$kind": "method"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [603,646],
+			"filename": "DataQueries.js",
+			"lineno": 22,
+			"columnno": 3,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000120",
+				"name": "body",
+				"type": "CallExpression",
+				"value": ""
+			}
+		},
+		"undocumented": true,
+		"name": "body",
+		"longname": "body",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "body",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [980,1040],
+			"filename": "DataQueries.js",
+			"lineno": 40,
+			"columnno": 5,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000182",
+				"name": "body",
+				"type": "CallExpression",
+				"value": ""
+			}
+		},
+		"undocumented": true,
+		"name": "body",
+		"longname": "body",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "body",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [1110,1171],
+			"filename": "DataQueries.js",
+			"lineno": 48,
+			"columnno": 5,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000200",
+				"name": "body",
+				"type": "CallExpression",
+				"value": ""
+			}
+		},
+		"undocumented": true,
+		"name": "body",
+		"longname": "body",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "body",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [1137,1212],
+			"filename": "_barely_DataQueries.js",
+			"lineno": 42,
+			"columnno": 6,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000327",
+				"name": "body",
+				"type": "CallExpression",
+				"value": ""
+			}
+		},
+		"undocumented": true,
+		"name": "body",
+		"longname": "body",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "body",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [433,454],
+			"filename": "DataConnection.js",
+			"lineno": 18,
+			"columnno": 3,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000051",
+				"name": "bufferCommands",
+				"type": "Literal",
+				"value": false
+			}
+		},
+		"undocumented": true,
+		"name": "bufferCommands",
+		"longname": "bufferCommands",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "bufferCommands",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [459,478],
+			"filename": "DataConnection.js",
+			"lineno": 19,
+			"columnno": 3,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000053",
+				"name": "bufferMaxEntries",
+				"type": "Literal",
+				"value": 0
+			}
+		},
+		"undocumented": true,
+		"name": "bufferMaxEntries",
+		"longname": "bufferMaxEntries",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "bufferMaxEntries",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [299,484],
+			"filename": "DataConnection.js",
+			"lineno": 14,
+			"columnno": 2,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000033",
+				"name": "CachedConnections[undefined]",
+				"type": "CallExpression",
+				"value": "",
+				"paramnames": []
+			}
+		},
+		"undocumented": true,
+		"name": "CachedConnections[undefined]",
+		"longname": "CachedConnections[undefined]",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "CachedConnections[undefined]",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [150,157],
+			"filename": "DataConnection.js",
+			"lineno": 7,
+			"columnno": 8,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000007",
+				"name": "connect",
+				"type": "Identifier",
+				"value": "connect"
+			}
+		},
+		"undocumented": true,
+		"name": "connect",
+		"longname": "connect",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "connect",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [277,287],
+			"filename": "DataQueries.js",
+			"lineno": 10,
+			"columnno": 8,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000064",
+				"name": "connection",
+				"type": "Identifier",
+				"value": "connection"
+			}
+		},
+		"undocumented": true,
+		"name": "connection",
+		"longname": "connection",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "connection",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [536,559],
+			"filename": "DataQueries.js",
+			"lineno": 19,
+			"columnno": 2,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000110",
+				"name": "cxnResult",
+				"type": "Literal",
+				"funcscope": "<anonymous>",
+				"value": "CXN ERROR",
+				"paramnames": []
+			}
+		},
+		"undocumented": true,
+		"name": "cxnResult",
+		"longname": "<anonymous>~cxnResult",
+		"kind": "member",
+		"memberof": "<anonymous>",
+		"scope": "inner",
+		"$longname": "cxnResult",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [630,639],
+			"filename": "DataQueries.js",
+			"lineno": 23,
+			"columnno": 4,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000126",
+				"name": "cxnResult",
+				"type": "Identifier",
+				"value": "cxnResult"
+			}
+		},
+		"undocumented": true,
+		"name": "cxnResult",
+		"longname": "cxnResult",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "cxnResult",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [694,719],
+			"filename": "DataQueries.js",
+			"lineno": 28,
+			"columnno": 2,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000137",
+				"name": "cxnResult",
+				"type": "Literal",
+				"funcscope": "<anonymous>",
+				"value": "CXN SUCCESS",
+				"paramnames": []
+			}
+		},
+		"undocumented": true,
+		"name": "cxnResult",
+		"longname": "<anonymous>~cxnResult",
+		"kind": "member",
+		"memberof": "<anonymous>",
+		"scope": "inner",
+		"$longname": "cxnResult",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [1009,1018],
+			"filename": "DataQueries.js",
+			"lineno": 41,
+			"columnno": 6,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000188",
+				"name": "cxnResult",
+				"type": "Identifier",
+				"value": "cxnResult"
+			}
+		},
+		"undocumented": true,
+		"name": "cxnResult",
+		"longname": "cxnResult",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "cxnResult",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [1139,1148],
+			"filename": "DataQueries.js",
+			"lineno": 49,
+			"columnno": 6,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000206",
+				"name": "cxnResult",
+				"type": "Identifier",
+				"value": "cxnResult"
+			}
+		},
+		"undocumented": true,
+		"name": "cxnResult",
+		"longname": "cxnResult",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "cxnResult",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [1167,1202],
+			"filename": "_barely_DataQueries.js",
+			"lineno": 43,
+			"columnno": 7,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000333",
+				"name": "data",
+				"type": "Literal",
+				"value": "This is some returned data."
+			}
+		},
+		"undocumented": true,
+		"name": "data",
+		"longname": "data",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "data",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name DataConnection\n * @service\n * @description Service facilitating all connections between Lambda functions and MongoDB Atlas.\n */",
+		"meta": {
+			"filename": "DataConnection.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				
+			}
+		},
+		"name": "DataConnection",
+		"tags": [
+			{
+				"originalTitle": "service",
+				"title": "service",
+				"text": ""
+			}
+		],
+		"description": "Service facilitating all connections between Lambda functions and MongoDB Atlas.",
+		"longname": "DataConnection",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "DataConnection",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [336,350],
+			"filename": "DataQueries.js",
+			"lineno": 11,
+			"columnno": 8,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000076",
+				"name": "DataConnection",
+				"type": "Identifier",
+				"value": "DataConnection"
+			}
+		},
+		"undocumented": true,
+		"name": "DataConnection",
+		"longname": "DataConnection",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "DataConnection",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name DataQueries\n * @service\n * @description Service facilitating all data queries from Lambda functions to MongoDB Atlas,\n */",
+		"meta": {
+			"filename": "DataQueries.js",
+			"lineno": 4,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				
+			}
+		},
+		"name": "DataQueries",
+		"tags": [
+			{
+				"originalTitle": "service",
+				"title": "service",
+				"text": ""
+			}
+		],
+		"description": "Service facilitating all data queries from Lambda functions to MongoDB Atlas,",
+		"longname": "DataQueries",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "DataQueries",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name DataQueries\n * @service\n * @description Service facilitating all data queries from Lambda functions to MongoDB Atlas,\n */",
+		"meta": {
+			"filename": "_barely_DataQueries.js",
+			"lineno": 4,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				
+			}
+		},
+		"name": "DataQueries",
+		"tags": [
+			{
+				"originalTitle": "service",
+				"title": "service",
+				"text": ""
+			}
+		],
+		"description": "Service facilitating all data queries from Lambda functions to MongoDB Atlas,",
+		"longname": "DataQueries",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "DataQueries",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [367,373],
+			"filename": "DataConnection.js",
+			"lineno": 15,
+			"columnno": 3,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000045",
+				"name": "dbName",
+				"type": "Identifier",
+				"value": "dbName"
+			}
+		},
+		"undocumented": true,
+		"name": "dbName",
+		"longname": "dbName",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "dbName",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [1026,1031],
+			"filename": "DataQueries.js",
+			"lineno": 42,
+			"columnno": 6,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000190",
+				"name": "error",
+				"type": "Identifier",
+				"value": "error"
+			}
+		},
+		"undocumented": true,
+		"name": "error",
+		"longname": "error",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "error",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [490,499],
+			"filename": "DataQueries.js",
+			"lineno": 16,
+			"columnno": 5,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000099",
+				"name": "cxnResult"
+			}
+		},
+		"undocumented": true,
+		"name": "cxnResult",
+		"longname": "InsertDoc~cxnResult",
+		"kind": "member",
+		"memberof": "InsertDoc",
+		"scope": "inner",
+		"params": [],
+		"$longname": "InsertDoc~cxnResult",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [297,302],
+			"filename": "DataQueries.js",
+			"lineno": 10,
+			"columnno": 28,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000068",
+				"name": "model",
+				"type": "Identifier",
+				"value": "model"
+			}
+		},
+		"undocumented": true,
+		"name": "model",
+		"longname": "model",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "model",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [277,288],
+			"filename": "_barely_DataQueries.js",
+			"lineno": 10,
+			"columnno": 8,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000215",
+				"name": "MongoClient",
+				"type": "Identifier",
+				"value": "MongoClient"
+			}
+		},
+		"undocumented": true,
+		"name": "MongoClient",
+		"longname": "MongoClient",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "MongoClient",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [318,328],
+			"filename": "_barely_DataQueries.js",
+			"lineno": 12,
+			"columnno": 4,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000221",
+				"name": "mongoDbUri"
+			}
+		},
+		"undocumented": true,
+		"name": "mongoDbUri",
+		"longname": "mongoDbUri",
+		"kind": "member",
+		"scope": "global",
+		"params": [],
+		"$longname": "mongoDbUri",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [544,582],
+			"filename": "_barely_DataQueries.js",
+			"lineno": 21,
+			"columnno": 3,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000250",
+				"name": "mongoDbUri",
+				"type": "MemberExpression",
+				"funcscope": "<anonymous>",
+				"value": "process.env.mongoDbUriDev",
+				"paramnames": []
+			}
+		},
+		"undocumented": true,
+		"name": "mongoDbUri",
+		"longname": "<anonymous>~mongoDbUri",
+		"kind": "member",
+		"memberof": "<anonymous>",
+		"scope": "inner",
+		"$longname": "mongoDbUri",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [759,771],
+			"filename": "DataQueries.js",
+			"lineno": 30,
+			"columnno": 3,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000146",
+				"name": "name",
+				"type": "Identifier",
+				"value": "String"
+			}
+		},
+		"undocumented": true,
+		"name": "name",
+		"longname": "name",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "name",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [859,873],
+			"filename": "DataQueries.js",
+			"lineno": 34,
+			"columnno": 3,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000161",
+				"name": "name",
+				"type": "Literal",
+				"value": "fluffy"
+			}
+		},
+		"undocumented": true,
+		"name": "name",
+		"longname": "name",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "name",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [1156,1162],
+			"filename": "DataQueries.js",
+			"lineno": 50,
+			"columnno": 6,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000208",
+				"name": "result",
+				"type": "Identifier",
+				"value": "result"
+			}
+		},
+		"undocumented": true,
+		"name": "result",
+		"longname": "result",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "result",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [289,295],
+			"filename": "DataQueries.js",
+			"lineno": 10,
+			"columnno": 20,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000066",
+				"name": "Schema",
+				"type": "Identifier",
+				"value": "Schema"
+			}
+		},
+		"undocumented": true,
+		"name": "Schema",
+		"longname": "Schema",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "Schema",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [583,598],
+			"filename": "DataQueries.js",
+			"lineno": 21,
+			"columnno": 3,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000118",
+				"name": "statusCode",
+				"type": "Literal",
+				"value": 200
+			}
+		},
+		"undocumented": true,
+		"name": "statusCode",
+		"longname": "statusCode",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "statusCode",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [958,973],
+			"filename": "DataQueries.js",
+			"lineno": 39,
+			"columnno": 5,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000180",
+				"name": "statusCode",
+				"type": "Literal",
+				"value": 200
+			}
+		},
+		"undocumented": true,
+		"name": "statusCode",
+		"longname": "statusCode",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "statusCode",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [1088,1103],
+			"filename": "DataQueries.js",
+			"lineno": 47,
+			"columnno": 5,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000198",
+				"name": "statusCode",
+				"type": "Literal",
+				"value": 200
+			}
+		},
+		"undocumented": true,
+		"name": "statusCode",
+		"longname": "statusCode",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "statusCode",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [1114,1129],
+			"filename": "_barely_DataQueries.js",
+			"lineno": 41,
+			"columnno": 6,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000325",
+				"name": "statusCode",
+				"type": "Literal",
+				"value": 200
+			}
+		},
+		"undocumented": true,
+		"name": "statusCode",
+		"longname": "statusCode",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "statusCode",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [378,399],
+			"filename": "DataConnection.js",
+			"lineno": 16,
+			"columnno": 3,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000047",
+				"name": "useNewUrlParser",
+				"type": "Literal",
+				"value": true
+			}
+		},
+		"undocumented": true,
+		"name": "useNewUrlParser",
+		"longname": "useNewUrlParser",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "useNewUrlParser",
+		"$kind": "property"
+	},
+	{
+		"comment": "",
+		"meta": {
+			"range": [404,428],
+			"filename": "DataConnection.js",
+			"lineno": 17,
+			"columnno": 3,
+			"path": "/home/skip/Software/HubAPI/meta/ref/Mongoose",
+			"code": {
+				"id": "astnode100000049",
+				"name": "useUnifiedTopology",
+				"type": "Literal",
+				"value": true
+			}
+		},
+		"undocumented": true,
+		"name": "useUnifiedTopology",
+		"longname": "useUnifiedTopology",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "useUnifiedTopology",
+		"$kind": "property"
 	}
 ]

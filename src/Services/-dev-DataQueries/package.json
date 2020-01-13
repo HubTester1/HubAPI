@@ -7,7 +7,7 @@
 	"author": "Museum of Science, Boston",
 	"license": "ISC",
 	"dependencies": {
-		"data-connection": "file:../DataConnection",
+		"data-connection": "file:../-dev-DataConnection",
 		"mongodb": "^3.4.1"
 	}
 }

@@ -8,7 +8,7 @@
 
 const DataQueries = require('data-queries');
 
-exports.handler = (event, context, callback) =>
+exports.InsertKitten = (event, context, callback) =>
 	// return a new promise
 	new Promise((resolve, reject) => {
 		const kitten = {

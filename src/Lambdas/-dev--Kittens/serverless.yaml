@@ -9,7 +9,7 @@ custom:
 
 functions:
   InsertKitten:
-    handler: index.handler
+    handler: index.InsertKitten
     events:
       - http:
           path: kittens
