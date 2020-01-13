@@ -24,26 +24,48 @@ gulp.task('d-watch-rebuild', () => {
 // LAMBDA FUNCTIONS LOCAL
 
 // run lambda function locally
-gulp.task('ll-run', () => run(gulpConfig.ReturnLLFunctionRunCommand(argv.d, argv.f, argv.e)).exec());
+gulp.task('ll-run', () => run(gulpConfig.ReturnLLFunctionRunCommand(argv.d, argv.fn, argv.e)).exec());
 // watch lambda function code; upon changes, run lambda function locally
 gulp.task('ll-watch-run', () => {
 	gulp.watch(
-		gulpConfig.ReturnLLFunctionWatchLocation(argv.d), 
+		gulpConfig.ReturnLambdaDirectory(argv.d), 
 		{ ignored: ['serverless.yaml', './serverless/*'] }, 
-		() => run(gulpConfig.ReturnLLFunctionRunCommand(argv.d, argv.f, argv.e)).exec(),
+		() => run(gulpConfig.ReturnLLFunctionRunCommand(argv.d, argv.fn, argv.e)).exec(),
 	);
 });
 // watch lambda function code; upon changes, run lambda function locally
 gulp.task('ll-watch-all-run', () => {
 	gulp.watch(
 		'./src',
-		() => run(gulpConfig.ReturnLLFunctionRunCommand(argv.d, argv.f, argv.e)).exec(),
+		() => run(gulpConfig.ReturnLLFunctionRunCommand(argv.d, argv.fn, argv.e)).exec(),
 	);
 });
 
 // AWS
 
+// run lambda function on AWS
 gulp.task('aws-i', () => run(
-	`sls invoke -f ${argv.f} -l`, 
-	{ cwd: `src/Lambdas${argv.d}` },
+	`sls invoke -f ${argv.fn} -l`, 
+	{ cwd: gulpConfig.ReturnLambdaDirectory(argv.d) },
+).exec());
+// deploy entire lambda function stack, CF included, to AWS
+gulp.task('aws-d-s', () => run(
+	'sls deploy -v', 
+	{ cwd: gulpConfig.ReturnLambdaDirectory(argv.d) },
+).exec());
+// deploy lambda function only to AWS
+gulp.task('aws-d-f', () => run(
+	`sls deploy function -f ${argv.fn}`, 
+	{ cwd: gulpConfig.ReturnLambdaDirectory(argv.d) },
+).exec());
+// retrieve lambda function log from AWS
+gulp.task('aws-l', () => run(
+	`sls logs -f ${argv.fn} -t`,
+	{ cwd: gulpConfig.ReturnLambdaDirectory(argv.d) },
+).exec());
+// deploy entire lambda function stack, including all
+// 		associated AWS resources
+gulp.task('aws-d-s', () => run(
+	'sls remove', 
+	{ cwd: gulpConfig.ReturnLambdaDirectory(argv.d) },
 ).exec());

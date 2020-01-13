@@ -18,7 +18,7 @@ module.exports = {
 		}
 		return eventPath;
 	},
-	ReturnLLFunctionWatchLocation: (directoryToken) => {
+	ReturnLambdaDirectory: (directoryToken) => {
 		const directoryTokenToUse = module.exports.ReturnReformattedDirectoryToken(directoryToken);
 		return `src/Lambdas/${directoryTokenToUse}`;
 	},
