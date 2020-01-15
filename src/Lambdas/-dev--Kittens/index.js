@@ -1,12 +1,17 @@
 /**
- * @name InsertKitten
- * @function
- * @api Sample
- * @description This is the kitten insertion function in the Kitten API. 
- * Of course, this is just a sample / testing API.
+ * @name Kitten
+ * @api
+ * @description Just a sample / testing API
  */
 
 const DataQueries = require('data-queries');
+
+/**
+ * @name InsertKitten
+ * @function
+ * @async
+ * @description This is the kitten insertion function in the Kitten API.
+ */
 
 exports.InsertKitten = (event, context, callback) =>
 	// return a new promise

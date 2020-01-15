@@ -1,9 +1,23 @@
+/**
+ * @name DataQueries
+ * @service
+ * @description Using DataConnection service, 
+ * facilitate queries of databases in MongoDB Atlas service.
+ */
 
 const { ObjectID } = require('mongodb');
 const DataConnection = require('data-connection');
 // const nesoErrors = require('./nesoErrors');
 
 module.exports = {
+
+	/**
+	 * @name ReturnAllDocsFromCollection
+	 * @function
+	 * @async
+	 * @description Return all documents from a collection
+	 * @param {string} collection - e.g., '_Kittens'
+	 */
 
 	ReturnAllDocsFromCollection: (collection) =>
 		// return a new promise
@@ -33,6 +47,18 @@ module.exports = {
 				}
 			});
 		})),
+
+	// /**
+	//  * @name ReturnLimitedDocsFromCollectionSorted
+	//  * @function
+	//  * @async
+	//  * @description Return documents from a collection, up to a specified quantity, 
+	//  * sorted as ascending or descending on a specified field
+	//  * @param {string} collection - E.g., '_Kittens'
+	//  * @param {string} field - E.g., 'name'
+	//  * @param {string} order - E.g., 'descending'
+	//  * @param {string} limit - E.g., 3
+	//  */
 
 	ReturnLimitedDocsFromCollectionSorted: (collection, field, order, limit) =>
 		// return a new promise

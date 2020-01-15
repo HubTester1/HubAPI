@@ -1,10 +1,17 @@
 /**
  * @name XXX
- * @function
- * @category XXX
+ * @api
  * @description XXX
  */
 
+// const DataQueries = require('data-queries');
+
+/**
+ * @name XXX
+ * @function
+ * @async
+ * @description XXX
+ */
 
 exports.XXX = (event, context) =>
 	// return a new promise

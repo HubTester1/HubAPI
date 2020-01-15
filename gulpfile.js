@@ -18,7 +18,7 @@ gulp.task('d-gb-build', () => run('gitbook build').exec());
 gulp.task('d-gb-serve', () => run('gitbook serve').exec());
 // watch code; upon changes, execute d-build
 gulp.task('d-watch-rebuild', () => {
-	gulp.watch('./src', gulp.series('d-build'));
+	gulp.watch(['./src', './docs/_build/build.js'], gulp.series('d-build'));
 });
 
 // LAMBDA FUNCTIONS LOCAL
