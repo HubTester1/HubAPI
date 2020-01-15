@@ -258,6 +258,18 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="code-reference">Code Reference</h1>
+<h2 id="index">Index</h2>
+<ul>
+<li><a href="https://github.com/HubTester1/HubAPI" target="_blank">Repo</a></li>
+<li><a href="#agenda">Agenda</a></li>
+<li><a href="#apis">APIs</a></li>
+<li><a href="#services">Services</a>
+<details><summary>- Services</summary><ul>
+<li><a href="#dataconnection">DataConnection</a></li>
+<li><a href="#dataqueries">DataQueries</a></li>
+</ul>
+</details></li>
+</ul>
 <h2 id="agenda">Agenda</h2>
 <table>
 <thead>
@@ -313,8 +325,68 @@
 <hr>
 <p>&#xA0;</p>
 <p>&#xA0;</p>
+<h2 id="apis">APIs</h2>
+<p>This text goes at the top of APIs.</p>
+<h3 id="kitten">Kitten</h3>
+<p>Just a sample / testing API</p>
+<blockquote>
+<p>/src/Lambdas/-dev--Kittens/index.js</p>
+</blockquote>
+<h4 id="functions">Functions</h4>
+<h5 id="insertkitten">InsertKitten</h5>
+<p><em><code>@async</code></em></p>
+<p>This is the kitten insertion function in the Kitten API.</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<p><a href="#index">Return to Index</a>
+&#xA0;</p>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
+<hr>
+<p>&#xA0;</p>
+<p>&#xA0;</p>
 <h2 id="services">Services</h2>
 <p>This is the Services preamble.</p>
+<h3 id="dataconnection">DataConnection</h3>
+<p>Return connection to either dev or prod database in MongoDB Atlas service.</p>
+<blockquote>
+<p>/src/Services/-dev-DataConnection/index.js</p>
+</blockquote>
+<h4 id="functions">Functions</h4>
+<h5 id="returndataconnection">ReturnDataConnection</h5>
+<p>Return <a href="https://www.npmjs.com/package/monk" target="_blank">monk</a> connection to database, using environment variables</p>
+<p>&#xA0;</p>
+<h3 id="dataqueries">DataQueries</h3>
+<p>Using DataConnection service, 
+facilitate queries of databases in MongoDB Atlas service.</p>
+<blockquote>
+<p>/src/Services/-dev-DataQueries/index.js</p>
+</blockquote>
+<h4 id="functions">Functions</h4>
+<h5 id="returnalldocsfromcollection">ReturnAllDocsFromCollection</h5>
+<p>Return all documents from a collection</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>collection</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>e.g., &apos;_Kittens&apos;</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<p>&#xA0;</p>
 <p>&#xA0;</p>
 <p><a href="#index">Return to Index</a>
 &#xA0;</p>
@@ -362,7 +434,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Code Reference","level":"5.2","depth":1,"previous":{"title":"Style Guide","level":"5.1","depth":1,"path":"style.md","ref":"style.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapse","livereload"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapse":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"toc.md"},"variables":{},"title":"Hub API","gitbook":"*"},"file":{"path":"code.md","mtime":"2020-01-15T20:02:00.784Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-15T19:47:20.707Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Code Reference","level":"5.2","depth":1,"previous":{"title":"Style Guide","level":"5.1","depth":1,"path":"style.md","ref":"style.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapse","livereload"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapse":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"toc.md"},"variables":{},"title":"Hub API","gitbook":"*"},"file":{"path":"code.md","mtime":"2020-01-15T21:31:40.567Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-15T21:17:06.766Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

@@ -58,7 +58,25 @@
 			}
 		]
 	},
-	null,
+	{
+		"title": "APIs",
+		"preamble": "This text goes at the top of APIs.",
+		"apis": [
+			{
+				"name": "Kitten",
+				"category": "APIs",
+				"description": "Just a sample / testing API",
+				"path": "/src/Lambdas/-dev--Kittens/index.js",
+				"functions": [
+					{
+						"name": "InsertKitten",
+						"description": "This is the kitten insertion function in the Kitten API.",
+						"async": true
+					}
+				]
+			}
+		]
+	},
 	null,
 	{
 		"title": "Services",

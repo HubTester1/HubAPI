@@ -37,6 +37,26 @@
 		"$kind": "module"
 	},
 	{
+		"comment": "/**\n * @name InsertKitten\n * @function\n * @async\n * @description This is the kitten insertion function in the Kitten API.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 9,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/-dev--Kittens",
+			"code": {
+				
+			}
+		},
+		"name": "InsertKitten",
+		"kind": "function",
+		"async": true,
+		"description": "This is the kitten insertion function in the Kitten API.",
+		"longname": "InsertKitten",
+		"scope": "global",
+		"$longname": "InsertKitten",
+		"$kind": "method"
+	},
+	{
 		"comment": "/**\r\n\t * @name ReturnAllDocsFromCollection\r\n\t * @function\r\n\t * @async\r\n\t * @description Return all documents from a collection\r\n\t * @param {string} collection - e.g., '_Kittens'\r\n\t */",
 		"meta": {
 			"filename": "index.js",
@@ -136,6 +156,32 @@
 		"kind": "member",
 		"scope": "global",
 		"$longname": "DataQueries",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name Kitten\n * @api\n * @description Just a sample / testing API\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/-dev--Kittens",
+			"code": {
+				
+			}
+		},
+		"name": "Kitten",
+		"tags": [
+			{
+				"originalTitle": "api",
+				"title": "api",
+				"text": ""
+			}
+		],
+		"description": "Just a sample / testing API",
+		"longname": "Kitten",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "Kitten",
 		"$kind": "property"
 	}
 ]

@@ -1,4 +1,15 @@
 #Code Reference
+##Index
+
+* [Repo](https://github.com/HubTester1/HubAPI)
+* [Agenda](#agenda)
+* [APIs](#apis)
+* [Services](#services)
+{% collapse title="- Services"%}
+- [DataConnection](#dataconnection)
+- [DataQueries](#dataqueries)
+{% endcollapse %}
+
 ##Agenda
 | *@todo* | path |
 | ----------- | ----------- |
@@ -26,8 +37,74 @@
 
 &nbsp;
 
+##APIs
+This text goes at the top of APIs.
+###Kitten
+
+Just a sample / testing API
+
+> /src/Lambdas/-dev--Kittens/index.js
+
+####Functions
+
+#####InsertKitten
+*`@async`*
+
+This is the kitten insertion function in the Kitten API.
+
+
+&nbsp;
+
+
+&nbsp;
+
+[Return to Index](#index)
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+---
+&nbsp;
+
+&nbsp;
+
 ##Services
 This is the Services preamble.
+###DataConnection
+
+Return connection to either dev or prod database in MongoDB Atlas service.
+
+> /src/Services/-dev-DataConnection/index.js
+
+####Functions
+
+#####ReturnDataConnection
+Return [monk](https://www.npmjs.com/package/monk) connection to database, using environment variables
+
+
+&nbsp;
+
+###DataQueries
+
+Using DataConnection service, facilitate queries of databases in MongoDB Atlas service.
+
+> /src/Services/-dev-DataQueries/index.js
+
+####Functions
+
+#####ReturnAllDocsFromCollection
+Return all documents from a collection
+
+{% collapse title="> Params"%}
+| *@param* | type | required | async | description |
+| --- |: --- :|: --- :|: --- :| --- |
+| collection | string | true |  | e.g., '_Kittens'  |
+{% endcollapse %}
+
+&nbsp;
+
 
 &nbsp;
 

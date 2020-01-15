@@ -8,6 +8,7 @@ const config = {
 	files: [
 		// './src',
 		'./meta',
+		'./src/Lambdas',
 		'./src/Services',
 	],
 	recurse: true,
@@ -44,7 +45,7 @@ const ReturnPathRelativeLocation = (pathRaw, filename, projectRoot) => {
 	const lengthOfRoot = projectRoot.length;
 	return `${pathRaw.substring(positionOfFirstCharacterOfRoot + lengthOfRoot)}/${filename}`;
 };
-const ReturnAllComponents = (allItemsRawArray, projectRoot) => {
+/* const ReturnAllComponents = (allItemsRawArray, projectRoot) => {
 	const allComponents = [];
 	allItemsRawArray.forEach((itemRawValue) => {
 		if (itemRawValue.tags) {
@@ -113,7 +114,7 @@ const ReturnAllComponents = (allItemsRawArray, projectRoot) => {
 		}
 	});
 	return allComponents;
-};
+}; */
 const ReturnFunctionsForThisServiceOrAPI = (allItemsRawArray, parentPath, projectRoot) => {
 	const functions = [];
 	allItemsRawArray.forEach((itemRawValue) => {
@@ -205,6 +206,40 @@ const ReturnAllServices = (allItemsRawArray, projectRoot) => {
 	});
 	return allServices;
 };
+const ReturnAllAPIs = (allItemsRawArray, projectRoot) => {
+	const allAPIs = [];
+	allItemsRawArray.forEach((itemRawValue) => {
+		if (itemRawValue.tags) {
+			itemRawValue.tags.forEach((tag) => {
+				if (tag.title && tag.title.trim() === 'api') {
+					const objectToPush = {
+						name: itemRawValue.name.trim(),
+						category: 'APIs',
+						description: itemRawValue.description,
+						path: ReturnPathRelativeLocation(
+							itemRawValue.meta.path,
+							itemRawValue.meta.filename,
+							projectRoot,
+						),
+						functions: ReturnFunctionsForThisServiceOrAPI(
+							allItemsRawArray,
+							ReturnPathRelativeLocation(
+								itemRawValue.meta.path,
+								itemRawValue.meta.filename,
+								projectRoot,
+							),
+							projectRoot,
+						),
+					};
+
+
+					allAPIs.push(objectToPush);
+				}
+			});
+		}
+	});
+	return allAPIs;
+};
 const ReturnAllToDos = (allItemsRawArray, projectRoot) => {
 	const allToDos = [];
 	allItemsRawArray.forEach((itemRawValue) => {
@@ -227,7 +262,7 @@ const ReturnAllToDos = (allItemsRawArray, projectRoot) => {
 	return allToDos;
 };
 
-const ReturnParamTypeAndRequirement = (paramValueRaw) => {
+/* const ReturnParamTypeAndRequirement = (paramValueRaw) => {
 	const valueParts = paramValueRaw.split('.');
 	return {
 		type: valueParts[1].trim(),
@@ -244,8 +279,8 @@ const ReturnParamIsSmart = (paramValueRaw) => {
 		});
 	}
 	return isSmart;
-};
-const ReturnAllParams = (allItemsRawArray) => {
+}; */
+/* const ReturnAllParams = (allItemsRawArray) => {
 	const allParams = [];
 	allItemsRawArray.forEach((itemRawValue) => {
 		if (
@@ -309,9 +344,9 @@ const ReturnAllParamDefaults = (allItemsRawArray) => {
 		}
 	});
 	return allDefaults;
-};
+}; */
 const ReturnCopyOfObject = (objectValue) => JSON.parse(JSON.stringify(objectValue));
-const ReturnComponentsSections = (allItemsRawArray, projectRoot, preambles) => {
+/* const ReturnComponentsSections = (allItemsRawArray, projectRoot, preambles) => {
 	const buildObject = {};
 	const allComponents = ReturnAllComponents(allItemsRawArray, projectRoot);
 	const allParams = ReturnAllParams(allItemsRawArray);
@@ -361,7 +396,28 @@ const ReturnComponentsSections = (allItemsRawArray, projectRoot, preambles) => {
 
 	// const tempBuildArray = [allComponents, allParams, allParamDefaults];
 	return buildObject;
+}; */
+const ReturnAPISections = (allItemsRawArray, projectRoot, preambles) => {
+	const buildObject = {};
+	const allAPIs = ReturnAllAPIs(allItemsRawArray, projectRoot);
+	allAPIs.forEach((api) => {
+		const apiCopy = ReturnCopyOfObject(api);
+
+		if (!buildObject[apiCopy.category]) {
+			buildObject[apiCopy.category] = {};
+		}
+		buildObject[apiCopy.category].title = apiCopy.category;
+		if (preambles[apiCopy.category]) {
+			buildObject[apiCopy.category].preamble = preambles[apiCopy.category];
+		}
+		if (!buildObject[apiCopy.category].apis) {
+			buildObject[apiCopy.category].apis = [];
+		}
+		buildObject[apiCopy.category].apis.push(apiCopy);
+	});
+	return buildObject;
 };
+
 const ReturnServicesSections = (allItemsRawArray, projectRoot, preambles) => {
 	const buildObject = {};
 	const allServices = ReturnAllServices(allItemsRawArray, projectRoot);
@@ -422,30 +478,32 @@ const ReturnIndex = (orderedSections) => {
 * [Repo](https://github.com/HubTester1/HubAPI)
 `;
 	orderedSections.forEach((section) => {
-		const sectionID = section.title.toLowerCase().replace('.', '');
-		buildString += `* [${section.title}](#${sectionID})
+		if (section && section.title) {
+			const sectionID = section.title.toLowerCase().replace('.', '');
+			buildString += `* [${section.title}](#${sectionID})
 `;
-		const childrenTitle = 
-			section.components
-				? 'Components'
-				: section.services
-					? 'Services'
-					: null;
-		const childrenPropertyID = 
-			childrenTitle ? 
-				childrenTitle.toLowerCase() : 
-				null;
-		if (childrenTitle) {
-			buildString += `{% collapse title="- ${childrenTitle}"%}
+			const childrenTitle = 
+				section.components
+					? 'Components'
+					: section.services
+						? 'Services'
+						: null;
+			const childrenPropertyID = 
+				childrenTitle ? 
+					childrenTitle.toLowerCase() : 
+					null;
+			if (childrenTitle) {
+				buildString += `{% collapse title="- ${childrenTitle}"%}
 `;
-			section[childrenPropertyID].forEach((child) => {
-				const childID = child.name.replace(' ', '-').toLowerCase();
-				buildString += `- [${child.name}](#${childID})
+				section[childrenPropertyID].forEach((child) => {
+					const childID = child.name.replace(' ', '-').toLowerCase();
+					buildString += `- [${child.name}](#${childID})
 `;
-			});
-			
-			buildString += `{% endcollapse %}
+				});
+				
+				buildString += `{% endcollapse %}
 `;
+			}
 		}
 	});
 	buildString += `
@@ -462,18 +520,18 @@ const ReturnMarkedDownTodos = (todos) => {
 	});
 	return buildString;
 };
-const ReturnMarkedDownComponent = ({
+const ReturnMarkedDownService = ({
 	name,
 	description,
-	smart,
+	async,
 	path,
-	params,
+	functions,
 }) => {
 	let buildString = `###${name}
 
 `;
-	if (smart) {
-		buildString += `*\`@smart\`*
+	if (async) {
+		buildString += `*\`@async\`*
 
 `;
 	}
@@ -485,31 +543,42 @@ const ReturnMarkedDownComponent = ({
 	});
 	buildString += `> ${path}
 
-`;
-	if (params) {
-		buildString += `{% collapse title="> Params"%}
-| *@param* | type | required | smart | description |
-| --- |: --- :|: --- :|: --- :| --- |
-`;
-		params.forEach((param) => {
-			const typeToken = param.type !== 'bool' ?
-				param.type :
-				'boolean';
-			const requiredToken = param.required ? 'true' : '';
-			const smartToken = param.smart ? 'true' : '';
-			let paramDescriptionString = '';
-			const paramDescriptionParts = param.description.split('\n');
-			paramDescriptionParts.forEach((paramDescriptionPart) => {
-				paramDescriptionString += `${paramDescriptionPart} `;
-			});
+####Functions
 
-			
-			buildString += `| ${param.name} | ${typeToken} | ${requiredToken} | ${smartToken} | ${paramDescriptionString} |
+`;
+	functions.forEach((functionValue) => {
+		buildString += `#####${functionValue.name}
+`;
+		const functionDescriptionParts = functionValue.description.split('\n\n');
+		functionDescriptionParts.forEach((descriptionPart) => {
+			buildString += `${descriptionPart}
+
 `;
 		});
-		buildString += `{% endcollapse %}
+		if (functionValue.params) {
+			buildString += `{% collapse title="> Params"%}
+| *@param* | type | required | async | description |
+| --- |: --- :|: --- :|: --- :| --- |
 `;
-	}
+			functionValue.params.forEach((param) => {
+				const typeToken = param.type !== 'bool' ?
+					param.type :
+					'boolean';
+				const requiredToken = param.required ? 'true' : '';
+				const asyncToken = param.async ? 'true' : '';
+				let paramDescriptionString = '';
+				const paramDescriptionParts = param.description.split('\n');
+				paramDescriptionParts.forEach((paramDescriptionPart) => {
+					paramDescriptionString += `${paramDescriptionPart} `;
+				});
+				
+				buildString += `| ${param.name} | ${typeToken} | ${requiredToken} | ${asyncToken} | ${paramDescriptionString} |
+`;
+			});
+			buildString += `{% endcollapse %}
+`;
+		}
+	});
 
 	buildString += `
 &nbsp;
@@ -517,10 +586,84 @@ const ReturnMarkedDownComponent = ({
 `;
 	return buildString;
 };
-const ReturnMarkedDownComponents = (components) => {
+const ReturnMarkedDownServices = (services) => {
 	let buildString = '';
-	components.forEach((component) => {
-		buildString += ReturnMarkedDownComponent(component);
+	services.forEach((service) => {
+		buildString += ReturnMarkedDownService(service);
+	});
+
+	return buildString;
+};
+const ReturnMarkedDownAPI = ({
+	name,
+	description,
+	// async,
+	path,
+	functions,
+}) => {
+	let buildString = `###${name}
+
+`;
+	const descriptionParts = description.split('\n\n');
+	descriptionParts.forEach((descriptionPart) => {
+		buildString += `${descriptionPart}
+
+`;
+	});
+	buildString += `> ${path}
+
+####Functions
+
+`;
+	functions.forEach((functionValue) => {
+		buildString += `#####${functionValue.name}
+`;
+		if (functionValue.async) {
+			buildString += `*\`@async\`*
+
+`;
+		}
+		const functionDescriptionParts = functionValue.description.split('\n\n');
+		functionDescriptionParts.forEach((descriptionPart) => {
+			buildString += `${descriptionPart}
+
+`;
+		});
+		if (functionValue.params) {
+			buildString += `{% collapse title="> Params"%}
+| *@param* | type | required | async | description |
+| --- |: --- :|: --- :|: --- :| --- |
+`;
+			functionValue.params.forEach((param) => {
+				const typeToken = param.type !== 'bool' ?
+					param.type :
+					'boolean';
+				const requiredToken = param.required ? 'true' : '';
+				const asyncToken = param.async ? 'true' : '';
+				let paramDescriptionString = '';
+				const paramDescriptionParts = param.description.split('\n');
+				paramDescriptionParts.forEach((paramDescriptionPart) => {
+					paramDescriptionString += `${paramDescriptionPart} `;
+				});
+
+				buildString += `| ${param.name} | ${typeToken} | ${requiredToken} | ${asyncToken} | ${paramDescriptionString} |
+`;
+			});
+			buildString += `{% endcollapse %}
+`;
+		}
+	});
+
+	buildString += `
+&nbsp;
+
+`;
+	return buildString;
+};
+const ReturnMarkedDownAPIs = (apis) => {
+	let buildString = '';
+	apis.forEach((api) => {
+		buildString += ReturnMarkedDownAPI(api);
 	});
 
 	return buildString;
@@ -537,8 +680,11 @@ const ReturnMarkedDownSection = (section) => {
 		if (section.todos) {
 			buildString += ReturnMarkedDownTodos(section.todos);
 		}
-		if (section.components) {
-			buildString += ReturnMarkedDownComponents(section.components);
+		if (section.services) {
+			buildString += ReturnMarkedDownServices(section.services);
+		}
+		if (section.apis) {
+			buildString += ReturnMarkedDownAPIs(section.apis);
 		}
 		buildString += `
 &nbsp;
@@ -568,14 +714,14 @@ const Build = (buildConfig) => {
 					const allItemsRawArray = result;
 					let buildString = `#Code Reference
 `;
-					// const componentsSections = ReturnComponentsSections(
-					// 	allItemsRawArray, 
-					// 	buildConfig.projectRoot, 
-					// 	buildConfig.preambles,
-					// );
+					const apiSections = ReturnAPISections(
+						allItemsRawArray,
+						buildConfig.projectRoot,
+						buildConfig.preambles,
+					);
 					const servicesSections = ReturnServicesSections(
 						allItemsRawArray,
-						buildConfig.projectRoot, 
+						buildConfig.projectRoot,
 						buildConfig.preambles,
 					);
 					const agendaSections = ReturnAgendaSections(
@@ -584,7 +730,7 @@ const Build = (buildConfig) => {
 						buildConfig.preambles,
 					);
 					const combinedSections = { 
-						// ...componentsSections, 
+						...apiSections,
 						...servicesSections, 
 						...agendaSections,
 					};
@@ -592,7 +738,7 @@ const Build = (buildConfig) => {
 					buildConfig.orderedCategories.forEach((categoryValue) => {
 						orderedSections.push(combinedSections[categoryValue]);
 					});
-					// buildString += ReturnIndex(orderedSections);
+					buildString += ReturnIndex(orderedSections);
 					WriteToFile(buildConfig.orderedSectionsDestination, orderedSections, true);
 					orderedSections.forEach((section) => {
 						buildString += ReturnMarkedDownSection(section);
