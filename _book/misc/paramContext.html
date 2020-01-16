@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>MS Graph Permissions · Hub API</title>
+        <title>Lambda Context Parameter · Hub API</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../how-to/refresh-user-data.html" />
     
-    
-    <link rel="prev" href="dev-environment.html" />
+    <link rel="prev" href="paramEvent.html" />
     
 
     </head>
@@ -122,9 +120,9 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="overview.html">
+        <li class="chapter " data-level="3.1" data-path="../architecture/overview.html">
             
-                <a href="overview.html">
+                <a href="../architecture/overview.html">
             
                     
                     Overview
@@ -135,9 +133,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="dev-environment.html">
+        <li class="chapter " data-level="3.2" data-path="../architecture/dev-environment.html">
             
-                <a href="dev-environment.html">
+                <a href="../architecture/dev-environment.html">
             
                     
                     Development Environment
@@ -148,9 +146,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.3" data-path="graph-permissions.html">
+        <li class="chapter " data-level="3.3" data-path="../architecture/graph-permissions.html">
             
-                <a href="graph-permissions.html">
+                <a href="../architecture/graph-permissions.html">
             
                     
                     MS Graph Permissions
@@ -221,9 +219,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../misc/paramEvent.html">
+        <li class="chapter " data-level="6.1" data-path="paramEvent.html">
             
-                <a href="../misc/paramEvent.html">
+                <a href="paramEvent.html">
             
                     
                     Lambda Event Parameter
@@ -234,9 +232,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="../misc/paramContext.html">
+        <li class="chapter active" data-level="6.2" data-path="paramContext.html">
             
-                <a href="../misc/paramContext.html">
+                <a href="paramContext.html">
             
                     
                     Lambda Context Parameter
@@ -277,7 +275,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >MS Graph Permissions</a>
+        <a href=".." >Lambda Context Parameter</a>
     </h1>
 </div>
 
@@ -292,102 +290,63 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="microsoft-graph-permissions">Microsoft Graph Permissions</h1>
-<h2 id="overview">Overview</h2>
-<p>Granted permissions of type &quot;Application permissions&quot; (those for daemon, not for user).</p>
-<p>Note that some of these are granted for experimental purposes, and may not be permanent. (We must understand what something does before we can know if we have a use case for it.)</p>
-<h2 id="details">Details</h2>
-<table>
-<thead>
-<tr>
-<th>Group</th>
-<th>Permission</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AdministrativeUnit</td>
-<td>Read</td>
-<td>Allows the app to read administrative units and administrative unit membership.</td>
-</tr>
-<tr>
-<td>ChannelMessage</td>
-<td>Read</td>
-<td>Allows the app to read all channel messages in Microsoft Teams.</td>
-</tr>
-<tr>
-<td>Chat</td>
-<td>Read and Write</td>
-<td>Allows an app to read and write all chat messages in Microsoft Teams.</td>
-</tr>
-<tr>
-<td>Directory</td>
-<td>Read</td>
-<td>Allows the app to read data in your organization&apos;s directory, such as users, groups and apps.</td>
-</tr>
-<tr>
-<td>Files</td>
-<td>Read and Write</td>
-<td>Allows the app to read, create, update and delete all files in all site collections.</td>
-</tr>
-<tr>
-<td>Group</td>
-<td>Read and Write</td>
-<td>Allows the app to create groups, read all group properties and memberships, update group properties and memberships, and delete groups. Also allows the app to read and write group calendar and conversations.</td>
-</tr>
-<tr>
-<td>GroupMember</td>
-<td>Read</td>
-<td>Allows the app to read memberships and basic group properties for all groups.</td>
-</tr>
-<tr>
-<td>Mail</td>
-<td>Read and Write</td>
-<td>Allows the app to create, read, update, and delete mail in all mailboxes. Does not include permission to send mail.</td>
-</tr>
-<tr>
-<td>Mail</td>
-<td>Send</td>
-<td>Allows the app to send mail as any user.</td>
-</tr>
-<tr>
-<td>OneNote</td>
-<td>Read and Write</td>
-<td>Allows the app to read all the OneNote notebooks in your organization.</td>
-</tr>
-<tr>
-<td>Place</td>
-<td>Read</td>
-<td>Allows the app to read company places (conference rooms and room lists) for calendar events and other applications.</td>
-</tr>
-<tr>
-<td>Sites</td>
-<td>Full Control</td>
-<td>Allows the app to have full control of all site collections.</td>
-</tr>
-<tr>
-<td>TeamsActivity</td>
-<td>Read</td>
-<td>Allows the app to read all users&apos; teamwork activity feed.</td>
-</tr>
-<tr>
-<td>TeamsActivity</td>
-<td>Send</td>
-<td>Allows the app to send new activities to any users&apos; teamwork activity feed.</td>
-</tr>
-<tr>
-<td>UserNotification</td>
-<td>Read and Write</td>
-<td>Allows the app to send, read, update and delete user&#x2019;s notifications.</td>
-</tr>
-<tr>
-<td>User</td>
-<td>Read</td>
-<td>Allows the app to read user profiles.</td>
-</tr>
-</tbody>
-</table>
+                                <h1 id="aws-lambda-function-context-parameter">AWS Lambda Function Context Parameter</h1>
+<p>Contains information about the invocation, function, and execution environment.</p>
+<h2 id="context-methods">Context Methods</h2>
+<p><code>getRemainingTimeInMillis()</code> &#x2013; Returns the number of milliseconds left before the execution times out.</p>
+<h2 id="context-properties">Context Properties</h2>
+<ul>
+<li><p><code>functionName</code> &#x2013; The name of the Lambda function.</p>
+</li>
+<li><p><code>functionVersion</code> &#x2013; The version of the function.</p>
+</li>
+<li><p><code>invokedFunctionArn</code> &#x2013; The Amazon Resource Name (ARN) that&apos;s used to invoke the function. Indicates if the invoker specified a version number or alias.</p>
+</li>
+<li><p><code>memoryLimitInMB</code> &#x2013; The amount of memory that&apos;s allocated for the function.</p>
+</li>
+<li><p><code>awsRequestId</code> &#x2013; The identifier of the invocation request.</p>
+</li>
+<li><p><code>logGroupName</code> &#x2013; The log group for the function.</p>
+</li>
+<li><p><code>logStreamName</code> &#x2013; The log stream for the function instance.</p>
+</li>
+<li><p><code>identity</code> &#x2013; (mobile apps) Information about the Amazon Cognito identity that authorized the request.</p>
+<ul>
+<li><p><code>cognitoIdentityId</code> &#x2013; The authenticated Amazon Cognito identity.</p>
+</li>
+<li><p><code>cognitoIdentityPoolId</code> &#x2013; The Amazon Cognito identity pool that authorized the invocation.</p>
+</li>
+</ul>
+</li>
+<li><p><code>clientContext</code> &#x2013; (mobile apps) Client context that&apos;s provided to Lambda by the client application.</p>
+<ul>
+<li><p><code>client.installation_id</code></p>
+</li>
+<li><p><code>client.app_title</code></p>
+</li>
+<li><p><code>client.app_version_name</code></p>
+</li>
+<li><p><code>client.app_version_code</code></p>
+</li>
+<li><p><code>client.app_package_name</code></p>
+</li>
+<li><p><code>env.platform_version</code></p>
+</li>
+<li><p><code>env.platform</code></p>
+</li>
+<li><p><code>env.make</code></p>
+</li>
+<li><p><code>env.model</code></p>
+</li>
+<li><p><code>env.locale</code></p>
+</li>
+<li><p><code>Custom</code> &#x2013; Custom values that are set by the mobile application.</p>
+</li>
+</ul>
+</li>
+<li><p><code>callbackWaitsForEmptyEventLoop</code> &#x2013; Set to false to send the response right away when the callback executes, instead of waiting for the Node.js event loop to be empty. If this is false, any outstanding events continue to run during the next invocation.</p>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -415,14 +374,10 @@
 
             
                 
-                <a href="dev-environment.html" class="navigation navigation-prev " aria-label="Previous page: Development Environment">
+                <a href="paramEvent.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Lambda Event Parameter">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="../how-to/refresh-user-data.html" class="navigation navigation-next " aria-label="Next page: Refresh User Data">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -431,7 +386,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"MS Graph Permissions","level":"3.3","depth":1,"next":{"title":"Refresh User Data","level":"4.1","depth":1,"path":"how-to/refresh-user-data.md","ref":"how-to/refresh-user-data.md","articles":[]},"previous":{"title":"Development Environment","level":"3.2","depth":1,"path":"architecture/dev-environment.md","ref":"architecture/dev-environment.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapse","livereload"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapse":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"toc.md"},"variables":{},"title":"Hub API","gitbook":"*"},"file":{"path":"architecture/graph-permissions.md","mtime":"2020-01-08T15:08:49.753Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-16T15:45:49.787Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Lambda Context Parameter","level":"6.2","depth":1,"previous":{"title":"Lambda Event Parameter","level":"6.1","depth":1,"path":"misc/paramEvent.md","ref":"misc/paramEvent.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapse","livereload"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapse":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"toc.md"},"variables":{},"title":"Hub API","gitbook":"*"},"file":{"path":"misc/paramContext.md","mtime":"2020-01-16T16:24:45.806Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-16T15:45:49.787Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

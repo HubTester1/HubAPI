@@ -8,8 +8,7 @@ const config = {
 	files: [
 		// './src',
 		'./meta',
-		'./src/Lambdas',
-		'./src/Services',
+		'./src',
 	],
 	recurse: true,
 	sort: 'kind',
@@ -35,86 +34,28 @@ const config = {
 		'Services',
 	],
 	preambles: {
-		APIs: 'This text goes at the top of APIs.',
-		Layers: 'This text goes at the top of Layers.',
-		Services: 'This is the Services preamble.',
+		APIs: `Each API is essentially a collection of Lambda functions. Each function has access to all layers. 
+			Each function receives three params from the AWS Lambda service.
+			{% collapse title="> Params"%}
+| *@param* | type | required | async | description |
+| --- |: --- :|: --- :|: --- :| --- |
+| event | object | | | Contains information from the invoker, Amazon API Gateway. [Get details of the event parameter](/misc/paramEvent.html)|
+| context | object | | | Contains information about the invocation, function, and execution environment. [Get details of the context parameter](/misc/paramContext.html)|
+| callback | function | | | In synchronous functions, call this function to send the response. The callback function takes two arguments: an Error and a response. When you call it, Lambda waits for the event loop to be empty and then returns the response or error to the invoker. The response object must be compatible with JSON.stringify. |
+{% endcollapse %}`,
+		Layers: 'AWS Lambda Layers contain modules (i.e., code), either MOS or contributed, that is external to but relied upon and accessed by Lambda functions (i.e., dependencies).',
+		Services: 'Services are MOS modules that are used in an AWS Lambda Layer. [Learn more about Layers](#layers)',
 	},
 };
 const ReturnPathRelativeLocation = (pathRaw, filename, projectRoot) => {
 	const positionOfFirstCharacterOfRoot = pathRaw.lastIndexOf(projectRoot);
 	const lengthOfRoot = projectRoot.length;
-	return `${pathRaw.substring(positionOfFirstCharacterOfRoot + lengthOfRoot)}/${filename}`;
+	let locationToReturn = `${pathRaw.substring(positionOfFirstCharacterOfRoot + lengthOfRoot)}`;
+	if (filename) {
+		locationToReturn += `/${filename}`;
+	}
+	return locationToReturn;
 };
-/* const ReturnAllComponents = (allItemsRawArray, projectRoot) => {
-	const allComponents = [];
-	allItemsRawArray.forEach((itemRawValue) => {
-		if (itemRawValue.tags) {
-			itemRawValue.tags.forEach((tag) => {
-				if (tag.title && tag.title.trim() === 'component') {
-					let category = '';
-					itemRawValue.tags.forEach((tagTwo) => {
-						if (tagTwo.title && tagTwo.title.trim() === 'category') {
-							category = tagTwo.value.trim();
-						}
-					});
-					let smart = false;
-					itemRawValue.tags.forEach((tagThree) => {
-						if (tagThree.title && tagThree.title.trim() === 'smart') {
-							smart = true;
-						}
-					});
-					const objectToPush = {
-						name: itemRawValue.name.trim(),
-						category,
-						description: itemRawValue.description,
-						smart,
-						path: ReturnPathRelativeLocation(
-							itemRawValue.meta.path,
-							itemRawValue.meta.filename,
-							projectRoot,
-						),
-					};
-					const params = [];
-					// NOTE: Does not yet account for the possibility of smart parameters
-					if (itemRawValue.params && itemRawValue.params[0]) {
-						itemRawValue.params.forEach((paramRaw) => {
-							const paramToPush = {
-								name: paramRaw.name,
-								description: paramRaw.description,
-								parent: itemRawValue.name.trim(),
-							};
-							if (!paramRaw.optional || paramRaw.optional !== true) {
-								paramToPush.required = true;
-							}
-							if (
-								paramRaw.type && 
-								paramRaw.type.names
-							) {
-								let typeIndication;
-								paramRaw.type.names.forEach((typeNameValue, typeNameIndex) => {
-									if (typeNameIndex === 0) {
-										typeIndication = typeNameValue;
-									} else {
-										typeIndication = ` | ${typeNameValue}`;
-									}
-								});
-								if (typeIndication) {
-									paramToPush.type = typeIndication;
-								}
-							}
-							params.push(paramToPush);
-						});
-					}
-					if (params[0]) {
-						objectToPush.params = params;
-					}
-					allComponents.push(objectToPush);
-				}
-			});
-		}
-	});
-	return allComponents;
-}; */
 const ReturnFunctionsForThisServiceOrAPI = (allItemsRawArray, parentPath, projectRoot) => {
 	const functions = [];
 	allItemsRawArray.forEach((itemRawValue) => {
@@ -261,142 +202,7 @@ const ReturnAllToDos = (allItemsRawArray, projectRoot) => {
 	});
 	return allToDos;
 };
-
-/* const ReturnParamTypeAndRequirement = (paramValueRaw) => {
-	const valueParts = paramValueRaw.split('.');
-	return {
-		type: valueParts[1].trim(),
-		required: !!(valueParts[2] && valueParts[2].trim() === 'isRequired'),
-	};
-};
-const ReturnParamIsSmart = (paramValueRaw) => {
-	let isSmart = false;
-	if (paramValueRaw.tags) {
-		paramValueRaw.tags.forEach((tag) => {
-			if (tag.title === 'smart') {
-				isSmart = true;
-			}
-		});
-	}
-	return isSmart;
-}; */
-/* const ReturnAllParams = (allItemsRawArray) => {
-	const allParams = [];
-	allItemsRawArray.forEach((itemRawValue) => {
-		if (
-			itemRawValue.kind && 
-			itemRawValue.kind === 'member' && 
-			itemRawValue.memberof && 
-			itemRawValue.meta && 
-			itemRawValue.meta.code &&
-			itemRawValue.meta.code.type && 
-			itemRawValue.meta.code.type === 'MemberExpression'
-		) {				
-			const memberOfParts = itemRawValue.memberof.split('.');
-			if (
-				memberOfParts[1] && 
-				memberOfParts[1].trim() === 'propTypes'
-			) {
-				const paramTypeAndRequirement = ReturnParamTypeAndRequirement(itemRawValue.meta.code.value);
-				const paramToPush = {
-					name: itemRawValue.meta.code.name.trim(),
-					description: itemRawValue.description,
-					type: paramTypeAndRequirement.type,
-					parent: memberOfParts[0],
-				};
-				if (paramTypeAndRequirement.required) {
-					paramToPush.required = true;
-				}
-				if (ReturnParamIsSmart(itemRawValue)) {
-					paramToPush.smart = true;
-				}
-				if (itemRawValue.defaultvalue) {
-					paramToPush.default = itemRawValue.defaultvalue;
-				}
-				allParams.push(paramToPush);
-			}
-		}
-	});
-	return allParams;
-};
-const ReturnAllParamDefaults = (allItemsRawArray) => {
-	const allDefaults = [];
-	allItemsRawArray.forEach((itemRawValue) => {
-		if (
-			itemRawValue.kind
-			&& itemRawValue.kind === 'member'
-			&& itemRawValue.memberof
-			&& itemRawValue.meta
-			&& itemRawValue.meta.code
-			&& itemRawValue.meta.code.type
-			&& itemRawValue.meta.code.type !== 'Identifier'
-		) {
-			const memberOfParts = itemRawValue.memberof.split('.');
-			if (memberOfParts[1] && memberOfParts[1].trim() === 'defaultProps') {
-				allDefaults.push({
-					name: itemRawValue.meta.code.name.trim(),
-					default: typeof (itemRawValue.meta.code.value) === 'string'
-						? itemRawValue.meta.code.value.trim()
-						: itemRawValue.meta.code.value,
-					parent: memberOfParts[0],
-				});
-			}
-		}
-	});
-	return allDefaults;
-}; */
 const ReturnCopyOfObject = (objectValue) => JSON.parse(JSON.stringify(objectValue));
-/* const ReturnComponentsSections = (allItemsRawArray, projectRoot, preambles) => {
-	const buildObject = {};
-	const allComponents = ReturnAllComponents(allItemsRawArray, projectRoot);
-	const allParams = ReturnAllParams(allItemsRawArray);
-	const allParamDefaults = ReturnAllParamDefaults(allItemsRawArray);
-	allComponents.forEach((component) => {
-		const componentCopy = ReturnCopyOfObject(component);
-		if (!buildObject[componentCopy.category]) {
-			buildObject[componentCopy.category] = {};
-		}
-		buildObject[componentCopy.category].title = componentCopy.category;
-		if (preambles[componentCopy.category]) {
-			buildObject[componentCopy.category].preamble = preambles[componentCopy.category];
-		}
-		if (!buildObject[componentCopy.category].components) {
-			buildObject[componentCopy.category].components = [];
-		}
-		allParams.forEach((param) => {
-			const paramCopy = ReturnCopyOfObject(param);
-			// if this param goes with this component
-			if (paramCopy.parent === componentCopy.name) {
-				if (!componentCopy.default) {
-					// look for a default value for this param;
-					// 		iterate over all paramDefaults
-					allParamDefaults.forEach((paramDefault) => {
-						// if this default goes with this param and this component
-						if (
-							paramDefault.name === paramCopy.name
-							&& paramDefault.parent === paramCopy.parent
-						) {
-							// add the default to the param
-							paramCopy.default = paramDefault.default;
-						}
-					});
-				}
-				// ensure the component has a params array
-				if (!componentCopy.params) {
-					componentCopy.params = [];
-				}
-				// add the param, with or without default, to the component
-				componentCopy.params.push(paramCopy);
-			}
-		});
-		// add the component to the category inside build object
-		buildObject[componentCopy.category].components.push(componentCopy);
-	});
-
-
-	// const tempBuildArray = [allComponents, allParams, allParamDefaults];
-	return buildObject;
-}; */
 const ReturnAPISections = (allItemsRawArray, projectRoot, preambles) => {
 	const buildObject = {};
 	const allAPIs = ReturnAllAPIs(allItemsRawArray, projectRoot);
@@ -417,7 +223,52 @@ const ReturnAPISections = (allItemsRawArray, projectRoot, preambles) => {
 	});
 	return buildObject;
 };
+const ReturnAllLayers = (allItemsRawArray, projectRoot) => {
+	const allLayers = [];
+	allItemsRawArray.forEach((itemRawValue) => {
+		if (itemRawValue.tags) {
+			itemRawValue.tags.forEach((tag) => {
+				if (tag.title && tag.title.trim() === 'layer') {
+					const objectToPush = {
+						name: itemRawValue.name.trim(),
+						category: 'Layers',
+						description: itemRawValue.description,
+						path: ReturnPathRelativeLocation(
+							itemRawValue.meta.path,
+							null,
+							projectRoot,
+						),
+					};
 
+
+					allLayers.push(objectToPush);
+				}
+			});
+		}
+	});
+	return allLayers;
+};
+
+const ReturnLayersSections = (allItemsRawArray, projectRoot, preambles) => {
+	const buildObject = {};
+	const allLayers = ReturnAllLayers(allItemsRawArray, projectRoot);
+	allLayers.forEach((layer) => {
+		const layerCopy = ReturnCopyOfObject(layer);
+
+		if (!buildObject[layerCopy.category]) {
+			buildObject[layerCopy.category] = {};
+		}
+		buildObject[layerCopy.category].title = layerCopy.category;
+		if (preambles[layerCopy.category]) {
+			buildObject[layerCopy.category].preamble = preambles[layerCopy.category];
+		}
+		if (!buildObject[layerCopy.category].services) {
+			buildObject[layerCopy.category].services = [];
+		}
+		buildObject[layerCopy.category].services.push(layerCopy);
+	});
+	return buildObject;
+};
 const ReturnServicesSections = (allItemsRawArray, projectRoot, preambles) => {
 	const buildObject = {};
 	const allServices = ReturnAllServices(allItemsRawArray, projectRoot);
@@ -543,42 +394,45 @@ const ReturnMarkedDownService = ({
 	});
 	buildString += `> ${path}
 
-####Functions
+`;
+	if (functions) {
+		buildString += `####Functions
+`;
+		functions.forEach((functionValue) => {
+			buildString += `#####${functionValue.name}
+`;
+			const functionDescriptionParts = functionValue.description.split('\n\n');
+			functionDescriptionParts.forEach((descriptionPart) => {
+				buildString += `${descriptionPart}
 
 `;
-	functions.forEach((functionValue) => {
-		buildString += `#####${functionValue.name}
-`;
-		const functionDescriptionParts = functionValue.description.split('\n\n');
-		functionDescriptionParts.forEach((descriptionPart) => {
-			buildString += `${descriptionPart}
-
-`;
-		});
-		if (functionValue.params) {
-			buildString += `{% collapse title="> Params"%}
+			});
+			if (functionValue.params) {
+				buildString += `{% collapse title="> Params"%}
 | *@param* | type | required | async | description |
 | --- |: --- :|: --- :|: --- :| --- |
 `;
-			functionValue.params.forEach((param) => {
-				const typeToken = param.type !== 'bool' ?
-					param.type :
-					'boolean';
-				const requiredToken = param.required ? 'true' : '';
-				const asyncToken = param.async ? 'true' : '';
-				let paramDescriptionString = '';
-				const paramDescriptionParts = param.description.split('\n');
-				paramDescriptionParts.forEach((paramDescriptionPart) => {
-					paramDescriptionString += `${paramDescriptionPart} `;
+				functionValue.params.forEach((param) => {
+					const typeToken = param.type !== 'bool' ?
+						param.type :
+						'boolean';
+					const requiredToken = param.required ? 'true' : '';
+					const asyncToken = param.async ? 'true' : '';
+					let paramDescriptionString = '';
+					const paramDescriptionParts = param.description.split('\n');
+					paramDescriptionParts.forEach((paramDescriptionPart) => {
+						paramDescriptionString += `${paramDescriptionPart} `;
+					});
+
+					buildString += `| ${param.name} | ${typeToken} | ${requiredToken} | ${asyncToken} | ${paramDescriptionString} |
+`;
 				});
-				
-				buildString += `| ${param.name} | ${typeToken} | ${requiredToken} | ${asyncToken} | ${paramDescriptionString} |
+				buildString += `{% endcollapse %}
 `;
-			});
-			buildString += `{% endcollapse %}
-`;
-		}
-	});
+			}
+		});
+	}
+
 
 	buildString += `
 &nbsp;
@@ -724,6 +578,11 @@ const Build = (buildConfig) => {
 						buildConfig.projectRoot,
 						buildConfig.preambles,
 					);
+					const layersSections = ReturnLayersSections(
+						allItemsRawArray,
+						buildConfig.projectRoot,
+						buildConfig.preambles,
+					);
 					const agendaSections = ReturnAgendaSections(
 						allItemsRawArray, 
 						buildConfig.projectRoot, 
@@ -731,7 +590,8 @@ const Build = (buildConfig) => {
 					);
 					const combinedSections = { 
 						...apiSections,
-						...servicesSections, 
+						...layersSections,
+						...servicesSections,
 						...agendaSections,
 					};
 					const orderedSections = [];

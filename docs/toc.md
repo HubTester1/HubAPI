@@ -22,3 +22,7 @@
 
 * [Style Guide](style.md)
 * [Code Reference](code.md)
+
+###Misc
+* [Lambda Event Parameter](misc/paramEvent.md)
+* [Lambda Context Parameter](misc/paramContext.md)

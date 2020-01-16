@@ -183,5 +183,57 @@
 		"scope": "global",
 		"$longname": "Kitten",
 		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name NPM\n * @layer\n * @description This AWS Lambda Layer contains third-party Node.js modules from [NPM](https://www.npmjs.com).\n */",
+		"meta": {
+			"filename": "doc.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Layers/-dev-NPM",
+			"code": {
+				
+			}
+		},
+		"name": "NPM",
+		"tags": [
+			{
+				"originalTitle": "layer",
+				"title": "layer",
+				"text": ""
+			}
+		],
+		"description": "This AWS Lambda Layer contains third-party Node.js modules from [NPM](https://www.npmjs.com).",
+		"longname": "NPM",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "NPM",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name Services\n * @layer\n * @description This AWS Lambda Layer contains MOS modules.\n */",
+		"meta": {
+			"filename": "doc.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Layers/-dev-Services",
+			"code": {
+				
+			}
+		},
+		"name": "Services",
+		"tags": [
+			{
+				"originalTitle": "layer",
+				"title": "layer",
+				"text": ""
+			}
+		],
+		"description": "This AWS Lambda Layer contains MOS modules.",
+		"longname": "Services",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "Services",
+		"$kind": "property"
 	}
 ]
