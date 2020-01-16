@@ -262,10 +262,10 @@ const ReturnLayersSections = (allItemsRawArray, projectRoot, preambles) => {
 		if (preambles[layerCopy.category]) {
 			buildObject[layerCopy.category].preamble = preambles[layerCopy.category];
 		}
-		if (!buildObject[layerCopy.category].services) {
-			buildObject[layerCopy.category].services = [];
+		if (!buildObject[layerCopy.category].layers) {
+			buildObject[layerCopy.category].layers = [];
 		}
-		buildObject[layerCopy.category].services.push(layerCopy);
+		buildObject[layerCopy.category].layers.push(layerCopy);
 	});
 	return buildObject;
 };
@@ -331,19 +331,22 @@ const ReturnIndex = (orderedSections) => {
 	orderedSections.forEach((section) => {
 		if (section && section.title) {
 			const sectionID = section.title.toLowerCase().replace('.', '');
-			buildString += `* [${section.title}](#${sectionID})
+			buildString += `* [${section.title} Section](#${sectionID})
 `;
-			const childrenTitle = 
-				section.components
-					? 'Components'
+			const childrenTitleToken = 
+				section.apis
+					? 'APIs'
 					: section.services
 						? 'Services'
-						: null;
+						: section.layers
+							? 'Layers'
+							: null;
+			const childrenTitle = `Individual ${childrenTitleToken}`;
 			const childrenPropertyID = 
-				childrenTitle ? 
-					childrenTitle.toLowerCase() : 
+				childrenTitleToken ?
+					childrenTitleToken.toLowerCase() :
 					null;
-			if (childrenTitle) {
+			if (childrenTitle && section[childrenPropertyID]) {
 				buildString += `{% collapse title="- ${childrenTitle}"%}
 `;
 				section[childrenPropertyID].forEach((child) => {
@@ -525,7 +528,7 @@ const ReturnMarkedDownAPIs = (apis) => {
 const ReturnMarkedDownSection = (section) => {
 	let buildString = '';
 	if (section && section.title) {
-		buildString += `##${section.title}
+		buildString += `##${section.title} Section
 `;
 		if (section.preamble) {
 			buildString += `${section.preamble}
@@ -536,6 +539,9 @@ const ReturnMarkedDownSection = (section) => {
 		}
 		if (section.services) {
 			buildString += ReturnMarkedDownServices(section.services);
+		}
+		if (section.layers) {
+			buildString += ReturnMarkedDownServices(section.layers);
 		}
 		if (section.apis) {
 			buildString += ReturnMarkedDownAPIs(section.apis);

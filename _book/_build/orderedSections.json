@@ -80,7 +80,7 @@
 	{
 		"title": "Layers",
 		"preamble": "AWS Lambda Layers contain modules (i.e., code), either MOS or contributed, that is external to but relied upon and accessed by Lambda functions (i.e., dependencies).",
-		"services": [
+		"layers": [
 			{
 				"name": "NPM",
 				"category": "Layers",

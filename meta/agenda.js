@@ -5,9 +5,6 @@
  * @description Literally, a todo list
  * 
  * 
- * @todo Gulp
- * @todo Documentation build
- * 
  * @todo Unwhitelist 0.0.0.0/0
  * @todo review 12 factors
  * @todo Develop the basic services

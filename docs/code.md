@@ -2,20 +2,23 @@
 ##Index
 
 * [Repo](https://github.com/HubTester1/HubAPI)
-* [Agenda](#agenda)
-* [APIs](#apis)
-* [Layers](#layers)
-{% collapse title="- Services"%}
+* [Agenda Section](#agenda)
+* [APIs Section](#apis)
+{% collapse title="- Individual APIs"%}
+- [Kitten](#kitten)
+{% endcollapse %}
+* [Layers Section](#layers)
+{% collapse title="- Individual Layers"%}
 - [NPM](#npm)
 - [Services](#services)
 {% endcollapse %}
-* [Services](#services)
-{% collapse title="- Services"%}
+* [Services Section](#services)
+{% collapse title="- Individual Services"%}
 - [DataConnection](#dataconnection)
 - [DataQueries](#dataqueries)
 {% endcollapse %}
 
-##Agenda
+##Agenda Section
 | *@todo* | path |
 | ----------- | ----------- |
 | Gulp | /meta/agenda.js |
@@ -42,7 +45,7 @@
 
 &nbsp;
 
-##APIs
+##APIs Section
 Each API is essentially a collection of Lambda functions. Each function has access to all layers. 
 			Each function receives three params from the AWS Lambda service.
 			{% collapse title="> Params"%}
@@ -83,7 +86,7 @@ This is the kitten insertion function in the Kitten API.
 
 &nbsp;
 
-##Layers
+##Layers Section
 AWS Lambda Layers contain modules (i.e., code), either MOS or contributed, that is external to but relied upon and accessed by Lambda functions (i.e., dependencies).
 ###NPM
 
@@ -118,7 +121,7 @@ This AWS Lambda Layer contains MOS modules.
 
 &nbsp;
 
-##Services
+##Services Section
 Services are MOS modules that are used in an AWS Lambda Layer. [Learn more about Layers](#layers)
 ###DataConnection
 
