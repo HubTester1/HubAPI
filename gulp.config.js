@@ -22,6 +22,13 @@ module.exports = {
 		const directoryTokenToUse = module.exports.ReturnReformattedDirectoryToken(directoryToken);
 		return `src/Lambdas/${directoryTokenToUse}`;
 	},
+	ReturnServiceFunctionRunCommand: (directoryToken, functionToken) => {
+		console.log('got to here');
+		const directoryTokenToUse = module.exports.ReturnReformattedDirectoryToken(directoryToken);
+		console.log(directoryTokenToUse);
+		console.log(functionToken);
+		return `NODE_ENV=local node-dev -e 'require("node src/Services/${directoryTokenToUse}").${functionToken}()'`;
+	},
 	ReturnLLFunctionRunCommand: (directoryToken, functionToken, eventToken) => {
 		const directoryTokenToUse = module.exports.ReturnReformattedDirectoryToken(directoryToken);
 		const eventPath = module.exports.ReturnEventPath(eventToken, directoryToken);

@@ -41,6 +41,10 @@ gulp.task('ll-watch-all-run', () => {
 	);
 });
 
+// SERVICE FUNCTIONS LOCAL
+
+gulp.task('sf-run', () => run(gulpConfig.ReturnServiceFunctionRunCommand(argv.dir, argv.function)).exec());
+
 // AWS
 
 // run lambda function on AWS

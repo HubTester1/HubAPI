@@ -5,18 +5,6 @@
 			{
 				"parent": "Agenda",
 				"category": "Agenda",
-				"description": "Gulp",
-				"path": "/meta/agenda.js"
-			},
-			{
-				"parent": "Agenda",
-				"category": "Agenda",
-				"description": "Documentation build",
-				"path": "/meta/agenda.js"
-			},
-			{
-				"parent": "Agenda",
-				"category": "Agenda",
 				"description": "Unwhitelist 0.0.0.0/0",
 				"path": "/meta/agenda.js"
 			},
@@ -127,6 +115,41 @@
 								"description": "e.g., '_Kittens'",
 								"required": true,
 								"type": "string"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "UltiPro",
+				"category": "Services",
+				"description": "Query the UltiPro EmployeeChangesAPI",
+				"path": "/src/Services/-dev-UltiPro/index.js",
+				"functions": [
+					{
+						"name": "ReturnAllActiveEmployeesFromUltiPro",
+						"description": "Return all active employees from the UltiPro EmployeeChanges API",
+						"async": true
+					},
+					{
+						"name": "ReturnOneSetOfEmployeesFromUltiPro",
+						"description": "Return all active employees from the UltiPro EmployeeChanges API",
+						"async": true,
+						"params": [
+							{
+								"name": "upApiKey",
+								"description": "Environment variable,\nstored in AWS Systems Manager, Parameter store",
+								"required": true
+							},
+							{
+								"name": "upEmployeeChangesPass",
+								"description": "Environment variable,\nstored in AWS Systems Manager, Parameter store",
+								"required": true
+							},
+							{
+								"name": "upEmployeeChangesUser",
+								"description": "Environment variable,\nstored in AWS Systems Manager, Parameter store",
+								"required": true
 							}
 						]
 					}

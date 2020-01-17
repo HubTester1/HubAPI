@@ -1,6 +1,6 @@
 [
 	{
-		"comment": "/**\n * @name Agenda\n * @module\n * @category Agenda\n * @description Literally, a todo list\n * \n * \n * @todo Gulp\n * @todo Documentation build\n * \n * @todo Unwhitelist 0.0.0.0/0\n * @todo review 12 factors\n * @todo Develop the basic services\n * \n * \n * @todo BIG PIC - People Data\n * @todo BIG PIC - Send email through Graph\n * @todo BIG PIC - Pull data from SPO\n * @todo BIG PIC - Serve client from AWS through SPO\n */",
+		"comment": "/**\n * @name Agenda\n * @module\n * @category Agenda\n * @description Literally, a todo list\n * \n * \n * @todo Unwhitelist 0.0.0.0/0\n * @todo review 12 factors\n * @todo Develop the basic services\n * \n * \n * @todo BIG PIC - People Data\n * @todo BIG PIC - Send email through Graph\n * @todo BIG PIC - Pull data from SPO\n * @todo BIG PIC - Serve client from AWS through SPO\n */",
 		"meta": {
 			"filename": "agenda.js",
 			"lineno": 1,
@@ -22,8 +22,6 @@
 		],
 		"description": "Literally, a todo list",
 		"todo": [
-			"Gulp",
-			"Documentation build",
 			"Unwhitelist 0.0.0.0/0",
 			"review 12 factors",
 			"Develop the basic services",
@@ -54,6 +52,26 @@
 		"longname": "InsertKitten",
 		"scope": "global",
 		"$longname": "InsertKitten",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnAllActiveEmployeesFromUltiPro\n\t * @function\n\t * @async\n\t * @description Return all active employees from the UltiPro EmployeeChanges API\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 87,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-UltiPro",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnAllActiveEmployeesFromUltiPro",
+		"kind": "function",
+		"async": true,
+		"description": "Return all active employees from the UltiPro EmployeeChanges API",
+		"longname": "ReturnAllActiveEmployeesFromUltiPro",
+		"scope": "global",
+		"$longname": "ReturnAllActiveEmployeesFromUltiPro",
 		"$kind": "method"
 	},
 	{
@@ -104,6 +122,40 @@
 		"longname": "ReturnDataConnection",
 		"scope": "global",
 		"$longname": "ReturnDataConnection",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnOneSetOfEmployeesFromUltiPro\n\t * @function\n\t * @async\n\t * @description Return all active employees from the UltiPro EmployeeChanges API\n\t * @param upApiKey - Environment variable,\n\t * stored in AWS Systems Manager, Parameter store\n\t * @param upEmployeeChangesPass - Environment variable,\n\t * stored in AWS Systems Manager, Parameter store\n\t * @param upEmployeeChangesUser - Environment variable,\n\t * stored in AWS Systems Manager, Parameter store\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 17,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-UltiPro",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnOneSetOfEmployeesFromUltiPro",
+		"kind": "function",
+		"async": true,
+		"description": "Return all active employees from the UltiPro EmployeeChanges API",
+		"params": [
+			{
+				"description": "Environment variable,\nstored in AWS Systems Manager, Parameter store",
+				"name": "upApiKey"
+			},
+			{
+				"description": "Environment variable,\nstored in AWS Systems Manager, Parameter store",
+				"name": "upEmployeeChangesPass"
+			},
+			{
+				"description": "Environment variable,\nstored in AWS Systems Manager, Parameter store",
+				"name": "upEmployeeChangesUser"
+			}
+		],
+		"longname": "ReturnOneSetOfEmployeesFromUltiPro",
+		"scope": "global",
+		"$longname": "ReturnOneSetOfEmployeesFromUltiPro",
 		"$kind": "method"
 	},
 	{
@@ -234,6 +286,32 @@
 		"kind": "member",
 		"scope": "global",
 		"$longname": "Services",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name UltiPro\n * @service\n * @description Query the UltiPro EmployeeChangesAPI\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-UltiPro",
+			"code": {
+				
+			}
+		},
+		"name": "UltiPro",
+		"tags": [
+			{
+				"originalTitle": "service",
+				"title": "service",
+				"text": ""
+			}
+		],
+		"description": "Query the UltiPro EmployeeChangesAPI",
+		"longname": "UltiPro",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "UltiPro",
 		"$kind": "property"
 	}
 ]

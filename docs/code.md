@@ -16,13 +16,12 @@
 {% collapse title="- Individual Services"%}
 - [DataConnection](#dataconnection)
 - [DataQueries](#dataqueries)
+- [UltiPro](#ultipro)
 {% endcollapse %}
 
 ##Agenda Section
 | *@todo* | path |
 | ----------- | ----------- |
-| Gulp | /meta/agenda.js |
-| Documentation build | /meta/agenda.js |
 | Unwhitelist 0.0.0.0/0 | /meta/agenda.js |
 | review 12 factors | /meta/agenda.js |
 | Develop the basic services | /meta/agenda.js |
@@ -150,6 +149,29 @@ Return all documents from a collection
 | *@param* | type | required | async | description |
 | --- |: --- :|: --- :|: --- :| --- |
 | collection | string | true |  | e.g., '_Kittens'  |
+{% endcollapse %}
+
+&nbsp;
+
+###UltiPro
+
+Query the UltiPro EmployeeChangesAPI
+
+> /src/Services/-dev-UltiPro/index.js
+
+####Functions
+#####ReturnAllActiveEmployeesFromUltiPro
+Return all active employees from the UltiPro EmployeeChanges API
+
+#####ReturnOneSetOfEmployeesFromUltiPro
+Return all active employees from the UltiPro EmployeeChanges API
+
+{% collapse title="> Params"%}
+| *@param* | type | required | async | description |
+| --- |: --- :|: --- :|: --- :| --- |
+| upApiKey | undefined | true |  | Environment variable, stored in AWS Systems Manager, Parameter store  |
+| upEmployeeChangesPass | undefined | true |  | Environment variable, stored in AWS Systems Manager, Parameter store  |
+| upEmployeeChangesUser | undefined | true |  | Environment variable, stored in AWS Systems Manager, Parameter store  |
 {% endcollapse %}
 
 &nbsp;

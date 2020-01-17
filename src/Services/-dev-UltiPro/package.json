@@ -1,12 +1,13 @@
 {
-	"name": "XXX",
+	"name": "ultipro",
 	"version": "1.0.0",
-	"description": "XXX.",
+	"description": "Handles all interactions with the UltiPro API.",
 	"main": "index.js",
 	"scripts": {},
 	"author": "Museum of Science, Boston",
 	"license": "ISC",
 	"dependencies": {
-		"XXX": "XXX"
+		"axios": "^0.19.1",
+		"dotenv": "^8.2.0"
 	}
-	}
+}
