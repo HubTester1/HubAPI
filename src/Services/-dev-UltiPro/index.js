@@ -155,3 +155,5 @@ module.exports = {
 			AttemptToGetOnePageOfEmployeesFromUltiPro();
 		}),
 };
+
+module.exports.ReturnAllEmployeesFromUltiPro();

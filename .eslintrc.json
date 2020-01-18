@@ -30,9 +30,9 @@
 		],
 		"no-tabs": "off",
 		"implicit-arrow-linebreak": "off",
-		"prefer-promise-reject-errors": "warn",
-		"linebreak-style": "warn",
-		"operator-linebreak": "warn",
+		"prefer-promise-reject-errors":"off",
+		"linebreak-style": "off",
+		"operator-linebreak": "off",
 		"no-trailing-spaces": "off",
 		"no-nested-ternary": "off",
 		"no-underscore-dangle": [

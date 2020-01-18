@@ -29,6 +29,6 @@ module.exports = {
 	ReturnLLFunctionRunCommand: (directoryToken, functionToken, eventToken) => {
 		const directoryTokenToUse = module.exports.ReturnReformattedDirectoryToken(directoryToken);
 		const eventPath = module.exports.ReturnEventPath(eventToken, directoryToken);
-		return `lambda-local -l src/Lambdas/${directoryTokenToUse}/index.js -h ${functionToken} -e ${eventPath} -E '{"mongoDbHostUnique": "${process.env.mongoDbHostUnique}","mongoDbUser":"${process.env.mongoDbUser}","mongoDbPass":"${process.env.mongoDbPass}","stage":"dev","isLocal":true}'`;
+		return `lambda-local -l src/Lambdas/${directoryTokenToUse}/index.js -h ${functionToken} -e ${eventPath} --envfile .env --timeout 30000`;
 	},
 };
