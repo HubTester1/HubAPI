@@ -12,6 +12,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"data-queries": "file:src/Services/-dev-DataQueries",
+		"ultipro": "file:src/Services/-dev-UltiPro",
 		"mongodb": "^3.4.1",
 		"mongoose": "^5.8.6",
 		"monk": "^7.1.2"

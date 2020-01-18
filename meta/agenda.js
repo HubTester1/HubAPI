@@ -15,3 +15,34 @@
  * @todo BIG PIC - Pull data from SPO
  * @todo BIG PIC - Serve client from AWS through SPO
  */
+
+/**
+ * End of January
+ * ---------
+ * Documentation
+ *
+ *
+ *
+ * End of February
+ * ---------
+ * App updates
+ * Server-side rendering
+ * UI / info arch / features artifact?
+ * 
+ * 
+ * 
+ * End of May
+ * ---------
+ * MOS API complete
+ * Hub client complete
+ * 
+ * 
+ * 
+ * End of June
+ * ---------
+ * Search complete
+ * GSE architecture plan artifact
+ * 
+ * 
+ * 
+ */

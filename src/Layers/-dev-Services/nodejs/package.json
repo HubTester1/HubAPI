@@ -3,6 +3,7 @@
 	"description": "AWS Lambda Layer containing services in ../Services",
 	"dependencies": {
 		"data-connection": "file:../../../Services/-dev-DataConnection",
-		"data-queries": "file:../../../Services/-dev-DataQueries"
+		"data-queries": "file:../../../Services/-dev-DataQueries",
+		"ultipro": "file:../../../Services/-dev-UltiPro"
 	}
 }

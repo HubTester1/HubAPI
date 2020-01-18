@@ -13,7 +13,7 @@ const DataQueries = require('data-queries');
  * @description This is the kitten insertion function in the Kitten API.
  */
 
-exports.InsertKitten = (event, context, callback) =>
+exports.InsertKitten = (event, context) =>
 	// return a new promise
 	new Promise((resolve, reject) => {
 		const kitten = {
