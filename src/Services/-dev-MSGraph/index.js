@@ -42,7 +42,7 @@ module.exports = {
 			axios.post(config.uri, config.body, config.options)
 				// if the promise is resolved
 				.then((result) => {
-					// console.log('result');
+					// console.log('token');
 					// console.log(result.data.access_token);
 					// console.log(result.status);
 					// if status indicates success
@@ -66,7 +66,7 @@ module.exports = {
 				})
 				// if the promise is rejected with an error, 
 				.catch((error) => {
-					// console.log('error');
+					// console.log('token error');
 					// console.log(error);
 					// create a generic error
 					const errorToReport = {
@@ -89,40 +89,39 @@ module.exports = {
 		},
 	}),
 	
-	ReturnAllUsersFromGraph: () =>
+	ReturnDataFromGraph: (endpointToken) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// get a promise to get an access token
 			module.exports.ReturnGraphAccessToken()
 				// if the promise is resolved with the token
 				.then((accessTokenResult) => {
-					console.log('accessTokenResult');
-					console.log(accessTokenResult.accessToken);
+					// console.log('accessTokenResult');
+					// console.log(accessTokenResult.accessToken);
 					// if status indicates success
-					const endpointToken = 'users';
 					const config = module.exports.ReturnGraphQueryConfig(
 						endpointToken,
 						accessTokenResult.accessToken,
 					);
-					console.log('config');
-					console.log(config);
+					// console.log('config');
+					// console.log(config);
 					// get a promise to an access token
 					axios.get(
 						config.uri, 
 						config.options,
 					)
 						// if the promise is resolved
-						.then((usersResult) => {
+						.then((dataResult) => {
 							// console.log('usersResult');
 							// console.log(result.data.access_token);
 							// console.log(usersResult.status);
 							// if status indicates success
-							if (usersResult.status === 200) {
+							if (dataResult.status === 200) {
 								// resolve this promise with the list items
 								// console.log(usersResult.data.value);
 								resolve({
 									error: false,
-									users: usersResult.data.value,
+									data: dataResult.data.value,
 								});
 								// if status indicates other than success
 							} else {
@@ -131,35 +130,35 @@ module.exports = {
 									error: true,
 									msGraphError: true,
 									msGraphEndpoint: endpointToken,
-									msGraphStatus: usersResult.status,
+									msGraphStatus: dataResult.status,
 								};
 									// reject this promise with the error
 								reject(errorToReport);
 							}
 						})
 						// if the promise is rejected with an error, 
-						.catch((error) => {
-							// console.log('error');
-							// console.log(error);
+						.catch((dataError) => {
+							// console.log('dataError');
+							// console.log(dataError);
 							// create a generic error
 							const errorToReport = {
 								error: true,
-								msGraphError: true,
-								msGraphErrorDetails: error,
+								msGraphError: 'data',
+								msGraphErrorDetails: dataError,
 							};
 								// reject this promise with an error
 							reject(errorToReport);
 						});
 				})
 				// if the promise is rejected with an error, 
-				.catch((error) => {
+				.catch((tokenError) => {
 					// console.log('error');
 					// console.log(error);
 					// create a generic error
 					const errorToReport = {
 						error: true,
-						msGraphError: true,
-						msGraphErrorDetails: error,
+						msGraphError: 'token',
+						msGraphErrorDetails: tokenError,
 					};
 					// reject this promise with an error
 					reject(errorToReport);
@@ -167,5 +166,3 @@ module.exports = {
 		}),
 
 };
-
-module.exports.ReturnAllUsersFromGraph();

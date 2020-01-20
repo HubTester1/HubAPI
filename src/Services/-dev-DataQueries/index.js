@@ -293,9 +293,16 @@ module.exports = {
 	InsertDocIntoCollection: (doc, collection) =>
 		// return a new promise
 		new Promise(((resolve, reject) => {
+			console.log('DataConnection');
+			console.log(DataConnection);
 			// use DataConnection object to query db
 			DataConnection.get(collection).insert(doc, (error, result) => {
 				// if there was an error
+				console.log('insert error');
+				console.log(error);
+				console.log('insert result');
+				console.log(result);
+
 				if (error) {
 					// construct a custom error
 					const errorToReport = {
