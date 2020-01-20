@@ -9,11 +9,74 @@ const UltiPro = require('ultipro');
 const MSGraph = require('ms-graph');
 const Utilities = require('utilities');
 
+/* exports.AddAllMSGraphUsersToDatabase = (event, context) =>
+	// return a new promise
+	new Promise((resolve, reject) => {
+		MSGraph.ReturnAllSpecifiedDataFromGraph('users')
+			// if the promise is resolved with the result, then resolve this promise with the result
+			.then((queryResult) => {
+				// get a promise to retrieve all documents from the emailQueue document collection
+				DataQueries.InsertDocIntoCollection(queryResult.allValues, 'peopleRawMSGraphUsers')
+					// if the promise is resolved with the result, then resolve this promise with the result
+					.then((insertResult) => {
+						resolve({
+							statusCode: 200,
+							body: JSON.stringify(insertResult),
+						});
+					})
+					// if the promise is rejected with an error, then reject this promise with an error
+					.catch((insertError) => {
+						reject({
+							statusCode: 500,
+							body: JSON.stringify(insertError),
+						});
+					});
+			})
+			// if the promise is rejected with an error, then reject this promise with an error
+			.catch((error) => {
+				reject({
+					statusCode: 500,
+					body: JSON.stringify(error),
+				});
+			});
+	});
+exports.AddAllMSGraphGroupsToDatabase = (event, context) =>
+	// return a new promise
+	new Promise((resolve, reject) => {
+		MSGraph.ReturnAllSpecifiedDataFromGraph('groups')
+			// if the promise is resolved with the result, then resolve this promise with the result
+			.then((queryResult) => {
+				// get a promise to retrieve all documents from the emailQueue document collection
+				DataQueries.InsertDocIntoCollection(queryResult.allValues, 'peopleRawMSGraphGroups')
+					// if the promise is resolved with the result, then resolve this promise with the result
+					.then((insertResult) => {
+						resolve({
+							statusCode: 200,
+							body: JSON.stringify(insertResult),
+						});
+					})
+					// if the promise is rejected with an error, then reject this promise with an error
+					.catch((insertError) => {
+						reject({
+							statusCode: 500,
+							body: JSON.stringify(insertError),
+						});
+					});
+			})
+			// if the promise is rejected with an error, then reject this promise with an error
+			.catch((error) => {
+				reject({
+					statusCode: 500,
+					body: JSON.stringify(error),
+				});
+			});
+	}); */
 /**
- * @name AddAllUltiProEmployeesToDatabase
+ * @name AddAllUltiProActiveEmployeesToDatabase
  * @function
  * @async
- * @description Get all employees via UltiPro service. Insert into peopleUltiProRaw collection.
+ * @description Get all active employees via UltiPro service. 
+ * Insert into peopleUltiProRaw collection.
  */
 
 exports.AddAllUltiProActiveEmployeesToDatabase = (event, context) =>
@@ -25,15 +88,24 @@ exports.AddAllUltiProActiveEmployeesToDatabase = (event, context) =>
 				const allActiveEmployees = [];
 				queryResult.allEmployees.forEach((employee) => {
 					if (employee.isActive) {
-						allActiveEmployees.push({
+						let phoneToUse = '';
+						if (
+							employee.workPhone &&
+							employee.workPhone.replace(/ /g, '')
+						) {
+							phoneToUse =
+								`${employee.workPhone.slice(0, 3)}-${employee.workPhone.slice(3, 6)}-${employee.workPhone.slice(6)}`;
+						}
+
+						const employeeToPush = {
 							account: Utilities
 								.ReturnAccountFromUserAndDomain(employee.emailAddress),
 							firstName: employee.firstName,
 							lastName: employee.lastName,
 							preferredName: employee.preferredName,
-							email: employee.emailAddress,
-							phone: employee.workPhone,
 							jobTitle: employee.alternateJobTitle,
+							email: employee.emailAddress,
+							phone: phoneToUse,
 							mosEmployeeID: employee.employeeNumber,
 							upEmployeeID: employee.employeeId,
 							upSupervisorId: employee.supervisorId,
@@ -43,7 +115,8 @@ exports.AddAllUltiProActiveEmployeesToDatabase = (event, context) =>
 							orgLevel3Code: employee.orgLevel3Code,
 							orgLevel4Code: employee.orgLevel4Code,
 							jobGroupCode: employee.jobGroupCode,
-						});
+						};
+						allActiveEmployees.push(employeeToPush);
 					}
 				});
 				// get a promise to retrieve all documents from the emailQueue document collection
@@ -113,69 +186,6 @@ exports.AddAllMSGraphUserPhonesToDatabase = (event, context) =>
 				});
 			});
 	});
-
-/* exports.AddAllMSGraphUsersToDatabase = (event, context) =>
-	// return a new promise
-	new Promise((resolve, reject) => {
-		MSGraph.ReturnAllSpecifiedDataFromGraph('users')
-			// if the promise is resolved with the result, then resolve this promise with the result
-			.then((queryResult) => {
-				// get a promise to retrieve all documents from the emailQueue document collection
-				DataQueries.InsertDocIntoCollection(queryResult.allValues, 'peopleRawMSGraphUsers')
-					// if the promise is resolved with the result, then resolve this promise with the result
-					.then((insertResult) => {
-						resolve({
-							statusCode: 200,
-							body: JSON.stringify(insertResult),
-						});
-					})
-					// if the promise is rejected with an error, then reject this promise with an error
-					.catch((insertError) => {
-						reject({
-							statusCode: 500,
-							body: JSON.stringify(insertError),
-						});
-					});
-			})
-			// if the promise is rejected with an error, then reject this promise with an error
-			.catch((error) => {
-				reject({
-					statusCode: 500,
-					body: JSON.stringify(error),
-				});
-			});
-	});
-exports.AddAllMSGraphGroupsToDatabase = (event, context) =>
-	// return a new promise
-	new Promise((resolve, reject) => {
-		MSGraph.ReturnAllSpecifiedDataFromGraph('groups')
-			// if the promise is resolved with the result, then resolve this promise with the result
-			.then((queryResult) => {
-				// get a promise to retrieve all documents from the emailQueue document collection
-				DataQueries.InsertDocIntoCollection(queryResult.allValues, 'peopleRawMSGraphGroups')
-					// if the promise is resolved with the result, then resolve this promise with the result
-					.then((insertResult) => {
-						resolve({
-							statusCode: 200,
-							body: JSON.stringify(insertResult),
-						});
-					})
-					// if the promise is rejected with an error, then reject this promise with an error
-					.catch((insertError) => {
-						reject({
-							statusCode: 500,
-							body: JSON.stringify(insertError),
-						});
-					});
-			})
-			// if the promise is rejected with an error, then reject this promise with an error
-			.catch((error) => {
-				reject({
-					statusCode: 500,
-					body: JSON.stringify(error),
-				});
-			});
-	}); */
 
 exports.AddTrackedMSGraphGroupsToDatabase = (event, context) =>
 	// return a new promise
@@ -269,7 +279,7 @@ exports.AddHubComponentGroupAdminsToDatabase = (event, context) =>
 					groupsAndAdmins.push(groupAndAdminToPush);
 				});
 				// get a promise to insert the component groups and their admins
-				DataQueries.InsertDocIntoCollection(groupsAndAdmins, 'peopleRawMOSHubComponentGroupAdmins')
+				DataQueries.InsertDocIntoCollection(groupsAndAdmins, 'peopleRawMSGraphHubComponentGroupAdmins')
 					// if the promise is resolved with the result
 					.then((insertResult) => {
 						// resolve this promise with the result
@@ -294,5 +304,83 @@ exports.AddHubComponentGroupAdminsToDatabase = (event, context) =>
 					statusCode: 500,
 					body: JSON.stringify(error),
 				});
+			});
+	});
+
+/* exports.ProcessAllPeopleBasic = (event, context) =>
+	// return a new promise
+	new Promise((resolve, reject) => {
+		Promise.all([
+			DataQueries.ReturnAllDocsFromCollection('peopleRawMOSGroupsTracked'),
+			DataQueries.ReturnAllDocsFromCollection('peopleRawMOSPreferences'),
+			DataQueries.ReturnAllDocsFromCollection('peopleRawMSGraphGroups'),
+			DataQueries.ReturnAllDocsFromCollection('peopleRawMSGraphHubComponentGroupAdmins'),
+			DataQueries.ReturnAllDocsFromCollection('peopleRawUltiPro'),
+		])
+			.then((queryResults) => {
+				// extract results for convenience
+				const groupTracking = queryResults[0];
+				const preferences = queryResults[1];
+				const groups = queryResults[2];
+				const componentGroupAdmins = queryResults[3];
+				const employees = queryResults[4];
+				// set up container for all people
+				const allPeople = [];
+				// iterate over each employee
+				employees.forEach((employee) => {
+					// start the person as a copy of employee param
+					const person = Utilities.ReturnCopyOfObject(employee);
+					groups.forEach((group) => {
+						
+					});
+				});
+			})
+			// if the promise is rejected with an error
+			.catch((error) => {
+				// reject this promise with an error
+				reject({
+					statusCode: 500,
+					body: JSON.stringify(error),
+				});
+			});
+	}); */
+
+exports.GetActiveLegacies = (event, context) =>
+	// return a new promise
+	new Promise((resolve, reject) => {
+		Promise.all([
+			DataQueries.ReturnAllDocsFromCollection('peopleRawUltiPro'),
+			DataQueries.ReturnAllDocsFromCollection('peopleRawLegacyPhoneNumbers'),
+		])
+			.then((phoneResults) => {
+				const upActiveEmps = phoneResults[0];
+				const qPhones = phoneResults[1];
+				const activeEmpsWLegacyNumbers = [];
+				upActiveEmps.docs.forEach((upActiveEmp) => {
+					// for this active employee
+					qPhones.docs.forEach((qPhone) => {
+						const quarkPhoneSansHyphens = qPhone.officePhone.replace(/-/g, '');
+						if (
+							qPhone.account === upActiveEmp.account &&
+							qPhone.officePhone !== upActiveEmp.phone &&
+							quarkPhoneSansHyphens !== upActiveEmp.phone
+						) {
+							activeEmpsWLegacyNumbers.push({
+								account: qPhone.account,
+								quarkPhone: quarkPhoneSansHyphens,
+								ultiProPhone: upActiveEmp.phone,
+							});
+						}
+					});
+				});
+				console.log(activeEmpsWLegacyNumbers);
+				console.log(activeEmpsWLegacyNumbers.length);
+				console.log('m5');
+				// resolve(activeEmpsWLegacyNumbers);
+			})
+			// if the promise to get all ad users from csv was rejected with an error
+			.catch((phoneError) => {
+				// reject this promise with the error
+				reject(phoneError);
 			});
 	});
