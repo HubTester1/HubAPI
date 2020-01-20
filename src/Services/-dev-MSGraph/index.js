@@ -85,11 +85,60 @@ module.exports = {
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
 			},
-			timeout: 5000,
+			timeout: 30000,
 		},
 	}),
-	
-	ReturnDataFromGraph: (endpointToken) =>
+
+	ReturnOnePageOfDataFromGraph: (config) =>
+		// return a new promise
+		new Promise((resolve, reject) => {
+			// get a promise to an access token
+			axios.get(
+				config.uri,
+				config.options,
+			)
+				// if the promise is resolved
+				.then((dataResult) => {
+					// console.log('dataResult');
+					// console.log(dataResult.status);
+					// if status indicates success
+					if (dataResult.status === 200) {
+						// resolve this promise with the list items
+						// console.log('dataResult');
+						// console.log(dataResult);
+						resolve({
+							error: false,
+							onePage: dataResult.data.value,
+							nextLink: dataResult.data['@odata.nextLink'],
+						});
+						// if status indicates other than success
+					} else {
+						// create a generic error
+						const errorToReport = {
+							error: true,
+							msGraphError: true,
+							msGraphURI: config.uri,
+							msGraphStatus: dataResult.status,
+						};
+						// reject this promise with the error
+						reject(errorToReport);
+					}
+				})
+				// if the promise is rejected with an error
+				.catch((dataError) => {
+					// console.log('dataError');
+					// console.log(dataError);
+					// create a generic error
+					const errorToReport = {
+						error: true,
+						msGraphError: 'data',
+						msGraphErrorDetails: dataError,
+					};
+					// reject this promise with an error
+					reject(errorToReport);
+				});
+		}),
+	ReturnAllSpecifiedDataFromGraph: (endpointToken) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// get a promise to get an access token
@@ -99,61 +148,69 @@ module.exports = {
 					// console.log('accessTokenResult');
 					// console.log(accessTokenResult.accessToken);
 					// if status indicates success
-					const config = module.exports.ReturnGraphQueryConfig(
+					const baseConfig = module.exports.ReturnGraphQueryConfig(
 						endpointToken,
 						accessTokenResult.accessToken,
 					);
 					// console.log('config');
 					// console.log(config);
-					// get a promise to an access token
-					axios.get(
-						config.uri, 
-						config.options,
-					)
-						// if the promise is resolved
-						.then((dataResult) => {
-							// console.log('usersResult');
-							// console.log(result.data.access_token);
-							// console.log(usersResult.status);
-							// if status indicates success
-							if (dataResult.status === 200) {
-								// resolve this promise with the list items
-								// console.log(usersResult.data.value);
-								resolve({
-									error: false,
-									data: dataResult.data.value,
-								});
-								// if status indicates other than success
-							} else {
+					let allValues = [];
+					// set up recursive function to get all pages of employees
+					const AttemptToGetOnePageOfDataFromGraph = (attemptConfig = baseConfig) => {
+						// get a promise to retrieve one page of employees
+						module.exports.ReturnOnePageOfDataFromGraph(attemptConfig)
+							// if the promise is resolved
+							.then((dataResult) => {
+								// if a page of employees was returned
+								if (dataResult.nextLink) {
+									// console.log('dataResult');
+									// console.log(dataResult.onePage.length);
+									// add the page of employees to allEmployees
+									allValues = [...allValues, ...dataResult.onePage];
+									// make another attempt
+									const newAttemptConfig = JSON.parse(JSON.stringify(attemptConfig));
+									newAttemptConfig.uri = dataResult.nextLink;
+									AttemptToGetOnePageOfDataFromGraph(newAttemptConfig);
+									// if we've reached the end of the pages
+								} else {
+									// add the page of employees to allEmployees
+									allValues = [...allValues, ...dataResult.onePage];
+									// console.log('allValues');
+									// console.log(allValues.length);
+									// resolve this promise with all of the employees
+									resolve({
+										error: false,
+										allValues,
+									});
+								}
+
+
+								/* resolve({
+										error: false,
+										data: dataResult.data.value,
+									}); */
+							})
+							// if the promise is rejected with an error, 
+							.catch((dataError) => {
+								// console.log('dataError');
+								// console.log(dataError);
 								// create a generic error
 								const errorToReport = {
 									error: true,
-									msGraphError: true,
-									msGraphEndpoint: endpointToken,
-									msGraphStatus: dataResult.status,
+									msGraphError: 'data',
+									msGraphErrorDetails: dataError,
 								};
-									// reject this promise with the error
+									// reject this promise with an error
 								reject(errorToReport);
-							}
-						})
-						// if the promise is rejected with an error, 
-						.catch((dataError) => {
-							// console.log('dataError');
-							// console.log(dataError);
-							// create a generic error
-							const errorToReport = {
-								error: true,
-								msGraphError: 'data',
-								msGraphErrorDetails: dataError,
-							};
-								// reject this promise with an error
-							reject(errorToReport);
-						});
+							});
+					};
+					// start the first attempt to get a page of employees
+					AttemptToGetOnePageOfDataFromGraph();
 				})
 				// if the promise is rejected with an error, 
 				.catch((tokenError) => {
-					// console.log('error');
-					// console.log(error);
+					// console.log('tokenError');
+					// console.log(tokenError);
 					// create a generic error
 					const errorToReport = {
 						error: true,

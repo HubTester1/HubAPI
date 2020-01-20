@@ -5,6 +5,7 @@
 		"data-connection": "file:../../../Services/-dev-DataConnection",
 		"data-queries": "file:../../../Services/-dev-DataQueries",
 		"ultipro": "file:../../../Services/-dev-UltiPro",
-		"ms-graph": "file:../../../Services/-dev-MSGraph"
+		"ms-graph": "file:../../../Services/-dev-MSGraph",
+		"utilities": "file:../../../Services/-dev-Utilities"
 	}
 }

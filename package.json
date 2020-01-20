@@ -13,6 +13,7 @@
 	"dependencies": {
 		"data-queries": "file:src/Services/-dev-DataQueries",
 		"ultipro": "file:src/Services/-dev-UltiPro",
+		"utilities": "file:src/Services/-dev-Utilities",
 		"ms-graph": "file:src/Services/-dev-MSGraph",
 		"mongodb": "^3.4.1",
 		"mongoose": "^5.8.6",
