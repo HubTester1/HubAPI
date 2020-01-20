@@ -217,7 +217,7 @@ exports.AddTrackedMSGraphGroupsToDatabase = (event, context) =>
 						// get a promise to retrieve all documents from the emailQueue document collection
 						DataQueries.InsertDocIntoCollection(
 							allTrackedGroupsWithMembers, 
-							'peopleRawMOSGroupsTrackedWithMembers',
+							'peopleRawMSGraphGroups',
 						)
 							// if the promise is resolved with the result
 							.then((insertResult) => {
