@@ -12,12 +12,13 @@
 	"license": "ISC",
 	"dependencies": {
 		"data-queries": "file:src/Services/-dev-DataQueries",
-		"ultipro": "file:src/Services/-dev-UltiPro",
-		"utilities": "file:src/Services/-dev-Utilities",
-		"ms-graph": "file:src/Services/-dev-MSGraph",
+		"fs-extra": "^8.1.0",
 		"mongodb": "^3.4.1",
 		"mongoose": "^5.8.6",
-		"monk": "^7.1.2"
+		"monk": "^7.1.2",
+		"ms-graph": "file:src/Services/-dev-MSGraph",
+		"ultipro": "file:src/Services/-dev-UltiPro",
+		"utilities": "file:src/Services/-dev-Utilities"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.7.7",

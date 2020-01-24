@@ -32,6 +32,7 @@
 		"implicit-arrow-linebreak": "off",
 		"prefer-promise-reject-errors":"off",
 		"linebreak-style": "off",
+		"object-curly-newline": "off",
 		"operator-linebreak": "off",
 		"no-trailing-spaces": "off",
 		"no-nested-ternary": "off",

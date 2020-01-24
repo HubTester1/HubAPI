@@ -1,0 +1,47 @@
+custom:
+  file: ${file(../../config-common.yaml)}
+# -------------------------------------------------------
+  config:
+    service: PeopleCron
+    stage: dev
+    memorySize: 512
+    timeout: 20
+
+functions:
+  AddAllUltiProEmployeesToDatabase:
+    handler: index.AddAllUltiProEmployeesToDatabase
+    events:
+      - http:
+          path: people/afup
+          method: get
+          cors: true
+
+# -------------------------------------------------------
+
+service: ${self:custom.config.service}
+
+provider:
+  name: aws
+  runtime: ${self:custom.file.provider.runtime}
+  stage: ${self:custom.config.stage}
+  region: us-east-1
+  profile: ${self:custom.file.provider.profile}
+  memorySize: ${self:custom.config.memorySize}
+  timeout: ${self:custom.config.timeout}
+  deploymentBucket:
+    name: mos-api-${self:provider.stage}-lambdas
+  environment:
+    NODE_PATH: "./:/opt/node_modules"
+    graphClientID: ${self:custom.file.graphClientID}
+    graphClientSecret: ${self:custom.file.graphClientSecret}
+    graphTenantID: ${self:custom.file.graphTenantID}
+    mongoDbHostUnique: ${self:custom.file.mongoDbHostUnique}
+    mongoDbPass: ${self:custom.file.mongoDbPass}
+    mongoDbUser: ${self:custom.file.mongoDbUser}
+    stage: ${self:provider.stage}
+    upApiKey: ${self:custom.file.upApiKey}
+    upEmployeeChangesPass: ${self:custom.file.upEmployeeChangesPass}
+    upEmployeeChangesUser: ${self:custom.file.upEmployeeChangesUser}
+  layers:
+    - ${self:custom.file.${self:custom.config.stage}LayerARNNPM}
+    - ${self:custom.file.${self:custom.config.stage}LayerARNServices}
