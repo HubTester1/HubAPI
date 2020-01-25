@@ -11,7 +11,7 @@ functions:
   ProcessAllPeopleFlat:
     handler: index.ProcessAllPeopleFlat
     events:
-      - schedule: cron(0/3 8-18 * * *)
+      - schedule: cron(${self:custom.file.cronScheduleGSEJobSync})
 
 # -------------------------------------------------------
 
