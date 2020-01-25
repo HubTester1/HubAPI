@@ -54,7 +54,8 @@
 			"definedTags": [
 				"model",
 				"service",
-				"api"
+				"api",
+				"cron"
 			]
 		}],// Recommended
 		"jsdoc/check-types": 1, // Recommended

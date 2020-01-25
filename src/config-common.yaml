@@ -1,3 +1,9 @@
+cronScheduleGSEJobSync: ${ssm:cron-schedule-gse-job-sync}
+cronScheduleGSEScheduleSync: ${ssm:cron-schedule-gse-schedule-sync}
+cronScheduleGSESignupSync: ${ssm:cron-schedule-gse-signup-sync}
+cronScheduleGSESignupReminders: ${ssm:cron-schedule-gse-signup-reminders}
+cronScheduleGSECreditReminders: ${ssm:cron-schedule-gse-credit-reminders}
+cronSchedulePeopleProcessing: ${ssm:cron-schedule-people-processing}
 graphClientID: ${ssm:graph-client-id}
 graphClientSecret: ${ssm:graph-client-secret}
 graphTenantID: ${ssm:graph-tenant-id}

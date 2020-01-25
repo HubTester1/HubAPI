@@ -4,17 +4,14 @@ custom:
   config:
     service: PeopleCron
     stage: dev
-    memorySize: 512
-    timeout: 20
+    memorySize: 1024
+    timeout: 30
 
 functions:
-  AddAllUltiProEmployeesToDatabase:
-    handler: index.AddAllUltiProEmployeesToDatabase
+  ProcessAllPeopleFlat:
+    handler: index.ProcessAllPeopleFlat
     events:
-      - http:
-          path: people/afup
-          method: get
-          cors: true
+      - schedule: cron(0/3 8-18 * * *)
 
 # -------------------------------------------------------
 
@@ -32,6 +29,12 @@ provider:
     name: mos-api-${self:provider.stage}-lambdas
   environment:
     NODE_PATH: "./:/opt/node_modules"
+    cronScheduleGSEJobSync: ${self:custom.file.cronScheduleGSEJobSync}
+    cronScheduleGSEScheduleSync: ${self:custom.file.cronScheduleGSEScheduleSync}
+    cronScheduleGSESignupSync: ${self:custom.file.cronScheduleGSESignupSync}
+    cronScheduleGSESignupReminders: ${self:custom.file.cronScheduleGSESignupReminders}
+    cronScheduleGSECreditReminders: ${self:custom.file.cronScheduleGSECreditReminders}
+    cronSchedulePeopleProcessing: ${self:custom.file.cronSchedulePeopleProcessing}
     graphClientID: ${self:custom.file.graphClientID}
     graphClientSecret: ${self:custom.file.graphClientSecret}
     graphTenantID: ${self:custom.file.graphTenantID}
