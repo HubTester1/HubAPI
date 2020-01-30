@@ -1,12 +1,12 @@
 {
-	"name": "utilities",
+	"name": "XXX",
 	"version": "1.0.0",
-	"description": "Miscellaneous utility functions.",
+	"description": "XXX.",
 	"main": "index.js",
 	"scripts": {},
 	"author": "Museum of Science, Boston",
 	"license": "ISC",
 	"dependencies": {
-		"moment": "^2.24.0"
+		"ms-graph": "file:../-dev-MSGraph"
 	}
-}
+	}

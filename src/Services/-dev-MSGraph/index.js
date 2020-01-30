@@ -6,8 +6,8 @@
 
 const axios = require('axios');
 const qs = require('qs');
-// const { Client } = require('@microsoft/microsoft-graph-client');
-// const { Auth } = require('./auth.ts');
+const Utilities = require('utilities');
+
 
 if (process.env.NODE_ENV === 'local') {
 	// eslint-disable-next-line global-require
@@ -38,7 +38,7 @@ module.exports = {
 		new Promise((resolve, reject) => {
 			// get URI and options
 			const config = module.exports.ReturnGraphAuthorizationConfig();
-			// get a promise to an access token
+			// get a promise to get an access token
 			axios.post(config.uri, config.body, config.options)
 				// if the promise is resolved
 				.then((result) => {
@@ -138,6 +138,7 @@ module.exports = {
 					reject(errorToReport);
 				});
 		}),
+		
 	ReturnAllSpecifiedDataFromGraph: (endpointToken) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
@@ -206,6 +207,109 @@ module.exports = {
 					};
 					// start the first attempt to get a page of employees
 					AttemptToGetOnePageOfDataFromGraph();
+				})
+				// if the promise is rejected with an error, 
+				.catch((tokenError) => {
+					// console.log('tokenError');
+					// console.log(tokenError);
+					// create a generic error
+					const errorToReport = {
+						error: true,
+						msGraphError: 'token',
+						msGraphErrorDetails: tokenError,
+					};
+					// reject this promise with an error
+					reject(errorToReport);
+				});
+		}),
+		
+	SendEmailToGraph: (emailData) =>
+		// return a new promise
+		new Promise((resolve, reject) => {
+			// get a promise to get an access token
+			module.exports.ReturnGraphAccessToken()
+				// if the promise is resolved with the token
+				.then((accessTokenResult) => {
+					// extract sender
+					const senderFormatted = 
+						Utilities.ReturnTerseEmailAddressFromFriendly(emailData.from);
+					const recipientsFormatted = [];
+					// if to property is array
+					if (typeof (emailData.to) === 'object') {
+						emailData.to.forEach((recipient) => {
+							recipientsFormatted.push({
+								emailAddress: {
+									address: Utilities.ReturnTerseEmailAddressFromFriendly(recipient),
+								},
+							});
+						});
+					}
+					// if to property is string
+					if (typeof (emailData.to) === 'string') {
+						recipientsFormatted.push({
+							emailAddress: {
+								address: Utilities.ReturnTerseEmailAddressFromFriendly(emailData.to),
+							},
+						});
+					}
+					const bodyFormatted = {};
+					if (emailData.html) {
+						bodyFormatted.contentType = 'HTML';
+						bodyFormatted.content = emailData.html;
+					}
+					if (emailData.text) {
+						bodyFormatted.contentType = 'text';
+						bodyFormatted.content = emailData.text;
+					}
+					const config = module.exports.ReturnGraphQueryConfig(
+						`users/${senderFormatted}/sendMail`,
+						accessTokenResult.accessToken,
+					);
+					config.body = {
+						message: {
+							subject: `${emailData.subject}`,
+							body: bodyFormatted,
+							toRecipients: recipientsFormatted,
+						},
+					};
+					axios.post(config.uri, config.body, config.options)
+						// if the promise is resolved
+						.then((sendResult) => {
+							// console.log('sendResult');
+							// console.log(sendResult.status);
+							// if status indicates success
+							if (sendResult.status === 202) {
+								// resolve this promise with the list items
+								resolve({
+									error: false,
+									emailData,
+								});
+							// if status indicates other than success
+							} else {
+								// create a generic error
+								const errorToReport = {
+									error: true,
+									msGraphError: true,
+									msGraphURI: config.uri,
+									msGraphStatus: sendResult.status,
+								};
+								// reject this promise with the error
+								reject(errorToReport);
+							}
+						})
+						// if the promise is rejected with an error
+						.catch((sendError) => {
+							// console.log('sendError');
+							// console.log(sendError);
+							// create a generic error
+							const errorToReport = {
+								error: true,
+								msGraphError: 'send',
+								msGraphErrorDetails: sendError,
+							};
+							// reject this promise with an error
+							reject(errorToReport);
+						});
 				})
 				// if the promise is rejected with an error, 
 				.catch((tokenError) => {

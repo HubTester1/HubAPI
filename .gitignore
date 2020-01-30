@@ -30,3 +30,4 @@ obj
 # Misc
 *.txt
 env.*
+dataDump
