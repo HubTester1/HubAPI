@@ -2,6 +2,16 @@
  * @name Email
  * @service
  * @description Performs all email-related operations.
+ * 
+ * @todo cron log
+ * @todo sending status
+ * @todo queue processing status
+ * @todo error handling
+ * @todo access through domain or token
+ */
+
+/**
+ * @typedef {import('../../TypeDefs/email').default} Email
  */
 
 const DataQueries = require('data-queries');
@@ -11,10 +21,11 @@ const MSGraph = require('ms-graph');
 module.exports = {
 	
 	/**
-	 * @name XXX
+	 * @name ReturnEmailQueueData
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Return all emails from the email queue 
+	 * (all docs from the 'emailQueue' collection).
 	 */
 
 	ReturnEmailQueueData: () =>
@@ -33,10 +44,11 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name ReturnEmailArchiveData
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Return all emails from the email archive 
+	 * (all docs from the 'emailArchive' collection).
 	 */
 
 	ReturnEmailArchiveData: () =>
@@ -55,10 +67,11 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name ReturnEmailSettingsData
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Return all email settings 
+	 * (all docs from the 'emailSettings' collection).
 	 */
 
 	ReturnEmailSettingsData: () =>
@@ -77,10 +90,11 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name ReturnEmailSendingStatus
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Return the setting indicating whether or not emails should be sent at this time.
+	 * This setting can be set to false in database to prevent emails from being sent.
 	 */
 
 	ReturnEmailSendingStatus: () =>
@@ -103,10 +117,12 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name ReturnEmailQueueProcessingStatus
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Return the setting indicating whether or not email the email queue 
+	 * should be processed.This setting can be set to false in database to prevent queued emails
+	 * from being sent.
 	 */
 
 	ReturnEmailQueueProcessingStatus: () =>
@@ -129,10 +145,11 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name ReturnEmailWhitelistedDomains
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Return the setting indicating the domains from which email requests are accepted.
+	 * Add a domain to this setting in database to all requests from an additional domain.
 	 */
 
 	ReturnEmailWhitelistedDomains: () =>
@@ -155,10 +172,11 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name ProcessEmailQueue
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description For each email in the queue, attempt to send the email (including
+	 * archiving and deleting from queue).
 	 */
 
 	ProcessEmailQueue: () =>
@@ -209,10 +227,11 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name SendEachEmailFromArray
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description For each email in an array, attempt to send the email.
+	 * @param {Array} emailArray - array of objects, each comprising data for one email
 	 */
 
 	SendEachEmailFromArray: (emailArray) =>
@@ -248,10 +267,11 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name AddEmailToQueue
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Add the email to the queue, i.e., the doc to the 'emailQueue' collection.
+	 * @param {Email} incomingEmail
 	 */
 
 	AddEmailToQueue: (incomingEmail) =>
@@ -274,10 +294,11 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name AddEmailToArchive
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Add the email to the archive, i.e., the doc to the 'emailArchive' collection.
+	 * @param {Email} incomingEmail
 	 */
 
 	AddEmailToArchive: (incomingEmail) =>
@@ -300,17 +321,19 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name ReplaceQueuedEmail
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Replace one email in the queue, i.e., one doc in the 'emailQueue' collection.
+	 * @param {string} emailID - ID of email to replace, i.e., of doc to overwrite
+	 * @param {Email} incomingEmail
 	 */
 
-	ReplaceQueuedEmail: (emailID, email) =>
+	ReplaceQueuedEmail: (emailID, incomingEmail) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// get a promise to overwrite the document
-			DataQueries.OverwriteDocInCollection(emailID, email, 'emailQueue')
+			DataQueries.OverwriteDocInCollection(emailID, incomingEmail, 'emailQueue')
 				// if the promise is resolved with the counts, then resolve this promise with the counts
 				.then((result) => {
 					resolve(result);
@@ -322,17 +345,19 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name ReplaceArchivedEmail
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Replace one email in the archive, i.e., one doc in the 'emailArchive' collection.
+	 * @param {string} emailID - ID of email to replace, i.e., of doc to overwrite
+	 * @param {Email} incomingEmail
 	 */
 
-	ReplaceArchivedEmail: (emailID, email) =>
+	ReplaceArchivedEmail: (emailID, incomingEmail) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// get a promise to overwrite the document
-			DataQueries.OverwriteDocInCollection(emailID, email, 'emailArchive')
+			DataQueries.OverwriteDocInCollection(emailID, incomingEmail, 'emailArchive')
 				// if the promise is resolved with the counts, then resolve this promise with the counts
 				.then((result) => {
 					resolve(result);
@@ -344,10 +369,11 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name ReplaceAllEmailSettings
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Replace email settings object in database, i.e., doc in 'emailSettings' queue.
+	 * @param {object} newSettings - object comprising new email settings
 	 */
 
 	ReplaceAllEmailSettings: (newSettings) =>
@@ -375,10 +401,12 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name ReplaceOneEmailSetting
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Replace one email setting in database, i.e., one property of 
+	 * doc in 'emailSettings' queue.
+	 * @param {object} newSingleSettingObject - object comprising new email setting property
 	 */
 
 	ReplaceOneEmailSetting: (newSingleSettingObject) =>
@@ -415,17 +443,18 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name DeleteQueuedEmail
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Delete one email from the queue, i.e., one doc in the 'emailQueue' collection.
+	 * @param {string} emailID - ID of email to delete, i.e., of doc to remove
 	 */
 
-	DeleteQueuedEmail: (docID) =>
+	DeleteQueuedEmail: (emailID) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// get a promise to delete all documents
-			DataQueries.DeleteDocFromCollection(docID, 'emailQueue')
+			DataQueries.DeleteDocFromCollection(emailID, 'emailQueue')
 				// if the promise is resolved with the docs, then resolve this promise with the docs
 				.then((result) => {
 					resolve(result);
@@ -437,10 +466,11 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name DeleteArchivedEmail
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Delete one email from the archive, i.e., one doc in the 'emailArchive' collection.
+	 * @param {string} emailID - ID of email to delete, i.e., of doc to remove
 	 */
 
 	DeleteArchivedEmail: (docID) =>
@@ -468,17 +498,21 @@ module.exports = {
 		}),
 	
 	/**
-	 * @name XXX
+	 * @name SendEmail
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Send one email to MSGraph service. If Graph is 
+	 * successful in sending, add email to archive (and remove from queue, 
+	 * as appropriate). If Graph is not successful in sending, add email to 
+	 * queue.
+	 * @param {Email} incomingEmail
 	 */
 
-	SendEmail: (emailData) =>
+	SendEmail: (incomingEmail) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// copy to preserve function parameter
-			const email = Utilities.ReturnCopyOfObject(JSON.parse(emailData));
+			const email = Utilities.ReturnCopyOfObject(JSON.parse(incomingEmail));
 			// if the email does not have a received time
 			if (!email.receivedTime) {
 				// add a received timestamp to the email
@@ -506,7 +540,7 @@ module.exports = {
 						.then((queueAndArchiveResults) => {
 							resolve({
 								error: false,
-								email: emailData,
+								email: incomingEmail,
 							});
 						})
 						// if any promise was rejected
@@ -516,7 +550,7 @@ module.exports = {
 								error: true,
 								graphError: false,
 								mongoDBError: queueOrArchiveError,
-								email: emailData,
+								email: incomingEmail,
 							});
 						});
 				})
@@ -534,7 +568,7 @@ module.exports = {
 									graphError: true,
 									graphErrorDetails: graphError,
 									mongoDBError: false,
-									email: emailData,
+									email: incomingEmail,
 								});
 							})
 							// if the promise is rejected with an error
@@ -546,7 +580,7 @@ module.exports = {
 									graphErrorDetails: graphError,
 									mongoDBError: true,
 									mongoDBErrorDetails: addToQueueError,
-									email: emailData,
+									email: incomingEmail,
 								});
 							});
 						// if email came from the queue
@@ -557,7 +591,7 @@ module.exports = {
 							graphError: true,
 							graphErrorDetails: graphError,
 							mongoDBError: false,
-							email: emailData,
+							email: incomingEmail,
 						});
 					}
 				});
