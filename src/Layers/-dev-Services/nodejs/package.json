@@ -4,6 +4,7 @@
 	"dependencies": {
 		"data-connection": "file:../../../Services/-dev-DataConnection",
 		"data-queries": "file:../../../Services/-dev-DataQueries",
+		"email": "file:../../../Services/-dev-Email",
 		"ultipro": "file:../../../Services/-dev-UltiPro",
 		"ms-graph": "file:../../../Services/-dev-MSGraph",
 		"utilities": "file:../../../Services/-dev-Utilities"

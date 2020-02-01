@@ -9,7 +9,7 @@ graphClientSecret: ${ssm:graph-client-secret}
 graphTenantID: ${ssm:graph-tenant-id}
 mongoDbHostUnique: ${ssm:mongodb-host-unique}
 devLayerARNNPM: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevNPM:2
-devLayerARNServices: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:6
+devLayerARNServices: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:7
 mongoDbPass: ${ssm:mongodb-pass}
 mongoDbUser: ${ssm:mongodb-user}
 provider:

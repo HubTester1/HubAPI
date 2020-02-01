@@ -4,6 +4,8 @@
  * @description Handles all email-related requests.
  */
 
+const Email = require('email');
+
 module.exports = {
 
 	/**
@@ -17,7 +19,7 @@ module.exports = {
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// get a promise to send the email
-			module.exports.SendEmail(event.body)
+			Email.SendEmail(event.body)
 				// if the promise is resolved with a result
 				.then((result) => {
 					// resolve this promise with the result and metadata
