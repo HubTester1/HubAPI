@@ -1,19 +1,19 @@
 custom:
-  file: ${file(../../config-common.yaml)}
+  file: ${file(../../../config-common.yaml)}
 # -------------------------------------------------------
   config:
-    service: XXX
-    stage: XXX
+    service: api-email
+    stage: dev
     memorySize: 256
     timeout: 5
 
 functions:
-  XXX:
-    handler: index.XXX
+  HandleSendEmailRequest:
+    handler: index.HandleSendEmailRequest
     events:
       - http:
-          path: XXX/XXX
-          method: XXX
+          path: email/send
+          method: post
           cors: true
 
 # -------------------------------------------------------

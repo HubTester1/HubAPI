@@ -1,5 +1,5 @@
 custom:
-  file: ${file(../../config-common.yaml)}
+  file: ${file(../../../config-common.yaml)}
 # -------------------------------------------------------
   config:
     service: Kittens

@@ -3,6 +3,10 @@
 	"description": "AWS Lambda Layer containing third-party Node.js modules.",
 	"dependencies": {
 		"axios": "^0.19.1",
-		"monk": "^7.1.2"
+		"dotenv": "^8.2.0",
+		"moment": "^2.24.0",
+		"mongodb": "^3.4.1",
+		"monk": "^7.1.2",
+		"qs": "^6.9.1"
 	}
 }

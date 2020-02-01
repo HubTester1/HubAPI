@@ -42,9 +42,6 @@ module.exports = {
 			axios.post(config.uri, config.body, config.options)
 				// if the promise is resolved
 				.then((result) => {
-					// console.log('token');
-					// console.log(result.data.access_token);
-					// console.log(result.status);
 					// if status indicates success
 					if (result.status === 200) {
 						// resolve this promise with the list items
@@ -66,8 +63,6 @@ module.exports = {
 				})
 				// if the promise is rejected with an error, 
 				.catch((error) => {
-					// console.log('token error');
-					// console.log(error);
 					// create a generic error
 					const errorToReport = {
 						error: true,
@@ -99,13 +94,9 @@ module.exports = {
 			)
 				// if the promise is resolved
 				.then((dataResult) => {
-					// console.log('dataResult');
-					// console.log(dataResult.status);
 					// if status indicates success
 					if (dataResult.status === 200) {
 						// resolve this promise with the list items
-						// console.log('dataResult');
-						// console.log(dataResult);
 						resolve({
 							error: false,
 							onePage: dataResult.data.value,
@@ -126,8 +117,6 @@ module.exports = {
 				})
 				// if the promise is rejected with an error
 				.catch((dataError) => {
-					// console.log('dataError');
-					// console.log(dataError);
 					// create a generic error
 					const errorToReport = {
 						error: true,
@@ -146,15 +135,11 @@ module.exports = {
 			module.exports.ReturnGraphAccessToken()
 				// if the promise is resolved with the token
 				.then((accessTokenResult) => {
-					// console.log('accessTokenResult');
-					// console.log(accessTokenResult.accessToken);
 					// if status indicates success
 					const baseConfig = module.exports.ReturnGraphQueryConfig(
 						endpointToken,
 						accessTokenResult.accessToken,
 					);
-					// console.log('config');
-					// console.log(config);
 					let allValues = [];
 					// set up recursive function to get all pages of employees
 					const AttemptToGetOnePageOfDataFromGraph = (attemptConfig = baseConfig) => {
@@ -164,8 +149,6 @@ module.exports = {
 							.then((dataResult) => {
 								// if a page of employees was returned
 								if (dataResult.nextLink) {
-									// console.log('dataResult');
-									// console.log(dataResult.onePage.length);
 									// add the page of employees to allEmployees
 									allValues = [...allValues, ...dataResult.onePage];
 									// make another attempt
@@ -176,8 +159,6 @@ module.exports = {
 								} else {
 									// add the page of employees to allEmployees
 									allValues = [...allValues, ...dataResult.onePage];
-									// console.log('allValues');
-									// console.log(allValues.length);
 									// resolve this promise with all of the employees
 									resolve({
 										error: false,
@@ -193,8 +174,6 @@ module.exports = {
 							})
 							// if the promise is rejected with an error, 
 							.catch((dataError) => {
-								// console.log('dataError');
-								// console.log(dataError);
 								// create a generic error
 								const errorToReport = {
 									error: true,
@@ -210,8 +189,6 @@ module.exports = {
 				})
 				// if the promise is rejected with an error, 
 				.catch((tokenError) => {
-					// console.log('tokenError');
-					// console.log(tokenError);
 					// create a generic error
 					const errorToReport = {
 						error: true,
@@ -275,8 +252,6 @@ module.exports = {
 					axios.post(config.uri, config.body, config.options)
 						// if the promise is resolved
 						.then((sendResult) => {
-							// console.log('sendResult');
-							// console.log(sendResult.status);
 							// if status indicates success
 							if (sendResult.status === 202) {
 								// resolve this promise with the list items
@@ -299,8 +274,6 @@ module.exports = {
 						})
 						// if the promise is rejected with an error
 						.catch((sendError) => {
-							// console.log('sendError');
-							// console.log(sendError);
 							// create a generic error
 							const errorToReport = {
 								error: true,
@@ -313,8 +286,6 @@ module.exports = {
 				})
 				// if the promise is rejected with an error, 
 				.catch((tokenError) => {
-					// console.log('tokenError');
-					// console.log(tokenError);
 					// create a generic error
 					const errorToReport = {
 						error: true,

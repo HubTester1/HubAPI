@@ -45,10 +45,10 @@
 				]
 			}
 		],
-		"jsdoc/check-alignment": 1, // Recommended
+		"jsdoc/check-alignment": 1,
 		"jsdoc/check-examples": 1,
 		"jsdoc/check-indentation": 1,
-		"jsdoc/check-param-names": 1, // Recommended
+		"jsdoc/check-param-names": 1,
 		"jsdoc/check-syntax": 1,
 		"jsdoc/check-tag-names": [1, {
 			"definedTags": [
@@ -57,24 +57,24 @@
 				"api",
 				"cron"
 			]
-		}],// Recommended
-		"jsdoc/check-types": 1, // Recommended
-		"jsdoc/implements-on-classes": 1, // Recommended
+		}],
+		"jsdoc/check-types": 1,
+		"jsdoc/implements-on-classes": 1,
 		"jsdoc/match-description": 1,
-		"jsdoc/newline-after-description": 0, // Recommended
+		"jsdoc/newline-after-description": 0,
 		"jsdoc/no-types": 1,
-		"jsdoc/no-undefined-types": 1, // Recommended
+		"jsdoc/no-undefined-types": 1,
 		"jsdoc/require-description": 1,
 		"jsdoc/require-hyphen-before-param-description": 1,
-		"jsdoc/require-jsdoc": 0, // Recommended
-		"jsdoc/require-param": 0, // Recommended
-		"jsdoc/require-param-description": 1, // Recommended
-		"jsdoc/require-param-name": 1, // Recommended
-		"jsdoc/require-param-type": 1, // Recommended
-		"jsdoc/require-returns": 0, // Recommended
-		"jsdoc/require-returns-check": 0, // Recommended
-		"jsdoc/require-returns-description": 0, // Recommended
-		"jsdoc/require-returns-type": 0, // Recommended
-		"jsdoc/valid-types": 0 // Recommended
+		"jsdoc/require-jsdoc": 0,
+		"jsdoc/require-param": 0,
+		"jsdoc/require-param-description": 1,
+		"jsdoc/require-param-name": 1,
+		"jsdoc/require-param-type": 1,
+		"jsdoc/require-returns": 0,
+		"jsdoc/require-returns-check": 0,
+		"jsdoc/require-returns-description": 0,
+		"jsdoc/require-returns-type": 0,
+		"jsdoc/valid-types": 0
 	}
 }
