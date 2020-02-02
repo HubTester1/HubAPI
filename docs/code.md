@@ -57,11 +57,11 @@
 Each API is essentially a collection of Lambda functions. Each function has access to all layers. 
 			Each function receives three params from the AWS Lambda service.
 			{% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| event | object | | | Contains information from the invoker, Amazon API Gateway. [Get details of the event parameter](/misc/paramEvent.html)|
-| context | object | | | Contains information about the invocation, function, and execution environment. [Get details of the context parameter](/misc/paramContext.html)|
-| callback | function | | | In synchronous functions, call this function to send the response. The callback function takes two arguments: an Error and a response. When you call it, Lambda waits for the event loop to be empty and then returns the response or error to the invoker. The response object must be compatible with JSON.stringify. |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| event | object | | Contains information from the invoker, Amazon API Gateway. [Get details of the event parameter](/misc/paramEvent.html)|
+| context | object | | Contains information about the invocation, function, and execution environment. [Get details of the context parameter](/misc/paramContext.html)|
+| callback | function | | In synchronous functions, call this function to send the response. The callback function takes two arguments: an Error and a response. When you call it, Lambda waits for the event loop to be empty and then returns the response or error to the invoker. The response object must be compatible with JSON.stringify. |
 {% endcollapse %}
 ###Email
 
@@ -72,8 +72,6 @@ Handles all email-related requests.
 ####Functions
 
 #####HandleSendEmailRequest
-*`@async`*
-
 Handle request to send email.
 
 
@@ -88,8 +86,6 @@ Just a sample / testing API
 ####Functions
 
 #####InsertKitten
-*`@async`*
-
 This is the kitten insertion function in the Kitten API.
 
 
@@ -171,9 +167,9 @@ Using DataConnection service, facilitate queries of databases in MongoDB Atlas 
 Return all documents from a collection
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| collection | string | true |  | e.g., '_Kittens'  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| collection | string | true | e.g., '_Kittens'  |
 {% endcollapse %}
 
 &nbsp;
@@ -189,49 +185,49 @@ Performs all email-related operations.
 Add the email to the archive, i.e., the doc to the 'emailArchive' collection.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| incomingEmail | object | true |  | One email <br> *(/src/TypeDefs/Email.js)*  |
-| event | string | true |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'approved admin'  |
-| from | string | true |  | email address string; must correspond to a  user in the MOS O365 tenancy; e.g., 'sp1@mos.org', 'The Hub <sp1@mos.org>'  |
-| html | string | true |  | HTML email body  |
-| subject | string | true |  | e.g., 'This is a subject'  |
-| system | string | true |  | flag, archived, indicating system  generating this email; useful for filtering archive; e.g., 'hub'  |
-| text | string | true |  | plain text (non-HTML) email body  |
-| to |  | Array | true |  | email address string or array email  address strings; e.g., ['sp1@mos.org', 'The Hub <sp1@mos.org>']  |
-| type | string | true |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'notification'  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| incomingEmail | object | true | One email <br> *(/src/TypeDefs/Email.js)*  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.event | string |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'approved admin'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.from | string | true | email address string; must correspond to a  user in the MOS O365 tenancy; e.g., 'sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.html | string |  | HTML email body  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.subject | string | true | e.g., 'This is a subject'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.system | string |  | flag, archived, indicating system  generating this email; useful for filtering archive; e.g., 'hub'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.text | string |  | plain text (non-HTML) email body  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to | string &#124; Array | true | email address string or array email  address strings; e.g., ['sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;']  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type | string |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'notification'  |
 {% endcollapse %}
 #####AddEmailToQueue
 Add the email to the queue, i.e., the doc to the 'emailQueue' collection.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| incomingEmail | object | true |  | {@link Email} object  |
-| event | string | true |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'approved admin'  |
-| from | string | true |  | email address string; must correspond to a  user in the MOS O365 tenancy; e.g., 'sp1@mos.org', 'The Hub <sp1@mos.org>'  |
-| html | string | true |  | HTML email body  |
-| subject | string | true |  | e.g., 'This is a subject'  |
-| system | string | true |  | flag, archived, indicating system  generating this email; useful for filtering archive; e.g., 'hub'  |
-| text | string | true |  | plain text (non-HTML) email body  |
-| to |  | Array | true |  | email address string or array email  address strings; e.g., ['sp1@mos.org', 'The Hub <sp1@mos.org>']  |
-| type | string | true |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'notification'  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| incomingEmail | object | true | {@link Email} object  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.event | string |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'approved admin'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.from | string | true | email address string; must correspond to a  user in the MOS O365 tenancy; e.g., 'sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.html | string |  | HTML email body  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.subject | string | true | e.g., 'This is a subject'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.system | string |  | flag, archived, indicating system  generating this email; useful for filtering archive; e.g., 'hub'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.text | string |  | plain text (non-HTML) email body  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to | string &#124; Array | true | email address string or array email  address strings; e.g., ['sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;']  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type | string |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'notification'  |
 {% endcollapse %}
 #####DeleteArchivedEmail
 Delete one email from the archive, i.e., one doc in the 'emailArchive' collection.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| emailID | string | true |  | ID of email to delete, i.e., of doc to remove  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| emailID | string | true | ID of email to delete, i.e., of doc to remove  |
 {% endcollapse %}
 #####DeleteQueuedEmail
 Delete one email from the queue, i.e., one doc in the 'emailQueue' collection.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| emailID | string | true |  | ID of email to delete, i.e., of doc to remove  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| emailID | string | true | ID of email to delete, i.e., of doc to remove  |
 {% endcollapse %}
 #####ProcessEmailQueue
 For each email in the queue, attempt to send the email (including
@@ -241,52 +237,52 @@ archiving and deleting from queue).
 Replace email settings object in database, i.e., doc in 'emailSettings' queue.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| newSettings | object | true |  | object comprising new email settings  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| newSettings | object | true | object comprising new email settings  |
 {% endcollapse %}
 #####ReplaceArchivedEmail
 Replace one email in the archive, i.e., one doc in the 'emailArchive' collection.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| emailID | string | true |  | ID of email to replace, i.e., of doc to overwrite  |
-| incomingEmail | object | true |  | One email <br> *(/src/TypeDefs/Email.js)*  |
-| event | string | true |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'approved admin'  |
-| from | string | true |  | email address string; must correspond to a  user in the MOS O365 tenancy; e.g., 'sp1@mos.org', 'The Hub <sp1@mos.org>'  |
-| html | string | true |  | HTML email body  |
-| subject | string | true |  | e.g., 'This is a subject'  |
-| system | string | true |  | flag, archived, indicating system  generating this email; useful for filtering archive; e.g., 'hub'  |
-| text | string | true |  | plain text (non-HTML) email body  |
-| to |  | Array | true |  | email address string or array email  address strings; e.g., ['sp1@mos.org', 'The Hub <sp1@mos.org>']  |
-| type | string | true |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'notification'  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| emailID | string | true | ID of email to replace, i.e., of doc to overwrite  |
+| incomingEmail | object | true | One email <br> *(/src/TypeDefs/Email.js)*  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.event | string |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'approved admin'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.from | string | true | email address string; must correspond to a  user in the MOS O365 tenancy; e.g., 'sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.html | string |  | HTML email body  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.subject | string | true | e.g., 'This is a subject'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.system | string |  | flag, archived, indicating system  generating this email; useful for filtering archive; e.g., 'hub'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.text | string |  | plain text (non-HTML) email body  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to | string &#124; Array | true | email address string or array email  address strings; e.g., ['sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;']  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type | string |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'notification'  |
 {% endcollapse %}
 #####ReplaceOneEmailSetting
 Replace one email setting in database, i.e., one property of 
 doc in 'emailSettings' queue.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| newSingleSettingObject | object | true |  | object comprising new email setting property  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| newSingleSettingObject | object | true | object comprising new email setting property  |
 {% endcollapse %}
 #####ReplaceQueuedEmail
 Replace one email in the queue, i.e., one doc in the 'emailQueue' collection.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| emailID | string | true |  | ID of email to replace, i.e., of doc to overwrite  |
-| incomingEmail | object | true |  | One email <br> *(/src/TypeDefs/Email.js)*  |
-| event | string | true |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'approved admin'  |
-| from | string | true |  | email address string; must correspond to a  user in the MOS O365 tenancy; e.g., 'sp1@mos.org', 'The Hub <sp1@mos.org>'  |
-| html | string | true |  | HTML email body  |
-| subject | string | true |  | e.g., 'This is a subject'  |
-| system | string | true |  | flag, archived, indicating system  generating this email; useful for filtering archive; e.g., 'hub'  |
-| text | string | true |  | plain text (non-HTML) email body  |
-| to |  | Array | true |  | email address string or array email  address strings; e.g., ['sp1@mos.org', 'The Hub <sp1@mos.org>']  |
-| type | string | true |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'notification'  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| emailID | string | true | ID of email to replace, i.e., of doc to overwrite  |
+| incomingEmail | object | true | One email <br> *(/src/TypeDefs/Email.js)*  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.event | string |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'approved admin'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.from | string | true | email address string; must correspond to a  user in the MOS O365 tenancy; e.g., 'sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.html | string |  | HTML email body  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.subject | string | true | e.g., 'This is a subject'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.system | string |  | flag, archived, indicating system  generating this email; useful for filtering archive; e.g., 'hub'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.text | string |  | plain text (non-HTML) email body  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to | string &#124; Array | true | email address string or array email  address strings; e.g., ['sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;']  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type | string |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'notification'  |
 {% endcollapse %}
 #####ReturnEmailArchiveData
 Return all emails from the email archive 
@@ -317,9 +313,9 @@ Add a domain to this setting in database to all requests from an additional doma
 For each email in an array, attempt to send the email.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| emailArray | Array.<object> | true |  | array of objects, each comprising data for one email  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| emailArray | Array.<object> | true | array of objects, each comprising data for one email  |
 {% endcollapse %}
 #####SendEmail
 Send one email to MSGraph service. If Graph is 
@@ -328,17 +324,17 @@ as appropriate). If Graph is not successful in sending, add email to
 queue.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| incomingEmail | object | true |  | One email <br> *(/src/TypeDefs/Email.js)*  |
-| event | string | true |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'approved admin'  |
-| from | string | true |  | email address string; must correspond to a  user in the MOS O365 tenancy; e.g., 'sp1@mos.org', 'The Hub <sp1@mos.org>'  |
-| html | string | true |  | HTML email body  |
-| subject | string | true |  | e.g., 'This is a subject'  |
-| system | string | true |  | flag, archived, indicating system  generating this email; useful for filtering archive; e.g., 'hub'  |
-| text | string | true |  | plain text (non-HTML) email body  |
-| to |  | Array | true |  | email address string or array email  address strings; e.g., ['sp1@mos.org', 'The Hub <sp1@mos.org>']  |
-| type | string | true |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'notification'  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| incomingEmail | object | true | One email <br> *(/src/TypeDefs/Email.js)*  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.event | string |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'approved admin'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.from | string | true | email address string; must correspond to a  user in the MOS O365 tenancy; e.g., 'sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.html | string |  | HTML email body  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.subject | string | true | e.g., 'This is a subject'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.system | string |  | flag, archived, indicating system  generating this email; useful for filtering archive; e.g., 'hub'  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.text | string |  | plain text (non-HTML) email body  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to | string &#124; Array | true | email address string or array email  address strings; e.g., ['sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;']  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.type | string |  | flag, archived, indicating type of  email; useful for filtering archive; e.g., 'notification'  |
 {% endcollapse %}
 
 &nbsp;
@@ -369,20 +365,20 @@ Return one page of employees from the UltiPro EmployeeChanges API.
 This is the one point of actual contact with the UltiPro EmployeeChanges API.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| upApiKey | undefined | true |  | Environment variable, stored in AWS Systems Manager, Parameter store  |
-| upEmployeeChangesPass | undefined | true |  | Environment variable, stored in AWS Systems Manager, Parameter store  |
-| upEmployeeChangesUser | undefined | true |  | Environment variable, stored in AWS Systems Manager, Parameter store  |
-| page | undefined | true |  | Which page to return  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| upApiKey | undefined | true | Environment variable, stored in AWS Systems Manager, Parameter store  |
+| upEmployeeChangesPass | undefined | true | Environment variable, stored in AWS Systems Manager, Parameter store  |
+| upEmployeeChangesUser | undefined | true | Environment variable, stored in AWS Systems Manager, Parameter store  |
+| page | undefined | true | Which page to return  |
 {% endcollapse %}
 #####ReturnUltiProEmployeeChangesQueryConfig
 Return URI and options for get query to UltiPro EmployeeChanges API
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| page | undefined | true |  | Which page to return  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| page | undefined | true | Which page to return  |
 {% endcollapse %}
 
 &nbsp;
@@ -398,37 +394,37 @@ Miscellaneous utility functions
 Return substring preceding '\r' and/or '\n' characters.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| needle | string | true |  | string to search for  |
-| replacementNeedle | string | true |  | string to replace needle  |
-| haystack | string | true |  | string to search in  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| needle | string | true | string to search for  |
+| replacementNeedle | string | true | string to replace needle  |
+| haystack | string | true | string to search in  |
 {% endcollapse %}
 #####ReturnAccountFromUserAndDomain
 Return substring preceding '@' character.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| incomingString | string | true |  | e.g., 'sp1@mos.org'  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| incomingString | string | true | e.g., 'sp1@mos.org'  |
 {% endcollapse %}
 #####ReturnArrayElementExists
 Return true if element is in array, false if not.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| testArray | string | true |  | array to test  |
-| testElement | string | true |  | element for which to test  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| testArray | string | true | array to test  |
+| testElement | string | true | element for which to test  |
 {% endcollapse %}
 #####ReturnCopyOfObject
 Return a deep / unique copy of an object 
 (as opposed to a reference to the original object).
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| incomingObject | string | true |  | e.g., any valid object  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| incomingObject | string | true | e.g., any valid object  |
 {% endcollapse %}
 #####ReturnFormattedDateTime
 Use moment.js to calculate and format times. 
@@ -436,29 +432,29 @@ Present for backward compatibility; should use moment
 directly going forward.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| incomingDateTimeString | string | true |  | predefined token or  moment-parsable representation of datetime;  e.g., 'nowLocal', 'nowUTC', 'April 19, 2020'  |
-| incomingFormat |  | null | true |  | null or moment-compatible  indication of format of incomingDateTimeString;  e.g., null, 'YYYY-MM-DDTHH:mm:ssZ'  |
-| incomingReturnFormat |  | null | true |  | null or moment-compatible  indication of format of datetime string to return;  e.g., null, 'YYYY-MM-DDTHH:mm:ssZ'  |
-| determineYearDisplayDynamically |  | null | true |  | if 1,  the datetime's year will only be included if it is not the current year;  e.g., null, 0, 1  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| incomingDateTimeString | string | true | predefined token or  moment-parsable representation of datetime;  e.g., 'nowLocal', 'nowUTC', 'April 19, 2020'  |
+| incomingFormat | string &#124; null | true | null or moment-compatible  indication of format of incomingDateTimeString;  e.g., null, 'YYYY-MM-DDTHH:mm:ssZ'  |
+| incomingReturnFormat | string &#124; null | true | null or moment-compatible  indication of format of datetime string to return;  e.g., null, 'YYYY-MM-DDTHH:mm:ssZ'  |
+| determineYearDisplayDynamically | number &#124; null | true | if 1,  the datetime's year will only be included if it is not the current year;  e.g., null, 0, 1  |
 {% endcollapse %}
 #####ReturnSubstringPrecedingNewLineCharacters
 Return substring preceding '\r' and/or '\n' characters.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| incomingString | string | true |  | e.g., 'Web & Mobile Application Developer\r\n'  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| incomingString | string | true | e.g., 'Web & Mobile Application Developer\r\n'  |
 {% endcollapse %}
 #####ReturnTerseEmailAddressFromFriendly
 Return the actual address portion from a friendly-formatted
 address. E.g., return 'noreply@mos.org'.
 
 {% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| incomingString | string | true |  | e.g., 'The Hub <noreply@mos.org>'  |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| incomingString | string | true | e.g., 'The Hub <noreply@mos.org>'  |
 {% endcollapse %}
 
 &nbsp;

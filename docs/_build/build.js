@@ -37,11 +37,11 @@ const config = {
 		APIs: `Each API is essentially a collection of Lambda functions. Each function has access to all layers. 
 			Each function receives three params from the AWS Lambda service.
 			{% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
-| event | object | | | Contains information from the invoker, Amazon API Gateway. [Get details of the event parameter](/misc/paramEvent.html)|
-| context | object | | | Contains information about the invocation, function, and execution environment. [Get details of the context parameter](/misc/paramContext.html)|
-| callback | function | | | In synchronous functions, call this function to send the response. The callback function takes two arguments: an Error and a response. When you call it, Lambda waits for the event loop to be empty and then returns the response or error to the invoker. The response object must be compatible with JSON.stringify. |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
+| event | object | | Contains information from the invoker, Amazon API Gateway. [Get details of the event parameter](/misc/paramEvent.html)|
+| context | object | | Contains information about the invocation, function, and execution environment. [Get details of the context parameter](/misc/paramContext.html)|
+| callback | function | | In synchronous functions, call this function to send the response. The callback function takes two arguments: an Error and a response. When you call it, Lambda waits for the event loop to be empty and then returns the response or error to the invoker. The response object must be compatible with JSON.stringify. |
 {% endcollapse %}`,
 		Layers: 'AWS Lambda Layers contain modules (i.e., code), either MOS or contributed, that is external to but relied upon and accessed by Lambda functions (i.e., dependencies).',
 		Services: 'Services are MOS modules that are used in an AWS Lambda Layer. [Learn more about Layers](#layers)',
@@ -61,11 +61,17 @@ const ReturnOneParameterFormattedData = (paramRaw) => {
 	const paramToReturn = {
 		name: paramRaw.name,
 		description: paramRaw.description,
-		// parent: itemRawValue.name.trim(),
 	};
+	// console.log('');
+	// console.log('paramRaw');
+	// console.log(paramRaw);
+	// console.log('!paramRaw.optional || paramRaw.optional !== true');
+	// console.log(!paramRaw.optional || paramRaw.optional !== true);
 	if (!paramRaw.optional || paramRaw.optional !== true) {
 		paramToReturn.required = true;
 	}
+	// console.log('paramToReturn');
+	// console.log(paramToReturn);
 	if (
 		paramRaw.type &&
 		paramRaw.type.names
@@ -75,7 +81,7 @@ const ReturnOneParameterFormattedData = (paramRaw) => {
 			if (typeNameIndex === 0) {
 				typeIndication += typeNameValue;
 			} else {
-				typeIndication += ` | ${typeNameValue}`;
+				typeIndication += ` &#124; ${typeNameValue}`;
 			}
 		});
 		if (typeIndication) {
@@ -105,10 +111,19 @@ const ReturnFunctionsForThisServiceOrAPI = (allItemsRawArray, parentPath, projec
 						name: propertyRaw.name,
 						type: propertyRaw.type,
 						description: propertyRaw.description,
+						optional: propertyRaw.optional,
 					};
-					if (!propertyRaw.optional || propertyRaw.optional !== true) {
-						propertyToPush.required = true;
-					}
+					// console.log('');
+					// console.log('');
+					// console.log('propertyRaw');
+					// console.log(propertyRaw);
+					// console.log('!propertyRaw.optional || propertyRaw.optional !== true');
+					// console.log(!propertyRaw.optional || propertyRaw.optional !== true);
+					// if (!propertyRaw.optional || propertyRaw.optional !== true) {
+					// 	propertyToPush.required = true;
+					// }
+					// console.log('propertyToPush');
+					// console.log(propertyToPush);
 					thisTypeDefObject.properties.push(propertyToPush);
 				});
 			}
@@ -128,9 +143,6 @@ const ReturnFunctionsForThisServiceOrAPI = (allItemsRawArray, parentPath, projec
 					name: itemRawValue.name.trim(),
 					description: itemRawValue.description,
 				};
-				if (itemRawValue.async) {
-					functionToPush.async = true;
-				}
 				const params = [];
 				if (itemRawValue.params && itemRawValue.params[0]) {
 					itemRawValue.params.forEach((paramRaw) => {
@@ -150,14 +162,22 @@ const ReturnFunctionsForThisServiceOrAPI = (allItemsRawArray, parentPath, projec
 									}
 									paramRawCopy.type = typeDefs[paramTypeName].type;
 									typeDefs[paramTypeName].properties.forEach((property) => {
-										thisParamProperties.push(property);
+										const propertyCopy = ReturnCopyOfObject(property);
+										propertyCopy.name = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.${property.name}`;
+										thisParamProperties.push(propertyCopy);
 									});
 								}
 							});
 						}
 						params.push(ReturnOneParameterFormattedData(paramRawCopy));
 						thisParamProperties.forEach((property) => {
-							params.push(ReturnOneParameterFormattedData(property));
+							// console.log('');
+							// console.log('property');
+							// console.log(property);
+							const propertyFormatted = ReturnOneParameterFormattedData(property);
+							// console.log('propertyFormatted');
+							// console.log(propertyFormatted);
+							params.push(propertyFormatted);
 						});
 					});
 				}
@@ -195,7 +215,12 @@ const ReturnAllServices = (allItemsRawArray, projectRoot) => {
 							projectRoot,
 						),
 					};
-					
+					// objectToPush.functions.forEach((thisFunction) => {
+					// 	console.log('');
+					// 	console.log('');
+					// 	console.log('thisFunction.params');
+					// 	console.log(thisFunction.params);
+					// });
 					
 					allServices.push(objectToPush);
 				}
@@ -304,7 +329,6 @@ const ReturnAllLayers = (allItemsRawArray, projectRoot) => {
 	});
 	return allLayers;
 };
-
 const ReturnLayersSections = (allItemsRawArray, projectRoot, preambles) => {
 	const buildObject = {};
 	const allLayers = ReturnAllLayers(allItemsRawArray, projectRoot);
@@ -329,6 +353,9 @@ const ReturnServicesSections = (allItemsRawArray, projectRoot, preambles) => {
 	const buildObject = {};
 	const allServices = ReturnAllServices(allItemsRawArray, projectRoot);
 	allServices.forEach((service) => {
+		// service.functions.forEach((thisFunction) => {
+		// 	console.log(thisFunction.params);
+		// });
 		const serviceCopy = ReturnCopyOfObject(service);
 
 		if (!buildObject[serviceCopy.category]) {
@@ -433,18 +460,18 @@ const ReturnMarkedDownTodos = (todos) => {
 const ReturnMarkedDownService = ({
 	name,
 	description,
-	async,
+	// async,
 	path,
 	functions,
 }) => {
 	let buildString = `###${name}
 
 `;
-	if (async) {
-		buildString += `*\`@async\`*
+	// 	if (async) {
+	// 		buildString += `*\`@async\`*
 
-`;
-	}
+	// `;
+	// }
 	const descriptionParts = description.split('\n\n');
 	descriptionParts.forEach((descriptionPart) => {
 		buildString += `${descriptionPart}
@@ -468,15 +495,15 @@ const ReturnMarkedDownService = ({
 			});
 			if (functionValue.params) {
 				buildString += `{% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
 `;
 				functionValue.params.forEach((param) => {
 					const typeToken = param.type !== 'bool' ?
 						param.type :
 						'boolean';
 					const requiredToken = param.required ? 'true' : '';
-					const asyncToken = param.async ? 'true' : '';
+					// const asyncToken = param.async ? 'true' : '';
 					let paramDescriptionString = '';
 					let paramDescriptionParts = [];
 					if (param.description) {
@@ -486,7 +513,7 @@ const ReturnMarkedDownService = ({
 						paramDescriptionString += `${paramDescriptionPart} `;
 					});
 
-					buildString += `| ${param.name} | ${typeToken} | ${requiredToken} | ${asyncToken} | ${paramDescriptionString} |
+					buildString += `| ${param.name} | ${typeToken} | ${requiredToken} | ${paramDescriptionString} |
 `;
 				});
 				buildString += `{% endcollapse %}
@@ -547,22 +574,22 @@ const ReturnMarkedDownAPI = ({
 		});
 		if (functionValue.params) {
 			buildString += `{% collapse title="> Params"%}
-| *@param* | type | required | async | description |
-| --- |: --- :|: --- :|: --- :| --- |
+| *@param* | type | required | description |
+| --- |: --- :|: --- :| --- |
 `;
 			functionValue.params.forEach((param) => {
 				const typeToken = param.type !== 'bool' ?
 					param.type :
 					'boolean';
 				const requiredToken = param.required ? 'true' : '';
-				const asyncToken = param.async ? 'true' : '';
+				// const asyncToken = param.async ? 'true' : '';
 				let paramDescriptionString = '';
 				const paramDescriptionParts = param.description.split('\n');
 				paramDescriptionParts.forEach((paramDescriptionPart) => {
 					paramDescriptionString += `${paramDescriptionPart} `;
 				});
 
-				buildString += `| ${param.name} | ${typeToken} | ${requiredToken} | ${asyncToken} | ${paramDescriptionString} |
+				buildString += `| ${param.name} | ${typeToken} | ${requiredToken} | ${paramDescriptionString} |
 `;
 			});
 			buildString += `{% endcollapse %}

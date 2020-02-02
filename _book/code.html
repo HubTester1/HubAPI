@@ -396,7 +396,6 @@
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -405,20 +404,17 @@
 <td>event</td>
 <td>object</td>
 <td></td>
-<td></td>
 <td>Contains information from the invoker, Amazon API Gateway. <a href="misc/paramEvent.html">Get details of the event parameter</a></td>
 </tr>
 <tr>
 <td>context</td>
 <td>object</td>
 <td></td>
-<td></td>
 <td>Contains information about the invocation, function, and execution environment. <a href="misc/paramContext.html">Get details of the context parameter</a></td>
 </tr>
 <tr>
 <td>callback</td>
 <td>function</td>
-<td></td>
 <td></td>
 <td>In synchronous functions, call this function to send the response. The callback function takes two arguments: an Error and a response. When you call it, Lambda waits for the event loop to be empty and then returns the response or error to the invoker. The response object must be compatible with JSON.stringify.</td>
 </tr>
@@ -432,7 +428,6 @@
 </blockquote>
 <h4 id="functions">Functions</h4>
 <h5 id="handlesendemailrequest">HandleSendEmailRequest</h5>
-<p><em><code>@async</code></em></p>
 <p>Handle request to send email.</p>
 <p>&#xA0;</p>
 <h3 id="kitten">Kitten</h3>
@@ -442,7 +437,6 @@
 </blockquote>
 <h4 id="functions">Functions</h4>
 <h5 id="insertkitten">InsertKitten</h5>
-<p><em><code>@async</code></em></p>
 <p>This is the kitten insertion function in the Kitten API.</p>
 <p>&#xA0;</p>
 <p>&#xA0;</p>
@@ -501,7 +495,6 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -510,7 +503,6 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 <td>collection</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>e.g., &apos;_Kittens&apos;</td>
 </tr>
 </tbody>
@@ -531,7 +523,6 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -540,63 +531,53 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 <td>incomingEmail</td>
 <td>object</td>
 <td>true</td>
-<td></td>
 <td>One email <br> <em>(/src/TypeDefs/Email.js)</em></td>
 </tr>
 <tr>
-<td>event</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.event</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;approved admin&apos;</td>
 </tr>
 <tr>
-<td>from</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.from</td>
 <td>string</td>
 <td>true</td>
-<td></td>
-<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;</td>
+<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;Hub Tester1 &lt;sp1@mos.org&gt;&apos;</td>
 </tr>
 <tr>
-<td>html</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.html</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>HTML email body</td>
 </tr>
 <tr>
-<td>subject</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.subject</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>e.g., &apos;This is a subject&apos;</td>
 </tr>
 <tr>
-<td>system</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.system</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating system  generating this email; useful for filtering archive; e.g., &apos;hub&apos;</td>
 </tr>
 <tr>
-<td>text</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.text</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>plain text (non-HTML) email body</td>
 </tr>
 <tr>
-<td>to</td>
-<td></td>
-<td>Array</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.to</td>
+<td>string | Array</td>
 <td>true</td>
-<td></td>
-<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;]</td>
+<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;Hub Tester1 &lt;sp1@mos.org&gt;&apos;]</td>
 </tr>
 <tr>
-<td>type</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.type</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;notification&apos;</td>
 </tr>
@@ -611,7 +592,6 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -620,63 +600,53 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 <td>incomingEmail</td>
 <td>object</td>
 <td>true</td>
-<td></td>
 <td>{@link Email} object</td>
 </tr>
 <tr>
-<td>event</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.event</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;approved admin&apos;</td>
 </tr>
 <tr>
-<td>from</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.from</td>
 <td>string</td>
 <td>true</td>
-<td></td>
-<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;</td>
+<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;Hub Tester1 &lt;sp1@mos.org&gt;&apos;</td>
 </tr>
 <tr>
-<td>html</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.html</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>HTML email body</td>
 </tr>
 <tr>
-<td>subject</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.subject</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>e.g., &apos;This is a subject&apos;</td>
 </tr>
 <tr>
-<td>system</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.system</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating system  generating this email; useful for filtering archive; e.g., &apos;hub&apos;</td>
 </tr>
 <tr>
-<td>text</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.text</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>plain text (non-HTML) email body</td>
 </tr>
 <tr>
-<td>to</td>
-<td></td>
-<td>Array</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.to</td>
+<td>string | Array</td>
 <td>true</td>
-<td></td>
-<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;]</td>
+<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;Hub Tester1 &lt;sp1@mos.org&gt;&apos;]</td>
 </tr>
 <tr>
-<td>type</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.type</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;notification&apos;</td>
 </tr>
@@ -691,7 +661,6 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -700,7 +669,6 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 <td>emailID</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>ID of email to delete, i.e., of doc to remove</td>
 </tr>
 </tbody>
@@ -714,7 +682,6 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -723,7 +690,6 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 <td>emailID</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>ID of email to delete, i.e., of doc to remove</td>
 </tr>
 </tbody>
@@ -740,7 +706,6 @@ archiving and deleting from queue).</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -749,7 +714,6 @@ archiving and deleting from queue).</p>
 <td>newSettings</td>
 <td>object</td>
 <td>true</td>
-<td></td>
 <td>object comprising new email settings</td>
 </tr>
 </tbody>
@@ -763,7 +727,6 @@ archiving and deleting from queue).</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -772,70 +735,59 @@ archiving and deleting from queue).</p>
 <td>emailID</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>ID of email to replace, i.e., of doc to overwrite</td>
 </tr>
 <tr>
 <td>incomingEmail</td>
 <td>object</td>
 <td>true</td>
-<td></td>
 <td>One email <br> <em>(/src/TypeDefs/Email.js)</em></td>
 </tr>
 <tr>
-<td>event</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.event</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;approved admin&apos;</td>
 </tr>
 <tr>
-<td>from</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.from</td>
 <td>string</td>
 <td>true</td>
-<td></td>
-<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;</td>
+<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;Hub Tester1 &lt;sp1@mos.org&gt;&apos;</td>
 </tr>
 <tr>
-<td>html</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.html</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>HTML email body</td>
 </tr>
 <tr>
-<td>subject</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.subject</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>e.g., &apos;This is a subject&apos;</td>
 </tr>
 <tr>
-<td>system</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.system</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating system  generating this email; useful for filtering archive; e.g., &apos;hub&apos;</td>
 </tr>
 <tr>
-<td>text</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.text</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>plain text (non-HTML) email body</td>
 </tr>
 <tr>
-<td>to</td>
-<td></td>
-<td>Array</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.to</td>
+<td>string | Array</td>
 <td>true</td>
-<td></td>
-<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;]</td>
+<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;Hub Tester1 &lt;sp1@mos.org&gt;&apos;]</td>
 </tr>
 <tr>
-<td>type</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.type</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;notification&apos;</td>
 </tr>
@@ -851,7 +803,6 @@ doc in &apos;emailSettings&apos; queue.</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -860,7 +811,6 @@ doc in &apos;emailSettings&apos; queue.</p>
 <td>newSingleSettingObject</td>
 <td>object</td>
 <td>true</td>
-<td></td>
 <td>object comprising new email setting property</td>
 </tr>
 </tbody>
@@ -874,7 +824,6 @@ doc in &apos;emailSettings&apos; queue.</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -883,70 +832,59 @@ doc in &apos;emailSettings&apos; queue.</p>
 <td>emailID</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>ID of email to replace, i.e., of doc to overwrite</td>
 </tr>
 <tr>
 <td>incomingEmail</td>
 <td>object</td>
 <td>true</td>
-<td></td>
 <td>One email <br> <em>(/src/TypeDefs/Email.js)</em></td>
 </tr>
 <tr>
-<td>event</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.event</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;approved admin&apos;</td>
 </tr>
 <tr>
-<td>from</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.from</td>
 <td>string</td>
 <td>true</td>
-<td></td>
-<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;</td>
+<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;Hub Tester1 &lt;sp1@mos.org&gt;&apos;</td>
 </tr>
 <tr>
-<td>html</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.html</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>HTML email body</td>
 </tr>
 <tr>
-<td>subject</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.subject</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>e.g., &apos;This is a subject&apos;</td>
 </tr>
 <tr>
-<td>system</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.system</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating system  generating this email; useful for filtering archive; e.g., &apos;hub&apos;</td>
 </tr>
 <tr>
-<td>text</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.text</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>plain text (non-HTML) email body</td>
 </tr>
 <tr>
-<td>to</td>
-<td></td>
-<td>Array</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.to</td>
+<td>string | Array</td>
 <td>true</td>
-<td></td>
-<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;]</td>
+<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;Hub Tester1 &lt;sp1@mos.org&gt;&apos;]</td>
 </tr>
 <tr>
-<td>type</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.type</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;notification&apos;</td>
 </tr>
@@ -980,7 +918,6 @@ Add a domain to this setting in database to all requests from an additional doma
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -989,7 +926,6 @@ Add a domain to this setting in database to all requests from an additional doma
 <td>emailArray</td>
 <td>Array.<object></object></td>
 <td>true</td>
-<td></td>
 <td>array of objects, each comprising data for one email</td>
 </tr>
 </tbody>
@@ -1006,7 +942,6 @@ queue.</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -1015,63 +950,53 @@ queue.</p>
 <td>incomingEmail</td>
 <td>object</td>
 <td>true</td>
-<td></td>
 <td>One email <br> <em>(/src/TypeDefs/Email.js)</em></td>
 </tr>
 <tr>
-<td>event</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.event</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;approved admin&apos;</td>
 </tr>
 <tr>
-<td>from</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.from</td>
 <td>string</td>
 <td>true</td>
-<td></td>
-<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;</td>
+<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;Hub Tester1 &lt;sp1@mos.org&gt;&apos;</td>
 </tr>
 <tr>
-<td>html</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.html</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>HTML email body</td>
 </tr>
 <tr>
-<td>subject</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.subject</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>e.g., &apos;This is a subject&apos;</td>
 </tr>
 <tr>
-<td>system</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.system</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating system  generating this email; useful for filtering archive; e.g., &apos;hub&apos;</td>
 </tr>
 <tr>
-<td>text</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.text</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>plain text (non-HTML) email body</td>
 </tr>
 <tr>
-<td>to</td>
-<td></td>
-<td>Array</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.to</td>
+<td>string | Array</td>
 <td>true</td>
-<td></td>
-<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;]</td>
+<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;Hub Tester1 &lt;sp1@mos.org&gt;&apos;]</td>
 </tr>
 <tr>
-<td>type</td>
+<td>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;.type</td>
 <td>string</td>
-<td>true</td>
 <td></td>
 <td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;notification&apos;</td>
 </tr>
@@ -1104,7 +1029,6 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -1113,28 +1037,24 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <td>upApiKey</td>
 <td>undefined</td>
 <td>true</td>
-<td></td>
 <td>Environment variable, stored in AWS Systems Manager, Parameter store</td>
 </tr>
 <tr>
 <td>upEmployeeChangesPass</td>
 <td>undefined</td>
 <td>true</td>
-<td></td>
 <td>Environment variable, stored in AWS Systems Manager, Parameter store</td>
 </tr>
 <tr>
 <td>upEmployeeChangesUser</td>
 <td>undefined</td>
 <td>true</td>
-<td></td>
 <td>Environment variable, stored in AWS Systems Manager, Parameter store</td>
 </tr>
 <tr>
 <td>page</td>
 <td>undefined</td>
 <td>true</td>
-<td></td>
 <td>Which page to return</td>
 </tr>
 </tbody>
@@ -1148,7 +1068,6 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -1157,7 +1076,6 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <td>page</td>
 <td>undefined</td>
 <td>true</td>
-<td></td>
 <td>Which page to return</td>
 </tr>
 </tbody>
@@ -1178,7 +1096,6 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -1187,21 +1104,18 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <td>needle</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>string to search for</td>
 </tr>
 <tr>
 <td>replacementNeedle</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>string to replace needle</td>
 </tr>
 <tr>
 <td>haystack</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>string to search in</td>
 </tr>
 </tbody>
@@ -1215,7 +1129,6 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -1224,7 +1137,6 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <td>incomingString</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>e.g., &apos;sp1@mos.org&apos;</td>
 </tr>
 </tbody>
@@ -1238,7 +1150,6 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -1247,14 +1158,12 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <td>testArray</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>array to test</td>
 </tr>
 <tr>
 <td>testElement</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>element for which to test</td>
 </tr>
 </tbody>
@@ -1269,7 +1178,6 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -1278,7 +1186,6 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <td>incomingObject</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>e.g., any valid object</td>
 </tr>
 </tbody>
@@ -1294,7 +1201,6 @@ directly going forward.</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -1303,31 +1209,24 @@ directly going forward.</p>
 <td>incomingDateTimeString</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>predefined token or  moment-parsable representation of datetime;  e.g., &apos;nowLocal&apos;, &apos;nowUTC&apos;, &apos;April 19, 2020&apos;</td>
 </tr>
 <tr>
 <td>incomingFormat</td>
-<td></td>
-<td>null</td>
+<td>string | null</td>
 <td>true</td>
-<td></td>
 <td>null or moment-compatible  indication of format of incomingDateTimeString;  e.g., null, &apos;YYYY-MM-DDTHH:mm:ssZ&apos;</td>
 </tr>
 <tr>
 <td>incomingReturnFormat</td>
-<td></td>
-<td>null</td>
+<td>string | null</td>
 <td>true</td>
-<td></td>
 <td>null or moment-compatible  indication of format of datetime string to return;  e.g., null, &apos;YYYY-MM-DDTHH:mm:ssZ&apos;</td>
 </tr>
 <tr>
 <td>determineYearDisplayDynamically</td>
-<td></td>
-<td>null</td>
+<td>number | null</td>
 <td>true</td>
-<td></td>
 <td>if 1,  the datetime&apos;s year will only be included if it is not the current year;  e.g., null, 0, 1</td>
 </tr>
 </tbody>
@@ -1341,7 +1240,6 @@ directly going forward.</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -1350,7 +1248,6 @@ directly going forward.</p>
 <td>incomingString</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>e.g., &apos;Web &amp; Mobile Application Developer\r\n&apos;</td>
 </tr>
 </tbody>
@@ -1365,7 +1262,6 @@ address. E.g., return &apos;noreply@mos.org&apos;.</p>
 <th><em>@param</em></th>
 <th>type</th>
 <th>required</th>
-<th>async</th>
 <th>description</th>
 </tr>
 </thead>
@@ -1374,7 +1270,6 @@ address. E.g., return &apos;noreply@mos.org&apos;.</p>
 <td>incomingString</td>
 <td>string</td>
 <td>true</td>
-<td></td>
 <td>e.g., &apos;The Hub <a href="mailto:noreply@mos.org" target="_blank">noreply@mos.org</a>&apos;</td>
 </tr>
 </tbody>
@@ -1432,7 +1327,7 @@ address. E.g., return &apos;noreply@mos.org&apos;.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Code Reference","level":"5.2","depth":1,"next":{"title":"Lambda Event Parameter","level":"6.1","depth":1,"path":"misc/paramEvent.md","ref":"misc/paramEvent.md","articles":[]},"previous":{"title":"Style Guide","level":"5.1","depth":1,"path":"style.md","ref":"style.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapse","livereload"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapse":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"toc.md"},"variables":{},"title":"Hub API","gitbook":"*"},"file":{"path":"code.md","mtime":"2020-02-02T00:35:55.017Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-02T00:39:06.303Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Code Reference","level":"5.2","depth":1,"next":{"title":"Lambda Event Parameter","level":"6.1","depth":1,"path":"misc/paramEvent.md","ref":"misc/paramEvent.md","articles":[]},"previous":{"title":"Style Guide","level":"5.1","depth":1,"path":"style.md","ref":"style.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapse","livereload"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapse":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"toc.md"},"variables":{},"title":"Hub API","gitbook":"*"},"file":{"path":"code.md","mtime":"2020-02-02T01:42:33.409Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-02T00:39:06.303Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

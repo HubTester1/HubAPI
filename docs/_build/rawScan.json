@@ -1,4 +1,1667 @@
-{
-	"error": true,
-	"stack": "Error: ERROR: Unable to parse a tag's type expression for source file /home/skip/Software/HubAPI/src/TypeDefs/Email.js in line 1 with tag title \"property\" and text \"{(string|Array} to - email address string or array email \naddress strings; e.g., ['sp1@mos.org', 'The Hub <sp1@mos.org>']\": Invalid type expression \"(string|Array\": Expected \"#\", \"$\", \"(\", \")\", \"-\", \".\", \"/\", \"0\", \":\", \"<\", \"=\", \"@\", \"[]\", \"\\\\\", \"_\", \"|\", \"~\", \"‌\", \"‍\", Unicode combining mark, Unicode decimal number, Unicode letter number, Unicode lowercase letter, Unicode modifier letter, Unicode other letter, Unicode punctuation connector, Unicode titlecase letter, Unicode uppercase letter, or [1-9] but end of input found.\n\n    at ChildProcess.<anonymous> (/home/skip/Software/HubAPI/node_modules/jsdoc-x/src/lib/helper.js:141:54)\n    at ChildProcess.emit (events.js:219:5)\n    at maybeClose (internal/child_process.js:1027:16)\n    at Process.ChildProcess._handle.onexit (internal/child_process.js:285:5)"
-}
+[
+	{
+		"comment": "/**\n * @name Agenda\n * @module\n * @category Agenda\n * @description Literally, a todo list\n * \n * \n * @todo Unwhitelist 0.0.0.0/0\n * @todo review 12 factors\n * @todo Develop the basic services\n * \n * \n * @todo BIG PIC - People Data\n * @todo BIG PIC - Send email through Graph\n * @todo BIG PIC - Pull data from SPO\n * @todo BIG PIC - Serve client from AWS through SPO\n */",
+		"meta": {
+			"filename": "agenda.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/meta",
+			"code": {
+				
+			}
+		},
+		"name": "Agenda",
+		"kind": "module",
+		"tags": [
+			{
+				"originalTitle": "category",
+				"title": "category",
+				"text": "Agenda",
+				"value": "Agenda"
+			}
+		],
+		"description": "Literally, a todo list",
+		"todo": [
+			"Unwhitelist 0.0.0.0/0",
+			"review 12 factors",
+			"Develop the basic services",
+			"BIG PIC - People Data",
+			"BIG PIC - Send email through Graph",
+			"BIG PIC - Pull data from SPO",
+			"BIG PIC - Serve client from AWS through SPO"
+		],
+		"longname": "module:Agenda",
+		"$longname": "Agenda",
+		"$kind": "module"
+	},
+	{
+		"comment": "/**\n * @name AddAllUltiProActiveEmployeesToDatabase\n * @function\n * @async\n * @description Get all active employees via UltiPro service. \n * Insert into peopleUltiProRaw collection.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 74,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/meta/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "AddAllUltiProActiveEmployeesToDatabase",
+		"kind": "function",
+		"async": true,
+		"description": "Get all active employees via UltiPro service. \nInsert into peopleUltiProRaw collection.",
+		"longname": "AddAllUltiProActiveEmployeesToDatabase",
+		"scope": "global",
+		"$longname": "AddAllUltiProActiveEmployeesToDatabase",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name AddAllUltiProActiveEmployeesToDatabase\n * @function\n * @async\n * @description Get all active employees via UltiPro service. \n * Insert into 'peopleRawUltiProActiveEmployees' collection.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 116,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "AddAllUltiProActiveEmployeesToDatabase",
+		"kind": "function",
+		"async": true,
+		"description": "Get all active employees via UltiPro service. \nInsert into 'peopleRawUltiProActiveEmployees' collection.",
+		"longname": "AddAllUltiProActiveEmployeesToDatabase",
+		"scope": "global",
+		"$longname": "AddAllUltiProActiveEmployeesToDatabase",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name AddEmailToArchive\n\t * @function\n\t * @async\n\t * @description Add the email to the archive, i.e., the doc to the 'emailArchive' collection.\n\t * @param {Email} incomingEmail\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 292,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "AddEmailToArchive",
+		"kind": "function",
+		"async": true,
+		"description": "Add the email to the archive, i.e., the doc to the 'emailArchive' collection.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"Email"
+					]
+				},
+				"name": "incomingEmail"
+			}
+		],
+		"longname": "AddEmailToArchive",
+		"scope": "global",
+		"$longname": "AddEmailToArchive",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name AddEmailToQueue\n\t * @function\n\t * @async\n\t * @description Add the email to the queue, i.e., the doc to the 'emailQueue' collection.\n\t * @param {...Email} incomingEmail - {@link Email} object\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 265,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "AddEmailToQueue",
+		"kind": "function",
+		"async": true,
+		"description": "Add the email to the queue, i.e., the doc to the 'emailQueue' collection.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"Email"
+					]
+				},
+				"variable": true,
+				"description": "{@link Email} object",
+				"name": "incomingEmail"
+			}
+		],
+		"longname": "AddEmailToQueue",
+		"scope": "global",
+		"$longname": "AddEmailToQueue",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name AddHubComponentGroupAdminsToDatabase\n * @function\n * @async\n * @description Get The Hub's Component Group Admins from SPO via Graph.\n * Insert into 'peopleRawMSGraphHubComponentGroupAdmins' collection.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 283,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "AddHubComponentGroupAdminsToDatabase",
+		"kind": "function",
+		"async": true,
+		"description": "Get The Hub's Component Group Admins from SPO via Graph.\nInsert into 'peopleRawMSGraphHubComponentGroupAdmins' collection.",
+		"longname": "AddHubComponentGroupAdminsToDatabase",
+		"scope": "global",
+		"$longname": "AddHubComponentGroupAdminsToDatabase",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name AddTrackedMSGraphGroupsToDatabase\n * @function\n * @async\n * @description Find out from people settings which AD groups \n * we're tracking and then get those group's info via Graph.\n * Insert into 'peopleRawMSGraphGroups' collection.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 204,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "AddTrackedMSGraphGroupsToDatabase",
+		"kind": "function",
+		"async": true,
+		"description": "Find out from people settings which AD groups \nwe're tracking and then get those group's info via Graph.\nInsert into 'peopleRawMSGraphGroups' collection.",
+		"longname": "AddTrackedMSGraphGroupsToDatabase",
+		"scope": "global",
+		"$longname": "AddTrackedMSGraphGroupsToDatabase",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name DeleteArchivedEmail\n\t * @function\n\t * @async\n\t * @description Delete one email from the archive, i.e., one doc in the 'emailArchive' collection.\n\t * @param {string} emailID - ID of email to delete, i.e., of doc to remove\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 464,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "DeleteArchivedEmail",
+		"kind": "function",
+		"async": true,
+		"description": "Delete one email from the archive, i.e., one doc in the 'emailArchive' collection.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "ID of email to delete, i.e., of doc to remove",
+				"name": "emailID"
+			}
+		],
+		"longname": "DeleteArchivedEmail",
+		"scope": "global",
+		"$longname": "DeleteArchivedEmail",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name DeleteQueuedEmail\n\t * @function\n\t * @async\n\t * @description Delete one email from the queue, i.e., one doc in the 'emailQueue' collection.\n\t * @param {string} emailID - ID of email to delete, i.e., of doc to remove\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 441,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "DeleteQueuedEmail",
+		"kind": "function",
+		"async": true,
+		"description": "Delete one email from the queue, i.e., one doc in the 'emailQueue' collection.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "ID of email to delete, i.e., of doc to remove",
+				"name": "emailID"
+			}
+		],
+		"longname": "DeleteQueuedEmail",
+		"scope": "global",
+		"$longname": "DeleteQueuedEmail",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name HandleSendEmailRequest\n\t * @function\n\t * @async\n\t * @description Handle request to send email.\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 11,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/API/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "HandleSendEmailRequest",
+		"kind": "function",
+		"async": true,
+		"description": "Handle request to send email.",
+		"longname": "HandleSendEmailRequest",
+		"scope": "global",
+		"$longname": "HandleSendEmailRequest",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name InsertKitten\n * @function\n * @async\n * @description This is the kitten insertion function in the Kitten API.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 9,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/API/-dev--Kittens",
+			"code": {
+				
+			}
+		},
+		"name": "InsertKitten",
+		"kind": "function",
+		"async": true,
+		"description": "This is the kitten insertion function in the Kitten API.",
+		"longname": "InsertKitten",
+		"scope": "global",
+		"$longname": "InsertKitten",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name ProcessAllPeopleFlat\n * @function\n * @async\n * @description Construct flat set of individual people. \n * Insert into 'peopleFlat' collection. This is the base people data set.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 467,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "ProcessAllPeopleFlat",
+		"kind": "function",
+		"async": true,
+		"description": "Construct flat set of individual people. \nInsert into 'peopleFlat' collection. This is the base people data set.",
+		"longname": "ProcessAllPeopleFlat",
+		"scope": "global",
+		"$longname": "ProcessAllPeopleFlat",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ProcessEmailQueue\n\t * @function\n\t * @async\n\t * @description For each email in the queue, attempt to send the email (including\n\t * archiving and deleting from queue).\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 170,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "ProcessEmailQueue",
+		"kind": "function",
+		"async": true,
+		"description": "For each email in the queue, attempt to send the email (including\narchiving and deleting from queue).",
+		"longname": "ProcessEmailQueue",
+		"scope": "global",
+		"$longname": "ProcessEmailQueue",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReplaceAll\n\t * @function\n\t * @description Return substring preceding '\\r' and/or '\\n' characters.\n\t * @param {string} needle - string to search for\n\t * @param {string} replacementNeedle - string to replace needle\n\t * @param {string} haystack - string to search in\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 113,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Utilities",
+			"code": {
+				
+			}
+		},
+		"name": "ReplaceAll",
+		"kind": "function",
+		"description": "Return substring preceding '\\r' and/or '\\n' characters.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "string to search for",
+				"name": "needle"
+			},
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "string to replace needle",
+				"name": "replacementNeedle"
+			},
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "string to search in",
+				"name": "haystack"
+			}
+		],
+		"longname": "ReplaceAll",
+		"scope": "global",
+		"$longname": "ReplaceAll",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReplaceAllEmailSettings\n\t * @function\n\t * @async\n\t * @description Replace email settings object in database, i.e., doc in 'emailSettings' queue.\n\t * @param {object} newSettings - object comprising new email settings\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 367,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "ReplaceAllEmailSettings",
+		"kind": "function",
+		"async": true,
+		"description": "Replace email settings object in database, i.e., doc in 'emailSettings' queue.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"object"
+					]
+				},
+				"description": "object comprising new email settings",
+				"name": "newSettings"
+			}
+		],
+		"longname": "ReplaceAllEmailSettings",
+		"scope": "global",
+		"$longname": "ReplaceAllEmailSettings",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReplaceArchivedEmail\n\t * @function\n\t * @async\n\t * @description Replace one email in the archive, i.e., one doc in the 'emailArchive' collection.\n\t * @param {string} emailID - ID of email to replace, i.e., of doc to overwrite\n\t * @param {Email} incomingEmail\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 343,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "ReplaceArchivedEmail",
+		"kind": "function",
+		"async": true,
+		"description": "Replace one email in the archive, i.e., one doc in the 'emailArchive' collection.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "ID of email to replace, i.e., of doc to overwrite",
+				"name": "emailID"
+			},
+			{
+				"type": {
+					"names": [
+						"Email"
+					]
+				},
+				"name": "incomingEmail"
+			}
+		],
+		"longname": "ReplaceArchivedEmail",
+		"scope": "global",
+		"$longname": "ReplaceArchivedEmail",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReplaceOneEmailSetting\n\t * @function\n\t * @async\n\t * @description Replace one email setting in database, i.e., one property of \n\t * doc in 'emailSettings' queue.\n\t * @param {object} newSingleSettingObject - object comprising new email setting property\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 399,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "ReplaceOneEmailSetting",
+		"kind": "function",
+		"async": true,
+		"description": "Replace one email setting in database, i.e., one property of \ndoc in 'emailSettings' queue.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"object"
+					]
+				},
+				"description": "object comprising new email setting property",
+				"name": "newSingleSettingObject"
+			}
+		],
+		"longname": "ReplaceOneEmailSetting",
+		"scope": "global",
+		"$longname": "ReplaceOneEmailSetting",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReplaceQueuedEmail\n\t * @function\n\t * @async\n\t * @description Replace one email in the queue, i.e., one doc in the 'emailQueue' collection.\n\t * @param {string} emailID - ID of email to replace, i.e., of doc to overwrite\n\t * @param {Email} incomingEmail\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 319,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "ReplaceQueuedEmail",
+		"kind": "function",
+		"async": true,
+		"description": "Replace one email in the queue, i.e., one doc in the 'emailQueue' collection.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "ID of email to replace, i.e., of doc to overwrite",
+				"name": "emailID"
+			},
+			{
+				"type": {
+					"names": [
+						"Email"
+					]
+				},
+				"name": "incomingEmail"
+			}
+		],
+		"longname": "ReplaceQueuedEmail",
+		"scope": "global",
+		"$longname": "ReplaceQueuedEmail",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnAccountFromUserAndDomain\n\t * @function\n\t * @description Return substring preceding '@' character.\n\t * @param {string} incomingString - e.g., 'sp1@mos.org'\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 11,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Utilities",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnAccountFromUserAndDomain",
+		"kind": "function",
+		"description": "Return substring preceding '@' character.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "e.g., 'sp1@mos.org'",
+				"name": "incomingString"
+			}
+		],
+		"longname": "ReturnAccountFromUserAndDomain",
+		"scope": "global",
+		"$longname": "ReturnAccountFromUserAndDomain",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\r\n\t * @name ReturnAllDocsFromCollection\r\n\t * @function\r\n\t * @async\r\n\t * @description Return all documents from a collection\r\n\t * @param {string} collection - e.g., '_Kittens'\r\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 14,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-DataQueries",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnAllDocsFromCollection",
+		"kind": "function",
+		"async": true,
+		"description": "Return all documents from a collection",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "e.g., '_Kittens'",
+				"name": "collection"
+			}
+		],
+		"longname": "ReturnAllDocsFromCollection",
+		"scope": "global",
+		"$longname": "ReturnAllDocsFromCollection",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnAllEmployeesFromUltiPro\n\t * @function\n\t * @async\n\t * @description Return all employees from the UltiPro EmployeeChanges API. \n\t * I.e., Return all of the pages.\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 108,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-UltiPro",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnAllEmployeesFromUltiPro",
+		"kind": "function",
+		"async": true,
+		"description": "Return all employees from the UltiPro EmployeeChanges API. \nI.e., Return all of the pages.",
+		"longname": "ReturnAllEmployeesFromUltiPro",
+		"scope": "global",
+		"$longname": "ReturnAllEmployeesFromUltiPro",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name ReturnAllPeople\n * @function\n * @async\n * @description Return all people from 'peopleFlat' collection.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 673,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnAllPeople",
+		"kind": "function",
+		"async": true,
+		"description": "Return all people from 'peopleFlat' collection.",
+		"longname": "ReturnAllPeople",
+		"scope": "global",
+		"$longname": "ReturnAllPeople",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnArrayElementExists\n\t * @function\n\t * @description Return true if element is in array, false if not.\n\t * @param {string} testArray - array to test\n\t * @param {string} testElement - element for which to test\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 124,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Utilities",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnArrayElementExists",
+		"kind": "function",
+		"description": "Return true if element is in array, false if not.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "array to test",
+				"name": "testArray"
+			},
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "element for which to test",
+				"name": "testElement"
+			}
+		],
+		"longname": "ReturnArrayElementExists",
+		"scope": "global",
+		"$longname": "ReturnArrayElementExists",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnCopyOfObject\n\t * @function\n\t * @description Return a deep / unique copy of an object \n\t * (as opposed to a reference to the original object).\n\t * @param {string} incomingObject - e.g., any valid object\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 52,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Utilities",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnCopyOfObject",
+		"kind": "function",
+		"description": "Return a deep / unique copy of an object \n(as opposed to a reference to the original object).",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "e.g., any valid object",
+				"name": "incomingObject"
+			}
+		],
+		"longname": "ReturnCopyOfObject",
+		"scope": "global",
+		"$longname": "ReturnCopyOfObject",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\r\n * @name ReturnDataConnection\r\n * @function\r\n * @description Return [monk](https://www.npmjs.com/package/monk) connection to database, using environment variables\r\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 12,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-DataConnection",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnDataConnection",
+		"kind": "function",
+		"description": "Return [monk](https://www.npmjs.com/package/monk) connection to database, using environment variables",
+		"longname": "ReturnDataConnection",
+		"scope": "global",
+		"$longname": "ReturnDataConnection",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnEmailArchiveData\n\t * @function\n\t * @async\n\t * @description Return all emails from the email archive \n\t * (all docs from the 'emailArchive' collection).\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 42,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnEmailArchiveData",
+		"kind": "function",
+		"async": true,
+		"description": "Return all emails from the email archive \n(all docs from the 'emailArchive' collection).",
+		"longname": "ReturnEmailArchiveData",
+		"scope": "global",
+		"$longname": "ReturnEmailArchiveData",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnEmailQueueData\n\t * @function\n\t * @async\n\t * @description Return all emails from the email queue \n\t * (all docs from the 'emailQueue' collection).\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 19,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnEmailQueueData",
+		"kind": "function",
+		"async": true,
+		"description": "Return all emails from the email queue \n(all docs from the 'emailQueue' collection).",
+		"longname": "ReturnEmailQueueData",
+		"scope": "global",
+		"$longname": "ReturnEmailQueueData",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnEmailQueueProcessingStatus\n\t * @function\n\t * @async\n\t * @description Return the setting indicating whether or not email the email queue \n\t * should be processed.This setting can be set to false in database to prevent queued emails\n\t * from being sent.\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 115,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnEmailQueueProcessingStatus",
+		"kind": "function",
+		"async": true,
+		"description": "Return the setting indicating whether or not email the email queue \nshould be processed.This setting can be set to false in database to prevent queued emails\nfrom being sent.",
+		"longname": "ReturnEmailQueueProcessingStatus",
+		"scope": "global",
+		"$longname": "ReturnEmailQueueProcessingStatus",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnEmailSendingStatus\n\t * @function\n\t * @async\n\t * @description Return the setting indicating whether or not emails should be sent at this time.\n\t * This setting can be set to false in database to prevent emails from being sent.\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 88,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnEmailSendingStatus",
+		"kind": "function",
+		"async": true,
+		"description": "Return the setting indicating whether or not emails should be sent at this time.\nThis setting can be set to false in database to prevent emails from being sent.",
+		"longname": "ReturnEmailSendingStatus",
+		"scope": "global",
+		"$longname": "ReturnEmailSendingStatus",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnEmailSettingsData\n\t * @function\n\t * @async\n\t * @description Return all email settings \n\t * (all docs from the 'emailSettings' collection).\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 65,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnEmailSettingsData",
+		"kind": "function",
+		"async": true,
+		"description": "Return all email settings \n(all docs from the 'emailSettings' collection).",
+		"longname": "ReturnEmailSettingsData",
+		"scope": "global",
+		"$longname": "ReturnEmailSettingsData",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnEmailWhitelistedDomains\n\t * @function\n\t * @async\n\t * @description Return the setting indicating the domains from which email requests are accepted.\n\t * Add a domain to this setting in database to all requests from an additional domain.\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 143,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnEmailWhitelistedDomains",
+		"kind": "function",
+		"async": true,
+		"description": "Return the setting indicating the domains from which email requests are accepted.\nAdd a domain to this setting in database to all requests from an additional domain.",
+		"longname": "ReturnEmailWhitelistedDomains",
+		"scope": "global",
+		"$longname": "ReturnEmailWhitelistedDomains",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnFormattedDateTime\n\t * @function\n\t * @description Use moment.js to calculate and format times. \n\t * Present for backward compatibility; should use moment \n\t * directly going forward.\n\t * @param {string} incomingDateTimeString - predefined token or \n\t * moment-parsable representation of datetime; \n\t * e.g., 'nowLocal', 'nowUTC', 'April 19, 2020'\n\t * @param {(string|null)} incomingFormat - null or moment-compatible \n\t * indication of format of incomingDateTimeString; \n\t * e.g., null, 'YYYY-MM-DDTHH:mm:ssZ'\n\t * @param {(string|null)} incomingReturnFormat - null or moment-compatible \n\t * indication of format of datetime string to return; \n\t * e.g., null, 'YYYY-MM-DDTHH:mm:ssZ'\n\t * @param {(number|null)} determineYearDisplayDynamically - if 1, \n\t * the datetime's year will only be included if it is not the current year; \n\t * e.g., null, 0, 1\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 134,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Utilities",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnFormattedDateTime",
+		"kind": "function",
+		"description": "Use moment.js to calculate and format times. \nPresent for backward compatibility; should use moment \ndirectly going forward.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "predefined token or \nmoment-parsable representation of datetime; \ne.g., 'nowLocal', 'nowUTC', 'April 19, 2020'",
+				"name": "incomingDateTimeString"
+			},
+			{
+				"type": {
+					"names": [
+						"string",
+						"null"
+					]
+				},
+				"description": "null or moment-compatible \nindication of format of incomingDateTimeString; \ne.g., null, 'YYYY-MM-DDTHH:mm:ssZ'",
+				"name": "incomingFormat"
+			},
+			{
+				"type": {
+					"names": [
+						"string",
+						"null"
+					]
+				},
+				"description": "null or moment-compatible \nindication of format of datetime string to return; \ne.g., null, 'YYYY-MM-DDTHH:mm:ssZ'",
+				"name": "incomingReturnFormat"
+			},
+			{
+				"type": {
+					"names": [
+						"number",
+						"null"
+					]
+				},
+				"description": "if 1, \nthe datetime's year will only be included if it is not the current year; \ne.g., null, 0, 1",
+				"name": "determineYearDisplayDynamically"
+			}
+		],
+		"longname": "ReturnFormattedDateTime",
+		"scope": "global",
+		"$longname": "ReturnFormattedDateTime",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnOnePageOfEmployeesFromUltiPro\n\t * @function\n\t * @async\n\t * @description Return one page of employees from the UltiPro EmployeeChanges API. \n\t * This is the one point of actual contact with the UltiPro EmployeeChanges API.\n\t * @param upApiKey - Environment variable,\n\t * stored in AWS Systems Manager, Parameter store\n\t * @param upEmployeeChangesPass - Environment variable,\n\t * stored in AWS Systems Manager, Parameter store\n\t * @param upEmployeeChangesUser - Environment variable,\n\t * stored in AWS Systems Manager, Parameter store\n\t * @param page - Which page to return\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 52,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-UltiPro",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnOnePageOfEmployeesFromUltiPro",
+		"kind": "function",
+		"async": true,
+		"description": "Return one page of employees from the UltiPro EmployeeChanges API. \nThis is the one point of actual contact with the UltiPro EmployeeChanges API.",
+		"params": [
+			{
+				"description": "Environment variable,\nstored in AWS Systems Manager, Parameter store",
+				"name": "upApiKey"
+			},
+			{
+				"description": "Environment variable,\nstored in AWS Systems Manager, Parameter store",
+				"name": "upEmployeeChangesPass"
+			},
+			{
+				"description": "Environment variable,\nstored in AWS Systems Manager, Parameter store",
+				"name": "upEmployeeChangesUser"
+			},
+			{
+				"description": "Which page to return",
+				"name": "page"
+			}
+		],
+		"longname": "ReturnOnePageOfEmployeesFromUltiPro",
+		"scope": "global",
+		"$longname": "ReturnOnePageOfEmployeesFromUltiPro",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name ReturnOnePerson\n * @function\n * @async\n * @description Return one person from 'peopleFlat' collection.\n * @param {string} account - E.g., 'sp1'\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 700,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnOnePerson",
+		"kind": "function",
+		"async": true,
+		"description": "Return one person from 'peopleFlat' collection.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "E.g., 'sp1'",
+				"name": "account"
+			}
+		],
+		"longname": "ReturnOnePerson",
+		"scope": "global",
+		"$longname": "ReturnOnePerson",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name ReturnPeopleProcessingPermitted\n * @function\n * @async\n * @description Return whether or not people processing is currently permitted.\n * Changing this property in db will disallow or reallow people data processing.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 38,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnPeopleProcessingPermitted",
+		"kind": "function",
+		"async": true,
+		"description": "Return whether or not people processing is currently permitted.\nChanging this property in db will disallow or reallow people data processing.",
+		"longname": "ReturnPeopleProcessingPermitted",
+		"scope": "global",
+		"$longname": "ReturnPeopleProcessingPermitted",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name ReturnPeopleSettings\n * @function\n * @async\n * @description Return people settings from db.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 14,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnPeopleSettings",
+		"kind": "function",
+		"async": true,
+		"description": "Return people settings from db.",
+		"longname": "ReturnPeopleSettings",
+		"scope": "global",
+		"$longname": "ReturnPeopleSettings",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name ReturnPeopleWhitelistedDomains\n * @function\n * @async\n * @description Return the domains that are whitelisted for the People API.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 66,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnPeopleWhitelistedDomains",
+		"kind": "function",
+		"async": true,
+		"description": "Return the domains that are whitelisted for the People API.",
+		"longname": "ReturnPeopleWhitelistedDomains",
+		"scope": "global",
+		"$longname": "ReturnPeopleWhitelistedDomains",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnSubstringPrecedingNewLineCharacters\n\t * @function\n\t * @description Return substring preceding '\\r' and/or '\\n' characters.\n\t * @param {string} incomingString - e.g., 'Web & Mobile Application Developer\\r\\n'\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 62,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Utilities",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnSubstringPrecedingNewLineCharacters",
+		"kind": "function",
+		"description": "Return substring preceding '\\r' and/or '\\n' characters.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "e.g., 'Web & Mobile Application Developer\\r\\n'",
+				"name": "incomingString"
+			}
+		],
+		"longname": "ReturnSubstringPrecedingNewLineCharacters",
+		"scope": "global",
+		"$longname": "ReturnSubstringPrecedingNewLineCharacters",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnTerseEmailAddressFromFriendly\n\t * @function\n\t * @description Return the actual address portion from a friendly-formatted\n\t * address. E.g., return 'noreply@mos.org'.\n\t * @param {string} incomingString - e.g., 'The Hub <noreply@mos.org>'\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 20,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Utilities",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnTerseEmailAddressFromFriendly",
+		"kind": "function",
+		"description": "Return the actual address portion from a friendly-formatted\naddress. E.g., return 'noreply@mos.org'.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "e.g., 'The Hub <noreply@mos.org>'",
+				"name": "incomingString"
+			}
+		],
+		"longname": "ReturnTerseEmailAddressFromFriendly",
+		"scope": "global",
+		"$longname": "ReturnTerseEmailAddressFromFriendly",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name ReturnUltiProEmployeeChangesQueryConfig\n\t * @function\n\t * @async\n\t * @description Return URI and options for get query to UltiPro EmployeeChanges API\n\t * @param page - Which page to return\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 17,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-UltiPro",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnUltiProEmployeeChangesQueryConfig",
+		"kind": "function",
+		"async": true,
+		"description": "Return URI and options for get query to UltiPro EmployeeChanges API",
+		"params": [
+			{
+				"description": "Which page to return",
+				"name": "page"
+			}
+		],
+		"longname": "ReturnUltiProEmployeeChangesQueryConfig",
+		"scope": "global",
+		"$longname": "ReturnUltiProEmployeeChangesQueryConfig",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name ReturnUserNameWeightRelativeToAnother\n * @function\n * @description Used in alphabetizing sets of people by last name.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 92,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "ReturnUserNameWeightRelativeToAnother",
+		"kind": "function",
+		"description": "Used in alphabetizing sets of people by last name.",
+		"longname": "ReturnUserNameWeightRelativeToAnother",
+		"scope": "global",
+		"$longname": "ReturnUserNameWeightRelativeToAnother",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name SendEachEmailFromArray\n\t * @function\n\t * @async\n\t * @description For each email in an array, attempt to send the email.\n\t * @param {object[]} emailArray - array of objects, each comprising data for one email\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 225,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "SendEachEmailFromArray",
+		"kind": "function",
+		"async": true,
+		"description": "For each email in an array, attempt to send the email.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"Array.<object>"
+					]
+				},
+				"description": "array of objects, each comprising data for one email",
+				"name": "emailArray"
+			}
+		],
+		"longname": "SendEachEmailFromArray",
+		"scope": "global",
+		"$longname": "SendEachEmailFromArray",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n\t * @name SendEmail\n\t * @function\n\t * @async\n\t * @description Send one email to MSGraph service. If Graph is \n\t * successful in sending, add email to archive (and remove from queue, \n\t * as appropriate). If Graph is not successful in sending, add email to \n\t * queue.\n\t * @param {Email} incomingEmail\n\t */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 496,
+			"columnno": 1,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "SendEmail",
+		"kind": "function",
+		"async": true,
+		"description": "Send one email to MSGraph service. If Graph is \nsuccessful in sending, add email to archive (and remove from queue, \nas appropriate). If Graph is not successful in sending, add email to \nqueue.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"Email"
+					]
+				},
+				"name": "incomingEmail"
+			}
+		],
+		"longname": "SendEmail",
+		"scope": "global",
+		"$longname": "SendEmail",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name SyncAllRawData\n * @function\n * @async\n * @description Sync (delete, fetch, insert) all raw data sets.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 433,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "SyncAllRawData",
+		"kind": "function",
+		"async": true,
+		"description": "Sync (delete, fetch, insert) all raw data sets.",
+		"longname": "SyncAllRawData",
+		"scope": "global",
+		"$longname": "SyncAllRawData",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name SyncSpecifiedRawData\n * @function\n * @async\n * @description Sync (delete, fetch, insert) a specific set of raw data.\n * @param {string} dataSetToken - e.g., 'ultiProActiveEmployees', 'graphGroups', 'hubAdmins'\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 342,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "SyncSpecifiedRawData",
+		"kind": "function",
+		"async": true,
+		"description": "Sync (delete, fetch, insert) a specific set of raw data.",
+		"params": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "e.g., 'ultiProActiveEmployees', 'graphGroups', 'hubAdmins'",
+				"name": "dataSetToken"
+			}
+		],
+		"longname": "SyncSpecifiedRawData",
+		"scope": "global",
+		"$longname": "SyncSpecifiedRawData",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\n * @name XXXXXXXXXXXXX\n * @function\n * @async\n * @description XXXXXXXXXXXXX\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 732,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "XXXXXXXXXXXXX",
+		"kind": "function",
+		"async": true,
+		"description": "XXXXXXXXXXXXX",
+		"longname": "XXXXXXXXXXXXX",
+		"scope": "global",
+		"$longname": "XXXXXXXXXXXXX",
+		"$kind": "method"
+	},
+	{
+		"comment": "/**\r\n * @name DataConnection\r\n * @service\r\n * @description Return connection to either dev or prod database in MongoDB Atlas service.\r\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-DataConnection",
+			"code": {
+				
+			}
+		},
+		"name": "DataConnection",
+		"tags": [
+			{
+				"originalTitle": "service",
+				"title": "service",
+				"text": ""
+			}
+		],
+		"description": "Return connection to either dev or prod database in MongoDB Atlas service.",
+		"longname": "DataConnection",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "DataConnection",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\r\n * @name DataQueries\r\n * @service\r\n * @description Using DataConnection service, \r\n * facilitate queries of databases in MongoDB Atlas service.\r\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-DataQueries",
+			"code": {
+				
+			}
+		},
+		"name": "DataQueries",
+		"tags": [
+			{
+				"originalTitle": "service",
+				"title": "service",
+				"text": ""
+			}
+		],
+		"description": "Using DataConnection service, \rfacilitate queries of databases in MongoDB Atlas service.",
+		"longname": "DataQueries",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "DataQueries",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name Email\n * @api\n * @description Handles all email-related requests.\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/API/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "Email",
+		"tags": [
+			{
+				"originalTitle": "api",
+				"title": "api",
+				"text": ""
+			}
+		],
+		"description": "Handles all email-related requests.",
+		"longname": "Email",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "Email",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name Email\n * @service\n * @description Performs all email-related operations.\n * \n * @todo cron log\n * @todo sending status\n * @todo queue processing status\n * @todo error handling\n * @todo access through domain or token\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
+			"code": {
+				
+			}
+		},
+		"name": "Email",
+		"tags": [
+			{
+				"originalTitle": "service",
+				"title": "service",
+				"text": ""
+			}
+		],
+		"description": "Performs all email-related operations.",
+		"todo": [
+			"cron log",
+			"sending status",
+			"queue processing status",
+			"error handling",
+			"access through domain or token"
+		],
+		"longname": "Email",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "Email",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name Kitten\n * @api\n * @description Just a sample / testing API\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/API/-dev--Kittens",
+			"code": {
+				
+			}
+		},
+		"name": "Kitten",
+		"tags": [
+			{
+				"originalTitle": "api",
+				"title": "api",
+				"text": ""
+			}
+		],
+		"description": "Just a sample / testing API",
+		"longname": "Kitten",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "Kitten",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name MSGraph\n * @service\n * @description Query the Microsoft Graph API\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-MSGraph",
+			"code": {
+				
+			}
+		},
+		"name": "MSGraph",
+		"tags": [
+			{
+				"originalTitle": "service",
+				"title": "service",
+				"text": ""
+			}
+		],
+		"description": "Query the Microsoft Graph API",
+		"longname": "MSGraph",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "MSGraph",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name NPM\n * @layer\n * @description This AWS Lambda Layer contains third-party Node.js modules from [NPM](https://www.npmjs.com).\n */",
+		"meta": {
+			"filename": "doc.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Layers/-dev-NPM",
+			"code": {
+				
+			}
+		},
+		"name": "NPM",
+		"tags": [
+			{
+				"originalTitle": "layer",
+				"title": "layer",
+				"text": ""
+			}
+		],
+		"description": "This AWS Lambda Layer contains third-party Node.js modules from [NPM](https://www.npmjs.com).",
+		"longname": "NPM",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "NPM",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name People\n * @cron\n * @description Perform all cron jobs to retrieve and process data for People API\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/meta/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "People",
+		"tags": [
+			{
+				"originalTitle": "cron",
+				"title": "cron",
+				"text": ""
+			}
+		],
+		"description": "Perform all cron jobs to retrieve and process data for People API",
+		"longname": "People",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "People",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name People\n * @cron\n * @description Perform all cron jobs to retrieve and process data for People API\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Lambdas/Cron/-dev-People",
+			"code": {
+				
+			}
+		},
+		"name": "People",
+		"tags": [
+			{
+				"originalTitle": "cron",
+				"title": "cron",
+				"text": ""
+			}
+		],
+		"description": "Perform all cron jobs to retrieve and process data for People API",
+		"longname": "People",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "People",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name Services\n * @layer\n * @description This AWS Lambda Layer contains MOS modules.\n */",
+		"meta": {
+			"filename": "doc.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Layers/-dev-Services",
+			"code": {
+				
+			}
+		},
+		"name": "Services",
+		"tags": [
+			{
+				"originalTitle": "layer",
+				"title": "layer",
+				"text": ""
+			}
+		],
+		"description": "This AWS Lambda Layer contains MOS modules.",
+		"longname": "Services",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "Services",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name UltiPro\n * @service\n * @description Query the UltiPro EmployeeChangesAPI\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-UltiPro",
+			"code": {
+				
+			}
+		},
+		"name": "UltiPro",
+		"tags": [
+			{
+				"originalTitle": "service",
+				"title": "service",
+				"text": ""
+			}
+		],
+		"description": "Query the UltiPro EmployeeChangesAPI",
+		"longname": "UltiPro",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "UltiPro",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * @name Utilities\n * @service\n * @description Miscellaneous utility functions\n */",
+		"meta": {
+			"filename": "index.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Utilities",
+			"code": {
+				
+			}
+		},
+		"name": "Utilities",
+		"tags": [
+			{
+				"originalTitle": "service",
+				"title": "service",
+				"text": ""
+			}
+		],
+		"description": "Miscellaneous utility functions",
+		"longname": "Utilities",
+		"kind": "member",
+		"scope": "global",
+		"$longname": "Utilities",
+		"$kind": "property"
+	},
+	{
+		"comment": "/**\n * One email\n * @typedef {object} Email\n * @property {(string|Array)} to - email address string or array email \n * address strings; e.g., ['sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;']\n * @property {string} from - email address string; must correspond to a \n * user in the MOS O365 tenancy; e.g., 'sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;'\n * @property {string} subject - e.g., 'This is a subject'\n * @property {string} [text] - plain text (non-HTML) email body\n * @property {string} [html] - HTML email body\n * @property {string} [system] - flag, archived, indicating system \n * generating this email; useful for filtering archive; e.g., 'hub'\n * @property {string} [type] - flag, archived, indicating type of \n * email; useful for filtering archive; e.g., 'notification'\n * @property {string} [event] - flag, archived, indicating type of \n * email; useful for filtering archive; e.g., 'approved admin'\n */",
+		"meta": {
+			"filename": "Email.js",
+			"lineno": 1,
+			"columnno": 0,
+			"path": "/home/skip/Software/HubAPI/src/TypeDefs",
+			"code": {
+				
+			}
+		},
+		"description": "One email",
+		"kind": "typedef",
+		"name": "Email",
+		"type": {
+			"names": [
+				"object"
+			]
+		},
+		"properties": [
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"optional": true,
+				"description": "flag, archived, indicating type of \nemail; useful for filtering archive; e.g., 'approved admin'",
+				"name": "event"
+			},
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "email address string; must correspond to a \nuser in the MOS O365 tenancy; e.g., 'sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;'",
+				"name": "from"
+			},
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"optional": true,
+				"description": "HTML email body",
+				"name": "html"
+			},
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"description": "e.g., 'This is a subject'",
+				"name": "subject"
+			},
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"optional": true,
+				"description": "flag, archived, indicating system \ngenerating this email; useful for filtering archive; e.g., 'hub'",
+				"name": "system"
+			},
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"optional": true,
+				"description": "plain text (non-HTML) email body",
+				"name": "text"
+			},
+			{
+				"type": {
+					"names": [
+						"string",
+						"Array"
+					]
+				},
+				"description": "email address string or array email \naddress strings; e.g., ['sp1@mos.org', 'Hub Tester1 &lt;sp1@mos.org&gt;']",
+				"name": "to"
+			},
+			{
+				"type": {
+					"names": [
+						"string"
+					]
+				},
+				"optional": true,
+				"description": "flag, archived, indicating type of \nemail; useful for filtering archive; e.g., 'notification'",
+				"name": "type"
+			}
+		],
+		"longname": "Email",
+		"scope": "global",
+		"$longname": "Email",
+		"$kind": "typedef"
+	}
+]
