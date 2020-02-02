@@ -1,19 +1,16 @@
 custom:
-  file: ${file(../../config-common.yaml)}
+  file: ${file(../../../config-common.yaml)}
 # -------------------------------------------------------
   config:
-    service: XXX
+    service: cron-email
     memorySize: 256
     timeout: 5
 
 functions:
-  XXX:
-    handler: index.XXX
-    events:
-      - http:
-          path: XXX/XXX
-          method: XXX
-          cors: true
+  HandleProcessEmailQueue:
+    handler: index.HandleProcessEmailQueue
+    # events:
+    #   - schedule: cron(${self:provider.environment.cronScheduleEmailQueueProcessing})
 
 # -------------------------------------------------------
 
@@ -31,7 +28,8 @@ provider:
     name: mos-api-${self:provider.stage}-lambdas
   environment:
     NODE_PATH: "./:/opt/node_modules"
-    cronScheduleGSEJobSync: ${self:custom.file.cronScheduleGSEJobSync}
+    cronScheduleEmailQueueProcessing: ${ssm:cron-schedule-email-queue-processing}
+    cronScheduleGSEJobSync: ${ssm:cron-schedule-gse-job-sync}
     cronScheduleGSEScheduleSync: ${self:custom.file.cronScheduleGSEScheduleSync}
     cronScheduleGSESignupSync: ${self:custom.file.cronScheduleGSESignupSync}
     cronScheduleGSESignupReminders: ${self:custom.file.cronScheduleGSESignupReminders}

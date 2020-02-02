@@ -1,0 +1,15 @@
+{
+	"name": "dev",
+	"version": "1.0.0",
+	"dependencies": {
+		"cron": "file:Services/Cron",
+		"data-queries": "file:Services/DataQueries",
+		"dotenv": "^8.2.0",
+		"email": "file:Services/Email",
+		"mongodb": "^3.4.1",
+		"monk": "^7.1.2",
+		"ms-graph": "file:Services/MSGraph",
+		"ultipro": "file:Services/UltiPro",
+		"utilities": "file:Services/Utilities"
+	}
+}

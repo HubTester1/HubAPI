@@ -4,6 +4,10 @@
  * @description XXX
  */
 
-module.exports.XXX = () => {
-
+module.exports = {
+	
+	XXX: () => {
+		
+	},
+	
 };

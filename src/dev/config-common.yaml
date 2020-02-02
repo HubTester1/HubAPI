@@ -1,9 +1,10 @@
 custom:
   config:
     layerARNNPM: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevNPM:3
-    layerARNServices: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:8
+    layerARNServices: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:10
     stage: dev
 #-------------
+cronScheduleEmailQueueProcessing: ${ssm:cron-schedule-email-queue-processing}
 cronScheduleGSEJobSync: ${ssm:cron-schedule-gse-job-sync}
 cronScheduleGSEScheduleSync: ${ssm:cron-schedule-gse-schedule-sync}
 cronScheduleGSESignupSync: ${ssm:cron-schedule-gse-signup-sync}

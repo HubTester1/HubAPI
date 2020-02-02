@@ -1,38 +1,63 @@
 /**
- * @name XXX
+ * @name Email
  * @api
- * @description XXX
+ * @description Handles all email-related cron job commands.
  */
 
-// const DataQueries = require('data-queries');
+const Email = require('email');
+const Cron = require('cron');
 
 /**
- * @name XXX
+ * @name HandleProcessEmailQueue
  * @function
  * @async
- * @description XXX
+ * @description Handle cron job command to process email queue.
  */
 
-exports.XXX = (event, context) =>
-	// return a new promise
-	new Promise((resolve, reject) => {
-		
-
-		/* 
-			// if the promise is resolved with the result, then resolve this promise with the result
-			.then((result) => {
-				resolve({
-					statusCode: 200,
-					body: JSON.stringify(result),
+module.exports = {
+	
+	HandleProcessEmailQueue: () =>
+		// return a new promise
+		new Promise((resolve, reject) => {
+			// get a promise to process email queue
+			Email.ProcessEmailQueue()
+				// if the promise is resolved with a result
+				.then((queueResult) => {
+					// get a promise to record in cron log
+					Cron.Log({
+						process: 'ProcessEmailQueue',
+						status: 'success',
+						result: queueResult,
+					})
+						// if the promise is resolved with a result
+						.then((cronResult) => {
+							// then resolve this promise with the result
+							resolve(cronResult);
+						})
+						// if the promise is rejected with an error
+						.catch((error) => {
+							// reject this promise with the error
+							reject(error);
+						});
+				})
+				// if the promise is rejected with an error
+				.catch((queueError) => {
+					// get a promise to record in cron log
+					Cron.Log({
+						process: 'ProcessEmailQueue',
+						status: 'error',
+						result: queueError,
+					})
+						// if the promise is resolved with a result
+						.then((cronResult) => {
+							// then resolve this promise with the result
+							resolve(cronResult);
+						})
+						// if the promise is rejected with an error
+						.catch((error) => {
+							// reject this promise with the error
+							reject(error);
+						});
 				});
-			})
-			// if the promise is rejected with an error, then reject this promise with an error
-			.catch((error) => {
-				reject({
-					statusCode: 500,
-					body: JSON.stringify(error),
-				});
-			});
-		
-		*/
-	});
+		}),
+};

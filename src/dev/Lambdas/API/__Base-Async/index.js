@@ -13,26 +13,22 @@
  * @description XXX
  */
 
-exports.XXX = (event, context) =>
-	// return a new promise
-	new Promise((resolve, reject) => {
-		
-
-		/* 
-			// if the promise is resolved with the result, then resolve this promise with the result
-			.then((result) => {
-				resolve({
-					statusCode: 200,
-					body: JSON.stringify(result),
+module.exports = {
+	
+	XXXXX: () =>
+		// return a new promise
+		new Promise((resolve, reject) => {
+			// get a promise to 
+			XXX()
+				// if the promise is resolved with a result
+				.then((result) => {
+					// then resolve this promise with the result
+					resolve(result);
+				})
+				// if the promise is rejected with an error
+				.catch((error) => {
+					// reject this promise with the error
+					reject(error);
 				});
-			})
-			// if the promise is rejected with an error, then reject this promise with an error
-			.catch((error) => {
-				reject({
-					statusCode: 500,
-					body: JSON.stringify(error),
-				});
-			});
-		
-		*/
-	});
+		}),
+};

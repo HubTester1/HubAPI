@@ -13,6 +13,9 @@
  * @param {XXX} XXX
  */
 
-exports.XXX = (event, context, callback) => {
-	// use callback
+module.exports = {
+	
+	XXXXX: (event, context) => {
+		// use callback
+	},
 };

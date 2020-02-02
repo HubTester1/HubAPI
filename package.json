@@ -1,7 +1,7 @@
 {
-	"name": "hub-api",
+	"name": "mos-api",
 	"version": "1.0.0",
-	"description": "2.1 build of The Hub Intranet web app for Museum of Science, Boston",
+	"description": "2.1 build of API for Museum of Science, Boston",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/HubTester1/HubAndNeso"
@@ -11,20 +11,8 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"data-queries": "file:src/Services/-dev-DataQueries",
-		"email": "file:src/Services/-dev-Email",
-		"fs-extra": "^8.1.0",
-		"mongodb": "^3.4.1",
-		"mongoose": "^5.8.6",
-		"monk": "^7.1.2",
-		"ms-graph": "file:src/Services/-dev-MSGraph",
-		"ultipro": "file:src/Services/-dev-UltiPro",
-		"utilities": "file:src/Services/-dev-Utilities"
-	},
-	"devDependencies": {
 		"@babel/core": "^7.7.7",
 		"babel-eslint": "^10.0.3",
-		"dotenv": "^8.2.0",
 		"eslint": "^6.1.0",
 		"eslint-config-airbnb": "^18.0.1",
 		"eslint-plugin-babel": "^5.3.0",
@@ -32,6 +20,7 @@
 		"eslint-plugin-jsdoc": "^18.4.4",
 		"eslint-plugin-jsx-a11y": "^6.2.3",
 		"eslint-plugin-react": "^7.17.0",
+		"fs-extra": "^8.1.0",
 		"gitbook-cli": "^2.3.2",
 		"gitbook-plugin-collapse": "^1.0.5",
 		"gulp": "^4.0.2",
