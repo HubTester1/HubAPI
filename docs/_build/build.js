@@ -47,6 +47,7 @@ const config = {
 		Services: 'Services are MOS modules that are used in an AWS Lambda Layer. [Learn more about Layers](#layers)',
 	},
 };
+const ReturnCopyOfObject = (objectValue) => JSON.parse(JSON.stringify(objectValue));
 const ReturnPathRelativeLocation = (pathRaw, filename, projectRoot) => {
 	const positionOfFirstCharacterOfRoot = pathRaw.lastIndexOf(projectRoot);
 	const lengthOfRoot = projectRoot.length;
@@ -56,8 +57,64 @@ const ReturnPathRelativeLocation = (pathRaw, filename, projectRoot) => {
 	}
 	return locationToReturn;
 };
+const ReturnOneParameterFormattedData = (paramRaw) => {
+	const paramToReturn = {
+		name: paramRaw.name,
+		description: paramRaw.description,
+		// parent: itemRawValue.name.trim(),
+	};
+	if (!paramRaw.optional || paramRaw.optional !== true) {
+		paramToReturn.required = true;
+	}
+	if (
+		paramRaw.type &&
+		paramRaw.type.names
+	) {
+		let typeIndication = '';
+		paramRaw.type.names.forEach((typeNameValue, typeNameIndex) => {
+			if (typeNameIndex === 0) {
+				typeIndication += typeNameValue;
+			} else {
+				typeIndication += ` | ${typeNameValue}`;
+			}
+		});
+		if (typeIndication) {
+			paramToReturn.type = typeIndication;
+		}
+	}
+	return paramToReturn;
+};
 const ReturnFunctionsForThisServiceOrAPI = (allItemsRawArray, parentPath, projectRoot) => {
 	const functions = [];
+	const typeDefs = {};
+	allItemsRawArray.forEach((itemRawValue) => {
+		if (itemRawValue.kind === 'typedef') {
+			const thisTypeDefObject = {
+				type: itemRawValue.type,
+				description: itemRawValue.description,
+				properties: [],
+				path: ReturnPathRelativeLocation(
+					itemRawValue.meta.path,
+					itemRawValue.meta.filename,
+					projectRoot,
+				),
+			};
+			if (itemRawValue.properties && itemRawValue.properties[0]) {
+				itemRawValue.properties.forEach((propertyRaw) => {
+					const propertyToPush = {
+						name: propertyRaw.name,
+						type: propertyRaw.type,
+						description: propertyRaw.description,
+					};
+					if (!propertyRaw.optional || propertyRaw.optional !== true) {
+						propertyToPush.required = true;
+					}
+					thisTypeDefObject.properties.push(propertyToPush);
+				});
+			}
+			typeDefs[itemRawValue.name] = thisTypeDefObject;
+		}
+	});
 	allItemsRawArray.forEach((itemRawValue) => {
 		if (itemRawValue.kind === 'function') {
 			if (
@@ -77,31 +134,31 @@ const ReturnFunctionsForThisServiceOrAPI = (allItemsRawArray, parentPath, projec
 				const params = [];
 				if (itemRawValue.params && itemRawValue.params[0]) {
 					itemRawValue.params.forEach((paramRaw) => {
-						const paramToPush = {
-							name: paramRaw.name,
-							description: paramRaw.description,
-							// parent: itemRawValue.name.trim(),
-						};
-						if (!paramRaw.optional || paramRaw.optional !== true) {
-							paramToPush.required = true;
-						}
+						const paramRawCopy = ReturnCopyOfObject(paramRaw);
+						const thisParamProperties = [];
 						if (
-							paramRaw.type && 
-							paramRaw.type.names
+							paramRawCopy.type &&
+							paramRawCopy.type.names
 						) {
-							let typeIndication;
-							paramRaw.type.names.forEach((typeNameValue, typeNameIndex) => {
-								if (typeNameIndex === 0) {
-									typeIndication = typeNameValue;
-								} else {
-									typeIndication = ` | ${typeNameValue}`;
+							paramRawCopy.type.names.forEach((paramTypeName) => {
+								if (typeDefs[paramTypeName]) {
+									if (!paramRawCopy.description) {
+										paramRawCopy.description = 
+											`${typeDefs[paramTypeName].description}
+<br>
+*(${typeDefs[paramTypeName].path})*`;
+									}
+									paramRawCopy.type = typeDefs[paramTypeName].type;
+									typeDefs[paramTypeName].properties.forEach((property) => {
+										thisParamProperties.push(property);
+									});
 								}
 							});
-							if (typeIndication) {
-								paramToPush.type = typeIndication;
-							}
 						}
-						params.push(paramToPush);
+						params.push(ReturnOneParameterFormattedData(paramRawCopy));
+						thisParamProperties.forEach((property) => {
+							params.push(ReturnOneParameterFormattedData(property));
+						});
 					});
 				}
 				if (params[0]) {
@@ -202,7 +259,6 @@ const ReturnAllToDos = (allItemsRawArray, projectRoot) => {
 	});
 	return allToDos;
 };
-const ReturnCopyOfObject = (objectValue) => JSON.parse(JSON.stringify(objectValue));
 const ReturnAPISections = (allItemsRawArray, projectRoot, preambles) => {
 	const buildObject = {};
 	const allAPIs = ReturnAllAPIs(allItemsRawArray, projectRoot);
@@ -422,7 +478,10 @@ const ReturnMarkedDownService = ({
 					const requiredToken = param.required ? 'true' : '';
 					const asyncToken = param.async ? 'true' : '';
 					let paramDescriptionString = '';
-					const paramDescriptionParts = param.description.split('\n');
+					let paramDescriptionParts = [];
+					if (param.description) {
+						paramDescriptionParts = param.description.split('\n');
+					}
 					paramDescriptionParts.forEach((paramDescriptionPart) => {
 						paramDescriptionString += `${paramDescriptionPart} `;
 					});

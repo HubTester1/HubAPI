@@ -10,10 +10,6 @@
  * @todo access through domain or token
  */
 
-/**
- * @typedef {import('../../TypeDefs/email').default} Email
- */
-
 const DataQueries = require('data-queries');
 const Utilities = require('utilities');
 const MSGraph = require('ms-graph');
@@ -231,7 +227,7 @@ module.exports = {
 	 * @function
 	 * @async
 	 * @description For each email in an array, attempt to send the email.
-	 * @param {Array} emailArray - array of objects, each comprising data for one email
+	 * @param {object[]} emailArray - array of objects, each comprising data for one email
 	 */
 
 	SendEachEmailFromArray: (emailArray) =>
@@ -271,7 +267,7 @@ module.exports = {
 	 * @function
 	 * @async
 	 * @description Add the email to the queue, i.e., the doc to the 'emailQueue' collection.
-	 * @param {Email} incomingEmail
+	 * @param {...Email} incomingEmail - {@link Email} object
 	 */
 
 	AddEmailToQueue: (incomingEmail) =>

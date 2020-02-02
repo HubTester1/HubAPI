@@ -299,6 +299,7 @@
 <li><a href="#agenda">Agenda Section</a></li>
 <li><a href="#apis">APIs Section</a>
 <details><summary>- Individual APIs</summary><ul>
+<li><a href="#email">Email</a></li>
 <li><a href="#kitten">Kitten</a></li>
 </ul>
 </details></li>
@@ -312,7 +313,10 @@
 <details><summary>- Individual Services</summary><ul>
 <li><a href="#dataconnection">DataConnection</a></li>
 <li><a href="#dataqueries">DataQueries</a></li>
+<li><a href="#email">Email</a></li>
+<li><a href="#msgraph">MSGraph</a></li>
 <li><a href="#ultipro">UltiPro</a></li>
+<li><a href="#utilities">Utilities</a></li>
 </ul>
 </details></li>
 </ul>
@@ -352,6 +356,26 @@
 <tr>
 <td>BIG PIC - Serve client from AWS through SPO</td>
 <td>/meta/agenda.js</td>
+</tr>
+<tr>
+<td>cron log</td>
+<td>/src/Services/-dev-Email/index.js</td>
+</tr>
+<tr>
+<td>sending status</td>
+<td>/src/Services/-dev-Email/index.js</td>
+</tr>
+<tr>
+<td>queue processing status</td>
+<td>/src/Services/-dev-Email/index.js</td>
+</tr>
+<tr>
+<td>error handling</td>
+<td>/src/Services/-dev-Email/index.js</td>
+</tr>
+<tr>
+<td>access through domain or token</td>
+<td>/src/Services/-dev-Email/index.js</td>
 </tr>
 </tbody>
 </table>
@@ -401,10 +425,20 @@
 </tbody>
 </table>
 </details></p>
+<h3 id="email">Email</h3>
+<p>Handles all email-related requests.</p>
+<blockquote>
+<p>/src/Lambdas/API/-dev-Email/index.js</p>
+</blockquote>
+<h4 id="functions">Functions</h4>
+<h5 id="handlesendemailrequest">HandleSendEmailRequest</h5>
+<p><em><code>@async</code></em></p>
+<p>Handle request to send email.</p>
+<p>&#xA0;</p>
 <h3 id="kitten">Kitten</h3>
 <p>Just a sample / testing API</p>
 <blockquote>
-<p>/src/Lambdas/-dev--Kittens/index.js</p>
+<p>/src/Lambdas/API/-dev--Kittens/index.js</p>
 </blockquote>
 <h4 id="functions">Functions</h4>
 <h5 id="insertkitten">InsertKitten</h5>
@@ -483,16 +517,587 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 </table>
 </details></p>
 <p>&#xA0;</p>
+<h3 id="email">Email</h3>
+<p>Performs all email-related operations.</p>
+<blockquote>
+<p>/src/Services/-dev-Email/index.js</p>
+</blockquote>
+<h4 id="functions">Functions</h4>
+<h5 id="addemailtoarchive">AddEmailToArchive</h5>
+<p>Add the email to the archive, i.e., the doc to the &apos;emailArchive&apos; collection.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>incomingEmail</td>
+<td>object</td>
+<td>true</td>
+<td></td>
+<td>One email <br> <em>(/src/TypeDefs/Email.js)</em></td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;approved admin&apos;</td>
+</tr>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;</td>
+</tr>
+<tr>
+<td>html</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>HTML email body</td>
+</tr>
+<tr>
+<td>subject</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>e.g., &apos;This is a subject&apos;</td>
+</tr>
+<tr>
+<td>system</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating system  generating this email; useful for filtering archive; e.g., &apos;hub&apos;</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>plain text (non-HTML) email body</td>
+</tr>
+<tr>
+<td>to</td>
+<td></td>
+<td>Array</td>
+<td>true</td>
+<td></td>
+<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;]</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;notification&apos;</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="addemailtoqueue">AddEmailToQueue</h5>
+<p>Add the email to the queue, i.e., the doc to the &apos;emailQueue&apos; collection.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>incomingEmail</td>
+<td>object</td>
+<td>true</td>
+<td></td>
+<td>{@link Email} object</td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;approved admin&apos;</td>
+</tr>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;</td>
+</tr>
+<tr>
+<td>html</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>HTML email body</td>
+</tr>
+<tr>
+<td>subject</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>e.g., &apos;This is a subject&apos;</td>
+</tr>
+<tr>
+<td>system</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating system  generating this email; useful for filtering archive; e.g., &apos;hub&apos;</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>plain text (non-HTML) email body</td>
+</tr>
+<tr>
+<td>to</td>
+<td></td>
+<td>Array</td>
+<td>true</td>
+<td></td>
+<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;]</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;notification&apos;</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="deletearchivedemail">DeleteArchivedEmail</h5>
+<p>Delete one email from the archive, i.e., one doc in the &apos;emailArchive&apos; collection.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>emailID</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>ID of email to delete, i.e., of doc to remove</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="deletequeuedemail">DeleteQueuedEmail</h5>
+<p>Delete one email from the queue, i.e., one doc in the &apos;emailQueue&apos; collection.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>emailID</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>ID of email to delete, i.e., of doc to remove</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="processemailqueue">ProcessEmailQueue</h5>
+<p>For each email in the queue, attempt to send the email (including
+archiving and deleting from queue).</p>
+<h5 id="replaceallemailsettings">ReplaceAllEmailSettings</h5>
+<p>Replace email settings object in database, i.e., doc in &apos;emailSettings&apos; queue.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>newSettings</td>
+<td>object</td>
+<td>true</td>
+<td></td>
+<td>object comprising new email settings</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="replacearchivedemail">ReplaceArchivedEmail</h5>
+<p>Replace one email in the archive, i.e., one doc in the &apos;emailArchive&apos; collection.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>emailID</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>ID of email to replace, i.e., of doc to overwrite</td>
+</tr>
+<tr>
+<td>incomingEmail</td>
+<td>object</td>
+<td>true</td>
+<td></td>
+<td>One email <br> <em>(/src/TypeDefs/Email.js)</em></td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;approved admin&apos;</td>
+</tr>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;</td>
+</tr>
+<tr>
+<td>html</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>HTML email body</td>
+</tr>
+<tr>
+<td>subject</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>e.g., &apos;This is a subject&apos;</td>
+</tr>
+<tr>
+<td>system</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating system  generating this email; useful for filtering archive; e.g., &apos;hub&apos;</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>plain text (non-HTML) email body</td>
+</tr>
+<tr>
+<td>to</td>
+<td></td>
+<td>Array</td>
+<td>true</td>
+<td></td>
+<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;]</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;notification&apos;</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="replaceoneemailsetting">ReplaceOneEmailSetting</h5>
+<p>Replace one email setting in database, i.e., one property of 
+doc in &apos;emailSettings&apos; queue.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>newSingleSettingObject</td>
+<td>object</td>
+<td>true</td>
+<td></td>
+<td>object comprising new email setting property</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="replacequeuedemail">ReplaceQueuedEmail</h5>
+<p>Replace one email in the queue, i.e., one doc in the &apos;emailQueue&apos; collection.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>emailID</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>ID of email to replace, i.e., of doc to overwrite</td>
+</tr>
+<tr>
+<td>incomingEmail</td>
+<td>object</td>
+<td>true</td>
+<td></td>
+<td>One email <br> <em>(/src/TypeDefs/Email.js)</em></td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;approved admin&apos;</td>
+</tr>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;</td>
+</tr>
+<tr>
+<td>html</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>HTML email body</td>
+</tr>
+<tr>
+<td>subject</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>e.g., &apos;This is a subject&apos;</td>
+</tr>
+<tr>
+<td>system</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating system  generating this email; useful for filtering archive; e.g., &apos;hub&apos;</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>plain text (non-HTML) email body</td>
+</tr>
+<tr>
+<td>to</td>
+<td></td>
+<td>Array</td>
+<td>true</td>
+<td></td>
+<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;]</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;notification&apos;</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="returnemailarchivedata">ReturnEmailArchiveData</h5>
+<p>Return all emails from the email archive 
+(all docs from the &apos;emailArchive&apos; collection).</p>
+<h5 id="returnemailqueuedata">ReturnEmailQueueData</h5>
+<p>Return all emails from the email queue 
+(all docs from the &apos;emailQueue&apos; collection).</p>
+<h5 id="returnemailqueueprocessingstatus">ReturnEmailQueueProcessingStatus</h5>
+<p>Return the setting indicating whether or not email the email queue 
+should be processed.This setting can be set to false in database to prevent queued emails
+from being sent.</p>
+<h5 id="returnemailsendingstatus">ReturnEmailSendingStatus</h5>
+<p>Return the setting indicating whether or not emails should be sent at this time.
+This setting can be set to false in database to prevent emails from being sent.</p>
+<h5 id="returnemailsettingsdata">ReturnEmailSettingsData</h5>
+<p>Return all email settings 
+(all docs from the &apos;emailSettings&apos; collection).</p>
+<h5 id="returnemailwhitelisteddomains">ReturnEmailWhitelistedDomains</h5>
+<p>Return the setting indicating the domains from which email requests are accepted.
+Add a domain to this setting in database to all requests from an additional domain.</p>
+<h5 id="sendeachemailfromarray">SendEachEmailFromArray</h5>
+<p>For each email in an array, attempt to send the email.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>emailArray</td>
+<td>Array.<object></object></td>
+<td>true</td>
+<td></td>
+<td>array of objects, each comprising data for one email</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="sendemail">SendEmail</h5>
+<p>Send one email to MSGraph service. If Graph is 
+successful in sending, add email to archive (and remove from queue, 
+as appropriate). If Graph is not successful in sending, add email to 
+queue.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>incomingEmail</td>
+<td>object</td>
+<td>true</td>
+<td></td>
+<td>One email <br> <em>(/src/TypeDefs/Email.js)</em></td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;approved admin&apos;</td>
+</tr>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>email address string; must correspond to a  user in the MOS O365 tenancy; e.g., &apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;</td>
+</tr>
+<tr>
+<td>html</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>HTML email body</td>
+</tr>
+<tr>
+<td>subject</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>e.g., &apos;This is a subject&apos;</td>
+</tr>
+<tr>
+<td>system</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating system  generating this email; useful for filtering archive; e.g., &apos;hub&apos;</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>plain text (non-HTML) email body</td>
+</tr>
+<tr>
+<td>to</td>
+<td></td>
+<td>Array</td>
+<td>true</td>
+<td></td>
+<td>email address string or array email  address strings; e.g., [&apos;sp1@mos.org&apos;, &apos;The Hub <a href="mailto:sp1@mos.org" target="_blank">sp1@mos.org</a>&apos;]</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>flag, archived, indicating type of  email; useful for filtering archive; e.g., &apos;notification&apos;</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<p>&#xA0;</p>
+<h3 id="msgraph">MSGraph</h3>
+<p>Query the Microsoft Graph API</p>
+<blockquote>
+<p>/src/Services/-dev-MSGraph/index.js</p>
+</blockquote>
+<h4 id="functions">Functions</h4>
+<p>&#xA0;</p>
 <h3 id="ultipro">UltiPro</h3>
 <p>Query the UltiPro EmployeeChangesAPI</p>
 <blockquote>
 <p>/src/Services/-dev-UltiPro/index.js</p>
 </blockquote>
 <h4 id="functions">Functions</h4>
-<h5 id="returnallactiveemployeesfromultipro">ReturnAllActiveEmployeesFromUltiPro</h5>
-<p>Return all active employees from the UltiPro EmployeeChanges API</p>
-<h5 id="returnonesetofemployeesfromultipro">ReturnOneSetOfEmployeesFromUltiPro</h5>
-<p>Return all active employees from the UltiPro EmployeeChanges API</p>
+<h5 id="returnallemployeesfromultipro">ReturnAllEmployeesFromUltiPro</h5>
+<p>Return all employees from the UltiPro EmployeeChanges API. 
+I.e., Return all of the pages.</p>
+<h5 id="returnonepageofemployeesfromultipro">ReturnOnePageOfEmployeesFromUltiPro</h5>
+<p>Return one page of employees from the UltiPro EmployeeChanges API. 
+This is the one point of actual contact with the UltiPro EmployeeChanges API.</p>
 <p><details><summary>&gt; Params</summary><table>
 <thead>
 <tr>
@@ -524,6 +1129,253 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 <td>true</td>
 <td></td>
 <td>Environment variable, stored in AWS Systems Manager, Parameter store</td>
+</tr>
+<tr>
+<td>page</td>
+<td>undefined</td>
+<td>true</td>
+<td></td>
+<td>Which page to return</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="returnultiproemployeechangesqueryconfig">ReturnUltiProEmployeeChangesQueryConfig</h5>
+<p>Return URI and options for get query to UltiPro EmployeeChanges API</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>page</td>
+<td>undefined</td>
+<td>true</td>
+<td></td>
+<td>Which page to return</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<p>&#xA0;</p>
+<h3 id="utilities">Utilities</h3>
+<p>Miscellaneous utility functions</p>
+<blockquote>
+<p>/src/Services/-dev-Utilities/index.js</p>
+</blockquote>
+<h4 id="functions">Functions</h4>
+<h5 id="replaceall">ReplaceAll</h5>
+<p>Return substring preceding &apos;\r&apos; and/or &apos;\n&apos; characters.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>needle</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>string to search for</td>
+</tr>
+<tr>
+<td>replacementNeedle</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>string to replace needle</td>
+</tr>
+<tr>
+<td>haystack</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>string to search in</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="returnaccountfromuseranddomain">ReturnAccountFromUserAndDomain</h5>
+<p>Return substring preceding &apos;@&apos; character.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>incomingString</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>e.g., &apos;sp1@mos.org&apos;</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="returnarrayelementexists">ReturnArrayElementExists</h5>
+<p>Return true if element is in array, false if not.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>testArray</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>array to test</td>
+</tr>
+<tr>
+<td>testElement</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>element for which to test</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="returncopyofobject">ReturnCopyOfObject</h5>
+<p>Return a deep / unique copy of an object 
+(as opposed to a reference to the original object).</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>incomingObject</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>e.g., any valid object</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="returnformatteddatetime">ReturnFormattedDateTime</h5>
+<p>Use moment.js to calculate and format times. 
+Present for backward compatibility; should use moment 
+directly going forward.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>incomingDateTimeString</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>predefined token or  moment-parsable representation of datetime;  e.g., &apos;nowLocal&apos;, &apos;nowUTC&apos;, &apos;April 19, 2020&apos;</td>
+</tr>
+<tr>
+<td>incomingFormat</td>
+<td></td>
+<td>null</td>
+<td>true</td>
+<td></td>
+<td>null or moment-compatible  indication of format of incomingDateTimeString;  e.g., null, &apos;YYYY-MM-DDTHH:mm:ssZ&apos;</td>
+</tr>
+<tr>
+<td>incomingReturnFormat</td>
+<td></td>
+<td>null</td>
+<td>true</td>
+<td></td>
+<td>null or moment-compatible  indication of format of datetime string to return;  e.g., null, &apos;YYYY-MM-DDTHH:mm:ssZ&apos;</td>
+</tr>
+<tr>
+<td>determineYearDisplayDynamically</td>
+<td></td>
+<td>null</td>
+<td>true</td>
+<td></td>
+<td>if 1,  the datetime&apos;s year will only be included if it is not the current year;  e.g., null, 0, 1</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="returnsubstringprecedingnewlinecharacters">ReturnSubstringPrecedingNewLineCharacters</h5>
+<p>Return substring preceding &apos;\r&apos; and/or &apos;\n&apos; characters.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>incomingString</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>e.g., &apos;Web &amp; Mobile Application Developer\r\n&apos;</td>
+</tr>
+</tbody>
+</table>
+</details></p>
+<h5 id="returnterseemailaddressfromfriendly">ReturnTerseEmailAddressFromFriendly</h5>
+<p>Return the actual address portion from a friendly-formatted
+address. E.g., return &apos;noreply@mos.org&apos;.</p>
+<p><details><summary>&gt; Params</summary><table>
+<thead>
+<tr>
+<th><em>@param</em></th>
+<th>type</th>
+<th>required</th>
+<th>async</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>incomingString</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td>e.g., &apos;The Hub <a href="mailto:noreply@mos.org" target="_blank">noreply@mos.org</a>&apos;</td>
 </tr>
 </tbody>
 </table>
@@ -580,7 +1432,7 @@ facilitate queries of databases in MongoDB Atlas service.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Code Reference","level":"5.2","depth":1,"next":{"title":"Lambda Event Parameter","level":"6.1","depth":1,"path":"misc/paramEvent.md","ref":"misc/paramEvent.md","articles":[]},"previous":{"title":"Style Guide","level":"5.1","depth":1,"path":"style.md","ref":"style.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapse","livereload"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapse":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"toc.md"},"variables":{},"title":"Hub API","gitbook":"*"},"file":{"path":"code.md","mtime":"2020-01-16T20:40:46.210Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-16T20:42:26.211Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Code Reference","level":"5.2","depth":1,"next":{"title":"Lambda Event Parameter","level":"6.1","depth":1,"path":"misc/paramEvent.md","ref":"misc/paramEvent.md","articles":[]},"previous":{"title":"Style Guide","level":"5.1","depth":1,"path":"style.md","ref":"style.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapse","livereload"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapse":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"toc.md"},"variables":{},"title":"Hub API","gitbook":"*"},"file":{"path":"code.md","mtime":"2020-02-02T00:35:55.017Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-02T00:39:06.303Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
