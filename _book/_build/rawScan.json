@@ -78,7 +78,7 @@
 		"comment": "/**\n\t * @name AddEmailToArchive\n\t * @function\n\t * @async\n\t * @description Add the email to the archive, i.e., the doc to the 'emailArchive' collection.\n\t * @param {Email} incomingEmail\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 292,
+			"lineno": 293,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -108,7 +108,7 @@
 		"comment": "/**\n\t * @name AddEmailToQueue\n\t * @function\n\t * @async\n\t * @description Add the email to the queue, i.e., the doc to the 'emailQueue' collection.\n\t * @param {...Email} incomingEmail - {@link Email} object\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 265,
+			"lineno": 266,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -180,7 +180,7 @@
 		"comment": "/**\n\t * @name DeleteArchivedEmail\n\t * @function\n\t * @async\n\t * @description Delete one email from the archive, i.e., one doc in the 'emailArchive' collection.\n\t * @param {string} emailID - ID of email to delete, i.e., of doc to remove\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 464,
+			"lineno": 465,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -211,7 +211,7 @@
 		"comment": "/**\n\t * @name DeleteQueuedEmail\n\t * @function\n\t * @async\n\t * @description Delete one email from the queue, i.e., one doc in the 'emailQueue' collection.\n\t * @param {string} emailID - ID of email to delete, i.e., of doc to remove\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 441,
+			"lineno": 442,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -302,7 +302,7 @@
 		"comment": "/**\n\t * @name ProcessEmailQueue\n\t * @function\n\t * @async\n\t * @description For each email in the queue, attempt to send the email (including\n\t * archiving and deleting from queue).\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 170,
+			"lineno": 171,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -370,7 +370,7 @@
 		"comment": "/**\n\t * @name ReplaceAllEmailSettings\n\t * @function\n\t * @async\n\t * @description Replace email settings object in database, i.e., doc in 'emailSettings' queue.\n\t * @param {object} newSettings - object comprising new email settings\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 367,
+			"lineno": 368,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -401,7 +401,7 @@
 		"comment": "/**\n\t * @name ReplaceArchivedEmail\n\t * @function\n\t * @async\n\t * @description Replace one email in the archive, i.e., one doc in the 'emailArchive' collection.\n\t * @param {string} emailID - ID of email to replace, i.e., of doc to overwrite\n\t * @param {Email} incomingEmail\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 343,
+			"lineno": 344,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -440,7 +440,7 @@
 		"comment": "/**\n\t * @name ReplaceOneEmailSetting\n\t * @function\n\t * @async\n\t * @description Replace one email setting in database, i.e., one property of \n\t * doc in 'emailSettings' queue.\n\t * @param {object} newSingleSettingObject - object comprising new email setting property\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 399,
+			"lineno": 400,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -471,7 +471,7 @@
 		"comment": "/**\n\t * @name ReplaceQueuedEmail\n\t * @function\n\t * @async\n\t * @description Replace one email in the queue, i.e., one doc in the 'emailQueue' collection.\n\t * @param {string} emailID - ID of email to replace, i.e., of doc to overwrite\n\t * @param {Email} incomingEmail\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 319,
+			"lineno": 320,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -699,7 +699,7 @@
 		"comment": "/**\n\t * @name ReturnEmailArchiveData\n\t * @function\n\t * @async\n\t * @description Return all emails from the email archive \n\t * (all docs from the 'emailArchive' collection).\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 42,
+			"lineno": 43,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -719,7 +719,7 @@
 		"comment": "/**\n\t * @name ReturnEmailQueueData\n\t * @function\n\t * @async\n\t * @description Return all emails from the email queue \n\t * (all docs from the 'emailQueue' collection).\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 19,
+			"lineno": 20,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -739,7 +739,7 @@
 		"comment": "/**\n\t * @name ReturnEmailQueueProcessingStatus\n\t * @function\n\t * @async\n\t * @description Return the setting indicating whether or not email the email queue \n\t * should be processed.This setting can be set to false in database to prevent queued emails\n\t * from being sent.\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 115,
+			"lineno": 116,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -759,7 +759,7 @@
 		"comment": "/**\n\t * @name ReturnEmailSendingStatus\n\t * @function\n\t * @async\n\t * @description Return the setting indicating whether or not emails should be sent at this time.\n\t * This setting can be set to false in database to prevent emails from being sent.\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 88,
+			"lineno": 89,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -779,7 +779,7 @@
 		"comment": "/**\n\t * @name ReturnEmailSettingsData\n\t * @function\n\t * @async\n\t * @description Return all email settings \n\t * (all docs from the 'emailSettings' collection).\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 65,
+			"lineno": 66,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -799,7 +799,7 @@
 		"comment": "/**\n\t * @name ReturnEmailWhitelistedDomains\n\t * @function\n\t * @async\n\t * @description Return the setting indicating the domains from which email requests are accepted.\n\t * Add a domain to this setting in database to all requests from an additional domain.\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 143,
+			"lineno": 144,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -1113,7 +1113,7 @@
 		"comment": "/**\n\t * @name SendEachEmailFromArray\n\t * @function\n\t * @async\n\t * @description For each email in an array, attempt to send the email.\n\t * @param {object[]} emailArray - array of objects, each comprising data for one email\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 225,
+			"lineno": 226,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -1144,7 +1144,7 @@
 		"comment": "/**\n\t * @name SendEmail\n\t * @function\n\t * @async\n\t * @description Send one email to MSGraph service. If Graph is \n\t * successful in sending, add email to archive (and remove from queue, \n\t * as appropriate). If Graph is not successful in sending, add email to \n\t * queue.\n\t * @param {Email} incomingEmail\n\t */",
 		"meta": {
 			"filename": "index.js",
-			"lineno": 496,
+			"lineno": 497,
 			"columnno": 1,
 			"path": "/home/skip/Software/HubAPI/src/Services/-dev-Email",
 			"code": {
@@ -1320,7 +1320,7 @@
 		"$kind": "property"
 	},
 	{
-		"comment": "/**\n * @name Email\n * @service\n * @description Performs all email-related operations.\n * \n * @todo cron log\n * @todo sending status\n * @todo queue processing status\n * @todo error handling\n * @todo access through domain or token\n */",
+		"comment": "/**\n * @name Email\n * @service\n * @description Performs all email-related operations.\n * \n * @todo cron process queue\n * @todo cron log\n * @todo sending status\n * @todo queue processing status\n * @todo error handling\n * @todo access through domain or token\n */",
 		"meta": {
 			"filename": "index.js",
 			"lineno": 1,
@@ -1340,6 +1340,7 @@
 		],
 		"description": "Performs all email-related operations.",
 		"todo": [
+			"cron process queue",
 			"cron log",
 			"sending status",
 			"queue processing status",

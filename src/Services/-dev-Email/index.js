@@ -3,6 +3,7 @@
  * @service
  * @description Performs all email-related operations.
  * 
+ * @todo cron process queue
  * @todo cron log
  * @todo sending status
  * @todo queue processing status

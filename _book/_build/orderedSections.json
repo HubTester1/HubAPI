@@ -47,6 +47,12 @@
 			{
 				"parent": "Email",
 				"category": "Agenda",
+				"description": "cron process queue",
+				"path": "/src/Services/-dev-Email/index.js"
+			},
+			{
+				"parent": "Email",
+				"category": "Agenda",
 				"description": "cron log",
 				"path": "/src/Services/-dev-Email/index.js"
 			},

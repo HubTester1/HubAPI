@@ -72,6 +72,7 @@ const ReturnOneParameterFormattedData = (paramRaw) => {
 	}
 	// console.log('paramToReturn');
 	// console.log(paramToReturn);
+
 	if (
 		paramRaw.type &&
 		paramRaw.type.names
@@ -414,7 +415,7 @@ const ReturnIndex = (orderedSections) => {
 	orderedSections.forEach((section) => {
 		if (section && section.title) {
 			const sectionID = section.title.toLowerCase().replace('.', '');
-			buildString += `* [${section.title} Section](#${sectionID})
+			buildString += `* [${section.title}](#${sectionID})
 `;
 			const childrenTitleToken = 
 				section.apis
@@ -434,7 +435,7 @@ const ReturnIndex = (orderedSections) => {
 `;
 				section[childrenPropertyID].forEach((child) => {
 					const childID = child.name.replace(' ', '-').toLowerCase();
-					buildString += `- [${child.name}](#${childID})
+					buildString += `- [${child.name} ${childrenTitleToken.slice(0, childrenTitleToken.length - 1)}](#${childID}-${childrenTitleToken.toLowerCase().slice(0, childrenTitleToken.length - 1)})
 `;
 				});
 				
@@ -457,14 +458,14 @@ const ReturnMarkedDownTodos = (todos) => {
 	});
 	return buildString;
 };
-const ReturnMarkedDownService = ({
+const ReturnMarkedDownServiceOrLayer = ({
 	name,
 	description,
 	// async,
 	path,
 	functions,
-}) => {
-	let buildString = `###${name}
+}, serviceOrLayerToken) => {
+	let buildString = `###${name} ${serviceOrLayerToken}
 
 `;
 	// 	if (async) {
@@ -499,9 +500,13 @@ const ReturnMarkedDownService = ({
 | --- |: --- :|: --- :| --- |
 `;
 				functionValue.params.forEach((param) => {
-					const typeToken = param.type !== 'bool' ?
-						param.type :
-						'boolean';
+					let typeToken = '';
+					if (param.type) {						
+						typeToken = param.type !== 'bool' ?
+							param.type.replace('<', '&lt;').replace('>', '&gt;') :
+							'boolean';
+					}
+					
 					const requiredToken = param.required ? 'true' : '';
 					// const asyncToken = param.async ? 'true' : '';
 					let paramDescriptionString = '';
@@ -529,12 +534,12 @@ const ReturnMarkedDownService = ({
 `;
 	return buildString;
 };
-const ReturnMarkedDownServices = (services) => {
+const ReturnMarkedDownServicesOrLayers = (servicesOrLayers, serviceOrLayerToken) => {
 	let buildString = '';
-	services.forEach((service) => {
-		buildString += ReturnMarkedDownService(service);
+	servicesOrLayers.forEach((serviceOrLayer) => {
+		buildString += ReturnMarkedDownServiceOrLayer(serviceOrLayer, serviceOrLayerToken);
 	});
-
+	
 	return buildString;
 };
 const ReturnMarkedDownAPI = ({
@@ -544,7 +549,7 @@ const ReturnMarkedDownAPI = ({
 	path,
 	functions,
 }) => {
-	let buildString = `###${name}
+	let buildString = `###${name} API
 
 `;
 	const descriptionParts = description.split('\n\n');
@@ -612,9 +617,10 @@ const ReturnMarkedDownAPIs = (apis) => {
 	return buildString;
 };
 const ReturnMarkedDownSection = (section) => {
+	console.log(section);
 	let buildString = '';
 	if (section && section.title) {
-		buildString += `##${section.title} Section
+		buildString += `##${section.title}
 `;
 		if (section.preamble) {
 			buildString += `${section.preamble}
@@ -624,10 +630,10 @@ const ReturnMarkedDownSection = (section) => {
 			buildString += ReturnMarkedDownTodos(section.todos);
 		}
 		if (section.services) {
-			buildString += ReturnMarkedDownServices(section.services);
+			buildString += ReturnMarkedDownServicesOrLayers(section.services, 'Service');
 		}
 		if (section.layers) {
-			buildString += ReturnMarkedDownServices(section.layers);
+			buildString += ReturnMarkedDownServicesOrLayers(section.layers, 'Layer');
 		}
 		if (section.apis) {
 			buildString += ReturnMarkedDownAPIs(section.apis);

@@ -2,28 +2,28 @@
 ##Index
 
 * [Repo](https://github.com/HubTester1/HubAPI)
-* [Agenda Section](#agenda)
-* [APIs Section](#apis)
+* [Agenda](#agenda)
+* [APIs](#apis)
 {% collapse title="- Individual APIs"%}
-- [Email](#email)
-- [Kitten](#kitten)
+- [Email API](#email-api)
+- [Kitten API](#kitten-api)
 {% endcollapse %}
-* [Layers Section](#layers)
+* [Layers](#layers)
 {% collapse title="- Individual Layers"%}
-- [NPM](#npm)
-- [Services](#services)
+- [NPM Layer](#npm-layer)
+- [Services Layer](#services-layer)
 {% endcollapse %}
-* [Services Section](#services)
+* [Services](#services)
 {% collapse title="- Individual Services"%}
-- [DataConnection](#dataconnection)
-- [DataQueries](#dataqueries)
-- [Email](#email)
-- [MSGraph](#msgraph)
-- [UltiPro](#ultipro)
-- [Utilities](#utilities)
+- [DataConnection Service](#dataconnection-service)
+- [DataQueries Service](#dataqueries-service)
+- [Email Service](#email-service)
+- [MSGraph Service](#msgraph-service)
+- [UltiPro Service](#ultipro-service)
+- [Utilities Service](#utilities-service)
 {% endcollapse %}
 
-##Agenda Section
+##Agenda
 | *@todo* | path |
 | ----------- | ----------- |
 | Unwhitelist 0.0.0.0/0 | /meta/agenda.js |
@@ -33,6 +33,7 @@
 | BIG PIC - Send email through Graph | /meta/agenda.js |
 | BIG PIC - Pull data from SPO | /meta/agenda.js |
 | BIG PIC - Serve client from AWS through SPO | /meta/agenda.js |
+| cron process queue | /src/Services/-dev-Email/index.js |
 | cron log | /src/Services/-dev-Email/index.js |
 | sending status | /src/Services/-dev-Email/index.js |
 | queue processing status | /src/Services/-dev-Email/index.js |
@@ -53,7 +54,7 @@
 
 &nbsp;
 
-##APIs Section
+##APIs
 Each API is essentially a collection of Lambda functions. Each function has access to all layers. 
 			Each function receives three params from the AWS Lambda service.
 			{% collapse title="> Params"%}
@@ -63,7 +64,7 @@ Each API is essentially a collection of Lambda functions. Each function has acce
 | context | object | | Contains information about the invocation, function, and execution environment. [Get details of the context parameter](/misc/paramContext.html)|
 | callback | function | | In synchronous functions, call this function to send the response. The callback function takes two arguments: an Error and a response. When you call it, Lambda waits for the event loop to be empty and then returns the response or error to the invoker. The response object must be compatible with JSON.stringify. |
 {% endcollapse %}
-###Email
+###Email API
 
 Handles all email-related requests.
 
@@ -77,7 +78,7 @@ Handle request to send email.
 
 &nbsp;
 
-###Kitten
+###Kitten API
 
 Just a sample / testing API
 
@@ -106,9 +107,9 @@ This is the kitten insertion function in the Kitten API.
 
 &nbsp;
 
-##Layers Section
+##Layers
 AWS Lambda Layers contain modules (i.e., code), either MOS or contributed, that is external to but relied upon and accessed by Lambda functions (i.e., dependencies).
-###NPM
+###NPM Layer
 
 This AWS Lambda Layer contains third-party Node.js modules from [NPM](https://www.npmjs.com).
 
@@ -117,7 +118,7 @@ This AWS Lambda Layer contains third-party Node.js modules from [NPM](https://ww
 
 &nbsp;
 
-###Services
+###Services Layer
 
 This AWS Lambda Layer contains MOS modules.
 
@@ -141,9 +142,9 @@ This AWS Lambda Layer contains MOS modules.
 
 &nbsp;
 
-##Services Section
+##Services
 Services are MOS modules that are used in an AWS Lambda Layer. [Learn more about Layers](#layers)
-###DataConnection
+###DataConnection Service
 
 Return connection to either dev or prod database in MongoDB Atlas service.
 
@@ -156,7 +157,7 @@ Return [monk](https://www.npmjs.com/package/monk) connection to database, using 
 
 &nbsp;
 
-###DataQueries
+###DataQueries Service
 
 Using DataConnection service, facilitate queries of databases in MongoDB Atlas service.
 
@@ -174,7 +175,7 @@ Return all documents from a collection
 
 &nbsp;
 
-###Email
+###Email Service
 
 Performs all email-related operations.
 
@@ -315,7 +316,7 @@ For each email in an array, attempt to send the email.
 {% collapse title="> Params"%}
 | *@param* | type | required | description |
 | --- |: --- :|: --- :| --- |
-| emailArray | Array.<object> | true | array of objects, each comprising data for one email  |
+| emailArray | Array.&lt;object&gt; | true | array of objects, each comprising data for one email  |
 {% endcollapse %}
 #####SendEmail
 Send one email to MSGraph service. If Graph is 
@@ -339,7 +340,7 @@ queue.
 
 &nbsp;
 
-###MSGraph
+###MSGraph Service
 
 Query the Microsoft Graph API
 
@@ -349,7 +350,7 @@ Query the Microsoft Graph API
 
 &nbsp;
 
-###UltiPro
+###UltiPro Service
 
 Query the UltiPro EmployeeChangesAPI
 
@@ -367,10 +368,10 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.
 {% collapse title="> Params"%}
 | *@param* | type | required | description |
 | --- |: --- :|: --- :| --- |
-| upApiKey | undefined | true | Environment variable, stored in AWS Systems Manager, Parameter store  |
-| upEmployeeChangesPass | undefined | true | Environment variable, stored in AWS Systems Manager, Parameter store  |
-| upEmployeeChangesUser | undefined | true | Environment variable, stored in AWS Systems Manager, Parameter store  |
-| page | undefined | true | Which page to return  |
+| upApiKey |  | true | Environment variable, stored in AWS Systems Manager, Parameter store  |
+| upEmployeeChangesPass |  | true | Environment variable, stored in AWS Systems Manager, Parameter store  |
+| upEmployeeChangesUser |  | true | Environment variable, stored in AWS Systems Manager, Parameter store  |
+| page |  | true | Which page to return  |
 {% endcollapse %}
 #####ReturnUltiProEmployeeChangesQueryConfig
 Return URI and options for get query to UltiPro EmployeeChanges API
@@ -378,12 +379,12 @@ Return URI and options for get query to UltiPro EmployeeChanges API
 {% collapse title="> Params"%}
 | *@param* | type | required | description |
 | --- |: --- :|: --- :| --- |
-| page | undefined | true | Which page to return  |
+| page |  | true | Which page to return  |
 {% endcollapse %}
 
 &nbsp;
 
-###Utilities
+###Utilities Service
 
 Miscellaneous utility functions
 

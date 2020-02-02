@@ -296,31 +296,31 @@
 <h2 id="index">Index</h2>
 <ul>
 <li><a href="https://github.com/HubTester1/HubAPI" target="_blank">Repo</a></li>
-<li><a href="#agenda">Agenda Section</a></li>
-<li><a href="#apis">APIs Section</a>
+<li><a href="#agenda">Agenda</a></li>
+<li><a href="#apis">APIs</a>
 <details><summary>- Individual APIs</summary><ul>
-<li><a href="#email">Email</a></li>
-<li><a href="#kitten">Kitten</a></li>
+<li><a href="#email-api">Email API</a></li>
+<li><a href="#kitten-api">Kitten API</a></li>
 </ul>
 </details></li>
-<li><a href="#layers">Layers Section</a>
+<li><a href="#layers">Layers</a>
 <details><summary>- Individual Layers</summary><ul>
-<li><a href="#npm">NPM</a></li>
-<li><a href="#services">Services</a></li>
+<li><a href="#npm-layer">NPM Layer</a></li>
+<li><a href="#services-layer">Services Layer</a></li>
 </ul>
 </details></li>
-<li><a href="#services">Services Section</a>
+<li><a href="#services">Services</a>
 <details><summary>- Individual Services</summary><ul>
-<li><a href="#dataconnection">DataConnection</a></li>
-<li><a href="#dataqueries">DataQueries</a></li>
-<li><a href="#email">Email</a></li>
-<li><a href="#msgraph">MSGraph</a></li>
-<li><a href="#ultipro">UltiPro</a></li>
-<li><a href="#utilities">Utilities</a></li>
+<li><a href="#dataconnection-service">DataConnection Service</a></li>
+<li><a href="#dataqueries-service">DataQueries Service</a></li>
+<li><a href="#email-service">Email Service</a></li>
+<li><a href="#msgraph-service">MSGraph Service</a></li>
+<li><a href="#ultipro-service">UltiPro Service</a></li>
+<li><a href="#utilities-service">Utilities Service</a></li>
 </ul>
 </details></li>
 </ul>
-<h2 id="agenda-section">Agenda Section</h2>
+<h2 id="agenda">Agenda</h2>
 <table>
 <thead>
 <tr>
@@ -358,6 +358,10 @@
 <td>/meta/agenda.js</td>
 </tr>
 <tr>
+<td>cron process queue</td>
+<td>/src/Services/-dev-Email/index.js</td>
+</tr>
+<tr>
 <td>cron log</td>
 <td>/src/Services/-dev-Email/index.js</td>
 </tr>
@@ -387,7 +391,7 @@
 <hr>
 <p>&#xA0;</p>
 <p>&#xA0;</p>
-<h2 id="apis-section">APIs Section</h2>
+<h2 id="apis">APIs</h2>
 <p>Each API is essentially a collection of Lambda functions. Each function has access to all layers. 
             Each function receives three params from the AWS Lambda service.
             <details><summary>&gt; Params</summary><table>
@@ -421,7 +425,7 @@
 </tbody>
 </table>
 </details></p>
-<h3 id="email">Email</h3>
+<h3 id="email-api">Email API</h3>
 <p>Handles all email-related requests.</p>
 <blockquote>
 <p>/src/Lambdas/API/-dev-Email/index.js</p>
@@ -430,7 +434,7 @@
 <h5 id="handlesendemailrequest">HandleSendEmailRequest</h5>
 <p>Handle request to send email.</p>
 <p>&#xA0;</p>
-<h3 id="kitten">Kitten</h3>
+<h3 id="kitten-api">Kitten API</h3>
 <p>Just a sample / testing API</p>
 <blockquote>
 <p>/src/Lambdas/API/-dev--Kittens/index.js</p>
@@ -447,15 +451,15 @@
 <hr>
 <p>&#xA0;</p>
 <p>&#xA0;</p>
-<h2 id="layers-section">Layers Section</h2>
+<h2 id="layers">Layers</h2>
 <p>AWS Lambda Layers contain modules (i.e., code), either MOS or contributed, that is external to but relied upon and accessed by Lambda functions (i.e., dependencies).</p>
-<h3 id="npm">NPM</h3>
+<h3 id="npm-layer">NPM Layer</h3>
 <p>This AWS Lambda Layer contains third-party Node.js modules from <a href="https://www.npmjs.com" target="_blank">NPM</a>.</p>
 <blockquote>
 <p>/src/Layers/-dev-NPM</p>
 </blockquote>
 <p>&#xA0;</p>
-<h3 id="services">Services</h3>
+<h3 id="services-layer">Services Layer</h3>
 <p>This AWS Lambda Layer contains MOS modules.</p>
 <blockquote>
 <p>/src/Layers/-dev-Services</p>
@@ -469,9 +473,9 @@
 <hr>
 <p>&#xA0;</p>
 <p>&#xA0;</p>
-<h2 id="services-section">Services Section</h2>
+<h2 id="services">Services</h2>
 <p>Services are MOS modules that are used in an AWS Lambda Layer. <a href="#layers">Learn more about Layers</a></p>
-<h3 id="dataconnection">DataConnection</h3>
+<h3 id="dataconnection-service">DataConnection Service</h3>
 <p>Return connection to either dev or prod database in MongoDB Atlas service.</p>
 <blockquote>
 <p>/src/Services/-dev-DataConnection/index.js</p>
@@ -480,7 +484,7 @@
 <h5 id="returndataconnection">ReturnDataConnection</h5>
 <p>Return <a href="https://www.npmjs.com/package/monk" target="_blank">monk</a> connection to database, using environment variables</p>
 <p>&#xA0;</p>
-<h3 id="dataqueries">DataQueries</h3>
+<h3 id="dataqueries-service">DataQueries Service</h3>
 <p>Using DataConnection service, 
 facilitate queries of databases in MongoDB Atlas service.</p>
 <blockquote>
@@ -509,7 +513,7 @@ facilitate queries of databases in MongoDB Atlas service.</p>
 </table>
 </details></p>
 <p>&#xA0;</p>
-<h3 id="email">Email</h3>
+<h3 id="email-service">Email Service</h3>
 <p>Performs all email-related operations.</p>
 <blockquote>
 <p>/src/Services/-dev-Email/index.js</p>
@@ -924,7 +928,7 @@ Add a domain to this setting in database to all requests from an additional doma
 <tbody>
 <tr>
 <td>emailArray</td>
-<td>Array.<object></object></td>
+<td>Array.&lt;object&gt;</td>
 <td>true</td>
 <td>array of objects, each comprising data for one email</td>
 </tr>
@@ -1004,14 +1008,14 @@ queue.</p>
 </table>
 </details></p>
 <p>&#xA0;</p>
-<h3 id="msgraph">MSGraph</h3>
+<h3 id="msgraph-service">MSGraph Service</h3>
 <p>Query the Microsoft Graph API</p>
 <blockquote>
 <p>/src/Services/-dev-MSGraph/index.js</p>
 </blockquote>
 <h4 id="functions">Functions</h4>
 <p>&#xA0;</p>
-<h3 id="ultipro">UltiPro</h3>
+<h3 id="ultipro-service">UltiPro Service</h3>
 <p>Query the UltiPro EmployeeChangesAPI</p>
 <blockquote>
 <p>/src/Services/-dev-UltiPro/index.js</p>
@@ -1035,25 +1039,25 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <tbody>
 <tr>
 <td>upApiKey</td>
-<td>undefined</td>
+<td></td>
 <td>true</td>
 <td>Environment variable, stored in AWS Systems Manager, Parameter store</td>
 </tr>
 <tr>
 <td>upEmployeeChangesPass</td>
-<td>undefined</td>
+<td></td>
 <td>true</td>
 <td>Environment variable, stored in AWS Systems Manager, Parameter store</td>
 </tr>
 <tr>
 <td>upEmployeeChangesUser</td>
-<td>undefined</td>
+<td></td>
 <td>true</td>
 <td>Environment variable, stored in AWS Systems Manager, Parameter store</td>
 </tr>
 <tr>
 <td>page</td>
-<td>undefined</td>
+<td></td>
 <td>true</td>
 <td>Which page to return</td>
 </tr>
@@ -1074,7 +1078,7 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 <tbody>
 <tr>
 <td>page</td>
-<td>undefined</td>
+<td></td>
 <td>true</td>
 <td>Which page to return</td>
 </tr>
@@ -1082,7 +1086,7 @@ This is the one point of actual contact with the UltiPro EmployeeChanges API.</p
 </table>
 </details></p>
 <p>&#xA0;</p>
-<h3 id="utilities">Utilities</h3>
+<h3 id="utilities-service">Utilities Service</h3>
 <p>Miscellaneous utility functions</p>
 <blockquote>
 <p>/src/Services/-dev-Utilities/index.js</p>
@@ -1327,7 +1331,7 @@ address. E.g., return &apos;noreply@mos.org&apos;.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Code Reference","level":"5.2","depth":1,"next":{"title":"Lambda Event Parameter","level":"6.1","depth":1,"path":"misc/paramEvent.md","ref":"misc/paramEvent.md","articles":[]},"previous":{"title":"Style Guide","level":"5.1","depth":1,"path":"style.md","ref":"style.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapse","livereload"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapse":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"toc.md"},"variables":{},"title":"Hub API","gitbook":"*"},"file":{"path":"code.md","mtime":"2020-02-02T01:42:33.409Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-02T00:39:06.303Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Code Reference","level":"5.2","depth":1,"next":{"title":"Lambda Event Parameter","level":"6.1","depth":1,"path":"misc/paramEvent.md","ref":"misc/paramEvent.md","articles":[]},"previous":{"title":"Style Guide","level":"5.1","depth":1,"path":"style.md","ref":"style.md","articles":[]},"dir":"ltr"},"config":{"plugins":["collapse","livereload"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapse":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"toc.md"},"variables":{},"title":"Hub API","gitbook":"*"},"file":{"path":"code.md","mtime":"2020-02-02T02:27:40.437Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-02T02:24:40.127Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
