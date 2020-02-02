@@ -8,7 +8,7 @@ const config = {
 	files: [
 		// './src',
 		'./meta',
-		'./src',
+		'./src/dev',
 	],
 	recurse: true,
 	sort: 'kind',

@@ -1,0 +1,13 @@
+{
+	"name": "data-queries",
+	"version": "1.0.0",
+	"description": "Handles all interactions with either dev or prod db in MongoDB Atlas Service.",
+	"main": "index.js",
+	"scripts": {},
+	"author": "Museum of Science, Boston",
+	"license": "ISC",
+	"dependencies": {
+		"data-connection": "file:../DataConnection",
+		"mongodb": "^3.4.1"
+	}
+}

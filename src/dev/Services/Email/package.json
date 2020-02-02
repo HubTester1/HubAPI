@@ -1,0 +1,14 @@
+{
+	"name": "email",
+	"version": "1.0.0",
+	"description": "Handles all email operations.",
+	"main": "index.js",
+	"scripts": {},
+	"author": "Museum of Science, Boston",
+	"license": "ISC",
+	"dependencies": {
+		"data-queries": "file:../DataQueries",
+		"ms-graph": "file:../MSGraph",
+		"utilities": "file:../Utilities"
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"name": "XXX",
+	"version": "1.0.0",
+	"description": "XXX.",
+	"main": "index.js",
+	"scripts": {},
+	"author": "Museum of Science, Boston",
+	"license": "ISC",
+	"dependencies": {
+		"XXX": "XXX"
+	}
+	}

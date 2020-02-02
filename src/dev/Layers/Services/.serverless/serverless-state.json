@@ -1,0 +1,66 @@
+{
+  "service": {
+    "service": "layer-dev-services",
+    "serviceObject": {
+      "name": "layer-dev-services"
+    },
+    "provider": {
+      "stage": "dev",
+      "variableSyntax": "\\${([ ~:a-zA-Z0-9._@'\",\\-\\/\\(\\)*?]+?)}",
+      "name": "aws",
+      "runtime": "nodejs12.x",
+      "region": "us-east-1",
+      "profile": "mos-api-sls-admin",
+      "deploymentBucket": "mos-api-dev-layers",
+      "deploymentBucketObject": {
+        "name": "mos-api-dev-layers"
+      },
+      "versionFunctions": true,
+      "remoteFunctionData": null,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "LayerDevServicesLambdaLayer": {
+            "Type": "AWS::Lambda::LayerVersion",
+            "Properties": {
+              "Content": {
+                "S3Bucket": "mos-api-dev-layers",
+                "S3Key": "serverless/layer-dev-services/dev/1580657168075-2020-02-02T15:26:08.075Z/LayerDevServices.zip"
+              },
+              "LayerName": "LayerDevServices",
+              "Description": "services dependencies"
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": "mos-api-dev-layers"
+          },
+          "LayerDevServicesLambdaLayerQualifiedArn": {
+            "Description": "Current Lambda layer version",
+            "Value": {
+              "Ref": "LayerDevServicesLambdaLayer"
+            }
+          }
+        }
+      }
+    },
+    "pluginsData": {},
+    "functions": {},
+    "serviceFilename": "serverless.yaml",
+    "layers": {
+      "LayerDevServices": {
+        "path": "nodejs",
+        "description": "services dependencies",
+        "package": {
+          "artifact": "/home/skip/Software/HubAPI/src/dev/Layers/Services/.serverless/LayerDevServices.zip"
+        }
+      }
+    }
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/layer-dev-services/dev/1580657168075-2020-02-02T15:26:08.075Z",
+    "artifact": ""
+  }
+}

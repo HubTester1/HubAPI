@@ -1,0 +1,52 @@
+custom:
+  file: ${file(../../../config-common.yaml)}
+# -------------------------------------------------------
+  config:
+    service: XXX
+    memorySize: 256
+    timeout: 5
+
+functions:
+  XXX:
+    handler: index.XXX
+    events:
+      - http:
+          path: XXX/XXX
+          method: XXX
+          cors: true
+
+# -------------------------------------------------------
+
+service: ${self:custom.config.service}
+
+provider:
+  name: aws
+  runtime: ${self:custom.file.provider.runtime}
+  stage: ${self:custom.file.custom.config.stage}
+  region: us-east-1
+  profile: ${self:custom.file.provider.profile}
+  memorySize: ${self:custom.config.memorySize}
+  timeout: ${self:custom.config.timeout}
+  deploymentBucket:
+    name: mos-api-${self:provider.stage}-lambdas
+  environment:
+    NODE_PATH: "./:/opt/node_modules"
+    cronScheduleGSEJobSync: ${self:custom.file.cronScheduleGSEJobSync}
+    cronScheduleGSEScheduleSync: ${self:custom.file.cronScheduleGSEScheduleSync}
+    cronScheduleGSESignupSync: ${self:custom.file.cronScheduleGSESignupSync}
+    cronScheduleGSESignupReminders: ${self:custom.file.cronScheduleGSESignupReminders}
+    cronScheduleGSECreditReminders: ${self:custom.file.cronScheduleGSECreditReminders}
+    cronSchedulePeopleProcessing: ${self:custom.file.cronSchedulePeopleProcessing}
+    graphClientID: ${self:custom.file.graphClientID}
+    graphClientSecret: ${self:custom.file.graphClientSecret}
+    graphTenantID: ${self:custom.file.graphTenantID}
+    mongoDbHostUnique: ${self:custom.file.mongoDbHostUnique}
+    mongoDbPass: ${self:custom.file.mongoDbPass}
+    mongoDbUser: ${self:custom.file.mongoDbUser}
+    stage: ${self:provider.stage}
+    upApiKey: ${self:custom.file.upApiKey}
+    upEmployeeChangesPass: ${self:custom.file.upEmployeeChangesPass}
+    upEmployeeChangesUser: ${self:custom.file.upEmployeeChangesUser}
+  layers:
+    - ${self:custom.file.custom.config.layerARNNPM}
+    - ${self:custom.file.custom.config.layerARNServices}

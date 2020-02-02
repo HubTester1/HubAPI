@@ -1,0 +1,66 @@
+{
+  "service": {
+    "service": "layer-dev-npm",
+    "serviceObject": {
+      "name": "layer-dev-npm"
+    },
+    "provider": {
+      "stage": "dev",
+      "variableSyntax": "\\${([ ~:a-zA-Z0-9._@'\",\\-\\/\\(\\)*?]+?)}",
+      "name": "aws",
+      "runtime": "nodejs12.x",
+      "region": "us-east-1",
+      "profile": "mos-api-sls-admin",
+      "deploymentBucket": "mos-api-dev-layers",
+      "deploymentBucketObject": {
+        "name": "mos-api-dev-layers"
+      },
+      "versionFunctions": true,
+      "remoteFunctionData": null,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "LayerDevNPMLambdaLayer": {
+            "Type": "AWS::Lambda::LayerVersion",
+            "Properties": {
+              "Content": {
+                "S3Bucket": "mos-api-dev-layers",
+                "S3Key": "serverless/layer-dev-npm/dev/1580657214383-2020-02-02T15:26:54.383Z/LayerDevNPM.zip"
+              },
+              "LayerName": "LayerDevNPM",
+              "Description": "npm dependencies"
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": "mos-api-dev-layers"
+          },
+          "LayerDevNPMLambdaLayerQualifiedArn": {
+            "Description": "Current Lambda layer version",
+            "Value": {
+              "Ref": "LayerDevNPMLambdaLayer"
+            }
+          }
+        }
+      }
+    },
+    "pluginsData": {},
+    "functions": {},
+    "serviceFilename": "serverless.yaml",
+    "layers": {
+      "LayerDevNPM": {
+        "path": "nodejs",
+        "description": "npm dependencies",
+        "package": {
+          "artifact": "/home/skip/Software/HubAPI/src/dev/Layers/NPM/.serverless/LayerDevNPM.zip"
+        }
+      }
+    }
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/layer-dev-npm/dev/1580657214383-2020-02-02T15:26:54.383Z",
+    "artifact": ""
+  }
+}

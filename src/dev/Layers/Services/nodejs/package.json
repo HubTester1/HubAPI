@@ -1,0 +1,12 @@
+{
+	"name": "layer-dev-services",
+	"description": "AWS Lambda Layer containing services in ../Services",
+	"dependencies": {
+		"data-connection": "file:../../../Services/DataConnection",
+		"data-queries": "file:../../../Services/DataQueries",
+		"email": "file:../../../Services/Email",
+		"ultipro": "file:../../../Services/UltiPro",
+		"ms-graph": "file:../../../Services/MSGraph",
+		"utilities": "file:../../../Services/Utilities"
+	}
+}
