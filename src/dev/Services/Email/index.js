@@ -214,7 +214,7 @@ module.exports = {
 												message: Errors.ReturnErrorMessage(11),
 											});
 										});
-									// if there are no emails to be sent
+								// if there are no emails to be sent
 								} else {
 									// resolve this promise with no error or metadata
 									resolve({
@@ -276,7 +276,7 @@ module.exports = {
 	 * @param {object[]} emailArray - array of objects, each comprising data for one email
 	 */
 
-	SendEachEmailFromArray: (emailArray) =>
+	SendEachEmailFromArray2: (emailArray) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// set up container for sending promises
@@ -319,6 +319,67 @@ module.exports = {
 					});
 				});
 		}),
+
+	SendEachEmailFromArray: (emailArray) =>
+		// return a new promise
+		new Promise((resolve, reject) => {
+			// start constructing result, defaulting to no errors
+			const emailArraySendingResult = {
+				error: false,
+				emailArraySendingError: false,
+				quantityEmailsInArray: emailArray.length,
+				quantityEmailsAttempted: 0,
+				quantityEmailsSent: 0,
+			};
+			// iterate over the array of emails
+			emailArray.forEach((emailValue, emailIndex) => {
+				// make sure the email is a string
+				// set up email var
+				let email;
+				// if emailValue is not a string
+				if (typeof (emailValue) !== 'string') {
+					// convert it to a string and assign to email var
+					email = JSON.stringify(emailValue);
+				// if emailValue is a string
+				} else {
+					// just assign to email var
+					email = emailValue;
+				}
+				// get a promise to send this email
+				module.exports.SendEmail(email)
+					// if the promise is resolved with a result
+					.then((sendingResult) => {
+						// increment emails sent
+						emailArraySendingResult.quantityEmailsSent += 1;
+						// if this was the last emailValue in the array
+						if ((emailIndex + 1) === emailArraySendingResult.quantityEmailsInArray) {
+							resolve(emailArraySendingResult);
+						}
+					})
+					// if the promise was rejected with an error
+					.catch((sendingError) => {
+						// set errors to true
+						emailArraySendingResult.error = true;
+						emailArraySendingResult.emailArraySendingError = true;
+						// create error collection, if it doesn't exist
+						if (!emailArraySendingResult.errorCollection) {
+							emailArraySendingResult.errorCollection = [];
+						}
+						// push error to collection
+						emailArraySendingResult.errorCollection.push(sendingError);
+						// if the error was not a transport error
+						if (!sendingError.graphError) {
+							// increment emails sent
+							emailArraySendingResult.quantityEmailsSent += 1;
+						}
+						// if this was the last email in the array
+						if ((emailIndex + 1) === emailArraySendingResult.quantityEmailsInArray) {
+							resolve(emailArraySendingResult);
+						}
+					});
+			});
+		}),
+
 	
 	/**
 	 * @name AddEmailToQueue
@@ -590,7 +651,7 @@ module.exports = {
 						MSGraph.SendEmailToGraph(email)
 						// if the promise is resolved with a result
 							.then((graphResults) => {
-							// set up container for promises for async operations
+								// set up container for promises for async operations
 								const emailQueueAndArchivePromises = [
 								// add to container promise to add email to archive
 									module.exports.AddEmailToArchive(email),
@@ -627,7 +688,7 @@ module.exports = {
 							})
 							// if the promise is rejected with an error
 							.catch((graphError) => {
-							// if this email is not already in the queue
+								// if this email is not already in the queue
 								if (!email.queuedTime) {
 									// get a promise to add email to queue
 									module.exports.AddEmailToQueue(email)

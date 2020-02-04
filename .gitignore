@@ -30,4 +30,4 @@ obj
 # Misc
 *.txt
 env.*
-dataDump
+_NesoDump

@@ -7,14 +7,14 @@
 const Email = require('email');
 const Cron = require('cron');
 
-/**
- * @name HandleProcessEmailQueue
- * @function
- * @async
- * @description Handle cron job command to process email queue.
- */
-
 module.exports = {
+
+	/**
+	 * @name HandleProcessEmailQueue
+	 * @function
+	 * @async
+	 * @description Handle cron job command to process email queue.
+	 */
 	
 	HandleProcessEmailQueue: () =>
 		// return a new promise
