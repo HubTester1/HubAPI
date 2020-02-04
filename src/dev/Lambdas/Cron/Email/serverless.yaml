@@ -9,8 +9,8 @@ custom:
 functions:
   HandleProcessEmailQueue:
     handler: index.HandleProcessEmailQueue
-    # events:
-    #   - schedule: cron(${self:provider.environment.cronScheduleEmailQueueProcessing})
+    events:
+      - schedule: cron(${self:provider.environment.cronScheduleEmailQueueProcessing})
 
 # -------------------------------------------------------
 
