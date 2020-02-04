@@ -20,6 +20,10 @@ mongoDbUser: ${ssm:mongodb-user}
 provider:
   runtime: nodejs12.x
   profile: mos-api-sls-admin
+twitterConsumerKey: ${ssm:twitter-consumer-key}
+twitterConsumerSecret: ${ssm:twitter-consumer-secret}
+twitterAccessTokenKey: ${ssm:twitter-access-token-key}
+twitterAccessTokenSecret: ${ssm:twitter-access-token-secret}
 upApiKey: ${ssm:up-api-key}
 upEmployeeChangesPass: ${ssm:up-emp-changes-pw}
 upEmployeeChangesUser: ${ssm:up-emp-changes-user}

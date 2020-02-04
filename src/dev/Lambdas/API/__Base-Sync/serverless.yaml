@@ -45,6 +45,10 @@ provider:
     mongoDbPass: ${self:custom.file.mongoDbPass}
     mongoDbUser: ${self:custom.file.mongoDbUser}
     stage: ${self:provider.stage}
+    twitterConsumerKey: ${self:custom.file.twitterConsumerKey}
+    twitterConsumerSecret: ${self:custom.file.twitterConsumerSecret}
+    twitterAccessTokenKey: ${self:custom.file.twitterAccessTokenKey}
+    twitterAccessTokenSecret: ${self:custom.file.twitterAccessTokenSecret}
     upApiKey: ${self:custom.file.upApiKey}
     upEmployeeChangesPass: ${self:custom.file.upEmployeeChangesPass}
     upEmployeeChangesUser: ${self:custom.file.upEmployeeChangesUser}

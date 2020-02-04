@@ -6,5 +6,8 @@
 	"scripts": {},
 	"author": "Museum of Science, Boston",
 	"license": "ISC",
-	"dependencies": {}
+	"dependencies": {
+		"moment": "^2.24.0",
+		"twitter": "^1.7.1"
+	}
 }

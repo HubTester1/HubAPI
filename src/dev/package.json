@@ -6,6 +6,7 @@
 		"data-queries": "file:Services/DataQueries",
 		"dotenv": "^8.2.0",
 		"email": "file:Services/Email",
+		"errors": "file:Services/Errors",
 		"mongodb": "^3.4.1",
 		"monk": "^7.1.2",
 		"ms-graph": "file:Services/MSGraph",

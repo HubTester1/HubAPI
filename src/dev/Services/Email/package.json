@@ -8,6 +8,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"data-queries": "file:../DataQueries",
+		"errors": "file:../Errors",
 		"ms-graph": "file:../MSGraph",
 		"utilities": "file:../Utilities"
 	}
