@@ -4,16 +4,16 @@
  * @category Agenda
  * @description Literally, a todo list
  * 
- * @todo integrate serverless
  * @todo access through domain or token
  * 
+ * @todo integrate serverless
  * 
  * 
- * @todo Unwhitelist 0.0.0.0/0
  * @todo review 12 factors
  * @todo Finish People
  * @todo Serve client from AWS through SPO
- * 
+ * @todo - ON HOLD - attach Lambdas to VPC and unwhitelist 0.0.0.0/0 in Atlas, 
+ * with help of Network Engineer
  */
 
 /**

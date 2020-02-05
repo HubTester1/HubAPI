@@ -206,12 +206,15 @@ module.exports = {
 										})
 										// if the promise is rejected with an error
 										.catch((emailSendingError) => {
-											// reject this promise with error and metadata
-											reject({
+											// reject this promise
+											const errorToReport = {
 												error: true,
+												emergencyError: true,
 												emailSendingError,
 												status: Status.ReturnStatusMessage(11),
-											});
+											};
+											Errors.ProcessError(errorToReport);
+											reject(errorToReport);
 										});
 								// if there are no emails to be sent
 								} else {
@@ -224,13 +227,16 @@ module.exports = {
 							})
 							// if the promise is rejected with an error
 							.catch((emailQueueError) => {
-								// reject this promise with error and metadata
-								reject({
+								// reject this promise
+								const errorToReport = {
 									error: true,
+									emergencyError: true,
 									mongoDBError: true,
 									mongoDBErrorDetails: emailQueueError,
 									status: Status.ReturnStatusMessage(13),
-								});
+								};
+								Errors.ProcessError(errorToReport);
+								reject(errorToReport);
 							});
 					// if there was no problem with retrieving the setting but 
 					// 		it's not ok to process the email queue right now
@@ -245,25 +251,31 @@ module.exports = {
 					// if we can't even retrieve the setting
 					} else if (!settingResult.error) {
 						// reject this promise
-						reject({
+						const errorToReport = {
 							error: true,
+							emergencyError: true,
 							graphError: false,
 							mongoDBError: true,
 							mongoDBErrorDetails: settingResult,
 							status: Status.ReturnStatusMessage(16),
-						});
+						};
+						Errors.ProcessError(errorToReport);
+						reject(errorToReport);
 					}
 				})
 				// if the promise is rejected with an error
 				.catch((settingError) => {
-					// reject this promise with the error
-					reject({
+					// reject this promise
+					const errorToReport = {
 						error: true,
+						emergencyError: true,
 						graphError: false,
 						mongoDBError: true,
 						mongoDBErrorDetails: settingError,
 						status: Status.ReturnStatusMessage(17),
-					});
+					};
+					Errors.ProcessError(errorToReport);
+					reject(errorToReport);
 				});
 		}),
 	
@@ -274,50 +286,6 @@ module.exports = {
 	 * @description For each email in an array, attempt to send the email.
 	 * @param {object[]} emailArray - array of objects, each comprising data for one email
 	 */
-
-	SendEachEmailFromArray2: (emailArray) =>
-		// return a new promise
-		new Promise((resolve, reject) => {
-			// set up container for sending promises
-			const sendingPromises = [];
-			// iterate over the array of emails
-			emailArray.forEach((emailValue, emailIndex) => {
-				// make sure the email is a string
-				// set up email var
-				let email;
-				// if emailValue is not a string
-				if (typeof (emailValue) !== 'string') {
-					// convert it to a string and assign to email var
-					email = JSON.stringify(emailValue);
-				// if emailValue is a string
-				} else {
-					// just assign to email var
-					email = emailValue;
-				}
-				// push to container a promise to send this email
-				sendingPromises.push(module.exports.SendEmail(email));
-			});
-			// get a promise that will fulfill when the other promises have been fulfilled
-			Promise.all(sendingPromises)
-				// if all promises were resolved
-				.then((sendingResults) => {
-					// resolve this promise with results and metadata
-					resolve({
-						error: false,
-						sendingResults,
-						emailArray,
-					});
-				})
-				// if any promise was rejected
-				.catch((sendingError) => {
-					// reject this promise with error and metadata
-					reject({
-						error: true,
-						sendingError,
-						emailArray,
-					});
-				});
-		}),
 
 	SendEachEmailFromArray: (emailArray) =>
 		// return a new promise
