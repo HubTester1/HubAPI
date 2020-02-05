@@ -6,8 +6,11 @@
 		"data-connection": "file:../../../Services/DataConnection",
 		"data-queries": "file:../../../Services/DataQueries",
 		"email": "file:../../../Services/Email",
+		"errors": "file:../../../Services/Errors",
+		"health": "file:../../../Services/Health",
 		"ultipro": "file:../../../Services/UltiPro",
 		"ms-graph": "file:../../../Services/MSGraph",
+		"status": "file:../../../Services/Status",
 		"utilities": "file:../../../Services/Utilities"
 	}
 }

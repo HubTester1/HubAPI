@@ -2,17 +2,17 @@ custom:
   file: ${file(../../../config-common.yaml)}
 # -------------------------------------------------------
   config:
-    service: XXX
+    service: api-health
     memorySize: 256
     timeout: 5
 
 functions:
-  XXX:
-    handler: index.XXX
+  HandleHealthCheckRequest:
+    handler: index.HandleHealthCheckRequest
     events:
       - http:
-          path: XXX/XXX
-          method: XXX
+          path: health/check
+          method: get
           cors: true
 
 # -------------------------------------------------------
@@ -53,5 +53,5 @@ provider:
     upEmployeeChangesPass: ${self:custom.file.upEmployeeChangesPass}
     upEmployeeChangesUser: ${self:custom.file.upEmployeeChangesUser}
   layers:
-    - ${self:custom.file.custom.config.custom.config.layerARNNPM}
+    - ${self:custom.file.custom.config.layerARNNPM}
     - ${self:custom.file.custom.config.layerARNServices}

@@ -1,109 +1,57 @@
 /**
  * @name Health
  * @api
- * @description XXX
+ * @description Handles all health-related requests.
  */
 
-const DataQueries = require('data-queries');
+const Health = require('health');
 
 module.exports = {
 
 	/**
-	 * @name XXX
+	 * @name HandleHealthCheckRequest
 	 * @function
 	 * @async
-	 * @description XXX
+	 * @description Handle request to check system health.
 	 */
 
-	ReturnHealthSettingsData: () =>
+	HandleHealthCheckRequest: (event, context) => 
 		// return a new promise
 		new Promise((resolve, reject) => {
-			// get a promise to retrieve the documents
-			DataQueries.ReturnAllDocsFromCollection('healthSettings')
-				// if the promise is resolved with the docs
-				.then((result) => {
-					// resolve this promise with the docs
-					resolve(result);
-				})
-				// if the promise is rejected with an error
-				.catch((error) => {
-					// reject this promise with an error
-					reject(error);
-				});
-		}),
-
-	/**
-	 * @name XXX
-	 * @function
-	 * @async
-	 * @description XXX
-	 */
-	
-	ReturnHealthWhitelistedDomains: () =>
-		// return a new promise
-		new Promise((resolve, reject) => {
-			// get a promise to retrieve all email settings
-			module.exports.ReturnHealthSettingsData()
-				// if the promise is resolved with the settings
-				.then((settings) => {
-					// resolve this promise with the requested setting
+			// get a promise to 
+			Health.ReturnHealth()
+				// if the promise is resolved with a result
+				.then((healthResult) => {
+					// resolve this promise with the result and metadata
 					resolve({
-						error: settings.error,
-						whitelistedDomains: settings.docs[0].whitelistedDomains,
+						statusCode: 200,
+						headers: {
+							'Access-Control-Allow-Origin': '*',
+							'Access-Control-Allow-Credentials': true,
+						},
+						body: JSON.stringify({
+							healthResult,
+							event,
+							context,
+						}),
 					});
 				})
 				// if the promise is rejected with an error
-				.catch((error) => {
-					// reject this promise with an error
-					reject(error);
+				.catch((healthError) => {
+					// reject this promise with the error and metadata
+					resolve({
+						statusCode: 500,
+						headers: {
+							'Access-Control-Allow-Origin': '*',
+							'Access-Control-Allow-Credentials': true,
+						},
+						body: JSON.stringify({
+							healthError,
+							event,
+							context,
+						}),
+					});
 				});
 		}),
 
-	/**
-	 * @name XXX
-	 * @function
-	 * @async
-	 * @description XXX
-	 */
-	
-	ReturnHealthFromDB: () =>
-		// return a new promise
-		new Promise((resolve, reject) => {
-			// get a promise to retrieve all documents
-			DataQueries.ReturnAllDocsFromCollection('health')
-				// if the promise is resolved with the docs
-				.then((result) => {
-					// resolve this promise with the docs
-					resolve(result);
-				})
-				// if the promise is rejected with an error
-				.catch((error) => {
-					// reject this promise with an error
-					reject(error);
-				});
-		}),
-
-	/**
-	 * @name XXX
-	 * @function
-	 * @async
-	 * @description XXX
-	 */
-	
-	ReturnHealth: () =>
-		// return a new promise
-		new Promise((resolve, reject) => {
-			// get a promise to retrieve health setting from DB
-			module.exports.ReturnHealthFromDB()
-				// if the promise is resolved with the docs
-				.then((result) => {
-					// resolve this promise with the docs
-					resolve(result);
-				})
-				// if the promise is rejected with an error
-				.catch((error) => {
-					// reject this promise with an error
-					reject(error);
-				});
-		}),
 };

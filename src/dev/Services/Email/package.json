@@ -10,6 +10,7 @@
 		"data-queries": "file:../DataQueries",
 		"errors": "file:../Errors",
 		"ms-graph": "file:../MSGraph",
+		"status": "file:../Status",
 		"utilities": "file:../Utilities"
 	}
 }

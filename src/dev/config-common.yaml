@@ -1,7 +1,7 @@
 custom:
   config:
-    layerARNNPM: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevNPM:3
-    layerARNServices: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:13
+    layerARNNPM: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevNPM:4
+    layerARNServices: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:15
     stage: dev
 #-------------
 cronScheduleEmailQueueProcessing: ${ssm:cron-schedule-email-queue-processing}

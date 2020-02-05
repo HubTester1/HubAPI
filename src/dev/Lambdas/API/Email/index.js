@@ -54,7 +54,7 @@ module.exports = {
 					//		we have no way of handling the email
 					if (error.graphError && error.mongoDBError) {
 						// reject this promise with the error and metadata
-						reject({
+						resolve({
 							statusCode: 500,
 							headers: {
 								'Access-Control-Allow-Origin': '*',

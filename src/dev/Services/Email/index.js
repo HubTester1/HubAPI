@@ -3,7 +3,11 @@
  * @service
  * @description Performs all email-related operations.
  * 
- * @todo error handling
+ * @todo Make API-facers return event and context
+ * @todo 5 - email sending error but queued says error: false
+ * @todo integrate serverless
+ * @todo If status, use status in error not.
+ * @todo health
  * @todo access through domain or token
  */
 
@@ -11,6 +15,7 @@ const DataQueries = require('data-queries');
 const Utilities = require('utilities');
 const MSGraph = require('ms-graph');
 const Errors = require('errors');
+const Status = require('status');
 
 module.exports = {
 	
@@ -142,8 +147,8 @@ module.exports = {
 	 * @name ReturnEmailWhitelistedDomains
 	 * @function
 	 * @async
-	 * @description Return the setting indicating the domains from which email requests are accepted.
-	 * Add a domain to this setting in database to all requests from an additional domain.
+	 * @description Return the setting indicating the domains from which requests are accepted.
+	 * Add a domain to this setting in database to allow requests from an additional domain.
 	 */
 
 	ReturnEmailWhitelistedDomains: () =>
@@ -171,7 +176,7 @@ module.exports = {
 	 * @async
 	 * @description If settings indicate that it's ok to process 
 	 * the email queue right now, then, if there are emails in the queue,
-	 * send each queued email to SendEmail().
+	 * send array of emails to SendEachEmailFromArray().
 	 * If settings indicate that it's not ok to process 
 	 * the email queue right now, then do nothing.
 	 * Return an error only if settings or queue cannot be reached or 
@@ -202,7 +207,7 @@ module.exports = {
 											resolve({
 												error: false,
 												emailSendingResults,
-												message: Errors.ReturnErrorMessage(10),
+												status: Status.ReturnStatusMessage(10),
 											});
 										})
 										// if the promise is rejected with an error
@@ -211,7 +216,7 @@ module.exports = {
 											reject({
 												error: true,
 												emailSendingError,
-												message: Errors.ReturnErrorMessage(11),
+												status: Status.ReturnStatusMessage(11),
 											});
 										});
 								// if there are no emails to be sent
@@ -219,7 +224,7 @@ module.exports = {
 									// resolve this promise with no error or metadata
 									resolve({
 										error: false,
-										message: Errors.ReturnErrorMessage(12),
+										status: Status.ReturnStatusMessage(12),
 									});
 								}
 							})
@@ -230,7 +235,7 @@ module.exports = {
 									error: true,
 									mongoDBError: true,
 									mongoDBErrorDetails: emailQueueError,
-									message: Errors.ReturnErrorMessage(13),
+									status: Status.ReturnStatusMessage(13),
 								});
 							});
 					// if there was no problem with retrieving the setting but 
@@ -241,17 +246,17 @@ module.exports = {
 					) {
 						resolve({
 							error: false,
-							message: Errors.ReturnErrorMessage(14),
+							status: Status.ReturnStatusMessage(14),
 						});
 					// if we can't even retrieve the setting
 					} else if (!settingResult.error) {
-						// reject this promise with an error object
+						// reject this promise
 						reject({
 							error: true,
 							graphError: false,
 							mongoDBError: true,
 							mongoDBErrorDetails: settingResult,
-							message: Errors.ReturnErrorMessage(9),
+							status: Status.ReturnStatusMessage(16),
 						});
 					}
 				})
@@ -263,7 +268,7 @@ module.exports = {
 						graphError: false,
 						mongoDBError: true,
 						mongoDBErrorDetails: settingError,
-						message: Errors.ReturnErrorMessage(9),
+						status: Status.ReturnStatusMessage(17),
 					});
 				});
 		}),
@@ -352,8 +357,14 @@ module.exports = {
 						// increment emails sent
 						emailArraySendingResult.quantityEmailsSent += 1;
 						// if this was the last emailValue in the array
-						if ((emailIndex + 1) === emailArraySendingResult.quantityEmailsInArray) {
-							resolve(emailArraySendingResult);
+						if (
+							(emailIndex + 1) === emailArraySendingResult.quantityEmailsInArray
+						) {
+							if (emailArraySendingResult.error) {
+								reject(emailArraySendingResult);
+							} else {
+								resolve(emailArraySendingResult);
+							}
 						}
 					})
 					// if the promise was rejected with an error
@@ -373,8 +384,14 @@ module.exports = {
 							emailArraySendingResult.quantityEmailsSent += 1;
 						}
 						// if this was the last email in the array
-						if ((emailIndex + 1) === emailArraySendingResult.quantityEmailsInArray) {
-							resolve(emailArraySendingResult);
+						if (
+							(emailIndex + 1) === emailArraySendingResult.quantityEmailsInArray
+						) {
+							if (emailArraySendingResult.error) {
+								reject(emailArraySendingResult);
+							} else {
+								resolve(emailArraySendingResult);
+							}
 						}
 					});
 			});
@@ -671,19 +688,21 @@ module.exports = {
 										resolve({
 											error: false,
 											email: incomingEmail,
-											message: Errors.ReturnErrorMessage(1),
+											status: Status.ReturnStatusMessage(1),
 										});
 									})
 									// if any promise was rejected
 									.catch((queueOrArchiveError) => {
-									// reject this promise with a message
-										reject({
+										// reject this promise
+										const errorToReport = {
 											error: true,
 											graphError: false,
 											mongoDBError: queueOrArchiveError,
 											email: incomingEmail,
-											message: Errors.ReturnErrorMessage(2),
-										});
+											status: Status.ReturnStatusMessage(2),
+										};
+										Errors.ProcessError(errorToReport);
+										reject(errorToReport);
 									});
 							})
 							// if the promise is rejected with an error
@@ -694,40 +713,45 @@ module.exports = {
 									module.exports.AddEmailToQueue(email)
 										// if the promise is resolved with a result
 										.then((addToQueueResult) => {
-										// reject this promise with an error object
+										// reject this promise
 											reject({
 												error: true,
 												graphError: true,
 												graphErrorDetails: graphError,
 												mongoDBError: false,
 												email: incomingEmail,
-												message: Errors.ReturnErrorMessage(3),
+												status: Status.ReturnStatusMessage(3),
 											});
 										})
 										// if the promise is rejected with an error
 										.catch((addToQueueError) => {
-										// reject this promise with an error object
-											reject({
+											// reject this promise
+											const errorToReport = {
 												error: true,
+												emergencyError: true,
 												graphError: true,
 												graphErrorDetails: graphError,
 												mongoDBError: true,
 												mongoDBErrorDetails: addToQueueError,
 												email: incomingEmail,
-												message: Errors.ReturnErrorMessage(4),
-											});
+												status: Status.ReturnStatusMessage(4),
+											};
+											Errors.ProcessError(errorToReport);
+											reject(errorToReport);
 										});
 								// if email came from the queue
 								} else {
-								// reject this promise with an error object
-									reject({
+									// reject this promise
+									const errorToReport = {
 										error: true,
 										graphError: true,
 										graphErrorDetails: graphError,
 										mongoDBError: false,
 										email: incomingEmail,
-										message: Errors.ReturnErrorMessage(5),
-									});
+										status: Status.ReturnStatusMessage(5),
+									};
+									Errors.ProcessError(errorToReport);
+									reject(errorToReport);
 								}
 							});
 					// if there was no problem with retrieving the setting but 
@@ -746,20 +770,23 @@ module.exports = {
 								resolve({
 									error: false,
 									email: incomingEmail,
-									message: Errors.ReturnErrorMessage(6),
+									status: Status.ReturnStatusMessage(6),
 								});
 							})
 							// if the promise is rejected with an error
 							.catch((addToQueueError) => {
-								// reject this promise with an error object
-								reject({
+								// reject this promise
+								const errorToReport = {
 									error: true,
+									emergencyError: true,
 									graphError: false,
 									mongoDBError: true,
 									mongoDBErrorDetails: addToQueueError,
 									email: incomingEmail,
-									message: Errors.ReturnErrorMessage(7),
-								});
+									status: Status.ReturnStatusMessage(7),
+								};
+								Errors.ProcessError(errorToReport);
+								reject(errorToReport);
 							});
 					// if there was no problem with retrieving the setting but 
 					// 		it's not ok to send email right now, and
@@ -775,32 +802,38 @@ module.exports = {
 							graphError: false,
 							mongoDBError: false,
 							email: incomingEmail,
-							message: Errors.ReturnErrorMessage(8),
+							status: Status.ReturnStatusMessage(8),
 						});
 					// if we can't even retrieve the setting
 					} else if (!settingResult.error) {
-						// reject this promise with an error object
-						reject({
+						// reject this promise
+						const errorToReport = {
 							error: true,
+							emergencyError: true,
 							graphError: false,
 							mongoDBError: true,
 							mongoDBErrorDetails: settingResult,
 							email: incomingEmail,
-							message: Errors.ReturnErrorMessage(9),
-						});
+							status: Status.ReturnStatusMessage(9),
+						};
+						Errors.ProcessError(errorToReport);
+						reject(errorToReport);
 					}
 				})
 				// if the promise is rejected with an error
 				.catch((settingError) => {
-					// reject this promise with an error object
-					reject({
+					// reject this promise
+					const errorToReport = {
 						error: true,
+						emergencyError: true,
 						graphError: false,
 						mongoDBError: true,
 						mongoDBErrorDetails: settingError,
 						email: incomingEmail,
-						message: Errors.ReturnErrorMessage(9),
-					});
+						status: Status.ReturnStatusMessage(15),
+					};
+					Errors.ProcessError(errorToReport);
+					reject(errorToReport);
 				});
 		}),
 };
