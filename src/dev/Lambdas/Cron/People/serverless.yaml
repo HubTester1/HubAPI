@@ -28,8 +28,10 @@ provider:
     name: mos-api-${self:provider.stage}-lambdas
   environment:
     NODE_PATH: "./:/opt/node_modules"
-    cronScheduleEmailQueueProcessing: ${ssm:cron-schedule-email-queue-processing}
-    cronScheduleGSEJobSync: ${ssm:cron-schedule-gse-job-sync}
+    authJWTPayloadMessage: ${self:custom.file.authJWTPayloadMessage}
+    authJWTPayloadSecret: ${self:custom.file.authJWTPayloadSecret}
+    cronScheduleEmailQueueProcessing: ${self:custom.file.cronScheduleEmailQueueProcessing}
+    cronScheduleGSEJobSync: ${self:custom.file.cronScheduleGSEJobSync}
     cronScheduleGSEScheduleSync: ${self:custom.file.cronScheduleGSEScheduleSync}
     cronScheduleGSESignupSync: ${self:custom.file.cronScheduleGSESignupSync}
     cronScheduleGSESignupReminders: ${self:custom.file.cronScheduleGSESignupReminders}

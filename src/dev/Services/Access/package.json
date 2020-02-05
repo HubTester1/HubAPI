@@ -1,12 +1,14 @@
 {
-	"name": "health",
+	"name": "access",
 	"version": "1.0.0",
-	"description": "Handles everything related to health.",
+	"description": "Handles everything related to access.",
 	"main": "index.js",
 	"scripts": {},
 	"author": "Museum of Science, Boston",
 	"license": "ISC",
 	"dependencies": {
-		"data-queries": "file:../DataQueries"
+		"atob": "^2.1.2",
+		"errors": "file:../Errors",
+		"status": "file:../Status"
 	}
 }

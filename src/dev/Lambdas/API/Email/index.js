@@ -22,6 +22,12 @@ module.exports = {
 			Email.SendEmail(event.body)
 				// if the promise is resolved with a result
 				.then((sendResult) => {
+					// eslint-disable-next-line no-console
+					console.log('sendResult', sendResult);
+					// eslint-disable-next-line no-console
+					console.log('event', event);
+					// eslint-disable-next-line no-console
+					console.log('context', context);
 					// resolve this promise with the result and metadata
 					resolve({
 						statusCode: 200,
@@ -41,6 +47,12 @@ module.exports = {
 					// if there was no graph error or no mongoDB error; i.e.,
 					// 		if either sending or queueing was successful
 					if (!sendError.graphError || !sendError.mongoDBError) {
+						// eslint-disable-next-line no-console
+						console.log('sendError', sendError);
+						// eslint-disable-next-line no-console
+						console.log('event', event);
+						// eslint-disable-next-line no-console
+						console.log('context', context);
 						// resolve this promise with the error and metadata; i.e.,
 						// 		resolve instead of reject because we don't want to 
 						// 		bother the requester with our internal problems
@@ -61,6 +73,12 @@ module.exports = {
 					// if there was a graph error and there was a queue error; i.e., 
 					//		we have no way of handling the email
 					if (sendError.graphError && sendError.mongoDBError) {
+						// eslint-disable-next-line no-console
+						console.log('sendError', sendError);
+						// eslint-disable-next-line no-console
+						console.log('event', event);
+						// eslint-disable-next-line no-console
+						console.log('context', context);
 						// reject this promise with the error and metadata
 						resolve({
 							statusCode: 500,

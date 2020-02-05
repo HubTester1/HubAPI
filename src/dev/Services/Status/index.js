@@ -12,9 +12,10 @@ module.exports = {
 	 * @function
 	 * @description Given a message ID, return a status message.
 	 * @param {number} messageID - ID of message to return, e.g., 14
+	 * @param {string} token - additional text to be used in message, e.g., 'name of error is X'
 	 */
 
-	ReturnStatusMessage: (messageID) => {
+	ReturnStatusMessage: (messageID, token) => {
 		let messageToReturn = '';
 		switch (messageID) {
 		case 1:
@@ -68,13 +69,13 @@ module.exports = {
 		case 17:
 			messageToReturn = '17 - email settings unavailable';
 			break;
+		case 18:
+			messageToReturn = `18 - domain whitelist retrieval failed for ${token}`;
+			break;
+		case 19:
+			messageToReturn = '19 - accessToken and origin missing';
+			break;
 		/* case XXX:
-			messageToReturn = 'XXXXXXXXXXXX';
-			break;
-		case XXX:
-			messageToReturn = 'XXXXXXXXXXXX';
-			break;
-		case XXX:
 			messageToReturn = 'XXXXXXXXXXXX';
 			break;
 		case XXX:

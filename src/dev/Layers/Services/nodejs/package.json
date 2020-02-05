@@ -2,6 +2,7 @@
 	"name": "layer-dev-services",
 	"description": "AWS Lambda Layer containing services in ../Services",
 	"dependencies": {
+		"access": "file:../../../Services/Access",
 		"cron": "file:../../../Services/Cron",
 		"data-connection": "file:../../../Services/DataConnection",
 		"data-queries": "file:../../../Services/DataQueries",

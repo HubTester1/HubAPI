@@ -4,7 +4,10 @@
  * @category Agenda
  * @description Literally, a todo list
  * 
- * @todo access through domain or token
+ * @todo access - move extra functions to utility
+ * @todo access - apply to all endpoints
+ * @todo friendlier cron, queue, archive dates
+ * @todo console.log(value); results
  * 
  * @todo integrate serverless
  * 

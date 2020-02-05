@@ -2,6 +2,7 @@
 	"name": "dev",
 	"version": "1.0.0",
 	"dependencies": {
+		"access": "file:Services/Access",
 		"cron": "file:Services/Cron",
 		"data-queries": "file:Services/DataQueries",
 		"dotenv": "^8.2.0",
