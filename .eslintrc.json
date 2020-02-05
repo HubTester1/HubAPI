@@ -53,6 +53,7 @@
 		"jsdoc/check-tag-names": [1, {
 			"definedTags": [
 				"model",
+				"category",
 				"service",
 				"api",
 				"cron"

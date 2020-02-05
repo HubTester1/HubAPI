@@ -21,7 +21,7 @@ module.exports = {
 			// get a promise to send the email
 			Email.SendEmail(event.body)
 				// if the promise is resolved with a result
-				.then((result) => {
+				.then((sendResult) => {
 					// resolve this promise with the result and metadata
 					resolve({
 						statusCode: 200,
@@ -29,14 +29,18 @@ module.exports = {
 							'Access-Control-Allow-Origin': '*',
 							'Access-Control-Allow-Credentials': true,
 						},
-						body: JSON.stringify(result),
+						body: JSON.stringify({
+							sendResult,
+							event,
+							context,
+						}),
 					});
 				})
 				// if the promise is rejected with an error
-				.catch((error) => {
+				.catch((sendError) => {
 					// if there was no graph error or no mongoDB error; i.e.,
 					// 		if either sending or queueing was successful
-					if (!error.graphError || !error.mongoDBError) {
+					if (!sendError.graphError || !sendError.mongoDBError) {
 						// resolve this promise with the error and metadata; i.e.,
 						// 		resolve instead of reject because we don't want to 
 						// 		bother the requester with our internal problems
@@ -47,12 +51,16 @@ module.exports = {
 								'Access-Control-Allow-Origin': '*',
 								'Access-Control-Allow-Credentials': true,
 							},
-							body: JSON.stringify(error),
+							body: JSON.stringify({
+								sendError,
+								event,
+								context,
+							}),
 						});
 					}
 					// if there was a graph error and there was a queue error; i.e., 
 					//		we have no way of handling the email
-					if (error.graphError && error.mongoDBError) {
+					if (sendError.graphError && sendError.mongoDBError) {
 						// reject this promise with the error and metadata
 						resolve({
 							statusCode: 500,
@@ -60,7 +68,11 @@ module.exports = {
 								'Access-Control-Allow-Origin': '*',
 								'Access-Control-Allow-Credentials': true,
 							},
-							body: JSON.stringify(error),
+							body: JSON.stringify({
+								sendError,
+								event,
+								context,
+							}),
 						});
 					}
 				});

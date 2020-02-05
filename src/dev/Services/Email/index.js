@@ -3,12 +3,6 @@
  * @service
  * @description Performs all email-related operations.
  * 
- * @todo Make API-facers return event and context
- * @todo 5 - email sending error but queued says error: false
- * @todo integrate serverless
- * @todo If status, use status in error not.
- * @todo health
- * @todo access through domain or token
  */
 
 const DataQueries = require('data-queries');
