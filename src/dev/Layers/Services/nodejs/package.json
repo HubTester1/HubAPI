@@ -3,15 +3,18 @@
 	"description": "AWS Lambda Layer containing services in ../Services",
 	"dependencies": {
 		"access": "file:../../../Services/Access",
-		"cron": "file:../../../Services/Cron",
 		"data-connection": "file:../../../Services/DataConnection",
 		"data-queries": "file:../../../Services/DataQueries",
 		"email": "file:../../../Services/Email",
 		"errors": "file:../../../Services/Errors",
 		"health": "file:../../../Services/Health",
-		"ultipro": "file:../../../Services/UltiPro",
+		"log": "file:../../../Services/Log",
+		"moment": "^2.24.0",
+		"moment-timezone": "^0.5.27",
 		"ms-graph": "file:../../../Services/MSGraph",
+		"response": "file:../../../Services/Response",
 		"status": "file:../../../Services/Status",
+		"ultipro": "file:../../../Services/UltiPro",
 		"utilities": "file:../../../Services/Utilities"
 	}
 }

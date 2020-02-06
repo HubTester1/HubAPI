@@ -5,8 +5,111 @@
  */
 
 const moment = require('moment');
+const atob = require('atob');
 
 module.exports = {
+
+	/**
+	 * @name ReturnAnyValueAsUniqueObject
+	 * @function
+	 * @description Return a new object. If given a parsable 
+	 * string representation of an object, return a parsed 
+	 * object. If given an object, return a copy of the 
+	 * object. Otherwise, return an empty object.
+	 * @param {any} incomingValue - e.g., 'kjsdf89gsdnrejk'
+	 */
+
+	ReturnUniqueObjectGivenAnyValue: (incomingValue) => {
+		// set up return value, defaulting to an empty object
+		let returnValue = {};
+		// if incomingValue is a parsable string representation 
+		// 		of an object
+		if (
+			module.exports
+				.ReturnValueIsJSONParsableString(incomingValue)
+		) {
+			// parse it into a new object
+			returnValue = JSON.parse(incomingValue);
+		// if incomingValue is a non-array object
+		} else if (
+			typeof (incomingValue) === 'object' && 
+			!incomingValue[0]
+		) {
+			// get a copy thereof
+			returnValue = 
+				module.exports.ReturnCopyOfObject(incomingValue);
+		}
+		// return returnValue
+		return returnValue;
+	},
+
+	/**
+	 * @name ReturnValueIsJSONParsableString
+	 * @function
+	 * @description Return true if incomingValue is a JSON-parsable 
+	 * string. Otherwise, return false.
+	 * @param {any} incomingValue - e.g., '{ kjsdf89: "gsdnrejk" }'
+	 */
+
+	ReturnValueIsJSONParsableString: (incomingValue) => {
+		// set up return value, defaulting to false
+		let returnValue = false;
+		// try...
+		try {
+			// ...to get a parsed object
+			const attemptedObject = JSON.parse(incomingValue);
+			// Parsing a boolean or a number will not throw an error,
+			// 		so we must check that type is object. However, 
+			// 		null is also of type object, so we must also 
+			// 		test for truthiness.
+			// if type is object and value is truthy
+			if (attemptedObject && typeof attemptedObject === 'object') {
+				// indicate that string is parsable
+				returnValue = true;
+			// if either type is not object or value is not truthy
+			} else {
+				// indicate that string is not parsable
+				returnValue = false;
+			}
+			
+		// if attempt to get an object resulted in an error
+		} catch (e) {
+			// indicate that string is not parsable
+			returnValue = false;
+		}
+		// return returnValue
+		return returnValue;
+	},
+
+	/**
+	 * @name ReturnJWTPayload
+	 * @function
+	 * @description Return the payload portion of a JSON Web Token.
+	 * @param {string} incomingString - e.g., 'kjsdf89gsdnrejk'
+	 */
+
+	ReturnJWTPayload: (incomingString) =>
+		JSON.parse(
+			module.exports.ReturnBase64DecodedUnicodeString(
+				incomingString
+					.split('.')[1]
+					.replace('-', '+').replace('_', '/'),
+			),
+		),
+
+	/**
+	 * @name ReturnBase64DecodedUnicodeString
+	 * @function
+	 * @description Return a decoded base-64 encoded string that may
+	 * be in Unicode format.
+	 * @param {string} incomingString - e.g., 'kjsdf89gsdnrejk'
+	 */
+
+	ReturnBase64DecodedUnicodeString: (incomingString) =>
+		decodeURIComponent(
+			Array.prototype.map.call(atob(incomingString), (c) =>
+				`%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`).join(''),
+		),
 
 	/**
 	 * @name ReturnAccountFromUserAndDomain
@@ -47,7 +150,6 @@ module.exports = {
 		// return the result
 		return stringToReturn;
 	},
-
 
 	/**
 	 * @name ReturnCopyOfObject

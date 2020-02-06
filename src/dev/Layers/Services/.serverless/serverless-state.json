@@ -26,7 +26,7 @@
             "Properties": {
               "Content": {
                 "S3Bucket": "mos-api-dev-layers",
-                "S3Key": "serverless/layer-dev-services/dev/1580937392739-2020-02-05T21:16:32.739Z/LayerDevServices.zip"
+                "S3Key": "serverless/layer-dev-services/dev/1581019567136-2020-02-06T20:06:07.136Z/LayerDevServices.zip"
               },
               "LayerName": "LayerDevServices",
               "Description": "services dependencies"
@@ -60,7 +60,7 @@
     }
   },
   "package": {
-    "artifactDirectoryName": "serverless/layer-dev-services/dev/1580937392739-2020-02-05T21:16:32.739Z",
+    "artifactDirectoryName": "serverless/layer-dev-services/dev/1581019567136-2020-02-06T20:06:07.136Z",
     "artifact": ""
   }
 }

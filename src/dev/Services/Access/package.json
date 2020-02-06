@@ -7,8 +7,8 @@
 	"author": "Museum of Science, Boston",
 	"license": "ISC",
 	"dependencies": {
-		"atob": "^2.1.2",
 		"errors": "file:../Errors",
-		"status": "file:../Status"
+		"status": "file:../Status",
+		"utilities": "file:../Utilities"
 	}
 }

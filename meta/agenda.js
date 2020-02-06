@@ -4,14 +4,10 @@
  * @category Agenda
  * @description Literally, a todo list
  * 
- * @todo access - move extra functions to utility
- * @todo access - apply to all endpoints
- * @todo friendlier cron, queue, archive dates
- * @todo console.log(value); results
- * 
- * @todo integrate serverless
+ * @todo - PAF, UP docs, send wfh report
  * 
  * 
+ * ----------------
  * @todo review 12 factors
  * @todo Finish People
  * @todo Serve client from AWS through SPO

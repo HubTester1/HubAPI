@@ -4,24 +4,11 @@
  * @description Performs all access-related operations.
  */
 
-const atob = require('atob');
 const Errors = require('errors');
 const Status = require('status');
+const Utilities = require('utilities');
 
 module.exports = {
-
-	B64DecodeUnicode: (str) =>
-		decodeURIComponent(
-			Array.prototype.map.call(atob(str), (c) =>
-				`%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`).join(''),
-		),
-
-	ParseJWT: (token) =>
-		JSON.parse(
-			module.exports.B64DecodeUnicode(
-				token.split('.')[1].replace('-', '+').replace('_', '/'),
-			),
-		),
 
 	/**
 	 * @name ReturnRequesterCanAccess
@@ -41,9 +28,12 @@ module.exports = {
 			const accessTokenPrefix = 'Bearer ';
 			// if event contains a truthy body property
 			if (event.body) {
-				// try to get access token plus its prefix out of it
-				const accessTokenAndPrefix = event.body.accessToken;
-				// if the result is a string and contains accessTokenPrefix
+				// ensure event.body is an object
+				const eventBody = 
+					Utilities.ReturnUniqueObjectGivenAnyValue(event.body);
+				// try to get access token plus its prefix out of eventBody
+				const accessTokenAndPrefix = eventBody.accessToken;
+				// if the result is a string and it contains accessTokenPrefix
 				if (
 					typeof (accessTokenAndPrefix) === 'string' && 
 					accessTokenAndPrefix.includes(accessTokenPrefix)
@@ -56,7 +46,7 @@ module.exports = {
 			// if an access token was sent and it contains the correct value
 			if (
 				accessToken && 
-				module.exports.ParseJWT(accessToken).message === process.env.authJWTPayloadMessage
+				Utilities.ReturnJWTPayload(accessToken).message === process.env.authJWTPayloadMessage
 			) {
 				// resolve this promise
 				resolve({

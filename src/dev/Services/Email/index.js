@@ -392,7 +392,7 @@ module.exports = {
 	 * @function
 	 * @async
 	 * @description Add the email to the archive, i.e., the doc to the 'emailArchive' collection.
-	 * @param {Email} incomingEmail
+	 * @param {...Email} incomingEmail - {@link Email} object
 	 */
 
 	AddEmailToArchive: (incomingEmail) =>
@@ -420,7 +420,7 @@ module.exports = {
 	 * @async
 	 * @description Replace one email in the queue, i.e., one doc in the 'emailQueue' collection.
 	 * @param {string} emailID - ID of email to replace, i.e., of doc to overwrite
-	 * @param {Email} incomingEmail
+	 * @param {...Email} incomingEmail - {@link Email} object
 	 */
 
 	ReplaceQueuedEmail: (emailID, incomingEmail) =>
@@ -444,7 +444,7 @@ module.exports = {
 	 * @async
 	 * @description Replace one email in the archive, i.e., one doc in the 'emailArchive' collection.
 	 * @param {string} emailID - ID of email to replace, i.e., of doc to overwrite
-	 * @param {Email} incomingEmail
+	 * @param {...Email} incomingEmail - {@link Email} object
 	 */
 
 	ReplaceArchivedEmail: (emailID, incomingEmail) =>
@@ -606,7 +606,7 @@ module.exports = {
 	 * bother requester if we cannot send but can queue.
 	 * Requester may examine the response details to determine whether 
 	 * the email was sent or queued.
-	 * @param {Email} incomingEmail
+	 * @param {...Email} incomingEmail - {@link Email} object
 	 */
 
 	SendEmail: (incomingEmail) =>

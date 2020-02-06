@@ -1,0 +1,12 @@
+{
+	"name": "response",
+	"version": "1.0.0",
+	"description": "Handles responses to requests and cron initiations.",
+	"main": "index.js",
+	"scripts": {},
+	"author": "Museum of Science, Boston",
+	"license": "ISC",
+	"dependencies": {
+		"log": "file:../Log"
+	}
+}

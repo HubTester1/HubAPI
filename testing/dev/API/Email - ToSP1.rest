@@ -1,6 +1,7 @@
 POST https://kn9p96t26h.execute-api.us-east-1.amazonaws.com/dev/email/send
 
 {
+	"accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoibHVzY2lvdXMga2l0dGVucyJ9.jGLud9MRGpHpI1GuGTBfYfyOlq57P0u8eXBpCLS0fLk",
 	"to": "sp1@mos.org",
 	"from": "The Hub <noreply@mos.org>",
 	"subject": "Test Email",
