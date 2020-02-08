@@ -1,0 +1,14 @@
+{
+	"name": "migration",
+	"version": "1.0.0",
+	"description": "XXX.",
+	"main": "index.js",
+	"scripts": {},
+	"author": "Museum of Science, Boston",
+	"license": "ISC",
+	"dependencies": {
+		"axios": "^0.19.2",
+		"data-queries": "file:../DataQueries",
+		"utilities": "file:../Utilities"
+	}
+}

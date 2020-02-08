@@ -4,10 +4,6 @@
  * @category Agenda
  * @description Literally, a todo list
  * 
- * @todo - PAF, UP docs, send wfh report
- * 
- * 
- * ----------------
  * @todo review 12 factors
  * @todo Finish People
  * @todo Serve client from AWS through SPO

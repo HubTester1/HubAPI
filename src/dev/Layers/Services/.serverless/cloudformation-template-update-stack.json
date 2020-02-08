@@ -7,7 +7,7 @@
       "Properties": {
         "Content": {
           "S3Bucket": "mos-api-dev-layers",
-          "S3Key": "serverless/layer-dev-services/dev/1581019567136-2020-02-06T20:06:07.136Z/LayerDevServices.zip"
+          "S3Key": "serverless/layer-dev-services/dev/1581190655856-2020-02-08T19:37:35.856Z/LayerDevServices.zip"
         },
         "LayerName": "LayerDevServices",
         "Description": "services dependencies"

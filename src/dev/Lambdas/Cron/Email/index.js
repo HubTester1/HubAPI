@@ -5,8 +5,8 @@
  */
 
 const Email = require('email');
-// const Cron = require('cron');
-const moment = require('moment');
+const Access = require('access');
+const Response = require('response');
 
 module.exports = {
 
@@ -20,106 +20,54 @@ module.exports = {
 	HandleProcessEmailQueue: (event, context) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
-			// resolve this promise with the result and metadata
-			// get a promise to process email queue
-			Email.ProcessEmailQueue()
+			// get a promise to check access
+			Access.ReturnRequesterCanAccess(
+				event,
+				Email.ReturnEmailWhitelistedDomains,
+			)
 				// if the promise is resolved with a result
-				.then((queueResult) => {
-					// eslint-disable-next-line no-console
-					console.log('easternTime', moment().format('dddd, MMM D YYYY, h:mm a'));
-					// eslint-disable-next-line no-console
-					console.log('queueResult', queueResult);
-					// eslint-disable-next-line no-console
-					console.log('event', event);
-					// eslint-disable-next-line no-console
-					console.log('context', context);
-					/* // get a promise to record in cron log
-					Cron.Log({
-						process: 'ProcessEmailQueue',
-						status: 'success',
-						result: queueResult,
-						event,
-						context,
-					})
+				.then((accessResult) => {
+					// get a promise to process email queue
+					Email.ProcessEmailQueue()
 						// if the promise is resolved with a result
-						.then((cronResult) => { */
-					// resolve this promise with the result and metadata
-					resolve({
-						statusCode: 200,
-						headers: {
-							'Access-Control-Allow-Origin': '*',
-							'Access-Control-Allow-Credentials': true,
-						},
-						body: JSON.stringify({
-							queueResult,
-							event,
-							context,
-						}),
-					});
-					/* })
-						// if the promise is rejected with an error
-						.catch((cronError) => {
-							// resolve this promise with the error and metadata
-							resolve({
-								statusCode: 500,
-								headers: {
-									'Access-Control-Allow-Origin': '*',
-									'Access-Control-Allow-Credentials': true,
-								},
-								body: JSON.stringify({
-									cronError,
+						.then((queueResult) => {
+							// send indicative response
+							Response.HandleResponse({
+								statusCode: 200,
+								responder: resolve,
+								content: {
+									queueResult,
 									event,
 									context,
-								}),
+								},
 							});
-						}); */
+						})
+						// if the promise is rejected with an error
+						.catch((queueError) => {
+							// send indicative response
+							Response.HandleResponse({
+								statusCode: 500,
+								responder: resolve,
+								content: {
+									queueError,
+									event,
+									context,
+								},
+							});
+						});
 				})
 				// if the promise is rejected with an error
-				.catch((queueError) => {
-					// eslint-disable-next-line no-console
-					console.log('queueError', queueError);
-					// eslint-disable-next-line no-console
-					console.log('event', event);
-					// eslint-disable-next-line no-console
-					console.log('context', context);
-					/* // get a promise to record in cron log
-					Cron.Log({
-						process: 'ProcessEmailQueue',
-						status: 'error',
-						result: queueError,
-					})
-						// if the promise is resolved with a result
-						.then((cronResult) => { */
-					// resolve this promise with the error and metadata
-					resolve({
-						statusCode: 500,
-						headers: {
-							'Access-Control-Allow-Origin': '*',
-							'Access-Control-Allow-Credentials': true,
-						},
-						body: JSON.stringify({
-							queueError,
+				.catch((accessError) => {
+					// send indicative response
+					Response.HandleResponse({
+						statusCode: 401,
+						responder: resolve,
+						content: {
+							accessError,
 							event,
 							context,
-						}),
+						},
 					});
-					/* })
-						// if the promise is rejected with an error
-						.catch((cronError) => {
-							// resolve this promise with the error and metadata
-							resolve({
-								statusCode: 500,
-								headers: {
-									'Access-Control-Allow-Origin': '*',
-									'Access-Control-Allow-Credentials': true,
-								},
-								body: JSON.stringify({
-									cronError,
-									event,
-									context,
-								}),
-							});
-						}); */
 				});
 		}),
 };

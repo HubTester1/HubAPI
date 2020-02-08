@@ -1,9 +1,16 @@
 
 const gulp = require('gulp');
 const run = require('gulp-run');
+const del = require('del');
+const path = require('path');
 const { argv } = require('yargs');
 
 const gulpConfig = require('./gulp.config');
+
+// UTILITIES
+
+// delete
+gulp.task('delete', (patternArray) => del(patternArray));
 
 
 // DOCUMENTATION
@@ -67,9 +74,97 @@ gulp.task('aws-l', () => run(
 	`sls logs -f ${argv.fn} -t`,
 	{ cwd: gulpConfig.ReturnLambdaDirectory(argv.d) },
 ).exec());
-// deploy entire lambda function stack, including all
-// 		associated AWS resources
-gulp.task('aws-d-s', () => run(
-	'sls remove', 
-	{ cwd: gulpConfig.ReturnLambdaDirectory(argv.d) },
-).exec());
+
+// MODULES
+
+const mClean = (location) => del([
+	`${location}/package-lock.json`,
+	`${location}/node_modules`,
+]);
+
+const mInstall = (location) => run(`npm install --prefix ${location}`).exec();
+
+
+const deploy = (location) =>
+	// return a new promise
+	new Promise((resolve, reject) => {
+		process.chdir(location);
+		run('sls deploy').exec();
+		resolve();
+	});
+
+gulp.task('m-deploy', () => 
+	// return a new promise
+	new Promise((resolve, reject) => {
+		let parentPath = path.join(__dirname, '/src');
+		let modulesPath = '';
+		switch (argv.e) {
+		case 'd':
+			parentPath += '/dev';
+			break;
+		case 'p':
+			parentPath += '/prod';
+			break;
+		default:
+			break;
+		}
+		switch (argv.t) {
+		case 'layer':
+			parentPath += '/Layers';
+			break;
+		case 'lambda':
+			parentPath += `/Lambdas/${argv.st}`;
+			break;
+		default:
+			break;
+		}
+		// eslint-disable-next-line no-console
+		console.log(parentPath);
+		parentPath += `/${argv.w}`;
+		if (argv.t === 'layer') {
+			modulesPath += `${parentPath}/nodejs`;
+			// eslint-disable-next-line no-console
+			console.log(modulesPath);
+			mClean(modulesPath);
+			mInstall(modulesPath);
+		}
+		deploy(parentPath).then(resolve());
+	}));
+
+gulp.task('m-reset', () =>
+	// return a new promise
+	new Promise((resolve, reject) => {
+		let parentPath = path.join(__dirname, '/src');
+		let modulesPath = '';
+		switch (argv.e) {
+		case 'd':
+			parentPath += '/dev';
+			break;
+		case 'p':
+			parentPath += '/prod';
+			break;
+		default:
+			break;
+		}
+		switch (argv.t) {
+		case 'l':
+			parentPath += '/Layers';
+			break;
+		case 's':
+			parentPath += '/Services';
+			break;
+		default:
+			break;
+		}
+		parentPath += `/${argv.w}`;
+		if (argv.t === 'l') {
+			modulesPath += `${parentPath}/nodejs`;
+		} else {
+			modulesPath = parentPath;
+		}
+		console.log(parentPath);
+		console.log(modulesPath);
+		mClean(modulesPath);
+		mInstall(modulesPath);
+		deploy(parentPath).then(resolve());
+	}));
