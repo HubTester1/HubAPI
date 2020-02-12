@@ -1,7 +1,7 @@
 custom:
   config:
-    layerARNNPM: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevNPM:4
-    layerARNServices: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:32
+    layerARNNPM: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevNPM:5
+    layerARNServices: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:33
     stage: dev
 #-------------
 authJWTPayloadMessage: ${ssm:auth-jwt-payload-message}

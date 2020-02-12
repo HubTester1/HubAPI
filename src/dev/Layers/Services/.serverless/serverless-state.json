@@ -26,7 +26,7 @@
             "Properties": {
               "Content": {
                 "S3Bucket": "mos-api-dev-layers",
-                "S3Key": "serverless/layer-dev-services/dev/1581190655856-2020-02-08T19:37:35.856Z/LayerDevServices.zip"
+                "S3Key": "serverless/layer-dev-services/dev/1581546041366-2020-02-12T22:20:41.366Z/LayerDevServices.zip"
               },
               "LayerName": "LayerDevServices",
               "Description": "services dependencies"
@@ -57,10 +57,11 @@
           "artifact": "/home/skip/Software/HubAPI/src/dev/Layers/Services/.serverless/LayerDevServices.zip"
         }
       }
-    }
+    },
+    "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/layer-dev-services/dev/1581190655856-2020-02-08T19:37:35.856Z",
+    "artifactDirectoryName": "serverless/layer-dev-services/dev/1581546041366-2020-02-12T22:20:41.366Z",
     "artifact": ""
   }
 }
