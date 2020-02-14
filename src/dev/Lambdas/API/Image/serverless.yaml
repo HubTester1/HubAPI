@@ -29,6 +29,9 @@ provider:
   timeout: ${self:custom.config.timeout}
   deploymentBucket:
     name: mos-api-${self:provider.stage}-lambdas
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
   environment:
     NODE_PATH: "./:/opt/node_modules"
     authJWTPayloadMessage: ${self:custom.file.authJWTPayloadMessage}

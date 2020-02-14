@@ -6,7 +6,7 @@
 
 const axios = require('axios');
 const qs = require('qs');
-const parser = require('lambda-multipart-parser');
+// const parser = require('lambda-multipart-parser');
 const Utilities = require('utilities');
 const Response = require('response');
 
@@ -173,7 +173,6 @@ module.exports = {
 									allValues = [...allValues, ...dataResult.onePage];
 								// if onePage and allValues are NOT both non-empty arrays
 								} else {
-									console.log('got to 1');
 									// set allValues to onePage
 									allValues = dataResult.onePage;
 								}
@@ -185,7 +184,6 @@ module.exports = {
 									AttemptToGetOnePageOfDataFromGraph(newAttemptConfig);
 								// if we've reached the end of the pages
 								} else {
-									console.log('got to 2');
 									// resolve this promise with allValues
 									resolve({
 										error: false,
@@ -488,6 +486,8 @@ module.exports = {
 									msGraphURI: config.uri,
 									requestedName: folderName,
 									createdName: createResult.data.name,
+									createdID: createResult.data.id,
+									folderData: createResult.data,
 								});
 								// if status indicates other than success
 							} else {
@@ -525,15 +525,101 @@ module.exports = {
 					// reject this promise with an error
 					reject(errorToReport);
 				});
-		}),
+		}),	
 
-	CreateFileInDrive: (driveID, parentID, fileName, fileContent) =>
+	ReturnFolderExistsInDrive: (driveID, folderName) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
-			// driveID = 'b!aLEmESK8e0Wx9dvsau4QEacBcz241XVJgYLGTNWsG8K1KDjrFWLwRKe1-plsdrQ0';
-			// // folderName = '1007';
-			// parentID = '01OO6BYSV6Y2GOVW7725BZO354PWSELRRZ';
-			// fileBinary = '';
+			// set up flag indicating that folder does not exist in drive
+			let folderExists = false;
+			let folderData;
+			// get a promise to get the data
+			module.exports.ReturnAllDriveImmediateChildren(driveID)
+				// if the promise is resolved with a result
+				.then((driveChildrenResult) => {
+					// iterate over all drive children
+					driveChildrenResult.allValues.forEach((childObject) => {
+						// if this child's name matches the name of the folder in question
+						if (childObject.name === folderName) {
+							// change flag to indicate folder exists
+							folderExists = true;
+							folderData = childObject;
+						}
+					});
+					// then resolve this promise with the result
+					resolve({
+						error: false,
+						folderExists,
+						folderData,
+					});
+				})
+				// if the promise is rejected with an error
+				.catch((driveChildrenError) => {
+					// reject this promise with the error
+					reject(driveChildrenError);
+				});
+		}),
+
+	CreateFolderInDriveIfNonexistent: (driveID, parentID, folderName) =>
+		// return a new promise
+		new Promise((resolve, reject) => {
+			// get a promise to get an access token
+			module.exports.ReturnGraphAccessToken()
+				// if the promise is resolved with the token
+				.then((accessTokenResult) => {
+					// get a promise to return flag indicating folder's existence
+					module.exports.ReturnFolderExistsInDrive(driveID, folderName)
+						// if the promise is resolved
+						.then((folderExistsResult) => {
+							// if flag indicates folder does not exist
+							if (!folderExistsResult.folderExists) {
+								// get a promise to 
+								module.exports.CreateFolderInDrive(driveID, parentID, folderName)
+									// if the promise is resolved with a result
+									.then((createFolderResult) => {
+										resolve(createFolderResult);
+									})
+									// if the promise is rejected with an error
+									.catch((createFolderError) => {
+										// reject this promise with the error
+										reject(createFolderError);
+									});
+							} else {
+								// then resolve this promise with the result
+								resolve({
+									error: false,
+									folderData: folderExistsResult.folderData,
+								});
+							}
+						})
+						// if the promise is rejected with an error
+						.catch((folderExistsError) => {
+							// create a generic error
+							const errorToReport = {
+								error: true,
+								msGraphError: 'create folder',
+								msGraphErrorDetails: folderExistsError,
+							};
+							// reject this promise with an error
+							reject(errorToReport);
+						});
+				})
+				// if the promise is rejected with an error, 
+				.catch((tokenError) => {
+					// create a generic error
+					const errorToReport = {
+						error: true,
+						msGraphError: 'token',
+						msGraphErrorDetails: tokenError,
+					};
+					// reject this promise with an error
+					reject(errorToReport);
+				});
+		}),
+
+	CreateFileInDrive: (driveID, parentID, fileName, fileContent, contentType) =>
+		// return a new promise
+		new Promise((resolve, reject) => {
 			// get a promise to get an access token
 			module.exports.ReturnGraphAccessToken()
 				// if the promise is resolved with the token
@@ -541,7 +627,7 @@ module.exports = {
 					const config = module.exports.ReturnGraphQueryConfig(
 						`drives/${driveID}/items/${parentID}:/${fileName}:/content`,
 						accessTokenResult.accessToken,
-						'text/plain',
+						contentType,
 					);
 					config.body = fileContent;
 					axios.put(config.uri, config.body, config.options)
@@ -594,7 +680,67 @@ module.exports = {
 				});
 		}),
 
+
 	ReceiveImage: (event, context) =>
+		// return a new promise
+		new Promise((resolve, reject) => {
+			console.log('----------- body -----------');
+			console.log(event.body);
+			console.log('----------- event -----------');
+			console.log(event);
+			console.log('----------- context -----------');
+			console.log(context);
+			
+			Response.HandleResponse({
+				statusCode: 200,
+				responder: resolve,
+				content: {
+					body: event.body,
+					event,
+					context,
+				},
+			});
+
+			/* const driveID = 'b!aLEmESK8e0Wx9dvsau4QEacBcz241XVJgYLGTNWsG8K1KDjrFWLwRKe1-plsdrQ0';
+			const parentID = '01OO6BYSV6Y2GOVW7725BZO354PWSELRRZ';
+			const fileName = 'ducks.jpg';
+			const fileContent = event.body;
+			// get a promise to 
+			module.exports.CreateFileInDrive(driveID, parentID, fileName, fileContent, 'image/jpeg')
+			// if the promise is resolved with a result
+				.then((fileResult) => {
+					// send indicative response
+					Response.HandleResponse({
+						statusCode: 200,
+						responder: resolve,
+						content: {
+							fileResult,
+							body: event.body,
+							event,
+							context,
+						},
+					});
+				})
+			// if the promise is rejected with an error
+				.catch((fileError) => {
+					// send indicative response
+					Response.HandleResponse({
+						statusCode: 500,
+						responder: resolve,
+						content: {
+							parsingResult,
+							folderResult,
+							fileError,
+							fileCreationResults,
+							body: event.body,
+							event,
+							context,
+						},
+					});
+				}); */
+		}),
+
+	/* ReceiveImage: (event, context) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// get a promise to 
@@ -603,53 +749,64 @@ module.exports = {
 				.then((parsingResult) => {
 					const driveID = 'b!aLEmESK8e0Wx9dvsau4QEacBcz241XVJgYLGTNWsG8K1KDjrFWLwRKe1-plsdrQ0';
 					const parentID = '01OO6BYSV6Y2GOVW7725BZO354PWSELRRZ';
+					// const folderName = parsingResult.messageID;
+					// const filesToCreate = parsingResult.files.length;
 					const folderName = parsingResult.messageID;
+					const filesToCreate = parsingResult.files.length;
+					const fileCreationResults = [];
 					// get a promise to 
-					module.exports.CreateFolderInDrive(driveID, parentID, folderName)
+					module.exports.CreateFolderInDriveIfNonexistent(driveID, parentID, folderName)
 						// if the promise is resolved with a result
 						.then((folderResult) => {
-							const fileName = parsingResult.files[0].filename;
-							const fileContent = parsingResult.files[0].content;
-							// get a promise to 
-							module.exports.CreateFileInDrive(driveID, parentID, fileName, fileContent)
-								// if the promise is resolved with a result
-								.then((fileResult) => {
-									// send indicative response
-									Response.HandleResponse({
-										statusCode: 200,
-										responder: resolve,
-										content: {
-											parsingResult,
-											folderResult,
-											fileResult,
-											body: event.body,
-											event,
-											context,
-										},
+							parsingResult.files.forEach((fileObject) => {								
+								const fileName = fileObject.filename;
+								const fileContent = fileObject.content;
+								const folderID = folderResult.createdID;
+								// get a promise to 
+								module.exports.CreateFileInDrive(driveID, folderID, fileName, fileContent, 'image/jpeg')
+									// if the promise is resolved with a result
+									.then((fileResult) => {
+										fileCreationResults.push(fileResult);
+										if (fileCreationResults.length === filesToCreate) {
+											// send indicative response
+											Response.HandleResponse({
+												statusCode: 200,
+												responder: resolve,
+												content: {
+													parsingResult,
+													folderResult,
+													fileCreationResults,
+													body: event.body,
+													event,
+													context,
+												},
+											});
+										}
+									})
+									// if the promise is rejected with an error
+									.catch((fileError) => {
+										// send indicative response
+										Response.HandleResponse({
+											statusCode: 500,
+											responder: resolve,
+											content: {
+												parsingResult,
+												folderResult,
+												fileError,
+												fileCreationResults,
+												body: event.body,
+												event,
+												context,
+											},
+										});
 									});
-								})
-								// if the promise is rejected with an error
-								.catch((fileError) => {
-									// send indicative response
-									Response.HandleResponse({
-										statusCode: 200,
-										responder: resolve,
-										content: {
-											parsingResult,
-											folderResult,
-											fileError,
-											body: event.body,
-											event,
-											context,
-										},
-									});
-								});
+							});
 						})
 						// if the promise is rejected with an error
 						.catch((folderError) => {
 							// send indicative response
 							Response.HandleResponse({
-								statusCode: 200,
+								statusCode: 500,
 								responder: resolve,
 								content: {
 									parsingResult,
@@ -665,7 +822,7 @@ module.exports = {
 				.catch((parsingError) => {
 					// send indicative response
 					Response.HandleResponse({
-						statusCode: 200,
+						statusCode: 500,
 						responder: resolve,
 						content: {
 							parsingError,
@@ -675,7 +832,7 @@ module.exports = {
 						},
 					});
 				});
-		}),
+		}), */
 
 
 };
