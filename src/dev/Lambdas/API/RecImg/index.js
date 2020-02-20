@@ -666,18 +666,13 @@ module.exports = {
 				.toBuffer()
 				// if the promise is resolved with a result
 				.then((newImageBuffer) => {
-					console.log(' +++++++++ newImageBuffer', newImageBuffer);
 					const mediaType = 'JPG';
 					const newImageDataURI = imageDataURI.encode(newImageBuffer, mediaType);
-					console.log(' +++++++++ newImageDataURI', newImageDataURI);
-					const newImageBufferIsBuffer = Buffer.isBuffer(newImageBuffer);
 					Response.HandleResponse({
 						statusCode: 200,
 						responder: resolve,
 						content: {
 							newImageDataURI,
-							newImageBufferIsBuffer,
-							newImageBuffer,
 							fileDataURI,
 							imageType,
 							imageBuffer,
