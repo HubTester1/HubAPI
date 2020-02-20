@@ -2,11 +2,21 @@
 	"name": "layer-dev-npm",
 	"description": "AWS Lambda Layer containing third-party Node.js modules.",
 	"dependencies": {
+		"atob": "^2.1.2",
+		"aws-sdk": "^2.621.0",
 		"axios": "^0.19.1",
+		"bser": "^2.1.1",
 		"dotenv": "^8.2.0",
+		"filereader": "^0.10.3",
+		"image-data-uri": "^2.0.1",
+		"lambda-multipart-parser": "0.0.2",
+		"mime": "^2.4.4",
 		"moment": "^2.24.0",
 		"mongodb": "^3.4.1",
 		"monk": "^7.1.2",
-		"qs": "^6.9.1"
+		"multer": "^1.4.2",
+		"multer-s3": "^2.9.0",
+		"qs": "^6.9.1",
+		"sharp": "^0.24.1"
 	}
 }

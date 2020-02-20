@@ -1,0 +1,57 @@
+custom:
+  file: ${file(../../../config-common.yaml)}
+# -------------------------------------------------------
+  config:
+    service: api-rec-img
+    memorySize: 512
+    timeout: 10
+
+functions:
+  ReceiveImg:
+    handler: index.ReceiveImg
+    events:
+      - http:
+          path: i/receive
+          method: post
+          cors: true
+
+service: ${self:custom.config.service}
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${self:custom.file.custom.config.stage}
+  region: us-east-1
+  profile: ${self:custom.file.provider.profile}
+  memorySize: ${self:custom.config.memorySize}
+  timeout: ${self:custom.config.timeout}
+  deploymentBucket:
+    name: mos-api-${self:provider.stage}-lambdas
+  environment:
+    NODE_PATH: "./:/opt/node_modules"
+    authJWTPayloadMessage: ${self:custom.file.authJWTPayloadMessage}
+    authJWTPayloadSecret: ${self:custom.file.authJWTPayloadSecret}
+    cronScheduleEmailQueueProcessing: ${self:custom.file.cronScheduleEmailQueueProcessing}
+    cronScheduleGSEJobSync: ${self:custom.file.cronScheduleGSEJobSync}
+    cronScheduleGSEScheduleSync: ${self:custom.file.cronScheduleGSEScheduleSync}
+    cronScheduleGSESignupSync: ${self:custom.file.cronScheduleGSESignupSync}
+    cronScheduleGSESignupReminders: ${self:custom.file.cronScheduleGSESignupReminders}
+    cronScheduleGSECreditReminders: ${self:custom.file.cronScheduleGSECreditReminders}
+    cronSchedulePeopleProcessing: ${self:custom.file.cronSchedulePeopleProcessing}
+    graphClientID: ${self:custom.file.graphClientID}
+    graphClientSecret: ${self:custom.file.graphClientSecret}
+    graphTenantID: ${self:custom.file.graphTenantID}
+    mongoDbHostUnique: ${self:custom.file.mongoDbHostUnique}
+    mongoDbPass: ${self:custom.file.mongoDbPass}
+    mongoDbUser: ${self:custom.file.mongoDbUser}
+    stage: ${self:provider.stage}
+    twitterConsumerKey: ${self:custom.file.twitterConsumerKey}
+    twitterConsumerSecret: ${self:custom.file.twitterConsumerSecret}
+    twitterAccessTokenKey: ${self:custom.file.twitterAccessTokenKey}
+    twitterAccessTokenSecret: ${self:custom.file.twitterAccessTokenSecret}
+    upApiKey: ${self:custom.file.upApiKey}
+    upEmployeeChangesPass: ${self:custom.file.upEmployeeChangesPass}
+    upEmployeeChangesUser: ${self:custom.file.upEmployeeChangesUser}
+  layers:
+    - ${self:custom.file.custom.config.layerARNNPM}
+    - ${self:custom.file.custom.config.layerARNServices}
