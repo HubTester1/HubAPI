@@ -36,7 +36,7 @@ module.exports = {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Credentials': true,
 				},
-				body: content,
+				body: JSON.stringify(content),
 			};
 		// if there's no status code
 		} else {
