@@ -1,7 +1,7 @@
 {
 	"name": "ms-graph",
 	"version": "1.0.0",
-	"description": "Handles all interactions with the UltiPro API.",
+	"description": "Handles all interactions with the Microsoft Graph API.",
 	"main": "index.js",
 	"scripts": {},
 	"author": "Museum of Science, Boston",
