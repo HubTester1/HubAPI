@@ -360,22 +360,18 @@ module.exports = {
 		changingFieldNewValue,
 	) =>
 	// return a new promise
-		new Promise(((resolve, reject) => {
-			// note: setObject MUST be constructed in the following way; 
-			// 		attempts to "optimize" the next two lines result in errors
+		new Promise((resolve, reject) => {
+			// construct set object
 			const setObject = {};
 			setObject[changingFieldName] = changingFieldNewValue;
 
-			// note: setObject MUST be constructed in the following way; 
-			// 		attempts to "optimize" the next two lines result in errors
+			// construct selection object
 			const selectionObject = {};
 			if (docsSelectorIsDocID) {
 				selectionObject[docsSelectionFieldName] = ObjectID(docsSelectionFieldValue);
 			} else {
 				selectionObject[docsSelectionFieldName] = docsSelectionFieldValue;
 			}
-
-
 			// use DataConnection object to query db
 			DataConnection.get(collection).update(
 				selectionObject,
@@ -383,6 +379,7 @@ module.exports = {
 				(error, countsFromMonk) => {
 					// if there was an error
 					if (error) {
+						console.log('error', error);
 						// construct a custom error
 						const errorToReport = {
 							error: true,
@@ -395,6 +392,7 @@ module.exports = {
 						reject(errorToReport);
 						// if there was NOT an error
 					} else {
+						console.log('countsFromMonk', countsFromMonk);
 						// resolve the promise and return the counts of what happened
 						const docCounts = {};
 						if (countsFromMonk.n) { docCounts.matchedDocs = countsFromMonk.n; }
@@ -407,7 +405,8 @@ module.exports = {
 					}
 				},
 			);
-		})),
+		}),
+	
 	UpdateSpecificFieldsInSpecificDocsInCollection: (
 		collection,
 		docsSelectionFieldName,
