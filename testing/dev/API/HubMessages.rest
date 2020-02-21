@@ -1,0 +1,61 @@
+### Get all settings
+
+POST https://48qoc7sqkh.execute-api.us-east-1.amazonaws.com/dev/hubMessages/settings
+
+{
+	"accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoibHVzY2lvdXMga2l0dGVucyJ9.jGLud9MRGpHpI1GuGTBfYfyOlq57P0u8eXBpCLS0fLk"
+}
+
+### Get all unexpired messages, descending
+
+POST https://48qoc7sqkh.execute-api.us-east-1.amazonaws.com/dev/hubMessages/unexpired/all/descending
+
+{
+	"accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoibHVzY2lvdXMga2l0dGVucyJ9.jGLud9MRGpHpI1GuGTBfYfyOlq57P0u8eXBpCLS0fLk"
+}
+
+
+
+
+
+
+
+### Get 4 unexpired messages, descending
+
+POST https://48qoc7sqkh.execute-api.us-east-1.amazonaws.com/dev/hubMessages/unexpired/4/descending
+
+{
+	"accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoibHVzY2lvdXMga2l0dGVucyJ9.jGLud9MRGpHpI1GuGTBfYfyOlq57P0u8eXBpCLS0fLk"
+}
+
+### Get all unexpired messages, descending, tagged announcements
+
+POST https://48qoc7sqkh.execute-api.us-east-1.amazonaws.com/dev/hubMessages/unexpired/all/descending/tagged/announcements
+
+{
+	"accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoibHVzY2lvdXMga2l0dGVucyJ9.jGLud9MRGpHpI1GuGTBfYfyOlq57P0u8eXBpCLS0fLk"
+}
+
+### Add message
+
+POST https://48qoc7sqkh.execute-api.us-east-1.amazonaws.com/dev/hubMessages/addMessage
+
+{
+	"accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoibHVzY2lvdXMga2l0dGVucyJ9.jGLud9MRGpHpI1GuGTBfYfyOlq57P0u8eXBpCLS0fLk"
+}
+
+### Update message
+
+POST https://48qoc7sqkh.execute-api.us-east-1.amazonaws.com/dev/hubMessages/updateMessage
+
+{
+	"accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoibHVzY2lvdXMga2l0dGVucyJ9.jGLud9MRGpHpI1GuGTBfYfyOlq57P0u8eXBpCLS0fLk"
+}
+
+### Get next messageID
+
+POST https://48qoc7sqkh.execute-api.us-east-1.amazonaws.com/dev/hubMessages/nextMessageID
+
+{
+	"accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoibHVzY2lvdXMga2l0dGVucyJ9.jGLud9MRGpHpI1GuGTBfYfyOlq57P0u8eXBpCLS0fLk"
+}

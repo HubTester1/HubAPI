@@ -18,6 +18,9 @@ const aws = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const imageDataURI = require('image-data-uri');
+const pnp = require('pnp');
+const Blob = require('node-blob');
+// const spauth = require('node-sp-auth');
 
 
 // mos-api-temp
@@ -555,8 +558,7 @@ module.exports = {
 					const config = module.exports.ReturnGraphQueryConfig(
 						`drives/${driveID}/items/${parentID}:/${fileName}/content`,
 						accessTokenResult.accessToken,
-						// fileType,
-						'text/plain',
+						fileType,
 					);
 					config.body = fileContent;
 					console.log('=========== CONFIG ==============');
@@ -632,25 +634,32 @@ module.exports = {
 		}),
 
 	ReturnBlobFromDataURI: (dataURI) => {
-		let byteStr;
-		if (dataURI.split(',')[0].indexOf('base64') >= 0) {
-			byteStr = atob(dataURI.split(',')[1]);
-		} else {
-			byteStr = unescape(dataURI.split(',')[1]);
-		}
-		const mimeStr = dataURI.split(',')[0].split(':')[1].split(';')[0];
+		// convert base64 to raw binary data held in a string
+		// doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+		const byteString = atob(dataURI.split(',')[1]);
 
-		const arr = new Uint8Array(byteStr.length);
-		for (let i = 0; i < byteStr.length; i++) {
-			arr[i] = byteStr.charCodeAt(i);
+		// separate out the mime component
+		const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+		// write the bytes of the string to an ArrayBuffer
+		const ab = new ArrayBuffer(byteString.length);
+
+		// create a view into the buffer
+		const ia = new Uint8Array(ab);
+
+		// set the bytes of the buffer to the correct values
+		for (let i = 0; i < byteString.length; i++) {
+			ia[i] = byteString.charCodeAt(i);
 		}
-		return new Blob([arr], { type: mimeStr });
+
+		// write the ArrayBuffer to a blob, and you're done
+		const blob = new Blob([ab], { type: mimeString });
+		return blob;
 	},
 
 	ReceiveImg: (event, context) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
-			console.log('========= M5 =========');
 			const eventBody = Utilities.ReturnCopyOfObject(JSON.parse(event.body));
 			const fileDataURI = eventBody.filesArray[0].fileBase64Content;
 			const imageDecoded = imageDataURI.decode(fileDataURI);
@@ -666,12 +675,17 @@ module.exports = {
 				.toBuffer()
 				// if the promise is resolved with a result
 				.then((newImageBuffer) => {
+					// const binaryString = newImageBuffer.toString('binary');
+
 					const mediaType = 'JPG';
 					const newImageDataURI = imageDataURI.encode(newImageBuffer, mediaType);
+					const newImageBlob = module.exports.ReturnBlobFromDataURI(newImageDataURI);
+					console.log('++++++++++ newImageBlob', newImageBlob);
 					Response.HandleResponse({
 						statusCode: 200,
 						responder: resolve,
 						content: {
+							binaryString,
 							newImageDataURI,
 							fileDataURI,
 							imageType,
@@ -697,63 +711,5 @@ module.exports = {
 						},
 					});
 				});
-
-
-			/* console.log('filesArray', eventBody.filesArray);
-			const fileDataURI = eventBody.filesArray[0].fileBase64Content;
-			console.log('fileDataURI', fileDataURI);
-			const mimeString = fileDataURI.split(',')[0].split(':')[1].split(';')[0];
-			console.log('mimeString', mimeString);
-			const fileBase64Content = fileDataURI.split(',')[1];
-			console.log('fileBase64Content', fileBase64Content);
-			const fileBlob = module.exports.ReturnBlobFromDataURI(fileDataURI);
-			console.log('fileBlob', fileBlob); */
-			// const ab = new ArrayBuffer(byteString.length * 2);
-			// console.log('ab', ab);
-			/* const ia = new Uint16Array(ab);
-			console.log('ia 1', ia);
-			for (let i = 0; i < byteString.length; i++) {
-				console.log('+++++++++++++ i', `The character code ${byteString.charCodeAt(i)} is equal to ${byteString.charAt(i)}`);
-				ia[i] = byteString.charCodeAt(i);
-			}
-			console.log('ia 2', ia); */
-			// const fileBlob = new Blob([ab], { type: mimeString });
-			// const fileBlob = module.exports.ReturnBlobFromDataURI(fileDataURI);
-			// send indicative response
-
-			/* const s3 = new aws.S3();
-			aws.config.update({
-				region: 'us-east-1',
-			});
-
-			const upload = multer({
-				storage: multerS3({
-					s3,
-					bucket: 'mos-api-temp',
-					// metadata(req, file, cb) {
-					// 	cb(null, { fieldName: file.fieldname });
-					// },
-					key(req, file, cb) {
-						cb(null, Date.now().toString());
-					},
-				}),
-			});
-
-			const singleUpload = upload.single('image');
-
-			singleUpload
-
-			// send indicative response
-			Response.HandleResponse({
-				statusCode: 200,
-				responder: resolve,
-				content: {
-					filesArray: eventBody.filesArray,
-					fileResult,
-					body: event.body,
-					event,
-					context,
-				},
-			}); */
 		}),
 };
