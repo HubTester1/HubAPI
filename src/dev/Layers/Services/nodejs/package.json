@@ -8,6 +8,7 @@
 		"email": "file:../../../Services/Email",
 		"errors": "file:../../../Services/Errors",
 		"health": "file:../../../Services/Health",
+		"hub-messages": "file:../../../Services/HubMessages",
 		"log": "file:../../../Services/Log",
 		"moment": "^2.24.0",
 		"moment-timezone": "^0.5.27",

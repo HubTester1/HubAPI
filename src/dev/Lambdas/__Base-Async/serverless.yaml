@@ -55,5 +55,5 @@ provider:
     upEmployeeChangesPass: ${self:custom.file.upEmployeeChangesPass}
     upEmployeeChangesUser: ${self:custom.file.upEmployeeChangesUser}
   layers:
-    - ${self:custom.file.custom.config.custom.config.layerARNNPM}
+    - ${self:custom.file.custom.config.layerARNNPM}
     - ${self:custom.file.custom.config.layerARNServices}
