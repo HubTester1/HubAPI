@@ -4,6 +4,7 @@
  * @category Agenda
  * @description Literally, a todo list
  * 
+ * @todo document vs code, .rest testing, in addition to gulp, lambda-local, serverless
  * @todo for API event handlers, document event and what has to be in event
  * @todo document that API handlers will always return 200, 500, 403, and either error or payload
  * @todo imagemagick processing and send to SP

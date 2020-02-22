@@ -93,7 +93,6 @@ module.exports = {
 								error: false,
 								docs: { 
 									nextMessageID: result.docs[0].nextMessageID,
-									iterationResult,
 								},
 							});
 						})
@@ -600,7 +599,7 @@ module.exports = {
 				// if the promise is resolved with a result
 				.then((accessResult) => {
 					// get a promise to return health status
-					HubMessages.ReturnHubMessagesSettings()
+					module.exports.ReturnNextMessageIDAndIterate()
 						// if the promise is resolved with a result
 						.then((settingsResult) => {
 							// send indicative response

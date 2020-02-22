@@ -36,7 +36,7 @@ module.exports = {
 								statusCode: 200,
 								responder: resolve,
 								content: {
-									payload: healthResult,
+									payload: healthResult.docs[0],
 									event,
 									context,
 								},

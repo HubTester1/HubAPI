@@ -14,6 +14,13 @@ functions:
           path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.settings}
           method: get
           cors: true
+  HandleNextMessageIDRequest:
+    handler: index.HandleNextMessageIDRequest
+    events:
+      - http:
+          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.nextID}
+          method: get
+          cors: true
   HandleMessagesRequest:
     handler: index.HandleMessagesRequest
     events:
@@ -31,21 +38,14 @@ functions:
     handler: index.HandleAddMessageRequest
     events:
       - http:
-          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.settings}
+          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.add}
           method: post
           cors: true
   HandleUpdateMessageRequest:
     handler: index.HandleUpdateMessageRequest
     events:
       - http:
-          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.settings}
-          method: post
-          cors: true
-  HandleNextMessageIDRequest:
-    handler: index.HandleNextMessageIDRequest
-    events:
-      - http:
-          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.settings}
+          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.update}
           method: post
           cors: true
 

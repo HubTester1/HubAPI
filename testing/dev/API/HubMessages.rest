@@ -8,6 +8,12 @@ Authorization: Bearer {{accessToken}}
 
 
 #########
+# Get next messageID
+GET {{baseURI}}/hubMessages/nextid
+Authorization: Bearer {{accessToken}}
+
+
+#########
 # Get all unexpired messages
 GET {{baseURI}}/hubMessages/messages?expiration=unexpired
 Authorization: Bearer {{accessToken}}
@@ -36,14 +42,20 @@ Authorization: Bearer {{accessToken}}
 POST {{baseURI}}/hubMessages/addMessage
 Authorization: Bearer {{accessToken}}
 
+{
+	"newMessageID":1084,
+	"newMessageTag": "announcements",
+	"newMessageSubject": "Test Subject",
+	"newMessageBody": "This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body.",
+	"newMessageImages": [],
+	"newMessageExpirationDate": "2020-02-29T05:00:00.000Z",
+	"newMessageKey": "q4ZF5Ori1",
+	"newMessageCreated": "2020-02-22T16:31:55-05:00",
+	"newMessageCreator": {"account":"jbaker","displayName":"James Baker"}
+}
+
 
 #########
 # Update message
 POST {{baseURI}}/hubMessages/updateMessage
-Authorization: Bearer {{accessToken}}
-
-
-#########
-# Get next messageID
-POST {{baseURI}}/hubMessages/nextMessageID
 Authorization: Bearer {{accessToken}}
