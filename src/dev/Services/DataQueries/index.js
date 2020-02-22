@@ -21,7 +21,7 @@ module.exports = {
 
 	ReturnAllDocsFromCollection: (collection) =>
 		// return a new promise
-		new Promise(((resolve, reject) => {
+		new Promise((resolve, reject) => {
 			// use DataConnection object to query db
 			DataConnection.get(collection).find({}, {}, (error, docs) => {
 				// if there was an error
@@ -46,7 +46,7 @@ module.exports = {
 					});
 				}
 			});
-		})),
+		}),
 
 	// /**
 	//  * @name ReturnLimitedDocsFromCollectionSorted
@@ -99,6 +99,46 @@ module.exports = {
 					}
 				});
 		})),
+
+	ReturnSpecifiedLimitedDocsFromCollectionSorted: (
+		collection, queryObject, sortField, sortOrder, limit,
+	) =>
+		// return a new promise
+		new Promise((resolve, reject) => {
+			const orderFlag = (sortOrder === 'descending') ? -1 : 1;
+			const sortObject = {};
+			sortObject[sortField] = orderFlag;
+			const projectionObject = {};
+			projectionObject.sort = sortObject;
+			if (limit) {
+				projectionObject.limit = limit;
+			}
+			// use DataConnection object to query db
+			DataConnection.get(collection)
+				.find(queryObject, projectionObject, (error, docs) => {
+					// if there was an error
+					if (error) {
+						// construct a custom error
+						const errorToReport = {
+							error: true,
+							mongoDBError: true,
+							mongoDBErrorDetails: error,
+						};
+						// add error to Twitter
+						// nesoErrors.ProcessError(errorToReport);
+						// reject this promise with the error
+						reject(errorToReport);
+						// if there was NOT an error
+					} else {
+						// resolve the promise and return the docs
+						resolve({
+							error: false,
+							mongoDBError: false,
+							docs,
+						});
+					}
+				});
+		}),
 
 
 	ReturnAllDocsFromCollectionSorted: (collection, field, order) =>

@@ -22,7 +22,6 @@ module.exports = {
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// get a promise to check access
-			// Access.ReturnRequesterCanAccess(
 			Access.ReturnRequesterCanAccess(
 				event,
 				Email.ReturnEmailWhitelistedDomains,
@@ -45,7 +44,7 @@ module.exports = {
 								statusCode: 200,
 								responder: resolve,
 								content: {
-									sendResult,
+									payload: sendResult,
 									event,
 									context,
 								},
@@ -65,7 +64,7 @@ module.exports = {
 									statusCode: 200,
 									responder: resolve,
 									content: {
-										sendError,
+										error: sendError,
 										event,
 										context,
 									},
@@ -79,7 +78,7 @@ module.exports = {
 									statusCode: 500,
 									responder: resolve,
 									content: {
-										sendError,
+										error: sendError,
 										event,
 										context,
 									},
@@ -94,7 +93,7 @@ module.exports = {
 						statusCode: 401,
 						responder: resolve,
 						content: {
-							accessError,
+							error: accessError,
 							event,
 							context,
 						},

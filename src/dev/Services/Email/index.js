@@ -11,6 +11,10 @@ const MSGraph = require('ms-graph');
 const Errors = require('errors');
 const Status = require('status');
 
+/**
+ * @typedef {import('../../../TypeDefs/Email').HubMessage} Email
+ */
+
 module.exports = {
 	
 	/**

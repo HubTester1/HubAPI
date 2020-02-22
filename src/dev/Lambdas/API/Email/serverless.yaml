@@ -11,7 +11,7 @@ functions:
     handler: index.HandleSendEmailRequest
     events:
       - http:
-          path: email/send
+          path: ${self:custom.file.endpoints.${self:provider.stage}.email.send}
           method: post
           cors: true
 

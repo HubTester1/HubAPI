@@ -36,7 +36,7 @@ module.exports = {
 								statusCode: 200,
 								responder: resolve,
 								content: {
-									healthResult,
+									payload: healthResult,
 									event,
 									context,
 								},
@@ -49,7 +49,7 @@ module.exports = {
 								statusCode: 500,
 								responder: resolve,
 								content: {
-									healthError,
+									error: healthError,
 									event,
 									context,
 								},
@@ -63,7 +63,7 @@ module.exports = {
 						statusCode: 401,
 						responder: resolve,
 						content: {
-							accessError,
+							error: accessError,
 							event,
 							context,
 						},

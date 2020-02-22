@@ -33,18 +33,18 @@ module.exports = {
 		}),
 
 	/**
-	 * @name ReturnHealthWhitelistedDomains
+	 * @name ReturnHubMessagesWhitelistedDomains
 	 * @function
 	 * @async
 	 * @description Return the setting indicating the domains from which requests are accepted.
 	 * Add a domain to this setting in database to allow requests from an additional domain.
 	 */
 
-	ReturnHealthWhitelistedDomains: () =>
+	ReturnHubMessagesWhitelistedDomains: () =>
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// get a promise to retrieve all email settings
-			module.exports.ReturnHealthSettingsData()
+			module.exports.ReturnHubMessagesSettings()
 				// if the promise is resolved with the settings
 				.then((settings) => {
 					// resolve this promise with the requested setting

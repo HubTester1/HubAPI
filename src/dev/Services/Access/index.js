@@ -24,7 +24,10 @@ module.exports = {
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// if this is a cron job
-			if (event.source && event.source === 'aws.events') {
+			if (
+				event.source && 
+				(event.source === 'aws.events' || event.source === 'local')
+			) {
 				// resolve immediately
 				resolve({
 					error: false,
@@ -36,12 +39,12 @@ module.exports = {
 				let accessToken;
 				const accessTokenPrefix = 'Bearer ';
 				// if event contains a truthy body property
-				if (event.body) {
+				if (event.headers) {
 					// ensure event.body is an object
-					const eventBody = 
-						Utilities.ReturnUniqueObjectGivenAnyValue(event.body);
-					// try to get access token plus its prefix out of eventBody
-					const accessTokenAndPrefix = eventBody.accessToken;
+					const eventHeaders = 
+						Utilities.ReturnUniqueObjectGivenAnyValue(event.headers);
+					// try to get access token plus its prefix out of eventHeaders
+					const accessTokenAndPrefix = eventHeaders.Authorization;
 					// if the result is a string and it contains accessTokenPrefix
 					if (
 						typeof (accessTokenAndPrefix) === 'string' && 

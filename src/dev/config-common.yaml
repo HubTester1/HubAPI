@@ -1,7 +1,7 @@
 custom:
   config:
     layerARNNPM: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevNPM:19
-    layerARNServices: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:46
+    layerARNServices: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:52
     stage: dev
 #-------------
 authJWTPayloadMessage: ${ssm:auth-jwt-payload-message}
@@ -29,3 +29,15 @@ twitterAccessTokenSecret: ${ssm:twitter-access-token-secret}
 upApiKey: ${ssm:up-api-key}
 upEmployeeChangesPass: ${ssm:up-emp-changes-pw}
 upEmployeeChangesUser: ${ssm:up-emp-changes-user}
+endpoints:
+  dev:
+    health:
+      check:                  health/check
+    email:
+      send:                   email/send
+    hubMessages:
+      settings:               hubMessages/settings
+      messages:               hubMessages/messages
+      add:                    hubMessages/add
+      update:                 hubMessages/update
+      nextID:                 hubMessages/nextid

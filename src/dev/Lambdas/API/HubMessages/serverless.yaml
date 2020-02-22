@@ -11,65 +11,43 @@ functions:
     handler: index.HandleSettingsRequest
     events:
       - http:
-          path: hubMessages/settings
-          method: post
+          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.settings}
+          method: get
           cors: true
-  HandleAllUnexpiredMessagesRequest:
-    handler: index.HandleAllUnexpiredMessagesRequest
+  HandleMessagesRequest:
+    handler: index.HandleMessagesRequest
     events:
       - http:
-          path: hubMessages/unexpired/all/descending
-          method: post
-          cors: true
-  HandleQuantityUnexpiredMessagesRequest:
-    handler: index.HandleQuantityUnexpiredMessagesRequest
-    events:
-      - http:
-          path: hubMessages/unexpired/{quantity}/descending
-          method: post
+          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.messages}
+          method: get
           cors: true
           request:
             parameters:
-              paths:
-                quantity: true
-  HandleAllUnexpiredMessagesWithTagRequest:
-    handler: index.HandleAllUnexpiredMessagesWithTagRequest
-    events:
-      - http:
-          path: hubMessages/unexpired/all/descending/tagged/{name}
-          method: post
-          cors: true
-          request:
-            parameters:
-              paths:
-                name: true
+              querystrings:
+                expiration: true
+                tag: true
+                limit: true
   HandleAddMessageRequest:
     handler: index.HandleAddMessageRequest
     events:
       - http:
-          path: hubMessages/addMessage
+          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.settings}
           method: post
           cors: true
   HandleUpdateMessageRequest:
     handler: index.HandleUpdateMessageRequest
     events:
       - http:
-          path: hubMessages/updateMessage
+          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.settings}
           method: post
           cors: true
   HandleNextMessageIDRequest:
     handler: index.HandleNextMessageIDRequest
     events:
       - http:
-          path: hubMessages/nextMessageID
+          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.settings}
           method: post
           cors: true
-
-
-
-
-
-
 
 # -------------------------------------------------------
 

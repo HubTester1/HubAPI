@@ -11,8 +11,8 @@ functions:
     handler: index.HandleHealthCheckRequest
     events:
       - http:
-          path: health/check
-          method: post
+          path: ${self:custom.file.endpoints.${self:provider.stage}.health.check}
+          method: get
           cors: true
 
 # -------------------------------------------------------

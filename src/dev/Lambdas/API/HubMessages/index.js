@@ -12,6 +12,10 @@ const DataQueries = require('data-queries');
 const Utilities = require('utilities');
 const moment = require('moment');
 
+/**
+ * @typedef {import('../../../TypeDefs/HubMessage').HubMessage} HubMessage
+ */
+
 module.exports = {
 
 
@@ -143,31 +147,55 @@ module.exports = {
 				});
 		}),
 
+	// ---------------------
+
+
 	/**
-	 * @name ReturnAllUnexpiredMessagesByCreatedDate
+	 * @name ReturnSpecifiedMessages
 	 * @function
 	 * @async
-	 * @description Return all unexpired messages.
+	 * @description Return messages specified by options param
+	 * @todo Create message options model and doc param
 	 */
 
-	ReturnAllUnexpiredMessagesByCreatedDate: () =>
+	ReturnSpecifiedMessages: (options = {}) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
-			// construct query object
+			// start off query object
 			const queryObject = {};
-			queryObject.messageExpiration = { $gte: new Date() };
+			// if there's an expiration option
+			if (options.expiration) {
+				// if expiration option is unexpired
+				if (options.expiration === 'unexpired') {
+					// specify querying for messages where expiration is 
+					// 		greater than or equal to now
+					queryObject.messageExpiration = { $gte: new Date() };
+				}
+				// if expiration option is expired
+				if (options.expiration === 'expired') {
+					// specify querying for messages where expiration is 
+					// 		less than now
+					queryObject.messageExpiration = { $lt: new Date() };
+				}
+			}
+			// if there's an tag option
+			if (options.tag) {
+				// specify querying for messages with specified tag
+				queryObject.messageTag = options.tag;
+			}
 			// get a promise to 
-			DataQueries.ReturnSpecifiedDocsFromCollectionSorted(
+			DataQueries.ReturnSpecifiedLimitedDocsFromCollectionSorted(
 				'hubMessages',
 				queryObject,
 				'messageCreated',
 				'descending',
+				parseInt(options.limit, 10),
 			)
 				// if the promise is resolved with a result
-				.then((docs) => {
+				.then((result) => {
 					// then resolve this promise with the result
-					const messagesWithPinnedFirst = 
-						module.exports.ReturnMessagesWithPinnedFirst(docs);
+					const messagesWithPinnedFirst =
+						module.exports.ReturnAnyMessageSetPinnedFirst(result.docs);
 					resolve({
 						error: false,
 						mongoDBError: false,
@@ -188,14 +216,6 @@ module.exports = {
 					reject(errorToReport);
 				});
 		}),
-
-	/**
-	 * @name ReturnAnyMessageSetPinnedFirst
-	 * @function
-	 * @async
-	 * @description For any set of messages, return them with the pinned messages first.
-	 * @param {object[]} messagesArray - array of objects, each comprising data for one message
-	 */
 
 	ReturnAnyMessageSetPinnedFirst: (messagesArray) => {
 		// set up container arrays
@@ -226,66 +246,11 @@ module.exports = {
 	},
 
 	/**
-	 * @name ReturnQuantityUnexpiredMessagesByCreatedDate
-	 * @function
-	 * @async
-	 * @description Return a specified quantity of unexpired messages.
-	 * @param {number} messagesQuantity - quantity of messages to return
-	 */
-
-	ReturnQuantityUnexpiredMessagesByCreatedDate: (messagesQuantity) =>
-		// return a new promise
-		new Promise((resolve, reject) => {
-			// get a promise to get all messages with pinned messages first
-			module.exports.ReturnAllUnexpiredMessagesByCreatedDate()
-				// if the promise is resolved with the messages, then resolve this promise with the docs
-				.then((result) => {
-					resolve({
-						error: false,
-						mongoDBError: false,
-						docs: result.docs.slice(0, messagesQuantity),
-					});
-				})
-				// if the promise is rejected with an error, then reject this promise with an error
-				.catch((error) => { reject(error); });
-		}),
-
-	/**
-	 * @name ReturnAllUnexpiredMessagesWithTagByCreatedDate
-	 * @function
-	 * @async
-	 * @description Return a specified quantity of unexpired messages.
-	 * @param {number} messagesQuantity - quantity of messages to return
-	 */
-
-	ReturnAllUnexpiredMessagesWithTagByCreatedDate: (name, camlName) =>
-		// return a new promise
-		new Promise((resolve, reject) => {
-			// note: queryObject MUST be constructed in the following way; 
-			// 		attempts to "optimize" the next two lines result in errors
-			const queryObject = {};
-			queryObject.messageTags = [{ name, camlName }];
-			queryObject.messageExpiration = { $gte: new Date() };
-
-			// get a promise to retrieve all documents from the hcMessages document collection
-			DataQueries.ReturnSpecifiedDocsFromCollectionSorted(
-				'hubMessages',
-				queryObject,
-				'messageCreated',
-				'descending',
-			)
-				// if the promise is resolved with the docs, then resolve this promise with the docs
-				.then((result) => { resolve(result); })
-				// if the promise is rejected with an error, then reject this promise with an error
-				.catch((error) => { reject(error); });
-		}),
-
-	/**
 	 * @name AddMessage
 	 * @function
 	 * @async
 	 * @description Adds a message to the database.
-	 * @param {object} incomingMessage - object comprising new message
+	 * @param {...HubMessage} incomingMessage - {@link HubMessage} object
 	 */
 
 	AddMessage: (incomingMessage) =>
@@ -395,7 +360,7 @@ module.exports = {
 								statusCode: 200,
 								responder: resolve,
 								content: {
-									settingsResult,
+									payload: settingsResult.docs,
 									event,
 									context,
 								},
@@ -408,7 +373,7 @@ module.exports = {
 								statusCode: 500,
 								responder: resolve,
 								content: {
-									settingsError,
+									error: settingsError,
 									event,
 									context,
 								},
@@ -422,7 +387,7 @@ module.exports = {
 						statusCode: 401,
 						responder: resolve,
 						content: {
-							accessError,
+							error: accessError,
 							event,
 							context,
 						},
@@ -431,13 +396,13 @@ module.exports = {
 		}),
 
 	/**
-	 * @name HandleAllUnexpiredMessagesRequest
+	 * @name HandleMessagesRequest
 	 * @function
 	 * @async
-	 * @description Handle request for all unexpired messages.
+	 * @description Handle request for messages.
 	 */
 
-	HandleAllUnexpiredMessagesRequest: (event, context) =>
+	HandleMessagesRequest: (event, context) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// get a promise to check access
@@ -448,7 +413,9 @@ module.exports = {
 				// if the promise is resolved with a result
 				.then((accessResult) => {
 					// get a promise to return health status
-					module.exports.ReturnAllUnexpiredMessagesByCreatedDate()
+					module.exports.ReturnSpecifiedMessages(
+						event.queryStringParameters,
+					)
 						// if the promise is resolved with a result
 						.then((messagesResult) => {
 							// send indicative response
@@ -456,7 +423,7 @@ module.exports = {
 								statusCode: 200,
 								responder: resolve,
 								content: {
-									messages: messagesResult,
+									payload: messagesResult.docs,
 									event,
 									context,
 								},
@@ -469,7 +436,7 @@ module.exports = {
 								statusCode: 500,
 								responder: resolve,
 								content: {
-									messagesError,
+									error: messagesError,
 									event,
 									context,
 								},
@@ -483,137 +450,7 @@ module.exports = {
 						statusCode: 401,
 						responder: resolve,
 						content: {
-							accessError,
-							event,
-							context,
-						},
-					});
-				});
-		}),
-
-	/**
-	 * @name HandleQuantityUnexpiredMessagesRequest
-	 * @function
-	 * @async
-	 * @description Handle request for a specified quantity of unexpired messages.
-	 * Quantity is event.pathParameters.quantity.
-	 */
-
-	HandleQuantityUnexpiredMessagesRequest: (event, context) =>
-		// return a new promise
-		new Promise((resolve, reject) => {
-			// get a promise to check access
-			Access.ReturnRequesterCanAccess(
-				event,
-				HubMessages.ReturnHubMessagesWhitelistedDomains,
-			)
-				// if the promise is resolved with a result
-				.then((accessResult) => {
-					// get a promise to return health status
-					module.exports
-						.ReturnQuantityUnexpiredMessagesByCreatedDate(
-							parseInt(event.pathParameters.quantity, 10),
-						)
-						// if the promise is resolved with a result
-						.then((messagesResult) => {
-							// send indicative response
-							Response.HandleResponse({
-								statusCode: 200,
-								responder: resolve,
-								content: {
-									messages: messagesResult,
-									event,
-									context,
-								},
-							});
-						})
-						// if the promise is rejected with an error
-						.catch((messagesError) => {
-							// send indicative response
-							Response.HandleResponse({
-								statusCode: 500,
-								responder: resolve,
-								content: {
-									messagesError,
-									event,
-									context,
-								},
-							});
-						});
-				})
-				// if the promise is rejected with an error
-				.catch((accessError) => {
-					// send indicative response
-					Response.HandleResponse({
-						statusCode: 401,
-						responder: resolve,
-						content: {
-							accessError,
-							event,
-							context,
-						},
-					});
-				});
-		}),
-
-	/**
-	 * @name HandleAllUnexpiredMessagesWithTagRequest
-	 * @function
-	 * @async
-	 * @description Handle request for all unexpired messages with a tag. 
-	 * Tag name is event.pathParameters.name.
-	 */
-
-	HandleAllUnexpiredMessagesWithTagRequest: (event, context) =>
-		// return a new promise
-		new Promise((resolve, reject) => {
-			// get a promise to check access
-			Access.ReturnRequesterCanAccess(
-				event,
-				HubMessages.ReturnHubMessagesWhitelistedDomains,
-			)
-				// if the promise is resolved with a result
-				.then((accessResult) => {
-					// get a promise to return health status
-					module.exports
-						.ReturnAllUnexpiredMessagesWithTagByCreatedDate(
-							event.pathParameters.name,
-						)
-						// if the promise is resolved with a result
-						.then((messagesResult) => {
-							// send indicative response
-							Response.HandleResponse({
-								statusCode: 200,
-								responder: resolve,
-								content: {
-									messages: messagesResult,
-									event,
-									context,
-								},
-							});
-						})
-						// if the promise is rejected with an error
-						.catch((messagesError) => {
-							// send indicative response
-							Response.HandleResponse({
-								statusCode: 500,
-								responder: resolve,
-								content: {
-									messagesError,
-									event,
-									context,
-								},
-							});
-						});
-				})
-				// if the promise is rejected with an error
-				.catch((accessError) => {
-					// send indicative response
-					Response.HandleResponse({
-						statusCode: 401,
-						responder: resolve,
-						content: {
-							accessError,
+							error: accessError,
 							event,
 							context,
 						},
@@ -649,7 +486,7 @@ module.exports = {
 								statusCode: 200,
 								responder: resolve,
 								content: {
-									addMessageResult,
+									payload: addMessageResult.docs,
 									event,
 									context,
 								},
@@ -662,7 +499,7 @@ module.exports = {
 								statusCode: 500,
 								responder: resolve,
 								content: {
-									addMessageError,
+									error: addMessageError,
 									event,
 									context,
 								},
@@ -676,7 +513,7 @@ module.exports = {
 						statusCode: 401,
 						responder: resolve,
 						content: {
-							accessError,
+							error: accessError,
 							event,
 							context,
 						},
@@ -704,26 +541,26 @@ module.exports = {
 					// get a promise to return health status
 					HubMessages.ReturnHubMessagesSettings()
 						// if the promise is resolved with a result
-						.then((settingsResult) => {
+						.then((updateMessageResult) => {
 							// send indicative response
 							Response.HandleResponse({
 								statusCode: 200,
 								responder: resolve,
 								content: {
-									settingsResult,
+									payload: updateMessageResult.docs,
 									event,
 									context,
 								},
 							});
 						})
 						// if the promise is rejected with an error
-						.catch((settingsError) => {
+						.catch((updateMessageError) => {
 							// send indicative response
 							Response.HandleResponse({
 								statusCode: 500,
 								responder: resolve,
 								content: {
-									settingsError,
+									error: updateMessageError,
 									event,
 									context,
 								},
@@ -737,7 +574,7 @@ module.exports = {
 						statusCode: 401,
 						responder: resolve,
 						content: {
-							accessError,
+							error: accessError,
 							event,
 							context,
 						},
@@ -771,7 +608,7 @@ module.exports = {
 								statusCode: 200,
 								responder: resolve,
 								content: {
-									settingsResult,
+									payload: settingsResult.docs,
 									event,
 									context,
 								},
@@ -784,7 +621,7 @@ module.exports = {
 								statusCode: 500,
 								responder: resolve,
 								content: {
-									settingsError,
+									error: settingsError,
 									event,
 									context,
 								},
@@ -798,7 +635,7 @@ module.exports = {
 						statusCode: 401,
 						responder: resolve,
 						content: {
-							accessError,
+							error: accessError,
 							event,
 							context,
 						},

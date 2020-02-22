@@ -1,5 +1,7 @@
-POST https://kzloq7b974.execute-api.us-east-1.amazonaws.com/dev/health/check
+@baseURI = https://kzloq7b974.execute-api.us-east-1.amazonaws.com/dev
 
-{
-	"accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoibHVzY2lvdXMga2l0dGVucyJ9.jGLud9MRGpHpI1GuGTBfYfyOlq57P0u8eXBpCLS0fLk"
-}
+
+#########
+# Check system health
+GET {{baseURI}}/health/check
+Authorization: Bearer {{accessToken}}
