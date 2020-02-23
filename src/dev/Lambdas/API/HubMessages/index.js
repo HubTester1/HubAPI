@@ -265,7 +265,7 @@ module.exports = {
 			});
 			const messageToInsert = {
 				messageID: incomingMessageCopy.newMessageID,
-				messageTags: incomingMessageCopy.newMessageTags,
+				messageTag: incomingMessageCopy.newMessageTags[0].name,
 				messageSubject: incomingMessageCopy.newMessageSubject,
 				messageBody: incomingMessageCopy.newMessageBody,
 				messageImages: imagesConverted,
@@ -308,7 +308,7 @@ module.exports = {
 				imagesConverted.push(imageValue.name);
 			});
 			const messagePropsToSet = [
-				{ key: 'messageTags', value: incomingMessageCopy.newMessageTags },
+				{ key: 'messageTag', value: incomingMessageCopy.newMessageTags[0].name },
 				{ key: 'messageSubject', value: incomingMessageCopy.newMessageSubject },
 				{ key: 'messageBody', value: incomingMessageCopy.newMessageBody },
 				{ key: 'messageImages', value: imagesConverted },
@@ -538,7 +538,9 @@ module.exports = {
 				// if the promise is resolved with a result
 				.then((accessResult) => {
 					// get a promise to return health status
-					HubMessages.ReturnHubMessagesSettings()
+					module.exports.UpdateMessage(
+						event.body,
+					)
 						// if the promise is resolved with a result
 						.then((updateMessageResult) => {
 							// send indicative response

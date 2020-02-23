@@ -39,12 +39,17 @@ Authorization: Bearer {{accessToken}}
 
 #########
 # Add message
-POST {{baseURI}}/hubMessages/addMessage
+POST {{baseURI}}/hubMessages/add
 Authorization: Bearer {{accessToken}}
 
 {
 	"newMessageID":1084,
-	"newMessageTag": "announcements",
+	"newMessageTags": [
+		{
+			"name": "Announcements",
+			"camlName": "announcements"
+		}
+	],
 	"newMessageSubject": "Test Subject",
 	"newMessageBody": "This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body.",
 	"newMessageImages": [],
@@ -57,5 +62,23 @@ Authorization: Bearer {{accessToken}}
 
 #########
 # Update message
-POST {{baseURI}}/hubMessages/updateMessage
+POST {{baseURI}}/hubMessages/update
 Authorization: Bearer {{accessToken}}
+
+{
+	"newMessageID":1084,
+	"newMessageTags": [
+		{
+			"name": "Events",
+			"camlName": "events"
+		}
+	],
+	"newMessageSubject": "Test Subject 2",
+	"newMessageBody": "2222222222222",
+	"newMessageImages": [],
+	"newMessageExpirationDate": "2020-02-29T05:00:00.000Z",
+	"newMessageKey": "q4ZF5Ori1",
+	"newMessageCreated": "2020-02-22T16:31:55-05:00",
+	"newMessageCreator": {"account":"jbaker","displayName":"James Baker"}
+}
+
