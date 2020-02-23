@@ -265,7 +265,7 @@ module.exports = {
 			});
 			const messageToInsert = {
 				messageID: incomingMessageCopy.newMessageID,
-				messageTag: incomingMessageCopy.newMessageTags[0].name,
+				messageTag: incomingMessageCopy.newMessageTag,
 				messageSubject: incomingMessageCopy.newMessageSubject,
 				messageBody: incomingMessageCopy.newMessageBody,
 				messageImages: imagesConverted,
@@ -308,7 +308,7 @@ module.exports = {
 				imagesConverted.push(imageValue.name);
 			});
 			const messagePropsToSet = [
-				{ key: 'messageTag', value: incomingMessageCopy.newMessageTags[0].name },
+				{ key: 'messageTag', value: incomingMessageCopy.newMessageTag },
 				{ key: 'messageSubject', value: incomingMessageCopy.newMessageSubject },
 				{ key: 'messageBody', value: incomingMessageCopy.newMessageBody },
 				{ key: 'messageImages', value: imagesConverted },

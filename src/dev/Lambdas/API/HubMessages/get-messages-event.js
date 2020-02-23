@@ -3,7 +3,7 @@ module.exports = {
 	source: 'local',
 	queryStringParameters: {
 		expiration: 'unexpired',
-		tag: 'announcements',
+		tag: 'Announcements',
 		limit: 4,
 	},
 };

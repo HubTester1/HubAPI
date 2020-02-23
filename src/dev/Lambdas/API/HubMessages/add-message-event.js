@@ -2,7 +2,7 @@
 module.exports = {
 	source: 'local',
 	body: {
-		newMessageTag: 'announcements',
+		newMessageTag: 'Announcements',
 		newMessageSubject: 'Test Subject',
 		newMessageBody: 'This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body. This is a test message body.',
 		newMessageImages: [],
