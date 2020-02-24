@@ -26,7 +26,7 @@
             "Properties": {
               "Content": {
                 "S3Bucket": "mos-api-dev-layers",
-                "S3Key": "serverless/layer-dev-npm/dev/1582290719612-2020-02-21T13:11:59.612Z/LayerDevNPM.zip"
+                "S3Key": "serverless/layer-dev-npm/dev/1582570743887-2020-02-24T18:59:03.887Z/LayerDevNPM.zip"
               },
               "LayerName": "LayerDevNPM",
               "Description": "npm dependencies"
@@ -61,7 +61,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/layer-dev-npm/dev/1582290719612-2020-02-21T13:11:59.612Z",
+    "artifactDirectoryName": "serverless/layer-dev-npm/dev/1582570743887-2020-02-24T18:59:03.887Z",
     "artifact": ""
   }
 }

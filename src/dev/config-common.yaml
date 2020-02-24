@@ -1,9 +1,11 @@
 custom:
   config:
-    layerARNNPM: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevNPM:19
+    layerARNNPM: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevNPM:21
     layerARNServices: arn:aws:lambda:us-east-1:344440222217:layer:LayerDevServices:55
     stage: dev
 #-------------
+authMOSAPISLSAdminAccessKeyID: ${ssm:auth-mos-api-sls-admin-access-key-id}
+authMOSAPISLSAdminSecretAccessKey: ${ssm:auth-mos-api-sls-admin-secret-access-key}
 authJWTPayloadMessage: ${ssm:auth-jwt-payload-message}
 authJWTPayloadSecret: ${ssm:auth-jwt-secret}
 cronScheduleEmailQueueProcessing: ${ssm:cron-schedule-email-queue-processing}
@@ -31,6 +33,8 @@ upEmployeeChangesPass: ${ssm:up-emp-changes-pw}
 upEmployeeChangesUser: ${ssm:up-emp-changes-user}
 endpoints:
   dev:
+    access:
+      awsCredentials:         access/aws-credentials
     health:
       check:                  health/check
     email:
@@ -41,3 +45,4 @@ endpoints:
       add:                    hubMessages/add
       update:                 hubMessages/update
       nextID:                 hubMessages/nextid
+      images:                 hubMessages/images

@@ -48,8 +48,21 @@ functions:
           path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.update}
           method: post
           cors: true
+  HandleUploadImagesRequest:
+    handler: index.HandleUploadImagesRequest
+    events:
+      - http:
+          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.images}
+          method: post
+          cors: true
+  HandleDeleteImagesRequest:
+    handler: index.HandleDeleteImagesRequest
+    events:
+      - http:
+          path: ${self:custom.file.endpoints.${self:provider.stage}.hubMessages.images}
+          method: delete
+          cors: true
 
-# -------------------------------------------------------
 
 service: ${self:custom.config.service}
 
@@ -61,6 +74,34 @@ provider:
   profile: ${self:custom.file.provider.profile}
   memorySize: ${self:custom.config.memorySize}
   timeout: ${self:custom.config.timeout}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:ListBucket"
+      Resource: "arn:aws:s3:::mos-api-temp"
+    - Effect: "Allow"
+      Action:
+        - "s3:AbortMultipartUpload"
+        - "s3:CreateBucket"
+        - "s3:PutObject"
+        - "s3:DeleteBucket"
+        - "s3:DeleteBucketPolicy"
+        - "s3:DeleteObject"
+        - "s3:GetBucketPolicy"
+        - "s3:GetLifecycleConfiguration"
+        - "s3:ListBucket"
+        - "s3:ListBucketMultipartUploads"
+        - "s3:ListMultipartUploadParts"
+        - "s3:PutBucketPolicy"
+        - "s3:PutLifecycleConfiguration"
+        - "s3:PutObject"
+      Resource: "arn:aws:s3:::mos-api-temp/*"
+    # - Effect: "Allow"
+    #   Action:
+    #     - "xray:PutTraceSegments"
+    #     - "xray:PutTelemetryRecords"
+    #   Resource:
+    #     - "*"
   deploymentBucket:
     name: mos-api-${self:provider.stage}-lambdas
   environment:

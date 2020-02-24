@@ -122,4 +122,9 @@ module.exports = {
 			}
 		}),
 	
+	ReturnAWSCredentials: () => ({
+		authMOSAPISLSAdminAccessKeyID: process.env.authMOSAPISLSAdminAccessKeyID,
+		authMOSAPISLSAdminSecretAccessKey: process.env.authMOSAPISLSAdminSecretAccessKey,
+	}),
+	
 };

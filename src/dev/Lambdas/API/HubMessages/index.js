@@ -11,6 +11,7 @@ const Response = require('response');
 const DataQueries = require('data-queries');
 const Utilities = require('utilities');
 const moment = require('moment');
+const S3FS = require('s3fs');
 
 /**
  * @typedef {import('../../../TypeDefs/HubMessage').HubMessage} HubMessage
@@ -145,6 +146,76 @@ module.exports = {
 					reject(error);
 				});
 		}),
+
+	/**
+	 * @name AddImages
+	 * @function
+	 * @async
+	 * @description Resize images, convert to JPG (if necessary), store, return data.
+	 */
+
+	ReturnFileTextContentAsBinary: (incomingFileContent) => incomingFileContent.split('').map((char) => char.charCodeAt(0).toString(2)).join(' '),
+
+	AddImages: (eventBody) =>
+		// return a new promise
+		new Promise((resolve, reject) => {
+			console.log('--------- AddImages m6 -------');
+			// get a promise to 
+			module.exports.AddToS3Bucket()
+				// if the promise is resolved with a result
+				.then((result) => {
+					// then resolve this promise with the result
+					resolve(result);
+				})
+				// if the promise is rejected with an error
+				.catch((error) => {
+					// reject this promise with the error
+					reject(error);
+				});
+			/* // preserve function parameter
+			const eventBodyCopy =
+				Utilities.ReturnUniqueObjectGivenAnyValue(eventBody);
+
+			// extract data from event body, and preserve param
+			const { messageID } = eventBodyCopy;
+			const incomingFiles = eventBodyCopy.filesArray;
+			// set up container var
+			const filesToStore = [];
+			// for each incoming file
+			incomingFiles.forEach((incomingFile) => {
+				const incomingFileContent = incomingFile.fileBinaryContent;
+				let convertedFileContent = '';
+				for (let i = 0; i < incomingFileContent.length; i++) {
+					convertedFileContent += 
+						`${incomingFileContent[i].charCodeAt(0).toString(2).padStart(8, '0')} `;
+				}
+				filesToStore.push(convertedFileContent);
+			}); */
+		}),
+
+	AddToS3Bucket: (fileData) =>
+		// return a new promise
+		new Promise((resolve, reject) => {
+			const bucketPath = 'mos-api-temp';
+			const s3Options = {
+				region: 'us-east-1',
+			};
+			const fsImpl = new S3FS(bucketPath, s3Options);
+			// get a promise to 
+			fsImpl.writeFile('message.txt', 'Hello Node')
+				// if the promise is resolved with a result
+				.then((result) => {
+					console.log('------- result', result);
+					// then resolve this promise with the result
+					resolve(result);
+				})
+				// if the promise is rejected with an error
+				.catch((error) => {
+					// reject this promise with the error
+					reject(error);
+				});
+		}),
+
 
 	// ---------------------
 
@@ -644,4 +715,66 @@ module.exports = {
 				});
 		}),
 
+	/**
+	 * @name HandleUploadImagesRequest
+	 * @function
+	 * @async
+	 * @description Handle request for uploading message images.
+	 */
+
+	HandleUploadImagesRequest: (event, context) =>
+		// return a new promise
+		new Promise((resolve, reject) => {
+			// get a promise to check access
+			Access.ReturnRequesterCanAccess(
+				event,
+				HubMessages.ReturnHubMessagesWhitelistedDomains,
+			)
+				// if the promise is resolved with a result
+				.then((accessResult) => {
+					// get a promise to return health status
+					module.exports.AddImages(event.body)
+						// if the promise is resolved with a result
+						.then((addResult) => {
+							// send indicative response
+							Response.HandleResponse({
+								statusCode: 200,
+								responder: resolve,
+								content: {
+									payload: addResult,
+									event,
+									context,
+								},
+							});
+						})
+						// if the promise is rejected with an error
+						.catch((addError) => {
+							// send indicative response
+							Response.HandleResponse({
+								statusCode: 500,
+								responder: resolve,
+								content: {
+									error: addError,
+									event,
+									context,
+								},
+							});
+						});
+				})
+				// if the promise is rejected with an error
+				.catch((accessError) => {
+					// send indicative response
+					Response.HandleResponse({
+						statusCode: 401,
+						responder: resolve,
+						content: {
+							error: accessError,
+							event,
+							context,
+						},
+					});
+				});
+		}),
+
 };
+// HandleDeleteImagesRequest
