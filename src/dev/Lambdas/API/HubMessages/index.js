@@ -12,12 +12,35 @@ const DataQueries = require('data-queries');
 const Utilities = require('utilities');
 const moment = require('moment');
 const S3FS = require('s3fs');
+const sharp = require('sharp');
 
 /**
  * @typedef {import('../../../TypeDefs/HubMessage').HubMessage} HubMessage
  */
 
 module.exports = {
+
+	/* FormatMessageImages: (eventBody) => {
+		// return a new promise
+		new Promise((resolve, reject) => {
+			// get a promise to 
+			const eventBodyCopy =
+				Utilities.ReturnUniqueObjectGivenAnyValue(eventBody);
+			const { messageID } = eventBodyCopy;
+			const fsImpl = new S3FS('mos-api-misc-storage', options);
+
+				// if the promise is resolved with a result
+				.then((result) => {
+					// then resolve this promise with the result
+					resolve(result);
+				})
+				// if the promise is rejected with an error
+				.catch((error) => {
+					// reject this promise with the error
+					reject(error);
+				});
+		}),
+	}, */
 
 
 	/**
@@ -155,66 +178,6 @@ module.exports = {
 	 */
 
 	ReturnFileTextContentAsBinary: (incomingFileContent) => incomingFileContent.split('').map((char) => char.charCodeAt(0).toString(2)).join(' '),
-
-	AddImages: (eventBody) =>
-		// return a new promise
-		new Promise((resolve, reject) => {
-			console.log('--------- AddImages m6 -------');
-			// get a promise to 
-			module.exports.AddToS3Bucket()
-				// if the promise is resolved with a result
-				.then((result) => {
-					// then resolve this promise with the result
-					resolve(result);
-				})
-				// if the promise is rejected with an error
-				.catch((error) => {
-					// reject this promise with the error
-					reject(error);
-				});
-			/* // preserve function parameter
-			const eventBodyCopy =
-				Utilities.ReturnUniqueObjectGivenAnyValue(eventBody);
-
-			// extract data from event body, and preserve param
-			const { messageID } = eventBodyCopy;
-			const incomingFiles = eventBodyCopy.filesArray;
-			// set up container var
-			const filesToStore = [];
-			// for each incoming file
-			incomingFiles.forEach((incomingFile) => {
-				const incomingFileContent = incomingFile.fileBinaryContent;
-				let convertedFileContent = '';
-				for (let i = 0; i < incomingFileContent.length; i++) {
-					convertedFileContent += 
-						`${incomingFileContent[i].charCodeAt(0).toString(2).padStart(8, '0')} `;
-				}
-				filesToStore.push(convertedFileContent);
-			}); */
-		}),
-
-	AddToS3Bucket: (fileData) =>
-		// return a new promise
-		new Promise((resolve, reject) => {
-			const bucketPath = 'mos-api-temp';
-			const s3Options = {
-				region: 'us-east-1',
-			};
-			const fsImpl = new S3FS(bucketPath, s3Options);
-			// get a promise to 
-			fsImpl.writeFile('message.txt', 'Hello Node')
-				// if the promise is resolved with a result
-				.then((result) => {
-					console.log('------- result', result);
-					// then resolve this promise with the result
-					resolve(result);
-				})
-				// if the promise is rejected with an error
-				.catch((error) => {
-					// reject this promise with the error
-					reject(error);
-				});
-		}),
 
 
 	// ---------------------
@@ -716,13 +679,13 @@ module.exports = {
 		}),
 
 	/**
-	 * @name HandleUploadImagesRequest
+	 * @name HandleImageFormattingRequest
 	 * @function
 	 * @async
-	 * @description Handle request for uploading message images.
+	 * @description Handle request to format a message's images.
 	 */
 
-	HandleUploadImagesRequest: (event, context) =>
+	HandleImageFormattingRequest: (event, context) =>
 		// return a new promise
 		new Promise((resolve, reject) => {
 			// get a promise to check access
@@ -732,8 +695,100 @@ module.exports = {
 			)
 				// if the promise is resolved with a result
 				.then((accessResult) => {
-					// get a promise to return health status
-					module.exports.AddImages(event.body)
+					const eventBodyCopy =
+						Utilities.ReturnUniqueObjectGivenAnyValue(event.body);
+					// const eventBodyCopy =
+					// 	Utilities.ReturnUniqueObjectGivenAnyValue(eventBody);
+					const { messageID } = eventBodyCopy;
+					const s3Options = {
+						region: 'us-east-1',
+						accessKeyId: process.env.authMOSAPISLSAdminAccessKeyID,
+						secretAccessKey: process.env.authMOSAPISLSAdminSecretAccessKey,
+					};
+					const fsImpl = new S3FS('mos-api-misc-storage', s3Options);
+					fsImpl.readdir(`/hub-message-assets/incoming/${messageID}`)	
+						// if the promise is resolved with a result
+						.then((readResult) => {
+							const fileFormattingPromises = [];
+							const fileWritingPromises = [];
+							readResult.forEach((fileName) => {
+								const filePath = `/hub-message-assets/incoming/${messageID}/${fileName}`;
+								fileFormattingPromises.push(sharp(filePath)
+									.resize(600, null)
+									.jpeg({
+										quality: 80,
+									})
+									// get a promise to 
+									.toBuffer());
+							});
+							// get a promise to 
+							Promise.all(fileFormattingPromises)
+								// if the promise is resolved with a result
+								.then((fileFormattingResults) => {
+									fileFormattingResults.forEach((fileFormatted, fileFormattedIndex) => {
+										fileWritingPromises
+											.push(fsImpl.writeFile(fileFormattedIndex, fileFormatted));
+									});
+									// get a promise to 
+									Promise.all(fileWritingPromises)
+										// if the promise is resolved with a result
+										.then((fileWritingResult) => {
+										// send indicative response
+											Response.HandleResponse({
+												statusCode: 200,
+												responder: resolve,
+												content: {
+													payload: fileWritingResult,
+													event,
+													context,
+												},
+											});
+										})
+										// if the promise is rejected with an error
+										.catch((fileWritingError) => {
+											// send indicative response
+											Response.HandleResponse({
+												statusCode: 500,
+												responder: resolve,
+												content: {
+													error: fileWritingError,
+													event,
+													context,
+												},
+											});
+										});
+								})
+								// if the promise is rejected with an error
+								.catch((fileFormattingError) => {
+									// send indicative response
+									Response.HandleResponse({
+										statusCode: 500,
+										responder: resolve,
+										content: {
+											error: fileFormattingError,
+											event,
+											context,
+										},
+									});
+								});
+						})
+						// if the promise is rejected with an error
+						.catch((readError) => {
+							// send indicative response
+							Response.HandleResponse({
+								statusCode: 500,
+								responder: resolve,
+								content: {
+									error: readError,
+									event,
+									context,
+								},
+							});
+						});
+
+
+					/* // get a promise to return health status
+					module.exports.FormatMessageImages(event.body)
 						// if the promise is resolved with a result
 						.then((addResult) => {
 							// send indicative response
@@ -759,7 +814,7 @@ module.exports = {
 									context,
 								},
 							});
-						});
+						}); */
 				})
 				// if the promise is rejected with an error
 				.catch((accessError) => {

@@ -25,8 +25,15 @@ module.exports = {
 		new Promise((resolve, reject) => {
 			// if this is a cron job
 			if (
-				event.source && 
-				(event.source === 'aws.events' || event.source === 'local')
+				(event.source && 
+				(
+					event.source === 'aws.events' || 
+					event.source === 'local'
+				)) ||
+				(event.Records && 
+				event.Records[0] && 
+				event.Records[0].eventSource && 
+				event.Records[0].eventSource === 'aws:s3')
 			) {
 				// resolve immediately
 				resolve({

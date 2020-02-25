@@ -33,6 +33,8 @@ provider:
     NODE_PATH: "./:/opt/node_modules"
     authJWTPayloadMessage: ${self:custom.file.authJWTPayloadMessage}
     authJWTPayloadSecret: ${self:custom.file.authJWTPayloadSecret}
+    authMOSAPISLSAdminAccessKeyID: ${self:custom.file.authMOSAPISLSAdminAccessKeyID}
+    authMOSAPISLSAdminSecretAccessKey: ${self:custom.file.authMOSAPISLSAdminSecretAccessKey}
     cronScheduleEmailQueueProcessing: ${self:custom.file.cronScheduleEmailQueueProcessing}
     cronScheduleGSEJobSync: ${self:custom.file.cronScheduleGSEJobSync}
     cronScheduleGSEScheduleSync: ${self:custom.file.cronScheduleGSEScheduleSync}

@@ -1,0 +1,7 @@
+@baseURI = https://xmmymt42ql.execute-api.us-east-1.amazonaws.com/dev
+
+
+#########
+# Get AWS credentials
+GET {{baseURI}}/access/aws-credentials
+Authorization: Bearer {{accessToken}}

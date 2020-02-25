@@ -82,3 +82,12 @@ Authorization: Bearer {{accessToken}}
 	"newMessageCreator": {"account":"jbaker","displayName":"James Baker"}
 }
 
+
+#########
+# Format a message's images
+POST {{baseURI}}/hubMessages/images
+Authorization: Bearer {{accessToken}}
+
+{
+	"messageID":1157
+}
