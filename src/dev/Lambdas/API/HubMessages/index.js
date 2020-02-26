@@ -708,64 +708,95 @@ module.exports = {
 					const fsImpl = new S3FS('mos-api-misc-storage', s3Options);
 					fsImpl.readdir(`/hub-message-assets/incoming/${messageID}`)	
 						// if the promise is resolved with a result
-						.then((readResult) => {
+						.then((readDirectoryResult) => {
+							// set up promise container vars
+							const fileReadingPromises = [];
 							const fileFormattingPromises = [];
 							const fileWritingPromises = [];
-							readResult.forEach((fileName) => {
+							// for each file in the directory
+							readDirectoryResult.forEach((fileName) => {
+								// construct its path
 								const filePath = `/hub-message-assets/incoming/${messageID}/${fileName}`;
-								fileFormattingPromises.push(sharp(filePath)
-									.resize(600, null)
-									.jpeg({
-										quality: 80,
-									})
-									// get a promise to 
-									.toBuffer());
+								// push to container a promise to read the file
+								fileReadingPromises.push(fsImpl.readFile(filePath));
 							});
-							// get a promise to 
-							Promise.all(fileFormattingPromises)
-								// if the promise is resolved with a result
-								.then((fileFormattingResults) => {
-									fileFormattingResults.forEach((fileFormatted, fileFormattedIndex) => {
-										fileWritingPromises
-											.push(fsImpl.writeFile(fileFormattedIndex, fileFormatted));
+							// when all file reading promises are fulfilled
+							Promise.all(fileReadingPromises)
+								// if all promises were resolved with results
+								.then((fileReadingResults) => {
+									// for each file that was read from the directory
+									fileReadingResults.forEach((fileRead) => {		
+										// push to container a promise to format the file 
+										// 		and output it to a file buffer
+										fileFormattingPromises.push(sharp(fileRead.Body)
+											.resize(600, null)
+											.jpeg({
+												quality: 80,
+											})
+											.toBuffer());
 									});
-									// get a promise to 
-									Promise.all(fileWritingPromises)
-										// if the promise is resolved with a result
-										.then((fileWritingResult) => {
-										// send indicative response
-											Response.HandleResponse({
-												statusCode: 200,
-												responder: resolve,
-												content: {
-													payload: fileWritingResult,
-													event,
-													context,
-												},
+									// when all file reading formatting are fulfilled
+									Promise.all(fileFormattingPromises)
+										// if all promises were resolved with results
+										.then((fileFormattingResults) => {
+											// for each file that was formatted
+											fileFormattingResults.forEach((fileFormatted, fileFormattedIndex) => {
+												// push to container a promise to write the file 
+												// 		to specified directory
+												fileWritingPromises
+													.push(fsImpl.writeFile(`/hub-message-assets/formatted/${messageID}/${fileFormattedIndex}.jpg`, fileFormatted));
 											});
+											// when all file writing promises are fulfilled
+											Promise.all(fileWritingPromises)
+												// if all promises were resolved with results
+												.then((fileWritingResults) => {
+													// send indicative response
+													Response.HandleResponse({
+														statusCode: 200,
+														responder: resolve,
+														content: {
+															payload: fileWritingResults,
+															event,
+															context,
+														},
+													});
+												})
+												// if any promise was rejected with an error
+												.catch((fileWritingError) => {
+													// send indicative response
+													Response.HandleResponse({
+														statusCode: 500,
+														responder: resolve,
+														content: {
+															error: fileWritingError,
+															event,
+															context,
+														},
+													});
+												});
 										})
-										// if the promise is rejected with an error
-										.catch((fileWritingError) => {
+										// if any promise was rejected with an error
+										.catch((fileFormattingError) => {
 											// send indicative response
 											Response.HandleResponse({
 												statusCode: 500,
 												responder: resolve,
 												content: {
-													error: fileWritingError,
+													error: fileFormattingError,
 													event,
 													context,
 												},
 											});
 										});
 								})
-								// if the promise is rejected with an error
-								.catch((fileFormattingError) => {
+								// if any promise was rejected with an error
+								.catch((fileReadingError) => {
 									// send indicative response
 									Response.HandleResponse({
 										statusCode: 500,
 										responder: resolve,
 										content: {
-											error: fileFormattingError,
+											error: fileReadingError,
 											event,
 											context,
 										},
@@ -785,36 +816,6 @@ module.exports = {
 								},
 							});
 						});
-
-
-					/* // get a promise to return health status
-					module.exports.FormatMessageImages(event.body)
-						// if the promise is resolved with a result
-						.then((addResult) => {
-							// send indicative response
-							Response.HandleResponse({
-								statusCode: 200,
-								responder: resolve,
-								content: {
-									payload: addResult,
-									event,
-									context,
-								},
-							});
-						})
-						// if the promise is rejected with an error
-						.catch((addError) => {
-							// send indicative response
-							Response.HandleResponse({
-								statusCode: 500,
-								responder: resolve,
-								content: {
-									error: addError,
-									event,
-									context,
-								},
-							});
-						}); */
 				})
 				// if the promise is rejected with an error
 				.catch((accessError) => {
