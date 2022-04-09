@@ -10,7 +10,7 @@
 		"health": "file:../../../Services/Health",
 		"hub-messages": "file:../../../Services/HubMessages",
 		"log": "file:../../../Services/Log",
-		"moment": "^2.24.0",
+		"moment": "^2.29.2",
 		"moment-timezone": "^0.5.27",
 		"ms-graph": "file:../../../Services/MSGraph",
 		"response": "file:../../../Services/Response",
