@@ -31,7 +31,7 @@
 		"request": "^2.88.2",
 		"response": "file:Services/Response",
 		"s3fs": "^2.5.0",
-		"sharp": "^0.24.1",
+		"sharp": "^0.30.5",
 		"status": "file:Services/Status",
 		"ultipro": "file:Services/UltiPro",
 		"utilities": "file:Services/Utilities"
