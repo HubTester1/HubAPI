@@ -18,7 +18,7 @@
 		"lambda-multipart-parser": "0.0.2",
 		"log": "file:Services/Log",
 		"mime": "^2.4.4",
-		"moment": "^2.24.0",
+		"moment": "^2.29.4",
 		"moment-timezone": "^0.5.27",
 		"mongodb": "^3.4.1",
 		"monk": "^7.1.2",
