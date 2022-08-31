@@ -11,7 +11,7 @@
 		"hub-messages": "file:../../../Services/HubMessages",
 		"log": "file:../../../Services/Log",
 		"moment": "^2.24.0",
-		"moment-timezone": "^0.5.27",
+		"moment-timezone": "^0.5.35",
 		"ms-graph": "file:../../../Services/MSGraph",
 		"response": "file:../../../Services/Response",
 		"status": "file:../../../Services/Status",
