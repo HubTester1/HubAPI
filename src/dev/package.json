@@ -19,7 +19,7 @@
 		"log": "file:Services/Log",
 		"mime": "^2.4.4",
 		"moment": "^2.24.0",
-		"moment-timezone": "^0.5.27",
+		"moment-timezone": "^0.5.35",
 		"mongodb": "^3.4.1",
 		"monk": "^7.1.2",
 		"ms-graph": "file:Services/MSGraph",
