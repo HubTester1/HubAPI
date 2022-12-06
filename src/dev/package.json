@@ -27,7 +27,7 @@
 		"multer-s3": "^2.9.0",
 		"node-blob": "0.0.2",
 		"pnp": "0.0.3",
-		"qs": "^6.9.1",
+		"qs": "^6.9.7",
 		"request": "^2.88.2",
 		"response": "file:Services/Response",
 		"s3fs": "^2.5.0",
